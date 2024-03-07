@@ -3,7 +3,7 @@
   import Moon from "../icons/Moon.svelte";
   import Sun from "../icons/Sun.svelte";
 
-  let darkMode = true;
+  let darkMode = false;
 
   function handleSwitchDarkMode() {
     darkMode = !darkMode;

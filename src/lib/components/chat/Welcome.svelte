@@ -23,9 +23,9 @@
         </svg>
     <h1 class="text-3xl  mb-5">The Hub for open source LLMs.<br>Directly on your computer</h1>
     <p class="opacity-50 mb-5">Chat with hundred of LLM available</p>
-    <div class="w-full border flex justify-between border-black-200 items-center gap-2 bg-white rounded-xl transition-shadow hover:shadow px-4 pr-2 py-2">
-        <span class="shrink-0 text-sm text-black-500">You are chating with</span>
-        <button class="p-2 border border-black-200 rounded-lg flex items-center justify-between gap-1 w-full">
+    <div class="w-full border flex justify-between border-black-200 dark:border-black-700 items-center gap-2 bg-white dark:bg-black-700 rounded-xl transition-shadow hover:shadow px-4 pr-2 py-2">
+        <span class="shrink-0 text-sm dark:text-black-200 text-black-500">You are chating with</span>
+        <button class="p-2 border dark:border-black-500 border-black-200 rounded-lg flex items-center justify-between gap-1 w-full">
           <div class="flex items-center gap-2">
             <img src="/icons/models/{$currentModel.icon}" alt="" class="w-5">
             <span class="text-black-400">{$currentModel.name} /</span>  <span class="font-semibold">{$currentModel.image}</span> 
