@@ -3,6 +3,7 @@ export const models = writable([
   {
     name: "Mistral",
     image: "mistral:latest",
+    icon:"mistral.svg",
     parameters: "7B",
     size: 4.1,
     description: `Mistral is a 7.3B parameter model, distributed with the Apache license. It is available in both instruct (instruction following) and text completion.
@@ -192,6 +193,7 @@ export const models = writable([
 export const currentModel = writable({
   name: "Mistral",
   image: "mistral:latest",
+  icon:"mistral.svg",
   parameters: "7B",
   size: 4.1,
   description: `Mistral is a 7.3B parameter model, distributed with the Apache license. It is available in both instruct (instruction following) and text completion.
