@@ -1,9 +1,10 @@
 import { writable } from "svelte/store";
-export const models = writable([
+
+export const localModels = [
   {
     name: "Mistral",
     image: "mistral:latest",
-    icon:"mistral.svg",
+    icon: "mistral.svg",
     parameters: "7B",
     size: 4.1,
     description: `Mistral is a 7.3B parameter model, distributed with the Apache license. It is available in both instruct (instruction following) and text completion.
@@ -188,21 +189,8 @@ export const models = writable([
     installed: false,
     derived: false,
   },
-]);
+];
 
-export const currentModel = writable({
-  name: "Mistral",
-  image: "mistral:latest",
-  icon:"mistral.svg",
-  parameters: "7B",
-  size: 4.1,
-  description: `Mistral is a 7.3B parameter model, distributed with the Apache license. It is available in both instruct (instruction following) and text completion.
 
-      The Mistral AI team has noted that Mistral 7B:
-      
-      Outperforms Llama 2 13B on all benchmarks
-      Outperforms Llama 1 34B on many benchmarks
-      Approaches CodeLlama 7B performance on code, while remaining good at English tasks`,
-  installed: false,
-  derived: false,
-});
+export const models = writable(localModels);
+export const currentModel = writable(localModels[0]);
