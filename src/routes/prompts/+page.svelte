@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>ollamaGPT - Svelte</title>
+  <title>modelO - Svelte</title>
 </svelte:head>
 
 <main class="flex">
@@ -19,8 +19,8 @@
       class="h-full overflow-hidden relative p-4 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600 flex gap-4"
     >
       <div>
-        <h1 class="text-2xl font-bold">ollamaGPT</h1>
-        <p class="text-sm">Welcome to ollamaGPT, a simple chatbot that uses the GPT-3 model to generate responses to your prompts. You can
+        <h1 class="text-2xl font-bold">modelO</h1>
+        <p class="text-sm">Welcome to modelO, a simple chatbot that uses the GPT-3 model to generate responses to your prompts. You can
       </div>
   </div>
   </div>

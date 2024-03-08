@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>ollamaGPT - Svelte</title>
+  <title>modelO - Svelte</title>
 </svelte:head>
 
 <main class="flex">

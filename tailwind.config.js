@@ -25,6 +25,7 @@ export default {
       },
       purple: "#A15BFC",
       green: "#4ACD9E",
+      blue:"#1C71F2",
       red: "#fb5b5b",
     },
     extend: {},

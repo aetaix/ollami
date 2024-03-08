@@ -75,7 +75,7 @@
           {#if message.role === "assistant"}
             <AssistantMessage
               content={message.content}
-              model={currentModel.image}
+              model={currentModel}
             />
           {/if}
           {#if message.role === "user"}

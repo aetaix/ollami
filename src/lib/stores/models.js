@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-export const localModels = [
+export let initialModels = [
   {
     name: "Mistral",
     image: "mistral:latest",
@@ -18,21 +18,11 @@ export const localModels = [
     derived: false,
   },
   {
-    name: "Mixtral",
-    image: "mixtral:latest",
-    parameters: "8x7B",
-    size: 26,
-    description: `The Mixtral-8x7B Large Language Model (LLM) is a pretrained generative Sparse Mixture of Experts. It outperforms Llama 2 70B on many benchmarks.
-
-    As of December 2023, it is the strongest open-weight model with a permissive license and the best model overall regarding cost/performance trade-offs.`,
-    installed: false,
-    derived: false,
-  },
-  {
     name: "Gemma",
     image: "gemma:latest",
     parameters: "7B",
     size: 4.8,
+    icon: "google.svg",
     description:
       "Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.",
     installed: false,
@@ -43,6 +33,7 @@ export const localModels = [
     image: "gemma:2b",
     parameters: "2B",
     size: 1.4,
+    icon: "google.svg",
     description:
       "Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.",
     installed: false,
@@ -52,6 +43,7 @@ export const localModels = [
     name: "Llama 2",
     image: "llama2",
     parameters: "7B",
+    icon: "llama.svg",
     size: 3.8,
     description:
       "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
@@ -62,29 +54,10 @@ export const localModels = [
     name: "Llama 2 Uncensored",
     image: "llama2-uncensored",
     parameters: "7B",
+    icon: "llama.svg",
     size: 3.8,
     description:
       "Llama 2 Uncensored is based on Meta’s Llama 2 model, and was created by George Sung and Jarrad Hope using the process defined by Eric Hartford in his blog post.",
-    installed: false,
-    derived: false,
-  },
-  {
-    name: "Llama 2 13B",
-    image: "llama2:13b",
-    parameters: "13B",
-    size: 7.3,
-    description:
-      "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
-    installed: false,
-    derived: false,
-  },
-  {
-    name: "Llama 2 70B",
-    image: "llama2:70b",
-    parameters: "70B",
-    size: 39,
-    description:
-      "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
     installed: false,
     derived: false,
   },
@@ -131,6 +104,7 @@ export const localModels = [
   {
     name: "Code Llama",
     image: "codellama",
+    icon: "llama.svg",
     parameters: "7B",
     size: 3.8,
     description:
@@ -150,20 +124,20 @@ export const localModels = [
     derived: false,
   },
   {
-    name: "Deepseek Coder",
-    image: "deepseek-coder:base",
-    parameters: "1.3B",
-    size: 0.77,
+    name: "Starcoder",
+    image: "starcoder:7b",
+    parameters: "7B",
+    size: 4.3,
     description:
-      "DeepSeek Coder is trained from scratch on both 87% code and 13% natural language in English and Chinese. Each of the models are pre-trained on 2 trillion tokens.",
+      "StarCoder is a code generation model trained on 80+ programming languages.",
     installed: false,
     derived: false,
   },
   {
     name: "Deepseek Coder",
     image: "deepseek-coder:base",
-    parameters: "6.7B",
-    size: 3.8,
+    parameters: "1.3B",
+    size: 0.77,
     description:
       "DeepSeek Coder is trained from scratch on both 87% code and 13% natural language in English and Chinese. Each of the models are pre-trained on 2 trillion tokens.",
     installed: false,
@@ -179,18 +153,7 @@ export const localModels = [
     installed: false,
     derived: false,
   },
-  {
-    name: "LLaVA",
-    image: "llava",
-    parameters: "7B",
-    size: 4.5,
-    description:
-      "LLaVA is a multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding, achieving impressive chat capabilities mimicking spirits of the multimodal GPT-4.",
-    installed: false,
-    derived: false,
-  },
 ];
 
-
-export const models = writable(localModels);
-export const currentModel = writable(localModels[0]);
+export const models = writable([]);
+export const currentModel = writable({});

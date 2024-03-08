@@ -6,15 +6,13 @@
   import OllamaStatus from "./sidebar/OllamaStatus.svelte";
   import Prompt from "./icons/Prompt.svelte";
   import Model from "./icons/Model.svelte";
-
-  console.log($page.params)
 </script>
 
 <div class="h-screen p-4 w-1/5 relative">
   <header class="flex justify-between items-center mb-5">
     <a href="/" class="inline-flex items-center space-x-2">
-      <Logo />
-      <span class=" font-semibold">ollamaGPT</span>
+      <Logo class="w-8" />
+      <span class=" font-semibold">modelO</span>
     </a>
     <OllamaStatus />
   </header>
@@ -35,7 +33,7 @@
       {$page.url.pathname.includes('models') ? 'bg-black-700' : 'hover:bg-black-800'}
       flex items-center gap-2 px-4 py-3 rounded-lg transition-colors text-sm"
     >
-      <Model />
+      <Model class="w-5" />
 
       Models</a
     >

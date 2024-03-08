@@ -1,74 +1,63 @@
 <script>
-  import ollama from "ollama";
   import { models } from "$lib/stores/models";
-  import AvailableModel from "./AvailableModel.svelte";
-  import InstalledModel from "./InstalledModel.svelte";
+  import ModelView from "./ModelView.svelte";
 
-  let totlaSize = 0;
+  let search = "";
 
-  try {
-    ollama.list().then((list) => {
-      models.update((models) => {
-        return models.map((model) => {
-          if (list.models.some((m) => m.model === model.image)) {
-            return { ...model, installed: true };
-          }
-          return model;
-        });
-      });
+  let filteredModels = [];
+  let selectedModel = $models[0];
 
-      // calculate total size of installed models, 2 decimal places
-      totlaSize = $models
-        .filter((model) => model.installed)
-        .reduce((acc, model) => {
-          return acc + parseFloat(model.size);
-        }, 0);
-
-      // add new models that are not in models store but are in list (supposedly derived models)
-      list.models.forEach((model) => {
-        if (!$models.find((m) => m.image === model.model)) {
-          models.update((models) => {
-            return [
-              ...models,
-              {
-                name: model.model,
-                image: model.model,
-                parameters: model.details.parameter_size,
-                size: (model.size / 1024 / 1024 / 1024).toFixed(2),
-                installed: true,
-                derived: true,
-              },
-            ];
-          });
-        }
-      });
-    });
-  } catch (e) {
-    console.log(e);
+  function viewModel(model) {
+    selectedModel = model;
   }
+
+  $: filteredModels = $models.filter((model) =>
+    model.name.toLowerCase().includes(search.toLowerCase())
+  );
 </script>
 
-<header class="flex items-center justify-between px-2">
-  <h3 class="text-sm opacity-50 mb-1">Installed models</h3>
-  <span class="text-xs">{totlaSize} GB</span>
-</header>
-
-<ul>
-  {#each $models as model}
-    {#if model.installed}
-      <InstalledModel {model} />
+<div class="grid grid-cols-2 rounded-xl border border-black-200">
+  <div class="border-r border-black-200">
+    <header class="flex border-b border-black-200 p-1">
+      <input
+        type="text"
+        bind:value={search}
+        placeholder="Search models..."
+        class="p-1 bg-transparent w-full focus:outline-none"
+      />
+    </header>
+    <ul class="p-2">
+      {#each filteredModels as model}
+        <li class="hover:bg-black-100 rounded text-black-500 hover:text-black">
+          <button
+            on:click={() => {
+              viewModel(model);
+            }}
+            class="flex justify-between w-full items-center p-2"
+          >
+            <div class="flex items-center gap-2">
+              <img
+                src="/icons/models/{model.icon || 'model.svg'}"
+                alt=""
+                class="w-4"
+              />
+              <span class="text-sm font-mono">{model.image}</span>
+            </div>
+            <span class="text-sm text-black-400"
+              >{model.installed ? "Installed" : ""}</span
+            >
+          </button>
+        </li>
+      {/each}
+    </ul>
+  </div>
+  <div class="p-8">
+    {#if selectedModel}
+      <ModelView model={selectedModel} />
+    {:else}
+      <div class="flex justify-center items-center h-full">
+        <p class="text-black-400">Select a model to view details</p>
+      </div>
     {/if}
-  {/each}
-</ul>
-
-<header class="flex items-center justify-between px-2 mt-5">
-  <h3 class="text-sm opacity-50 mb-1">Available models</h3>
-</header>
-
-<ul class="max-h-[200px] overflow-y-auto">
-  {#each $models as model}
-    {#if !model.installed}
-      <AvailableModel {model} />
-    {/if}
-  {/each}
-</ul>
+  </div>
+</div>
