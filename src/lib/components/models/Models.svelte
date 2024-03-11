@@ -5,15 +5,16 @@
   let search = "";
 
   let filteredModels = [];
-  let selectedModel = $models[0];
+  let selectedModel = null;
 
   function viewModel(model) {
     selectedModel = model;
   }
 
-  $: filteredModels = $models.filter((model) =>
-    model.name.toLowerCase().includes(search.toLowerCase())
-  );
+  $:filteredModels = $models.filter((model) =>
+      model.name.toLowerCase().includes(search.toLowerCase())
+    );
+  
 </script>
 
 <div class="grid grid-cols-2 rounded-xl border border-black-200">

@@ -41,7 +41,7 @@ export let initialModels = [
   },
   {
     name: "Llama 2",
-    image: "llama2",
+    image: "llama2:latest",
     parameters: "7B",
     icon: "llama.svg",
     size: 3.8,

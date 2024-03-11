@@ -1,5 +1,8 @@
 <script>
   import ollama from "ollama";
+  import Trash from "../icons/Trash.svelte";
+  import Pull from "../icons/Pull.svelte";
+  import NewMessage from "../icons/NewMessage.svelte";
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
   export let model = {};
@@ -10,9 +13,24 @@
   }
 
   let loading = false;
-  function installModel() {
-    console.log("installing", model.image);
+  async function installModel() {
+    loading = true;
 
+    // Use fetch on api/pull-model to install the model
+
+    const pulledModel = await fetch("/api/pull-model", {
+      method: "POST",
+      body: JSON.stringify({ model: model }),
+    });
+
+    // Update the models store
+
+    console.log(pulledModel.json());
+
+    loading = false;
+
+    /* 
+    Old METHOD
     ollama
       .pull({
         model: model.image,
@@ -28,30 +46,67 @@
             return model;
           });
         });
+        loading = false;
       });
+      */
+  }
+
+  function deleteModel() {
+    ollama.delete({ model: model.image }).then(() => {
+      models.update((models) => {
+        return models.map((item) => {
+          if (item.image === model.image) {
+            return { ...item, installed: false };
+          }
+          return item;
+        });
+      });
+    });
   }
 </script>
 
-<h2 class="flex gap-2 items-center mb-4">
-  <img src="/icons/models/{model.icon || 'model.svg'}" class="w-5" alt="" />
-  <span class="text-black-400">{model.name} /</span>
-  <span class="font-semibold">{model.image}</span>
-</h2>
+<header class="flex items-center justify-between mb-4">
+  <h2 class="flex gap-2 items-center">
+    <img src="/icons/models/{model.icon || 'model.svg'}" class="w-5" alt="" />
+    <span class="text-black-400">{model.name} /</span>
+    <span class="font-semibold">{model.image}</span>
+  </h2>
+</header>
 
 <p class="text-sm text-black-600 mb-4">{model.description}</p>
 
 {#if model.installed}
-  <button
-    on:click={setCurrentModel}
-    class="bg-white border border-black-200 shadow px-3 py-2 font-semibold text-sm rounded-lg mb-4"
-    >Chat with model</button
-  >
+  <div class="flex items-center gap-2 mb-4">
+    <button
+      on:click={setCurrentModel}
+      class="bg-white border flex items-center gap-2 border-black-200 shadow px-3 py-2 font-semibold text-sm rounded-lg"
+    >
+      <NewMessage class="w-4" />
+      Chat with model</button
+    >
+    <button
+      on:click={deleteModel}
+      class="w-8 h-8 bg-black-100 hover:bg-black-200 rounded flex justify-center items-center"
+    >
+      <Trash class="w-4" />
+    </button>
+  </div>
 {:else}
   <button
     on:click={installModel}
-    class="bg-white border border-black-200 shadow px-3 py-2 font-semibold text-sm rounded-lg mb-4"
-    >Install model</button
+    class="
+    {loading
+      ? 'w-full rounded-full h-2 bg-black-100'
+      : 'bg-white shadow px-3 h-auto py-2 rounded-lg '}
+     flex gap-2 items-center border border-black-200 font-semibold text-sm mb-4 transition-all relative"
   >
+    {#if !loading}
+      <Pull class="w-4" />
+      Install model
+    {:else}
+      <div class="loading bg-black-600 h-2 rounded-full"></div>
+    {/if}
+  </button>
 {/if}
 
 <table class="w-full text-left text-sm">
@@ -64,3 +119,28 @@
     <td class="text-black-400 py-2 w-3/4">{model.size}GB</td>
   </tr>
 </table>
+
+<style>
+  .loading {
+    animation: loading 0.6s linear infinite alternate;
+    animation-fill-mode: backwards;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  @keyframes loading {
+    0% {
+      width: 10%;
+      left: 0;
+    }
+    50% {
+      width: 50%;
+      left: 50%;
+    }
+    100% {
+      width: 0%;
+      left: 100%;
+    }
+  }
+</style>

@@ -4,8 +4,11 @@
   export let data;
 
   models.set(data.props.models);
-  currentModel.set(data.props.models[0]);
 
+  $: if ($models) {
+    currentModel.set($models.find((model) => model.installed));
+  }
+  
 </script>
 
 <slot />
