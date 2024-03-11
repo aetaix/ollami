@@ -1,23 +1,25 @@
 <script>
-  import { currentModel } from "$lib/stores/models";
-  import { ollamaIsActivated } from "$lib/stores/states";
-  import ollama from "ollama";
+import { ollamaIsActivated } from "$lib/stores/states";
+  import { onMount } from "svelte";
+
 
   async function detectOllama() {
     try {
-      const check = await ollama.show({
-        model: $currentModel.image,
-      });
+      // try fetching the ollama local endpoint
+      const response = await fetch("http://127.0.0.1:11434");
 
-      if (check) {
-        ollamaIsActivated.set(true)
-       
+      // if the response is ok, then ollama is activated
+      if (response.ok) {
+        ollamaIsActivated.set(true);
+      } else {
+        ollamaIsActivated.set(false);
       }
+      
     } catch (e) {
       console.log(e);
     }
   }
-  detectOllama();
+  onMount(detectOllama);
 </script>
 
 {#if $ollamaIsActivated}

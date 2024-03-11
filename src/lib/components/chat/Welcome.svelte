@@ -1,28 +1,34 @@
 <script>
+  import { currentModel } from "$lib/stores/models";
   import { ollamaIsActivated } from "$lib/stores/states";
   import Logo from "$lib/components/sidebar/Logo.svelte";
   import DropdownModels from "../models/DropdownModels.svelte";
 
 </script>
 
-{#if $ollamaIsActivated}
+{#if $ollamaIsActivated }
   <div
     id="welcome"
     class="w-full max-w-lg mx-auto flex flex-col items-center text-center h-full justify-center"
   >
-    <Logo class="w-24" />
-    <h1 class="text-3xl mb-5">
-      The hub for open source LLMs.<br />Powered by Ollama
-    </h1>
-    <p class="opacity-50 mb-5">Chat with hundred of LLM available</p>
-    <DropdownModels />
+  {#if $currentModel}
+  <Logo class="w-14" />
+  <h1 class="text-3xl mb-5">
+    The hub for open source LLMs.<br />Powered by Ollama
+  </h1>
+  <p class="opacity-50 mb-5">Chat with hundred of LLM available</p>
+  <DropdownModels />
+  {:else}
+  <h1 class="text-2xl mb-2">No model installed yet</h1>
+  <a href="/models" class="rounded-lg shadow border border-black-200 px-4 py-3">Install your first model</a>
+  {/if}
+   
   </div>
 {:else}
   <div
     class="w-full max-w-xl mx-auto flex flex-col items-center text-center h-full justify-center"
   >
-    <Logo class="w-8" />
-
+    <Logo class="w-14" />
     <h1 class="text-2xl mb-2">Ollama is disconnected</h1>
     <p>
       Please install <a
@@ -31,6 +37,9 @@
         class="underline">Ollama</a
       > or launch the application
     </p>
+  
+
+    
   </div>
 {/if}
 

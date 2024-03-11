@@ -5,7 +5,6 @@
   import ollama from "ollama";
   import { useChat } from "ai/svelte";
   import { goto } from "$app/navigation";
-  //import DropdownModel from "$lib/components/models/DropdownModel.svelte";
   import AssistantMessage from "./chat/AssistantMessage.svelte";
   import UserMessage from "./chat/UserMessage.svelte";
   import Tooglefullsize from "./chat/Tooglefullsize.svelte";
@@ -13,7 +12,6 @@
   import Input from "./chat/Input.svelte";
 
   const { input, messages, append } = useChat({
-    //initialMessages: initialMessages,
     onFinish: createChat,
   });
 

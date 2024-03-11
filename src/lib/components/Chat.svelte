@@ -3,13 +3,14 @@
   import { browser } from "$app/environment";
   import { history } from "$lib/stores/history";
   import { useChat } from "ai/svelte";
+  import { currentModel } from "$lib/stores/models";
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import AssistantMessage from "./chat/AssistantMessage.svelte";
   import UserMessage from "./chat/UserMessage.svelte";
   import Tooglefullsize from "./chat/Tooglefullsize.svelte";
   import Input from "./chat/Input.svelte";
 
-  let currentModel = "";
+  let chatModel = "";
 
   const { input, messages, setMessages, append } = useChat({
     onFinish: updateChat,
@@ -20,7 +21,7 @@
       const currentChat = $history.find((conv) => conv.id === $page.params.id);
       if (currentChat) {
         setMessages(currentChat.messages);
-        currentModel = currentChat.model;
+        chatModel = currentChat.model;
       }
     }
   }
@@ -30,7 +31,7 @@
       append(
         { role: "user", content: $input },
         {
-          options: { body: { currentModel: currentModel } },
+          options: { body: { currentModel: chatModel } },
         }
       );
       $input = "";
@@ -66,7 +67,7 @@
   <div
     class="h-full overflow-hidden relative p-4 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600"
   >
-    <span class="absolute top-4 right-8">{currentModel.image}</span>
+    <span class="absolute top-4 left-4 bg-black-100 px-3 font-mono text-xs  py-2 rounded-md">{chatModel.image}</span>
     <Tooglefullsize />
 
     <div bind:this={chatContainer} class="h-full overflow-y-auto pt-20 pb-32">
@@ -75,7 +76,7 @@
           {#if message.role === "assistant"}
             <AssistantMessage
               content={message.content}
-              model={currentModel}
+              model={chatModel}
             />
           {/if}
           {#if message.role === "user"}
@@ -83,7 +84,7 @@
           {/if}
         {/each}
       </div>
-      {#if $ollamaIsActivated}
+      {#if $ollamaIsActivated && $currentModel}
         <Input bind:value={$input} onSubmit={handleSubmit} />
       {/if}
     </div>

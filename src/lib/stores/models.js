@@ -6,6 +6,7 @@ export let initialModels = [
     image: "mistral:latest",
     icon: "mistral.svg",
     parameters: "7B",
+    context: 4096,
     size: 4.1,
     description: `Mistral is a 7.3B parameter model, distributed with the Apache license. It is available in both instruct (instruction following) and text completion.
 
@@ -18,9 +19,23 @@ export let initialModels = [
     derived: false,
   },
   {
+    name: "Mixtral",
+    image: "mixtral:8x7b",
+    icon: "mistral.svg",
+    parameters: "8x7B",
+    context: 32000,
+    size: 26,
+    description: `The Mixtral-8x7B Large Language Model (LLM) is a pretrained generative Sparse Mixture of Experts. It outperforms Llama 2 70B on many benchmarks.
+
+    As of December 2023, it is the strongest open-weight model with a permissive license and the best model overall regarding cost/performance trade-offs.`,
+    installed: false,
+    derived: false,
+  },
+  {
     name: "Gemma",
-    image: "gemma:latest",
+    image: "gemma:7b",
     parameters: "7B",
+    context: 4096,
     size: 4.8,
     icon: "google.svg",
     description:
@@ -32,6 +47,7 @@ export let initialModels = [
     name: "Gemma",
     image: "gemma:2b",
     parameters: "2B",
+    context: 4096,
     size: 1.4,
     icon: "google.svg",
     description:
@@ -41,10 +57,23 @@ export let initialModels = [
   },
   {
     name: "Llama 2",
-    image: "llama2:latest",
+    image: "llama2:7b",
+    context: 4096,
     parameters: "7B",
     icon: "llama.svg",
     size: 3.8,
+    description:
+      "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
+    installed: false,
+    derived: false,
+  },
+  {
+    name: "Llama 2",
+    image: "llama2:13b",
+    parameters: "13B",
+    icon: "llama.svg",
+    size: 7.5,
+    context: 4096,
     description:
       "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
     installed: false,
@@ -58,6 +87,15 @@ export let initialModels = [
     size: 3.8,
     description:
       "Llama 2 Uncensored is based on Meta’s Llama 2 model, and was created by George Sung and Jarrad Hope using the process defined by Eric Hartford in his blog post.",
+    installed: false,
+    derived: false,
+  },
+  {
+    name: "llava",
+    image: "llava:7b",
+    parameters: "7B",
+    size: 4.7,
+    description: "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6.",
     installed: false,
     derived: false,
   },
@@ -82,7 +120,7 @@ export let initialModels = [
   },
   {
     name: "Neural Chat",
-    image: "neural-chat",
+    image: "neural-chat:7b",
     parameters: "7B",
     size: 4.1,
     description:
@@ -92,7 +130,7 @@ export let initialModels = [
   },
   {
     name: "Starling",
-    image: "starling-lm",
+    image: "starling-lm:7b",
     parameters: "7B",
     size: 4.1,
     description: `Starling-7B is an open (non-commercial) large language model (LLM) trained by reinforcement learning from AI feedback. (RLAIF)
@@ -103,7 +141,7 @@ export let initialModels = [
   },
   {
     name: "Code Llama",
-    image: "codellama",
+    image: "codellama:7b",
     icon: "llama.svg",
     parameters: "7B",
     size: 3.8,
@@ -112,10 +150,20 @@ export let initialModels = [
     installed: false,
     derived: false,
   },
-
+  {
+    name: "Code Llama",
+    image: "codellama:34b",
+    icon: "llama.svg",
+    parameters: "34B",
+    size: 3.8,
+    description:
+      "Code Llama is a model for generating and discussing code, built on top of Llama 2. It’s designed to make workflows faster and efficient for developers and make it easier for people to learn how to code. It can generate both code and natural language about code. Code Llama supports many of the most popular programming languages used today, including Python, C++, Java, PHP, Typescript (Javascript), C#, Bash and more.",
+    installed: false,
+    derived: false,
+  },
   {
     name: "Orca Mini",
-    image: "orca-mini",
+    image: "orca-mini:3b",
     parameters: "3B",
     size: 1.9,
     description:
