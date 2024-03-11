@@ -1,8 +1,8 @@
 <script>
   import { ollamaIsActivated } from "$lib/stores/states";
-  import { currentModel } from "$lib/stores/models";
-  import Chevron from "../icons/Chevron.svelte";
   import Logo from "$lib/components/sidebar/Logo.svelte";
+  import DropdownModels from "../models/DropdownModels.svelte";
+
 </script>
 
 {#if $ollamaIsActivated}
@@ -10,29 +10,12 @@
     id="welcome"
     class="w-full max-w-lg mx-auto flex flex-col items-center text-center h-full justify-center"
   >
-  <Logo class="w-24" />
+    <Logo class="w-24" />
     <h1 class="text-3xl mb-5">
       The hub for open source LLMs.<br />Powered by Ollama
     </h1>
     <p class="opacity-50 mb-5">Chat with hundred of LLM available</p>
-    <div
-      class="w-full border flex justify-between border-black-200 dark:border-black-700 items-center gap-2 bg-white dark:bg-black-700 rounded-xl transition-shadow hover:shadow px-4 pr-2 py-2"
-    >
-      <button
-        class="text-sm flex items-center justify-between gap-1 p-1 w-full"
-      >
-        <div class="flex items-center gap-2">
-          <img
-            src="/icons/models/{$currentModel.icon || 'model.svg'}"
-            alt=""
-            class="w-5"
-          />
-          <span class="text-black-400 font-mono">{$currentModel.name} /</span>
-          <span class="font-semibold">{$currentModel.image}</span>
-        </div>
-        <Chevron />
-      </button>
-    </div>
+    <DropdownModels />
   </div>
 {:else}
   <div

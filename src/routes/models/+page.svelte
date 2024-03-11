@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-  <title>modelO - Svelte</title>
+  <title>Ullama - Svelte</title>
 </svelte:head>
 
 <main class="flex">

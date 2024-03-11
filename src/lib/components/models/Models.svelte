@@ -11,6 +11,10 @@
     selectedModel = model;
   }
 
+  $: if ($models) {
+    selectedModel = $models.find((model) => model.image === selectedModel?.image);
+  }
+
   $:filteredModels = $models.filter((model) =>
       model.name.toLowerCase().includes(search.toLowerCase())
     );
