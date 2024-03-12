@@ -32,6 +32,18 @@ export let initialModels = [
     derived: false,
   },
   {
+    name: "Open Orca",
+    image: "mistral-openorca:latest",
+    icon: "orca.svg",
+    parameters: "7B",
+    context: 4096,
+    size: 4.1,
+    description: `Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the Mistral 7B model using the OpenOrca dataset.
+  HuggingFace Leaderboard evals place this model as leader for all models smaller than 30B at the release time, outperforming all other 7B and 13B models.`,
+    installed: false,
+    derived: false,
+  },
+  {
     name: "Gemma",
     image: "gemma:7b",
     parameters: "7B",
@@ -95,7 +107,8 @@ export let initialModels = [
     image: "llava:7b",
     parameters: "7B",
     size: 4.7,
-    description: "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6.",
+    description:
+      "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6.",
     installed: false,
     derived: false,
   },
@@ -165,6 +178,7 @@ export let initialModels = [
     name: "Orca Mini",
     image: "orca-mini:3b",
     parameters: "3B",
+    icon: "orca.svg",
     size: 1.9,
     description:
       "Orca Mini is a Llama and Llama 2 model trained on Orca Style datasets created using the approaches defined in the paper, Orca: Progressive Learning from Complex Explanation Traces of GPT-4. There are two variations available. The original Orca Mini based on Llama in 3, 7, and 13 billion parameter sizes, and v3 based on Llama 2 in 7, 13, and 70 billion parameter sizes.",

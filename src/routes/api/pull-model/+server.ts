@@ -14,19 +14,15 @@ export async function POST({ request }) {
   // pullModel is an async generator, get loading updates
 
   for await (const update of pulledModel) {
-    console.log("Pulled model update", update);
-  }
-
-  // return the stream to front to display loading updates and indicate progress
-
-  return new ReadableStream({   
-    async start(controller) {
-      for await (const update of pulledModel) {
-        controller.enqueue(JSON.stringify(update));
-      }
-      controller.close();
+    if (update.status === "success") {
+      const response = new Response(JSON.stringify(pulledModel), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+      return response;
+    } else {
+      let progress = Math.round((update.completed / update.total) * 100);
+      process.stdout.write("Pulling model: " + progress);
     }
-  }, { type: "application/json" });
-
-  // return new Response(JSON.stringify(pulledModel), { status: 200 });
+  }
 }

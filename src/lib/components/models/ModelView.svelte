@@ -17,13 +17,14 @@
     loading = true;
 
     // Use fetch on api/pull-model to install the model
-    const pulledModel = await fetch("/api/pull-model", {
+    const response = await fetch("/api/pull-model", {
       method: "POST",
       body: JSON.stringify({ model: model }),
     });
 
-    // Update the models store
-    console.log(pulledModel.json());
+    for await (const part of response) {
+        console.log(part);
+    }
 
     loading = false;
   }
