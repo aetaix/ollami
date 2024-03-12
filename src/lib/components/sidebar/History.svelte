@@ -58,7 +58,7 @@
     <span class="bg-black-700 p-1 rounded text-xs">⌘+k</span>
   </a>
   {#if $history.length > 0}
-    <ul class="space-y-2 max-h-[30vh] overflow-y-auto mt-2">
+    <ul class="space-y-2 max-h-[50vh] overflow-y-auto mt-2">
       {#each $history as chat}
         <HistoryItem id={chat.id} name={chat.name} />
       {/each}

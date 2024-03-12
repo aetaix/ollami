@@ -1,4 +1,5 @@
 <script>
+  import ollama from "ollama";
   import { page } from "$app/stores";
   import { browser } from "$app/environment";
   import { history } from "$lib/stores/history";
@@ -24,6 +25,11 @@
         chatModel = currentChat.model;
       }
     }
+  }
+
+  // Trigger ollama with currentModel to make load time faster for the model
+  $: if ($ollamaIsActivated && $currentModel) {
+    ollama.chat({ model: chatModel, prompt: "" });
   }
 
   function handleSubmit() {
@@ -67,17 +73,17 @@
   <div
     class="h-full overflow-hidden relative p-4 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600"
   >
-    <span class="absolute top-4 left-4 bg-black-100 px-3 font-mono text-xs  py-2 rounded-md">{chatModel.image}</span>
+    <span
+      class="absolute top-4 left-4 bg-black-100 dark:bg-black-600 px-3 font-mono text-xs py-2 rounded-md"
+      >{chatModel.image}</span
+    >
     <Tooglefullsize />
 
     <div bind:this={chatContainer} class="h-full overflow-y-auto pt-20 pb-32">
       <div class="w-full max-w-2xl mx-auto">
         {#each $messages as message}
           {#if message.role === "assistant"}
-            <AssistantMessage
-              content={message.content}
-              model={chatModel}
-            />
+            <AssistantMessage content={message.content} model={chatModel} />
           {/if}
           {#if message.role === "user"}
             <UserMessage content={message.content} />

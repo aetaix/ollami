@@ -17,38 +17,15 @@
     loading = true;
 
     // Use fetch on api/pull-model to install the model
-
     const pulledModel = await fetch("/api/pull-model", {
       method: "POST",
       body: JSON.stringify({ model: model }),
     });
 
     // Update the models store
-
     console.log(pulledModel.json());
 
     loading = false;
-
-    /* 
-    Old METHOD
-    ollama
-      .pull({
-        model: model.image,
-      })
-      .then(() => {
-        loading = false;
-        console.log("done");
-        models.update((models) => {
-          return models.map((model) => {
-            if (model.image === image) {
-              return { ...model, installed: true };
-            }
-            return model;
-          });
-        });
-        loading = false;
-      });
-      */
   }
 
   function deleteModel() {
@@ -68,25 +45,25 @@
 <header class="flex items-center justify-between mb-4">
   <h2 class="flex gap-2 items-center">
     <img src="/icons/models/{model.icon || 'model.svg'}" class="w-5" alt="" />
-    <span class="text-black-400">{model.name} /</span>
+    <span class="text-black-400 dark:text-black-100">{model.name} /</span>
     <span class="font-semibold">{model.image}</span>
   </h2>
 </header>
 
-<p class="text-sm text-black-600 mb-4">{model.description}</p>
+<p class="text-sm text-black-600 dark:text-black-300 mb-4">{model.description}</p>
 
 {#if model.installed}
   <div class="flex items-center gap-2 mb-4">
     <button
       on:click={setCurrentModel}
-      class="bg-white border flex items-center gap-2 border-black-200 shadow px-3 py-2 font-semibold text-sm rounded-lg"
+      class="bg-white dark:bg-black-500 border flex items-center gap-2 border-black-200 dark:border-black-400 shadow px-3 py-2 font-semibold text-sm rounded-lg"
     >
       <NewMessage class="w-4" />
       Chat with model</button
     >
     <button
       on:click={deleteModel}
-      class="w-8 h-8 bg-black-100 hover:bg-black-200 rounded flex justify-center items-center"
+      class="w-8 h-8 bg-black-100 dark:bg-black-600 hover:bg-black-200 rounded flex justify-center items-center"
     >
       <Trash class="w-4" />
     </button>
@@ -96,26 +73,26 @@
     on:click={installModel}
     class="
     {loading
-      ? 'w-full rounded-full h-2 bg-black-100'
-      : 'bg-white shadow px-3 h-auto py-2 rounded-lg '}
-     flex gap-2 items-center border border-black-200 font-semibold text-sm mb-4 transition-all relative"
+      ? 'w-full rounded-full h-2 bg-black-100 dark:bg-black-300'
+      : 'bg-white dark:bg-black-500 shadow px-3 h-auto py-2 rounded-lg '}
+     flex gap-2 items-center border border-black-200 dark:border-black-400 font-semibold text-sm mb-4 transition-all relative"
   >
     {#if !loading}
       <Pull class="w-4" />
       Install model
     {:else}
-      <div class="loading bg-black-600 h-2 rounded-full"></div>
+      <div class="loading bg-black-600 dark:bg-black-300 h-2 rounded-full"></div>
     {/if}
   </button>
 {/if}
 
 <table class="w-full text-left text-sm">
-  <tr class="border-b border-black-200">
-    <td class="text-black-800 py-2">Parameters</td>
+  <tr class="border-b border-black-200 dark:border-black-600">
+    <td class="text-black-800 dark:text-black-200 py-2">Parameters</td>
     <td class="text-black-400 py-2 w-3/4">{model.parameters}</td>
   </tr>
-  <tr class="border-b border-black-200">
-    <td class="text-black-800 py-2">Size</td>
+  <tr class="border-b border-black-200 dark:border-black-600">
+    <td class="text-black-800 dark:text-black-200 py-2">Size</td>
     <td class="text-black-400 py-2 w-3/4">{model.size}GB</td>
   </tr>
 </table>

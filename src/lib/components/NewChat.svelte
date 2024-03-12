@@ -1,8 +1,8 @@
 <script>
+  import ollama from "ollama";
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import { currentModel } from "$lib/stores/models";
   import { history } from "$lib/stores/history";
-  import ollama from "ollama";
   import { useChat } from "ai/svelte";
   import { goto } from "$app/navigation";
   import AssistantMessage from "./chat/AssistantMessage.svelte";
@@ -10,6 +10,11 @@
   import Tooglefullsize from "./chat/Tooglefullsize.svelte";
   import Welcome from "./chat/Welcome.svelte";
   import Input from "./chat/Input.svelte";
+
+  // Trigger ollama with currentModel to make load time faster for the model
+  $: if ($ollamaIsActivated && $currentModel) {
+    ollama.chat({ model: $currentModel.image, prompt: "" });
+  }
 
   const { input, messages, append } = useChat({
     onFinish: createChat,
@@ -51,8 +56,8 @@
     await ollama
       .generate({
         model: $currentModel.image,
-        prompt: `Considering the following conversation, capture the main topic and use it to generate a short title for the chat. The chat's message: ${JSON.stringify(chat)}.
-        The Title:
+        prompt: `Considering the following conversation, capture the main topic and use it to generate a short title for the chat. No format, just a pure string. The chat's message: ${JSON.stringify(chat)}.
+        The Title in one sentence is:
         `,
       })
       .then((response) => {

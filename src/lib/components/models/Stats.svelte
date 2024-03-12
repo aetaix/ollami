@@ -15,7 +15,7 @@
 </script>
 
 <div class="grid grid-flow-col gap-5">
-  <div class="rounded-xl border border-black-200 p-4 bg-white shadow">
+  <div class="rounded-xl border border-black-200 dark:border-black-600 p-4 bg-white dark:bg-black-700 shadow">
     {#if $currentModel}
       <div class="flex gap-2 items-center mb-4">
         <span class="w-3 h-3 rounded-full bg-green"></span>
@@ -38,7 +38,7 @@
       </div>
     {/if}
   </div>
-  <div class="rounded-xl border border-black-200 p-4 bg-white shadow">
+  <div class="rounded-xl border border-black-200 dark:border-black-600 p-4 bg-white dark:bg-black-700 shadow">
     <h3 class="mb-4">Installed model</h3>
     <div class="grid grid-cols-2 gap-5 divide-x divide-black-200">
       <div class="">

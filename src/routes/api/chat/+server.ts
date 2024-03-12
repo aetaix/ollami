@@ -14,7 +14,6 @@ export const POST = (async ({ request }) => {
   const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
   const currentMessageContent = messages[messages.length - 1].content;
 
-  console.log(currentModel)
   
   const prompt = ChatPromptTemplate.fromMessages([
     ...formattedPreviousMessages,
