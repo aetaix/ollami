@@ -56,7 +56,9 @@
     await ollama
       .generate({
         model: $currentModel.image,
-        prompt: `Considering the following conversation, capture the main topic and use it to generate a short title for the chat. No format, just a pure string. The chat's message: ${JSON.stringify(chat)}.
+        prompt: `Considering the following conversation, capture the main topic and use it to generate a short title for the chat. 
+        You only return a string, never use formating, and not title. 
+        The chat's message: ${JSON.stringify(chat)}.
         The Title in one sentence is:
         `,
       })
