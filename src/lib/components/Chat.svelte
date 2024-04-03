@@ -83,7 +83,6 @@
     });
 
     // Append the new message
-
     append(
       { role: "user", content: query.content },
       {

@@ -37,7 +37,7 @@
   }
 </script>
 
-<div class="relative w-full">
+<div class="relative w-full opening-animation">
   <button
     on:click|stopPropagation={dropdown.open}
     class="text-sm flex items-center justify-between w-full border border-black-200 dark:border-black-600 gap-2 bg-white dark:bg-black-700 rounded-xl transition-shadow hover:shadow px-4 pr-2 py-3 shadow"
@@ -90,3 +90,20 @@
     </div>
   {/if}
 </div>
+
+<style>
+  .opening-animation {
+    animation: open 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  @keyframes open {
+    from {
+      opacity: 0;
+      transform:  scaleX(0.2);
+    }
+    to {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+</style>

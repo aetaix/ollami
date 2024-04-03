@@ -93,7 +93,7 @@ export let initialModels = [
   },
   {
     name: "Llama 2 Uncensored",
-    image: "llama2-uncensored",
+    image: "llama2-uncensored:latest",
     parameters: "7B",
     icon: "llama.svg",
     size: 3.8,
@@ -123,7 +123,7 @@ export let initialModels = [
   },
   {
     name: "Phi-2",
-    image: "phi",
+    image: "phi:latest",
     parameters: "2.7B",
     size: 1.7,
     description:

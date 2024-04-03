@@ -1,11 +1,11 @@
 <script>
-  import { models } from "$lib/stores/models";
+  import { models, currentModel } from "$lib/stores/models";
   import ModelView from "./ModelView.svelte";
 
   let search = "";
 
   let filteredModels = [];
-  let selectedModel = null;
+  let selectedModel = $models[0];
 
   function viewModel(model) {
     selectedModel = model;
@@ -44,7 +44,11 @@
     </header>
     <ul class="p-2">
       {#each filteredModels as model}
-        <li class="hover:bg-black-100 dark:hover:bg-black-600 rounded text-black-500 dark:text-black-100 dark:hover:text-white hover:text-black">
+        <li class="
+        {selectedModel?.image === model.image
+          ? 'bg-black-200 dark:bg-black-600  dark:text-white'
+          : 'hover:bg-black-50 dark:hover:bg-black-600 text-black-500 dark:text-black-100 dark:hover:text-white hover:text-black'}
+         rounded ">
           <button
             on:click={() => {
               viewModel(model);
@@ -59,8 +63,16 @@
               />
               <span class="text-sm font-mono">{model.image}</span>
             </div>
-            <span class="text-sm text-black-400 dark:text-black-200"
-              >{model.installed ? "Installed" : ""}</span
+            <span class="text-sm opacity-50"
+              >
+              {#if $currentModel.image === model.image}
+                Running
+              {:else}
+                {#if model.installed}
+                  Installed
+                {/if}
+              {/if}
+              </span
             >
           </button>
         </li>

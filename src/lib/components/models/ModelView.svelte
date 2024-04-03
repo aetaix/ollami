@@ -5,6 +5,8 @@
   import NewMessage from "../icons/NewMessage.svelte";
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
+  import { onMount, onDestroy } from "svelte";
+
   export let model = {};
 
   function setCurrentModel() {
@@ -12,21 +14,56 @@
     goto("/");
   }
 
+  let websocket;
   let loading = false;
+  let progress = 0;
+
+  onMount(() => {
+    // Initialize WebSocket connection when the component mounts
+    setupWebSocket();
+  });
+  onDestroy(() => {
+    // Close WebSocket connection when the component is destroyed
+    if (websocket) {
+      websocket.close();
+    }
+  });
+
+  function setupWebSocket() {
+    websocket = new WebSocket("ws://localhost:8080/");
+
+    websocket.onopen = () => {
+      console.log("WebSocket connection opened");
+      websocket.send(
+        JSON.stringify({ type: "requestProgress", modelImage: model.image })
+      );
+    };
+
+    websocket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === "progress" || data.type === "currentProgress") {
+        progress = data.progress;
+        loading = progress < 100;
+      }
+    };
+
+    websocket.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+
+    websocket.onclose = () => {
+      console.log("WebSocket connection closed");
+    };
+  }
+
   async function installModel() {
     loading = true;
-
+    progress = 0;
     // Use fetch on api/pull-model to install the model
     const response = await fetch("/api/pull-model", {
       method: "POST",
       body: JSON.stringify({ model: model }),
     });
-
-    for await (const part of response) {
-        console.log(part);
-    }
-
-    loading = false;
   }
 
   function deleteModel() {
@@ -51,13 +88,15 @@
   </h2>
 </header>
 
-<p class="text-sm text-black-600 dark:text-black-300 mb-4">{model.description}</p>
+<p class="text-sm text-black-600 dark:text-black-300 mb-4">
+  {model.description}
+</p>
 
 {#if model.installed}
   <div class="flex items-center gap-2 mb-4">
     <button
       on:click={setCurrentModel}
-      class="bg-white dark:bg-black-500 border flex items-center gap-2 border-black-200 dark:border-black-400 shadow px-3 py-2 font-semibold text-sm rounded-lg"
+      class="bg-green hover:bg-green-500 transition-all active:scale-95 text-white border flex items-center gap-2 border-green/50 shadow px-3 py-2 font-semibold text-sm rounded-lg"
     >
       <NewMessage class="w-4" />
       Chat with model</button
@@ -75,14 +114,17 @@
     class="
     {loading
       ? 'w-full rounded-full h-2 bg-black-100 dark:bg-black-300'
-      : 'bg-white dark:bg-black-500 shadow px-3 h-auto py-2 rounded-lg '}
-     flex gap-2 items-center border border-black-200 dark:border-black-400 font-semibold text-sm mb-4 transition-all relative"
+      : 'bg-white hover:bg-black-100 dark:hover:bg-black-400 dark:bg-black-500 shadow px-3 h-auto py-2 rounded-lg '}
+     flex gap-2 items-center border border-black-200 dark:border-black-500 font-semibold text-sm mb-4 transition-all relative"
   >
     {#if !loading}
       <Pull class="w-4" />
       Install model
     {:else}
-      <div class="loading bg-black-600 dark:bg-black-300 h-2 rounded-full"></div>
+      <div
+        class="loading bg-black-600 dark:bg-black-300 h-2 rounded-full"
+        style="width: {progress}%"
+      ></div>
     {/if}
   </button>
 {/if}
@@ -100,25 +142,8 @@
 
 <style>
   .loading {
-    animation: loading 0.6s linear infinite alternate;
-    animation-fill-mode: backwards;
     position: absolute;
     top: 0;
     left: 0;
-  }
-
-  @keyframes loading {
-    0% {
-      width: 10%;
-      left: 0;
-    }
-    50% {
-      width: 50%;
-      left: 50%;
-    }
-    100% {
-      width: 0%;
-      left: 100%;
-    }
   }
 </style>
