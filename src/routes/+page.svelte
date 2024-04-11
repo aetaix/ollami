@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>Ullama - Svelte</title>
+  <title>Local LLM | Ollami</title>
 </svelte:head>
 
 <main class="flex">

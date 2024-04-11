@@ -12,7 +12,7 @@
   <header class="flex justify-between items-center mb-5">
     <a href="/" class="inline-flex items-center space-x-2">
       <Logo class="w-8" />
-      <span class=" font-semibold">myllama</span>
+      <span class=" font-semibold">Ollami</span>
     </a>
     <OllamaStatus />
   </header>

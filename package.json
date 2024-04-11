@@ -11,6 +11,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-node": "^5.0.1",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@tailwindcss/typography": "^0.5.10",
@@ -28,7 +29,9 @@
 		"@langchain/community": "^0.0.34",
 		"ai": "^3.0.2",
 		"langchain": "^0.1.25",
-		"ollama": "^0.4.8",
+		"ollama": "^0.4.9",
+		"socket.io": "^4.7.5",
+		"socket.io-client": "^4.7.5",
 		"svelte-markdown": "^0.4.1",
 		"ws": "^8.16.0"
 	}

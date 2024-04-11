@@ -3,15 +3,15 @@
   import Model from "$lib/components/icons/Model.svelte";
   import Stats from "$lib/components/models/Stats.svelte";
   import Models from "$lib/components/models/Models.svelte";
+  import ModelFile from "$lib/components/models/ModelFile.svelte";
 </script>
 
 <svelte:head>
-  <title>Ullama - Svelte</title>
+  <title>Models | Ollami</title>
 </svelte:head>
 
 <main class="flex">
   <Sidebar />
-
   <div
     class="h-screen p-2
       w-4/5 pl-2 transition-all absolute right-0 top-0"
@@ -23,7 +23,7 @@
         <h1 class="items-center flex gap-3 text-lg">
           <Model class="w-6" /> Models
         </h1>
-        <button class="border border-green text-green px-4 py-2 rounded-lg">Create a modelfile</button>
+        <ModelFile />
       </header>
       <Stats />
       <Models />

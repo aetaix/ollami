@@ -5,7 +5,18 @@
   import NewMessage from "../icons/NewMessage.svelte";
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
-  import { onMount, onDestroy } from "svelte";
+
+  import { io } from 'socket.io-client'
+
+  const socket = io()
+
+  socket.on('eventFromServer', (message) => {
+    console.log(message)
+  })
+
+  socket.on('modelPullProgress', (data) => {
+    progress = data.progress
+  })
 
   export let model = {};
 
@@ -14,47 +25,8 @@
     goto("/");
   }
 
-  let websocket;
   let loading = false;
   let progress = 0;
-
-  onMount(() => {
-    // Initialize WebSocket connection when the component mounts
-    setupWebSocket();
-  });
-  onDestroy(() => {
-    // Close WebSocket connection when the component is destroyed
-    if (websocket) {
-      websocket.close();
-    }
-  });
-
-  function setupWebSocket() {
-    websocket = new WebSocket("ws://localhost:8080/");
-
-    websocket.onopen = () => {
-      console.log("WebSocket connection opened");
-      websocket.send(
-        JSON.stringify({ type: "requestProgress", modelImage: model.image })
-      );
-    };
-
-    websocket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.type === "progress" || data.type === "currentProgress") {
-        progress = data.progress;
-        loading = progress < 100;
-      }
-    };
-
-    websocket.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-
-    websocket.onclose = () => {
-      console.log("WebSocket connection closed");
-    };
-  }
 
   async function installModel() {
     loading = true;

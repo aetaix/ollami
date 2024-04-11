@@ -1,7 +1,4 @@
-import { sendProgressUpdate } from "./websocket";
 import ollama from "ollama";
-
-const modelProgress = new Map<string, number>();
 
 export async function startModelPull(model: object) {
   // Replace with your actual model pulling logic
@@ -16,16 +13,10 @@ export async function startModelPull(model: object) {
     switch (update.status) {
       case "success":
         console.log(update.status);
-        sendProgressUpdate(100);
       default:
         let progress = Math.round((update.completed / update.total) * 100);
-        //process.stdout.write("Pulling model: " + progress + "%");
-        modelProgress.set(model.image, progress);
-        sendProgressUpdate(progress);
+        process.stdout.write("Pulling model: " + progress + "%");
+        
     }
   }
-}
-
-export function getProgress(modelImage: string) {
-  return modelProgress.get(modelImage) || 0;
 }

@@ -8,7 +8,8 @@
 
   $: diskSpace = $models.reduce((acc, model) => {
     if (model.installed) {
-      return acc + model.size;
+      // return model sized rounded to 2 decimal places
+      return acc + Math.round(model.size * 100) / 100;
     }
     return acc;
   }, 0);
