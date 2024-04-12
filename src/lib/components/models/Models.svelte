@@ -21,7 +21,7 @@
   
 </script>
 
-<div class="grid grid-cols-2 rounded-xl border border-black-200 dark:border-black-600">
+<div class="grid grid-cols-2 rounded-xl border border-black-200 shadow dark:border-black-600">
   <div class="border-r border-black-200 dark:border-black-600">
     <header class="flex items-center gap-2 border-b border-black-200 dark:border-black-600 p-2">
       <svg width="20"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

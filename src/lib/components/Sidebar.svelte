@@ -11,7 +11,7 @@
 <div class="h-screen p-4 w-1/5 relative">
   <header class="flex justify-between items-center mb-5">
     <a href="/" class="inline-flex items-center space-x-2">
-      <Logo class="w-8" />
+      <Logo class="w-6" />
       <span class=" font-semibold">Ollami</span>
     </a>
     <OllamaStatus />

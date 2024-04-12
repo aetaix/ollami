@@ -20,7 +20,7 @@
       class="h-full overflow-y-auto relative p-8 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600 space-y-5"
     >
       <header class="flex justify-between items-center">
-        <h1 class="items-center flex gap-3 text-lg">
+        <h1 class="items-center flex gap-3 text-xl font-semibold">
           <Model class="w-6" /> Models
         </h1>
         <ModelFile />

@@ -12,11 +12,11 @@
     class="w-full max-w-lg mx-auto flex flex-col items-center text-center h-full justify-center"
   >
   {#if $currentModel}
-  <Logo class="w-14" />
-  <h1 class="text-3xl mb-5">
-    The hub for open source LLMs.<br />Powered by Ollama
+  <Logo class="w-12" />
+  <h1 class="text-3xl mt-5 mb-2">
+    The Home of LLMs, on your computer.
   </h1>
-  <p class="opacity-50 mb-5">Chat with hundred of LLM available</p>
+  <p class="opacity-50 mb-5">Powered by Ollama</p>
   <DropdownModels />
   {:else}
   <h1 class="text-2xl mb-2">No model installed yet</h1>

@@ -1,6 +1,12 @@
 <script>
   import Sidebar from "$lib/components/Sidebar.svelte";
   import { fullscreen } from "$lib/stores/states";
+  import { create } from "$lib/stores/prompts";
+  import Prompt from "$lib/components/icons/Prompt.svelte";
+  import Prompts from "$lib/components/prompts/Prompts.svelte";
+  import ButtonCreate from "$lib/components/prompts/ButtonCreate.svelte";
+  import Edit from "$lib/components/prompts/Edit.svelte";
+  import Create from "$lib/components/prompts/Create.svelte";
 </script>
 
 <svelte:head>
@@ -16,12 +22,27 @@
       : 'w-4/5 pl-2'} transition-all absolute right-0 top-0"
   >
     <div
-      class="h-full overflow-hidden relative p-4 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600 flex gap-4"
+      class="h-full overflow-hidden relative p-8 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600"
     >
-      <div>
-        <h1 class="text-2xl font-bold">Ollami</h1>
-        <p class="text-sm">Welcome to Ollami, a simple chatbot that uses the GPT-3 model to generate responses to your prompts. You can
+      <header class="flex items-center justify-between mb-4">
+        <h1 class="text-xl font-semibold flex gap-2 items-center">
+          <Prompt class="w-6" />
+          Prompt Libary
+        </h1>
+        <ButtonCreate />
+      </header>
+      <div class="border border-black-200 rounded-lg shadow flex">
+        <div class="w-1/2 border-r border-black-200">
+          <Prompts />
+        </div>
+        <div class="w-1/2 min-h-[70vh]">
+          {#if $create}
+            <Create />
+          {:else}
+            <Edit />
+          {/if}
+        </div>
       </div>
-  </div>
+    </div>
   </div>
 </main>
