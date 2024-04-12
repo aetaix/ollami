@@ -1,8 +1,8 @@
-# modelbase 🌟
+# Ollami 🌟
 
-This package is a frontend application designed specifically to utilize local Ollama Models for text generation. We offer two versatile versions: one tailored for Nuxt, and another optimized for Svelte. Feel free to experiment with any number of models from the extensive Ollama library!
+This package is a frontend application designed specifically to utilize local Ollama Models for text generation. Feel free to experiment with any number of models from the extensive Ollama library!
 
-**Why Use modelbase?** 💡
+**Why Use Ollami?** 💡
 
 - Seamlessly test and evaluate local model performance in a real-world application context.
 - Save time and resources by running your favorite models directly on your machine.
@@ -31,13 +31,11 @@ ollama run mistral
 
 ## Install modelbase 🔧
 
-We provide two versions of the app: one for Nuxt and another for Svelte, depending on your preference.
-
-Clone the repository to your local machine using the following command: 
+Clone the repository to your local machine development folder using the following command: 
 
 ```bash
-git clone https://github.com/aetaix/modelbase.git modelbase
-cd modelbase
+git clone https://github.com/aetaix/ollami.git ollami
+cd ollami
 ```
 
 Install packages and start the app:
