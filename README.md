@@ -9,9 +9,12 @@ This package is a frontend application designed specifically to utilize local Ol
 
 ## Prerequisites 🏗️
 
-Before you begin, ensure you have met the following requirements:
+You have installed the latest version of Node.js and npm. If not :
 
-- You have installed the latest version of Node.js and npm.
+- [Download Node.js (Node.js + npm)](https://nodejs.org/en/download/)
+
+> Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows you to run JavaScript applications on your local machine, and much more.
+
 
 ## Install Ollama 🤝
 
