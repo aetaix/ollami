@@ -61,7 +61,7 @@
 </header>
 
 <p class="text-sm text-black-600 dark:text-black-300 mb-4">
-  {model.description}
+  {@html model.description}
 </p>
 
 {#if model.installed}

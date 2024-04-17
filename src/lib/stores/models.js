@@ -122,6 +122,18 @@ export let initialModels = [
     derived: false,
   },
   {
+    name: "Wizardlm2",
+    image: "wizardlm2:latest",
+    parameters: "7B",
+    size: 4.1,
+    description:
+      `WizardLM-2 is a next generation state-of-the-art large language model with improved performance on complex chat, multilingual, reasoning and agent use cases. This family includes three cutting-edge models: wizardlm2:7b: fastest model, comparable performance with 10x larger open-source models, wizardlm2:8x22b: the most advanced model, and the best opensource LLM in Microsoft’s internal evaluation on highly complex tasks, wizardlm2:70b: model with top-tier reasoning capabilities for its size (coming soon)
+      `,
+      icon: "microsoft.svg",
+    installed: false,
+    derived: false,
+  },
+  {
     name: "Phi-2",
     image: "phi:latest",
     parameters: "2.7B",

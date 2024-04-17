@@ -9,19 +9,30 @@ This package is a frontend application designed specifically to utilize local Ol
 
 ## Prerequisites 🏗️
 
-### Get Started with Ollama Models 🤝
+Before you begin, ensure you have met the following requirements:
+
+- You have installed the latest version of Node.js and npm.
+
+## Install Ollama 🤝
 
 Get up and running with large language models locally.
 
 _[Find detailed instructions on installing Ollama here](https://ollama.com)_
 
-#### macOS 🍎 
-
-Ollama is currently exclusive to macOS.
+### macOS 🍎 
 
 [Download Ollama for macOS](https://ollama.com/download/Ollama-darwin.zip)
 
-#### Quickstart ⚡
+### Windows 🪟 (Preview)
+
+[Download Ollama for Windows](https://ollama.com/download/OllamaSetup.exe)
+
+### Linux 🐧 
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+### Install your first model ⚡
 
 Interact with models like Mistral effortlessly:
 
@@ -29,7 +40,7 @@ Interact with models like Mistral effortlessly:
 ollama run mistral
 ```
 
-## Install modelbase 🔧
+## Install Ollami 🔧
 
 Clone the repository to your local machine development folder using the following command: 
 

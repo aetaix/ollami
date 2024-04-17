@@ -28,7 +28,9 @@
     // add event listener to handle keydown events
     chatInput.addEventListener("keydown", handleKeydown);
   } else {
+    const chatInput = document.getElementById("chat-input");
     promptModal = false;
+    //chatInput.removeEventListener("keydown", handleKeydown);
   }
 
   // function to handle keydown events
@@ -40,7 +42,7 @@
       selectedIndex =
         selectedIndex === 0 ? filteredPrompts.length - 1 : selectedIndex - 1;
     } else if (e.key === "Enter") {
-        
+
       e.preventDefault();
       const chatInput = document.getElementById("chat-input");
       chatInput.value = filteredPrompts[selectedIndex].content;
