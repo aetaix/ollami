@@ -4,7 +4,7 @@
   import { goto } from "$app/navigation";
   import HistoryItem from "./HistoryItem.svelte";
 
-  let search = ""
+  let search = "";
 
   if (browser) {
     if (localStorage.getItem("chats")) {
@@ -28,19 +28,19 @@
     }
   }
 
-   // if search changes, filter history
+  // if search changes, filter history
 
- let filteredHistory = []; 
+  let filteredHistory = [];
 
-$: {
-  if (search.length > 0) {
-    filteredHistory = $history.filter((conversation) => {
-      return conversation.name.toLowerCase().includes(search.toLowerCase());
-    });
-  } else {
-    filteredHistory = $history;
+  $: {
+    if (search.length > 0) {
+      filteredHistory = $history.filter((conversation) => {
+        return conversation.name.toLowerCase().includes(search.toLowerCase());
+      });
+    } else {
+      filteredHistory = $history;
+    }
   }
-}
 </script>
 
 <div
@@ -74,23 +74,38 @@ $: {
     <span class="bg-black-700 p-1 rounded text-xs">⌘+o</span>
   </a>
   {#if $history.length > 0}
-  <div class="border rounded-lg border-black-600 p-1 flex gap-2 my-2">
-    <svg width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_21_7844)">
-      <path d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.867 18 18 14.867 18 11C18 7.132 14.867 4 11 4C7.132 4 4 7.132 4 11C4 14.867 7.132 18 11 18ZM19.485 18.071L22.314 20.899L20.899 22.314L18.071 19.485L19.485 18.071Z" fill="currentColor"/>
-      </g>
-      <defs>
-      <clipPath id="clip0_21_7844">
-      <rect width="24" height="24" fill="white"/>
-      </clipPath>
-      </defs>
+    <div class="border rounded-lg border-black-600 p-1 flex gap-2 my-2">
+      <svg
+        width="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g clip-path="url(#clip0_21_7844)">
+          <path
+            d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.867 18 18 14.867 18 11C18 7.132 14.867 4 11 4C7.132 4 4 7.132 4 11C4 14.867 7.132 18 11 18ZM19.485 18.071L22.314 20.899L20.899 22.314L18.071 19.485L19.485 18.071Z"
+            fill="currentColor"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_21_7844">
+            <rect width="24" height="24" fill="white" />
+          </clipPath>
+        </defs>
       </svg>
-      
-    <input bind:value={search} placeholder="Search a chat..." type="text" class="text-sm focus:outline-none bg-transparent w-full py-1">
-  </div>
+
+      <input
+        bind:value={search}
+        placeholder="Search a chat..."
+        type="text"
+        class="text-sm focus:outline-none bg-transparent w-full py-1"
+      />
+    </div>
     <ul class="space-y-2 max-h-[50vh] overflow-y-auto mt-2">
       {#each filteredHistory as chat}
-        <HistoryItem id={chat.id} name={chat.name} />
+        {#if chat.name.length > 0}
+          <HistoryItem id={chat.id} name={chat.name} />
+        {/if}
       {/each}
     </ul>
   {/if}

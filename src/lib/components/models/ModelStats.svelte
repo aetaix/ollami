@@ -7,10 +7,11 @@
     let totalSize = installed.reduce((acc, model) => {
         return acc + parseFloat(model.size);
     }, 0);
+
 </script>
 
 <div class="rounded-full p-2 px-4 bg-black-100">
     <span class=" text-sm">{installed.length} models</span>
     |
-    <span class=" text-sm">{totalSize} Go</span>
+    <span class=" text-sm">{totalSize.toFixed(2)} Go</span>
 </div>

@@ -3,97 +3,40 @@
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import { currentModel } from "$lib/stores/models";
   import { history } from "$lib/stores/history";
-  import { useChat } from "ai/svelte";
   import { goto } from "$app/navigation";
-  import AssistantMessage from "./chat/AssistantMessage.svelte";
-  import UserMessage from "./chat/UserMessage.svelte";
   import Tooglefullsize from "./chat/Tooglefullsize.svelte";
   import Welcome from "./chat/Welcome.svelte";
   import Input from "./chat/Input.svelte";
+  import { writable } from "svelte/store";
 
   // Trigger ollama with currentModel to make load time faster for the model
   $: if ($ollamaIsActivated && $currentModel) {
     ollama.chat({ model: $currentModel.image, prompt: "" });
   }
 
-  const { input, messages, append } = useChat({
-    onFinish: createChat,
-  });
-
-  let modelSafetyFrame = [
-    {
-      role: "system",
-      content:
-        "You are a helpful assistant. You are going to help the user with its query. Answer in their language. Try to give short answers. If you don't know the answer, just say so.",
-    },
-  ];
-
-  function handleSubmit() {
-    let options = { body: { currentModel: $currentModel } };
-
-    if ($input.includes("/") && $input.indexOf("/") === 0) {
-      return;
-    }
-
-    if ($currentModel.derived) {
-      options.initialMessages = modelSafetyFrame;
-    }
-
-    if ($input) {
-      append(
-        { role: "user", content: $input },
-        {
-          options: options,
-        }
-      );
-    }
-    $input = "";
-  }
+  let input = writable("");
 
   async function createChat() {
-    let chat = $messages.map((message) => {
-      return {
-        role: message.role,
-        content: message.content,
-      };
+    const messages = [
+      {
+        role: "user",
+        content: $input,
+      },
+    ];
+
+    let newchat = {
+      id: Math.random().toString(36).substring(2, 11),
+      name: "",
+      model: $currentModel,
+      messages,
+    };
+
+    history.update((chats) => {
+      chats.unshift(newchat);
+      return chats;
     });
-    await ollama
-      .generate({
-        model: $currentModel.image,
-        prompt: `Considering the following conversation, capture the main topic and use it to generate a short title for the chat. 
-        You only return a string, never use formating, and not title. 
-        The chat's message: ${JSON.stringify(chat)}.
-        The Title in one sentence is:
-        `,
-      })
-      .then((response) => {
-        console.log(response);
-        // remove " " from response.response;
 
-        let title = response.response.replace(/"/g, "");
-
-        let newchat = {
-          id: Math.random().toString(36).substring(2, 11),
-          name: title,
-          model: $currentModel,
-          messages: chat,
-        };
-
-        history.update((chats) => {
-          chats.unshift(newchat);
-          return chats;
-        });
-
-        goto(`/chat/${newchat.id}`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  let chatContainer;
-  $: if ($messages.length > 1) {
-    chatContainer.scrollTop = chatContainer.scrollHeight;
+    goto(`/chat/${newchat.id}`);
   }
 </script>
 
@@ -107,26 +50,11 @@
   >
     <Tooglefullsize />
 
-    <div bind:this={chatContainer} class="h-full overflow-y-auto pt-20 pb-32">
-      {#if $messages.length < 1}
-        <Welcome />
-      {:else}
-        <div class="w-full max-w-2xl mx-auto">
-          {#each $messages as message}
-            {#if message.role === "assistant"}
-              <AssistantMessage
-                content={message.content}
-                model={$currentModel}
-              />
-            {/if}
-            {#if message.role === "user"}
-              <UserMessage content={message.content} />
-            {/if}
-          {/each}
-        </div>
-      {/if}
+    <div class="h-full overflow-y-auto pt-20 pb-32">
+      <Welcome />
+
       {#if $ollamaIsActivated}
-        <Input bind:value={$input} onSubmit={handleSubmit} />
+        <Input bind:value={$input} onSubmit={createChat} />
       {/if}
     </div>
   </div>

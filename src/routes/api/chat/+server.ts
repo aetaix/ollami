@@ -9,7 +9,7 @@ const formatMessage = (message: VercelChatMessage) => {
 };
 
 export const POST = (async ({ request }) => {
-  const { messages, currentModel } = await request.json();
+  const { messages, model } = await request.json();
 
   const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
   const currentMessageContent = messages[messages.length - 1].content;
@@ -20,13 +20,13 @@ export const POST = (async ({ request }) => {
     ["user", "{input}"],
   ]);
 
-  const model = new ChatOllama({
-    model: currentModel.image,
+  const chat = new ChatOllama({
+    model: model.image,
   });
 
   const outputParser = new BytesOutputParser();
 
-  const chain = prompt.pipe(model).pipe(outputParser);
+  const chain = prompt.pipe(chat).pipe(outputParser);
 
   const stream = await chain.stream({
     input: currentMessageContent,

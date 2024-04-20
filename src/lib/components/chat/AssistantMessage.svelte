@@ -27,12 +27,10 @@
     <div class="w-8 h-8 shrink-0 flex items-center justify-center">
       <img src="/icons/models/{model.icon || 'model.svg'}" class="w-6" alt="" />
     </div>
-    <div class=" flex items-center gap-1 text-sm">
-      <span class="text-black-500 dark:text-black-400">
-        {model.name}/
+    <div class=" flex items-center gap-1">
+      <span class="text-black-600 font-semibold dark:text-black-400">
+        {model.name}
       </span>
-
-      <span class="font-semibold">{model.image}</span>
     </div>
   </div>
   <div

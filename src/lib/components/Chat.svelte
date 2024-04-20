@@ -23,19 +23,55 @@
     if (browser) {
       const currentChat = $history.find((conv) => conv.id === $page.params.id);
       if (currentChat) {
-        setMessages(currentChat.messages);
-
         // Check that the currentChat model is installed by comparing it with the models
         chatModel = currentChat.model;
 
-        console.log("currentChat", chatModel.image);
         if ($models.find((model) => model.image === chatModel.image)) {
           active = true;
         } else {
           active = false;
         }
+        setMessages(currentChat.messages);
+        // chat handler if first message is the first from user and the model is installed, triggering a conversation
+        if (
+          currentChat.messages.length === 1 &&
+          currentChat.messages[0].role === "user" &&
+          active
+        ) {
+          append(
+            { role: "user", content: currentChat.messages[0].content },
+            {
+              options: { body: { model: chatModel } },
+            }
+          );
+        }
       }
     }
+  }
+
+  async function renameChat(chat) {
+    await ollama
+      .generate({
+        model: chatModel.image,
+        prompt: `Capture the main topic, idea, or subject of the following chat and use it to generate a short title for organizing my historic of chat. 
+        You only return the title as a string, never use formating. 
+        The chat's messages: ${JSON.stringify(chat)}.
+        Return title:
+        `,
+      })
+      .then((response) => {
+        const title = response.response.replace(/"/g, "");
+        console.log(title);
+        // update the chat with the new title in the local storage and the history store
+        history.update((chats) => {
+          const index = chats.findIndex((conv) => conv.id === $page.params.id);
+          chats[index].name = title;
+          return chats;
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   // Trigger ollama with currentModel to make load time faster for the model
@@ -49,9 +85,9 @@
     }
     if ($input) {
       append(
-        { role: "user", content: JSON.stringify($input) },
+        { role: "user", content: $input },
         {
-          options: { body: { currentModel: chatModel } },
+          options: { body: { model: chatModel } },
         }
       );
     }
@@ -65,6 +101,12 @@
         content: message.content,
       };
     });
+
+    console.log(chat);
+
+    if (chat.length === 2) {
+      renameChat(chat);
+    }
 
     history.update((chats) => {
       const index = chats.findIndex((conv) => conv.id === $page.params.id);
@@ -89,7 +131,7 @@
     append(
       { role: "user", content: query.content },
       {
-        options: { body: { currentModel: chatModel } },
+        options: { body: { model: chatModel } },
       }
     );
   }

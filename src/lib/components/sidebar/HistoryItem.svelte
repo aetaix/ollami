@@ -20,7 +20,8 @@
   class="
         {id === $page.params.id
     ? 'bg-black-700 text-white '
-    : '  text-white  hover:bg-black-700'} conversation-show group rounded-lg transition-colors flex justify-between items-center relative"
+    : '  text-white  hover:bg-black-700'} 
+    group rounded-lg transition-colors flex justify-between items-center relative"
 >
   <a
     href="/chat/{id}"
@@ -94,3 +95,4 @@
     </svg>
   </button>
 </li>
+

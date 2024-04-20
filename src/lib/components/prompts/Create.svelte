@@ -23,6 +23,8 @@
   $: if (browser) {
     localStorage.setItem("prompts", JSON.stringify($prompts));
   }
+
+  let clipboard = '{{CLIPBOARD}}';
 </script>
 
 <div class="p-4">
@@ -67,7 +69,8 @@
       ></textarea>
       <span class="block text-xs"
         >Format your variables using square brackets like this: [variable] .
-        Make sure to enclose them with '[' and ']' .</span
+        Make sure to enclose them with '[' and ']'. Utilize {clipboard} variable to have them replaced with clipboard content.
+        </span
       >
     </div>
     <button
