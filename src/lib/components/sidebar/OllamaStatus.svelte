@@ -23,7 +23,7 @@ import { ollamaIsActivated } from "$lib/stores/states";
 </script>
 
 {#if $ollamaIsActivated}
-  <div class="rounded-full bg-black-800 px-3 py-2 flex items-center gap-2 text-green">
+  <div class="rounded-full bg-green-50 dark:bg-black-800 px-3 py-2 flex items-center gap-2 text-green">
     <span class="w-2 h-2 bg-green rounded-full"></span>
     <span class="text-[10px] font-semibold uppercase">Ready</span>
   </div>

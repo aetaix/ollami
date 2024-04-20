@@ -1,11 +1,13 @@
 <script>
   import ollama from "ollama";
+  import { browser } from "$app/environment";
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
 
   export let name = "";
   export let image = "";
   export let icon = "";
+  export let parameters = "";
   export let description = "";
   export let tags = [];
   export let size = "";
@@ -20,6 +22,23 @@
 
   let loading = false;
 
+  $: {
+    if (browser) {
+      // check local storage if there is an installation queue running
+      const queue = JSON.parse(localStorage.getItem("queue") || "[]");
+      // if the model is in the queue and is not already installed, set loading to true esle remove it from the queue
+      if (queue.includes(image) && !installed) {
+        loading = true;
+      } else {
+        localStorage.setItem(
+          "queue",
+          JSON.stringify(queue.filter((item) => item !== image))
+        );
+      }
+   
+    }
+  }
+
   function setCurrentModel() {
     currentModel.set({ name, image, icon, description, tags, size, installed });
     goto("/");
@@ -27,6 +46,12 @@
 
   async function installModel() {
     loading = true;
+
+    // Add the model to the installation queue
+    if (browser) {
+      const queue = JSON.parse(localStorage.getItem("queue") || "[]");
+      localStorage.setItem("queue", JSON.stringify([...queue, image]));
+    }
     // Use fetch on api/pull-model to install the model
     const response = await fetch("/api/pull-model", {
       method: "POST",
@@ -36,7 +61,9 @@
 
   function deleteModel() {
     ollama.delete({ model: image }).then(() => {
-      models.update((models) => models.filter((model) => model.image !== image));
+      models.update((models) =>
+        models.filter((model) => model.image !== image)
+      );
     });
   }
 </script>
@@ -48,7 +75,11 @@
     <div class="flex items-center gap-2">
       <img src="/icons/models/{icon}" alt={name} class="w-4 h-4" />
 
-      <h2 class="font-mono text-sm">{name}/{image}</h2>
+      <h2 class="text-sm">
+        <span class="font-semibold">{name}</span><span
+          class="font-mono ml-1 text-black-500">{parameters}</span
+        >
+      </h2>
     </div>
 
     {#if installed}
@@ -65,6 +96,11 @@
         >
           Delete
         </button>
+      </div>
+    {:else if loading}
+      <div class="flex items-center gap-2">
+        <svg width="20" stroke="#000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g class="spinner_V8m1"><circle cx="12" cy="12" r="9.5" fill="none" stroke-width="3" class=" stroke-green-500"></circle></g></svg>
+        <span class="text-xs ">Installing...</span>
       </div>
     {:else}
       <button
@@ -91,3 +127,5 @@
     >
   </footer>
 </div>
+
+<style>.spinner_V8m1{transform-origin:center;animation:spinner_zKoa 2s linear infinite}.spinner_V8m1 circle{stroke-linecap:round;animation:spinner_YpZS 1.5s ease-in-out infinite}@keyframes spinner_zKoa{100%{transform:rotate(360deg)}}@keyframes spinner_YpZS{0%{stroke-dasharray:0 150;stroke-dashoffset:0}47.5%{stroke-dasharray:42 150;stroke-dashoffset:-16}95%,100%{stroke-dasharray:42 150;stroke-dashoffset:-59}}</style>

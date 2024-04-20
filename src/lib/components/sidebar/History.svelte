@@ -44,11 +44,11 @@
 </script>
 
 <div
-  class="bg-black-800 border-black-700 border shadow-lg rounded-2xl p-2 mb-6"
+  class="dark:bg-black-800 bg-white border-black-200 dark:border-black-700 border shadow-lg rounded-2xl p-2 mb-6"
 >
   <a
     href="/"
-    class="flex w-full justify-between items-center rounded-lg hover:bg-black-700 transition-colors p-2"
+    class="flex w-full justify-between items-center rounded-lg hover:bg-black-100 dark:hover:bg-black-700 transition-colors p-2"
   >
     <div class="text-sm flex items-center gap-2">
       <svg
@@ -71,10 +71,10 @@
 
       New chat
     </div>
-    <span class="bg-black-700 p-1 rounded text-xs">⌘+o</span>
+    <span class="dark:bg-black-700 bg-black-100 p-1 rounded text-xs">⌘+o</span>
   </a>
   {#if $history.length > 0}
-    <div class="border rounded-lg border-black-600 p-1 flex gap-2 my-2">
+    <div class="border rounded-lg border-black-200 dark:border-black-600 p-1 flex gap-2 my-2">
       <svg
         width="24"
         viewBox="0 0 24 24"

@@ -16,7 +16,7 @@
   <h1 class="text-3xl mt-5 mb-2">
     The Home of LLMs, on your computer.
   </h1>
-  <p class="opacity-50 mb-5">Powered by Ollama</p>
+  <p class="opacity-50 mb-5">Powered by <a href="https://ollama.com/" target="_blank" class="underline">Ollama</a></p>
   <DropdownModels />
   {:else}
   <h1 class="text-2xl mb-2">No model installed yet</h1>

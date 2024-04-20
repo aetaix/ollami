@@ -21,7 +21,7 @@
     <a
       href="/prompts"
       class="
-      {$page.url.pathname.includes('prompts') ? 'bg-black-700' : 'hover:bg-black-800'}
+      {$page.url.pathname.includes('prompts') ? 'bg-black-200 dark:bg-black-700' : 'hover:bg-black-100 dark:hover:bg-black-800'}
       flex px-4 items-center gap-2 py-3 rounded-lg transition-colors text-sm"
     >
       <Prompt />
@@ -31,7 +31,7 @@
     <a
       href="/models"
       class="
-      {$page.url.pathname.includes('models') ? 'bg-black-700' : 'hover:bg-black-800'}
+      {$page.url.pathname.includes('models') ? 'bg-black-200 dark:bg-black-700' : 'hover:bg-black-100 dark:hover:bg-black-800'}
       flex items-center gap-2 px-4 py-3 rounded-lg transition-colors text-sm"
     >
       <Model class="w-5" />

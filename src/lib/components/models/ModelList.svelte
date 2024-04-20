@@ -76,6 +76,7 @@
         name={model.name}
         image={model.image}
         icon={model.icon || "model.svg"}
+        parameters={model.parameters}
         description={model.description || "This model is derived, meaning it use its parent model's weights to generate responses."}
         tags={model.tags || []}
         size={model.size}

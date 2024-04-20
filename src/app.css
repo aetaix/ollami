@@ -5,8 +5,11 @@
 
 @layer base {
   body {
-    @apply bg-black-900 text-white;
+    @apply bg-black-50 ;
   
+  }
+  .dark body {
+    @apply bg-black-900 text-white;
   }
 }
 

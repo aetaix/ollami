@@ -33,10 +33,10 @@
 
   <button
     on:click={handleSwitchDarkMode}
-    class="w-full outline outline-4 outline-black-800 flex items-center relative rounded-lg bg-black-800 "
+    class="w-full outline outline-4 outline-white dark:outline-black-800 flex items-center relative rounded-lg bg-white dark:bg-black-800 "
   >
     <div
-      class="w-1/2 left-0  overflow-hidden bg-black-700 bottom-0 rounded-lg absolute top-0 transition-transform {darkMode
+      class="w-1/2 left-0  overflow-hidden bg-black-100 dark:bg-black-700 bottom-0 rounded-lg absolute top-0 transition-transform {darkMode
         ? 'translate-x-full'
         : ''}"
     ></div>
