@@ -41,18 +41,18 @@
         id="name"
         on:keyup={autofill}
         bind:value={prompt.name}
-        class="p-2 border text-sm border-black-200 rounded-lg"
+        class="p-2 border text-sm dark:border-black-600 dark:bg-transparent border-black-200 rounded-lg"
       />
     </div>
     <div class="flex flex-col gap-2">
       <label for="command">Command</label>
-      <div class="flex items-center gap-2 bg-black-200 rounded-lg">
+      <div class="flex items-center gap-2 bg-black-200 dark:bg-black-900 rounded-lg">
         <span class="pl-3 pr-1 font-bold">/</span>
         <input
           type="text"
           id="command"
           bind:value={prompt.command}
-          class="p-2 border w-full text-sm border-black-200 rounded-lg rounded-l-none"
+          class="p-2 border w-full dark:bg-black-800 text-sm dark:border-black-600 border-black-200 rounded-lg rounded-l-none"
         />
       </div>
       <span class="block text-xs"
@@ -65,7 +65,7 @@
       <textarea
         id="description"
         bind:value={prompt.content}
-        class="p-2 border text-sm border-black-200 rounded-lg"
+        class="p-2 border text-sm dark:border-black-600 dark:bg-transparent border-black-200 rounded-lg"
       ></textarea>
       <span class="block text-xs"
         >Format your variables using square brackets like this: [variable] .
@@ -75,7 +75,7 @@
     </div>
     <button
       type="submit"
-      class="border flex gap-2 items-center border-black-200 z-10 hover:bg-black-50 transition-colors text-black bg-white shadow px-4 py-2 rounded-lg"
+      class="border flex gap-2 items-center dark:border-black-600 border-black-200 z-10 hover:bg-black-50 transition-colors text-black bg-white shadow px-4 py-2 rounded-lg"
     >
       Create
     </button>

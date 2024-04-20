@@ -36,8 +36,8 @@
         <ButtonCreate />
       </header>
      
-        <div class="border border-black-200 rounded-lg shadow flex">
-          <div class="w-1/2 border-r border-black-200">
+        <div class="border border-black-200 dark:border-black-600 rounded-lg shadow flex">
+          <div class="w-1/2 border-r border-black-200 dark:border-black-600">
             <Prompts />
           </div>
           <div class="w-1/2 min-h-[70vh]">

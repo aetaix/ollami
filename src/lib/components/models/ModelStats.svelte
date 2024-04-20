@@ -10,7 +10,7 @@
 
 </script>
 
-<div class="rounded-full p-2 px-4 bg-black-100">
+<div class="rounded-full p-2 px-4 bg-black-100 dark:bg-black-900">
     <span class=" text-sm">{installed.length} models</span>
     |
     <span class=" text-sm">{totalSize.toFixed(2)} Go</span>

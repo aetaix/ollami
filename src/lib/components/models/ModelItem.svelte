@@ -14,7 +14,7 @@
   export let installed = false;
 
   let sizeColor =
-    size < 2 ? "bg-green-100" : size < 5 ? "bg-orange-100" : "bg-red-100";
+    size < 2 ? "bg-green-100 dark:bg-green/10 dark:text-green" : size < 5 ? "bg-orange-100 dark:bg-orange-400/10 dark:text-orange-400" : "bg-red-100 dark:bg-red-400/10 dark:text-red-400";
 
   /**
    * Model I/O
@@ -69,7 +69,7 @@
 </script>
 
 <div
-  class="bg-white dark:bg-black-700 border border-black-200 hover:shadow-lg transition-shadow rounded-xl p-4"
+  class="bg-white dark:bg-black-700 border border-black-200 dark:border-black-600 hover:shadow-lg transition-shadow rounded-xl p-4"
 >
   <header class="flex items-center justify-between mb-4">
     <div class="flex items-center gap-2">
@@ -77,7 +77,7 @@
 
       <h2 class="text-sm">
         <span class="font-semibold">{name}</span><span
-          class="font-mono ml-1 text-black-500">{parameters}</span
+          class="font-mono ml-1 text-black-500 dark:text-black-200">{parameters}</span
         >
       </h2>
     </div>
@@ -92,7 +92,7 @@
         </button>
         <button
           on:click={deleteModel}
-          class="border border-black-200 bg-white px-2 py-1 rounded-md text-sm"
+          class="border border-black-200 dark:border-black-500 bg-white dark:bg-black-600 px-2 py-1 rounded-md text-sm"
         >
           Delete
         </button>
@@ -105,13 +105,13 @@
     {:else}
       <button
         on:click={installModel}
-        class="border border-black-200 bg-white px-2 py-1 rounded-md text-sm"
+        class="border border-black-200 dark:border-black-500 bg-white dark:bg-black-600 px-2 py-1 rounded-md text-sm"
       >
         Install
       </button>
     {/if}
   </header>
-  <p class="text-sm text-black-500">{description}</p>
+  <p class="text-sm text-black-500 dark:text-black-200">{description}</p>
   <footer class="flex items-center justify-between mt-4">
     <div class="flex items-center gap-1">
       {#each tags as tag}

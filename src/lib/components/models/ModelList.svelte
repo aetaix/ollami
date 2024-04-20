@@ -36,12 +36,12 @@
     <div class="flex items-center gap-2">
         <input
           type="text"
-          class=" p-2 border text-sm border-black-200 rounded-md"
+          class=" p-2 border text-sm border-black-200 dark:border-black-600 bg-transparent rounded-md"
           placeholder="Search models"
           bind:value={search}
         />
         <select
-          class="border text-sm border-black-200 rounded-md p-2"
+          class="border text-sm border-black-200 dark:border-black-600 rounded-md p-2 bg-transparent"
           bind:value={filters.tags}
         >
           <option value="">All tags</option>
@@ -51,9 +51,9 @@
         </select>
         <button 
         on:click={toggleFilterInstalled}
-        class="border text-sm border-black-200 rounded-md p-2 flex items-center gap-2">
+        class="border text-sm border-black-200 dark:border-black-600 rounded-md p-2 flex items-center gap-2">
           <div class="
-          {filters.installed ? 'bg-green-500 border-green' : 'border-black-200 bg-black-200'}
+          {filters.installed ? 'bg-green-500 border-green' : 'border-black-200 dark:border-black-600 bg-black-200'}
           rounded-full border  p-0.5 w-10">
               <div class="
               {filters.installed ? 'translate-x-full ' : 'translate-x-0'}

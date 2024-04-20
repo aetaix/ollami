@@ -25,7 +25,7 @@
 </script>
 
 {#if $prompts.length > 0}
-  <header class="border-b border-black-200 p-2">
+  <header class="border-b dark:border-black-600 border-black-200 p-2">
     <input
       bind:value={search}
       type="text"
@@ -40,14 +40,14 @@
           on:click={() => {
             setPrompt(index);
           }}
-          class="{$currentPrompt === index ? 'bg-black-100' : ''} 
-        p-2 block mb-2 w-full rounded-lg cursor-pointer text-start hover:bg-black-200"
+          class="{$currentPrompt === index ? 'bg-black-100 dark:bg-black-600' : 'hover:bg-black-200 dark:hover:bg-black-700'} 
+        p-2 block mb-2 w-full rounded-lg cursor-pointer text-start "
         >
           <h2 class="font-bold text-sm">
             {prompt.name}
           </h2>
           <span
-            class="font-mono bg-black-50 rounded p-1 text-sm text-black-500"
+            class="font-mono bg-black-50 dark:bg-black-900 rounded p-1 text-sm text-black-500 dark:text-black-200"
           >
             /{prompt.command}
           </span>

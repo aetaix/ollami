@@ -40,7 +40,7 @@
 <div class="relative w-full opening-animation">
   <button
     on:click|stopPropagation={dropdown.open}
-    class="text-sm flex items-center justify-between w-full border border-black-200 dark:border-black-600 gap-2 bg-white dark:bg-black-700 rounded-xl transition-shadow hover:shadow px-4 pr-2 py-3 shadow"
+    class="text-sm flex items-center justify-between w-full border border-black-200 dark:border-black-600 gap-2 bg-white hover:bg-black-50  dark:hover:bg-black-600 dark:bg-black-700 rounded-xl transition-all hover:shadow px-4 pr-2 py-3 shadow"
   >
     <div class="flex items-center gap-2">
      
@@ -50,17 +50,17 @@
         class="w-5"
       />
       <p>
-        <span class="text-black-400 font-mono">{$currentModel.name}/</span>
-        <span class="font-semibold">{$currentModel.image}</span>
+        <span class="font-semibold">{$currentModel.name}</span>
+        <span class="text-black-400 dark:text-black-300">{$currentModel.parameters}</span>
       </p>
    
     </div>
-    <Chevron />
+    <Chevron class="{dropdown.state ? 'rotate-90':''}" />
   </button>
   {#if dropdown.state}
     <div
       use:clickOutside={dropdown.close}
-      class="absolute top-12 bg-white dark:bg-black-700 shadow-lg rounded-xl mt-2 p-2 w-full border border-black-200 dark:border-black-600"
+      class="absolute dropdown-animation top-12 bg-white dark:bg-black-700 shadow-lg rounded-xl mt-2 p-2 w-full border border-black-200 dark:border-black-600"
     >
       {#if $models.filter(model => model.installed).length <= 1}
         <div class="h-32 flex flex-col justify-center items-center">
@@ -72,7 +72,7 @@
           {#if model.installed && model.name !== $currentModel.name}
             <button
               on:click={() => setCurrentModel(model)}
-              class="flex items-center gap-2 p-2 w-full hover:bg-black-100 dark:hover:bg-black-600 rounded-md cursor-pointer"
+              class="flex items-center gap-2 p-2 mb-1 w-full hover:bg-black-100 dark:hover:bg-black-600 rounded-md cursor-pointer"
             >
               <img
                 src="/icons/models/{model.icon || 'model.svg'}"
@@ -80,8 +80,8 @@
                 class="w-5"
               />
               <p class="text-sm">
-                <span class="text-black-400 font-mono">{model.name}/</span>
-                <span class="font-semibold">{model.image}</span>
+                <span class=" font-semibold">{model.name}</span>
+                <span class="text-black-400 dark:text-black-300">{model.parameters}</span>
               </p>
             </button>
           {/if}
@@ -104,6 +104,22 @@
     to {
       opacity: 1;
       transform: scaleX(1);
+    }
+  }
+
+  .dropdown-animation {
+    animation: dropdown 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  }
+
+  @keyframes dropdown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 </style>
