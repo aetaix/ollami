@@ -1,6 +1,9 @@
 <script>
   import { browser } from "$app/environment";
-  import { prompts } from "$lib/stores/prompts";
+  import { prompts, modal } from "$lib/stores/prompts";
+
+  export let value = "";
+  let selectedIndex = 0;
 
   if (browser) {
     if (localStorage.getItem("prompts")) {
@@ -11,75 +14,54 @@
     }
   }
 
-  export let input = "";
   let filteredPrompts = [];
 
-  // if statement to check if input includes a slash and that slash is the first character
-  $: if (input.includes("/") && input.indexOf("/") === 0) {
-    promptModal = true;
-
-    // filter prompts based on input
+  $: {
     filteredPrompts = $prompts.filter((prompt) => {
-      return prompt.command.includes(input.slice(1));
+      return prompt.command.includes(value.slice(1));
     });
-
-    const chatInput = document.getElementById("chat-input");
-
-    // add event listener to handle keydown events
-    chatInput.addEventListener("keydown", handleKeydown);
-  } else {
-    const chatInput = document.getElementById("chat-input");
-    promptModal = false;
-    //chatInput.removeEventListener("keydown", handleKeydown);
+    // Reset selectedIndex when filteredPrompts changes
+    selectedIndex = 0;
   }
 
-  // function to handle keydown events
-  function handleKeydown(e) {
-    if (e.key === "ArrowDown") {
-      selectedIndex =
-        selectedIndex === filteredPrompts.length - 1 ? 0 : selectedIndex + 1;
-    } else if (e.key === "ArrowUp") {
-      selectedIndex =
-        selectedIndex === 0 ? filteredPrompts.length - 1 : selectedIndex - 1;
-    } else if (e.key === "Enter") {
+  export function setPrompt() {
+    let prompt = filteredPrompts[selectedIndex].content;
 
-      e.preventDefault();
-      const chatInput = document.getElementById("chat-input");
-      chatInput.value = filteredPrompts[selectedIndex].content;
+    if (prompt.includes("{{CLIPBOARD}}")) {
+      navigator.clipboard.readText().then((text) => {
+        value = prompt.replace("{{CLIPBOARD}}", text);
+      });
+    } else {
+      value = prompt;
+    }
+    modal.set(false);
+  }
 
-      // if prompt content contain [ and ] then focus and select this part [...]
-      if (filteredPrompts[selectedIndex].content.includes("[")) {
-        const start = filteredPrompts[selectedIndex].content.indexOf("[");
-        const end = filteredPrompts[selectedIndex].content.indexOf("]");
-        chatInput.focus();
-        chatInput.setSelectionRange(start, end + 1);
+  function clickToSetPrompt(prompt) {
+    setPrompt(prompt);
+  }
+
+  export function navigate(event) {
+    if (event.direction === "ArrowDown") {
+      if (selectedIndex < filteredPrompts.length - 1) {
+        selectedIndex++;
       }
-
-      if (filteredPrompts[selectedIndex].content.includes("{{CLIPBOARD}}")) {
-        navigator.clipboard.readText().then((text) => {
-          chatInput.value = filteredPrompts[selectedIndex].content.replace(
-            "{{CLIPBOARD}}",
-            text
-          );
-        });
+    } else if (event.direction === "ArrowUp") {
+      if (selectedIndex > 0) {
+        selectedIndex--;
       }
-
-      promptModal = false;
     }
   }
-
-  let promptModal = false;
-  let selectedIndex = 0;
 </script>
 
-{#if promptModal && filteredPrompts.length > 0}
+{#if $modal}
   <div
     class="modal w-full mb-4 max-w-2xl mx-auto bg-white bottom border border-black-200 rounded-xl p-2 shadow"
   >
     {#each filteredPrompts as prompt, index}
       <button
-        class="
-      {index === selectedIndex ? 'bg-black-50' : ''}
+        on:click={() => clickToSetPrompt(prompt)}
+        class="{index === selectedIndex ? 'bg-black-100' : ''}
       p-2 text-start hover:bg-black-50 w-full rounded-lg"
       >
         <h3 class="mb-0 block">/{prompt.command}</h3>

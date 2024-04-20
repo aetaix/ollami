@@ -22,6 +22,11 @@
   }
 </script>
 
+{#if content.length < 1}
+  <div >
+    Loading LLM
+  </div>
+{:else}
 <div class="mb-4 p-4 rounded-xl bg-black-100 dark:bg-black-700">
   <div class="flex gap-2 items-center">
     <div class="w-8 h-8 shrink-0 flex items-center justify-center">
@@ -96,3 +101,4 @@
     >
   </div>
 </div>
+{/if}

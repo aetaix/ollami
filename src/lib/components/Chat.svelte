@@ -34,18 +34,19 @@
         setMessages(currentChat.messages);
         // chat handler if first message is the first from user and the model is installed, triggering a conversation
         if (
-          currentChat.messages.length === 1 &&
-          currentChat.messages[0].role === "user" &&
+          currentChat.messages.length === 2 &&
+          currentChat.messages[1].role === "user" &&
           active
         ) {
           append(
-            { role: "user", content: currentChat.messages[0].content },
+            { role: "user", content: currentChat.messages[1].content },
             {
               options: { body: { model: chatModel } },
             }
           );
         }
       }
+
     }
   }
 
@@ -61,7 +62,7 @@
       })
       .then((response) => {
         const title = response.response.replace(/"/g, "");
-        console.log(title);
+     
         // update the chat with the new title in the local storage and the history store
         history.update((chats) => {
           const index = chats.findIndex((conv) => conv.id === $page.params.id);

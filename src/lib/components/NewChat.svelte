@@ -19,6 +19,11 @@
   async function createChat() {
     const messages = [
       {
+        role: "system",
+        content:
+          "You are a helpful assistant. You are going to help the user with its query. Answer in their language. Try to give short answers. If you don't know the answer, just say so.",
+      },
+      {
         role: "user",
         content: $input,
       },
