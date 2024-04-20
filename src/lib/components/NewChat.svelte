@@ -31,6 +31,10 @@
   function handleSubmit() {
     let options = { body: { currentModel: $currentModel } };
 
+    if ($input.includes("/") && $input.indexOf("/") === 0) {
+      return;
+    }
+
     if ($currentModel.derived) {
       options.initialMessages = modelSafetyFrame;
     }
@@ -42,8 +46,8 @@
           options: options,
         }
       );
-      $input = "";
     }
+    $input = "";
   }
 
   async function createChat() {

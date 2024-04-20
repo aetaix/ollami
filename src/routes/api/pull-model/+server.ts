@@ -1,11 +1,10 @@
-import { startModelPull } from "$lib/websocket/modelPuller";
-
+import ollama from "ollama";
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
   try {
-    const { model } = await request.json();
+    const { image } = await request.json();
 
-    startModelPull(model);
+    await startModelPull(image);
 
     return new Response(JSON.stringify({ message: "Model pull initiated" }), {
       status: 200,
@@ -23,5 +22,25 @@ export async function POST({ request }) {
         },
       }
     );
+  }
+}
+
+async function startModelPull(image: string) {
+  // Replace with your actual model pulling logic
+  console.log("Pulling", image);
+
+  const pulledModel = await ollama.pull({
+    model: image,
+    stream: true,
+  });
+
+  for await (const update of pulledModel) {
+    switch (update.status) {
+      case "success":
+        console.log(update.status);
+      default:
+        let progress = Math.round((update.completed / update.total) * 100);
+        process.stdout.write("Pulling model: " + progress + "%");
+    }
   }
 }

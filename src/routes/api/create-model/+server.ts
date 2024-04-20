@@ -7,6 +7,7 @@ export async function POST({ request }) {
   const modelFile = `FROM ${model}\nSYSTEM "${system}"\n`;
 
   await ollama.create({ model: name, modelfile: modelFile });
+  
   console.log("Model created");
 
   return new Response(JSON.stringify(name), { status: 200 });

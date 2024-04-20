@@ -1,8 +1,8 @@
 <script>
   import ollama from "ollama";
-  import Trash from "../icons/Trash.svelte";
-  import Pull from "../icons/Pull.svelte";
-  import NewMessage from "../icons/NewMessage.svelte";
+  import Trash from "../../icons/Trash.svelte";
+  import Pull from "../../icons/Pull.svelte";
+  import NewMessage from "../../icons/NewMessage.svelte";
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
 

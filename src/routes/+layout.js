@@ -1,43 +1,48 @@
 import ollama from "ollama";
 import { initialModels } from "$lib/stores/models";
 
-/** @type {import('./$types').LayoutServerLoad} */
+/**
+ * Load models from API and merge with initial models.
+ * @type {import('./$types').LayoutServerLoad}
+ */
 export async function load() {
   // Create a deep copy of initialModels to avoid mutating the original array
-  let transformedModels = JSON.parse(JSON.stringify(initialModels));
+  let models = JSON.parse(JSON.stringify(initialModels));
 
+  try {
+    let { models: apiModels } = await ollama.list();
 
-  let list = await ollama.list();
+    if (apiModels.length === 0) {
+      return { props: { models } };
+    }
 
-  if (!list.models.length > 0) {
-    return {
-      props: {
-        models: transformedModels,
-      },
-    };
+    const modelMap = new Map(models.map(model => [model.image, model]));
+
+    apiModels.forEach(apiModel => {
+      let model = modelMap.get(apiModel.model);
+
+      if (model) {
+        model.installed = true;
+      } else {
+        const sizeGB = (apiModel.size / 1024 / 1024 / 1024).toFixed(2);
+        models.push({
+          name: apiModel.model,
+          image: apiModel.model,
+          parameters: apiModel.details.parameter_size,
+          size: sizeGB,
+          installed: true,
+          tags: ["custom"],
+          derived: true,
+          description: apiModel.details.description,
+        });
+      }
+    });
+
+    return { props: { models } };
+  } catch (error) {
+    console.error('Failed to load models:', error);
+    // Handle errors or return a default error state
+    return { props: { models: [], error: 'Failed to load data from Ollama.' } };
   }
-  list.models.forEach((model) => {
-    let localModel = transformedModels.find((m) => m.image === model.model);
-    if (localModel) {
-      localModel.installed = true;
-    }
-
-    if (!transformedModels.some((m) => m.image === model.model)) {
-      transformedModels.push({
-        name: model.model,
-        image: model.model,
-        parameters: model.details.parameter_size,
-        size: (model.size / 1024 / 1024 / 1024).toFixed(2),
-        installed: true,
-        derived: true,
-        description: model.details.description,
-      });
-    }
-  });
- 
-  return {
-    props: {
-      models: transformedModels,
-    },
-  };
 }
+

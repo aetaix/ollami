@@ -5,19 +5,6 @@
   export let value = "";
   export let onSubmit;
   let textarea;
-  // when value changes, count number of lines and resize textarea accordingly
-
-  $: if (value) {
-    const lines = value.split("\n").length;
-    textarea.style.height = `${lines * 56}px`;
-  }
-
-  function handleSubmit() {
-    if (value.includes("/") && value.indexOf("/") === 0) {
-      return;
-    }
-    onSubmit();
-  }
 </script>
 
 <div
@@ -25,7 +12,7 @@
 >
   <PromptModal input={value} />
   <form
-    on:submit|preventDefault={handleSubmit}
+    on:submit|preventDefault={onSubmit}
     class="w-full max-w-2xl mx-auto flex border shadow-lg bg-white dark:bg-black-700 border-black-200 dark:border-black-600 rounded-xl pl-4 relative"
   >
     <textarea
@@ -35,7 +22,7 @@
       on:keydown={(e) => {
         if (e.key === "Enter" && !e.shiftKey) {
           e.preventDefault();
-          handleSubmit();
+          onSubmit();
         }
       }}
       bind:value

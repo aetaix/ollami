@@ -1,12 +1,16 @@
 <script>
   import Sidebar from "$lib/components/Sidebar.svelte";
   import { fullscreen } from "$lib/stores/states";
-  import { create } from "$lib/stores/prompts";
+  import { create, prompts } from "$lib/stores/prompts";
   import Prompt from "$lib/components/icons/Prompt.svelte";
   import Prompts from "$lib/components/prompts/Prompts.svelte";
   import ButtonCreate from "$lib/components/prompts/ButtonCreate.svelte";
   import Edit from "$lib/components/prompts/Edit.svelte";
   import Create from "$lib/components/prompts/Create.svelte";
+
+  if ($prompts.length === 0) {
+    create.set(true);
+  }
 </script>
 
 <svelte:head>
@@ -31,18 +35,20 @@
         </h1>
         <ButtonCreate />
       </header>
-      <div class="border border-black-200 rounded-lg shadow flex">
-        <div class="w-1/2 border-r border-black-200">
-          <Prompts />
+     
+        <div class="border border-black-200 rounded-lg shadow flex">
+          <div class="w-1/2 border-r border-black-200">
+            <Prompts />
+          </div>
+          <div class="w-1/2 min-h-[70vh]">
+            {#if $create}
+              <Create />
+            {:else}
+              <Edit />
+            {/if}
+          </div>
         </div>
-        <div class="w-1/2 min-h-[70vh]">
-          {#if $create}
-            <Create />
-          {:else}
-            <Edit />
-          {/if}
-        </div>
-      </div>
+
     </div>
   </div>
 </main>

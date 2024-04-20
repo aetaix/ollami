@@ -44,15 +44,18 @@
   }
 
   function handleSubmit() {
+    if ($input.includes("/") && $input.indexOf("/") === 0) {
+      return;
+    }
     if ($input) {
       append(
-        { role: "user", content: $input },
+        { role: "user", content: JSON.stringify($input) },
         {
           options: { body: { currentModel: chatModel } },
         }
       );
-      $input = "";
     }
+    $input = "";
   }
 
   function updateChat() {
