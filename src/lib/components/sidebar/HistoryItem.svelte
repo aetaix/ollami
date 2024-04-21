@@ -21,7 +21,7 @@
         {id === $page.params.id
     ? 'dark:bg-black-700 bg-black-100  '
     : ' hover:bg-black-100  dark:hover:bg-black-700'} 
-    group:hover:to-black-700 rounded-lg transition-colors flex justify-between items-center relative"
+    group group:hover:to-black-700 rounded-lg transition-colors flex justify-between items-center relative"
 >
   <a
     href="/chat/{id}"
@@ -72,7 +72,7 @@
     </div>
   </a>
   <button
-    class="group-hover:opacity-100 opacity-0 absolute right-0 shrink-0 p-1 mr-2 text-sm text-left hover:bg-black-700/10 dark:hover:bg-black-600 rounded transition-colors"
+    class="group-hover:opacity-100 opacity-0 absolute right-0 shrink-0 p-1 mr-2 text-sm text-left text-black hover:bg-black-700/10 dark:hover:bg-black-600 rounded transition-colors"
     on:click={() => deleteConversation(id)}
   >
     <svg
