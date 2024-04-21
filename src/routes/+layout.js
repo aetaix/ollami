@@ -1,4 +1,4 @@
-import ollama from "ollama";
+import ollama from 'ollama/browser'
 import { initialModels } from "$lib/stores/models";
 
 /**

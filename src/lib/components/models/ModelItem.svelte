@@ -1,5 +1,5 @@
 <script>
-  import ollama from "ollama";
+ import ollama from 'ollama/browser'
   import { browser } from "$app/environment";
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";

@@ -1,5 +1,5 @@
 <script>
-  import ollama from "ollama";
+import ollama from 'ollama/browser'
   import Trash from "../../icons/Trash.svelte";
   import Pull from "../../icons/Pull.svelte";
   import NewMessage from "../../icons/NewMessage.svelte";

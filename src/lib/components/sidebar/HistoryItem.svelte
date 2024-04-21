@@ -21,7 +21,7 @@
         {id === $page.params.id
     ? 'dark:bg-black-700 bg-black-100  '
     : ' hover:bg-black-100  dark:hover:bg-black-700'} 
-    group rounded-lg transition-colors flex justify-between items-center relative"
+    group:hover:to-black-700 rounded-lg transition-colors flex justify-between items-center relative"
 >
   <a
     href="/chat/{id}"
@@ -66,7 +66,7 @@
         class="absolute bg-gradient-to-r from-transparent from-70% to-90%
               {id === $page.params.id
           ? 'to-black-100'
-          : ' dark:to-black-800 to-white group-hover:to-black-100 dark:group-hover:to-black-700 '}
+          : ' dark:to-black-800 group-hover:to-black-200 dark:group-hover:to-black-700 '}
                inset-0"
       ></div>
     </div>

@@ -1,0 +1,10 @@
+services:
+   app:
+    restart: always
+    image: svelte-docker
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: run
+    ports:
+      - 3000:5050

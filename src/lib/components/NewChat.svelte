@@ -1,5 +1,5 @@
 <script>
-  import ollama from "ollama";
+import ollama from 'ollama/browser'
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import { currentModel } from "$lib/stores/models";
   import { history } from "$lib/stores/history";

@@ -1,5 +1,5 @@
 <script>
-  import ollama from "ollama";
+  import ollama from "ollama/browser";
   import { page } from "$app/stores";
   import { browser } from "$app/environment";
   import { history } from "$lib/stores/history";
@@ -19,7 +19,7 @@
   let writing = false;
 
   const { input, messages, setMessages, append, stop } = useChat({
-    onResponse: ()=> {
+    onResponse: () => {
       ram = false;
       writing = true;
     },
@@ -54,7 +54,6 @@
           );
         }
       }
-
     }
   }
 
@@ -70,7 +69,7 @@
       })
       .then((response) => {
         const title = response.response.replace(/"/g, "");
-     
+
         // update the chat with the new title in the local storage and the history store
         history.update((chats) => {
           const index = chats.findIndex((conv) => conv.id === $page.params.id);
@@ -149,7 +148,6 @@
 
   $: if ($messages.length > 1) {
     chatContainer.scrollTop = chatContainer.scrollHeight;
-
   }
 </script>
 
@@ -183,11 +181,16 @@
           {/if}
         {/each}
         {#if ram}
-         <LoadingModel />
+          <LoadingModel />
         {/if}
       </div>
       {#if $ollamaIsActivated && active}
-        <Input bind:value={$input} on:submit={handleSubmit} on:stop={stop} writing={writing} />
+        <Input
+          bind:value={$input}
+          on:submit={handleSubmit}
+          on:stop={stop}
+          {writing}
+        />
       {:else}
         <div
           class="absolute bottom-2 left-2 right-2 pb-10 z-10 bg-gradient-to-r from-white dark:from-black-800 from-80% to-90%"
