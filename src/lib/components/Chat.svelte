@@ -10,12 +10,19 @@
   import UserMessage from "./chat/UserMessage.svelte";
   import Tooglefullsize from "./chat/Tooglefullsize.svelte";
   import Input from "./chat/Input.svelte";
+  import LoadingModel from "./chat/LoadingModel.svelte";
 
   let chatModel = "";
   let active = false;
   let chatContainer = null;
+  let ram = false;
+  let writing = false;
 
-  const { input, messages, setMessages, append } = useChat({
+  const { input, messages, setMessages, append, stop } = useChat({
+    onResponse: ()=> {
+      ram = false;
+      writing = true;
+    },
     onFinish: updateChat,
   });
 
@@ -38,6 +45,7 @@
           currentChat.messages[1].role === "user" &&
           active
         ) {
+          ram = true;
           append(
             { role: "user", content: currentChat.messages[1].content },
             {
@@ -85,6 +93,7 @@
       return;
     }
     if ($input) {
+      ram = true;
       append(
         { role: "user", content: $input },
         {
@@ -96,6 +105,7 @@
   }
 
   function updateChat() {
+    writing = false;
     let chat = $messages.map((message) => {
       return {
         role: message.role,
@@ -139,6 +149,7 @@
 
   $: if ($messages.length > 1) {
     chatContainer.scrollTop = chatContainer.scrollHeight;
+
   }
 </script>
 
@@ -171,9 +182,12 @@
             <UserMessage content={message.content} />
           {/if}
         {/each}
+        {#if ram}
+         <LoadingModel />
+        {/if}
       </div>
       {#if $ollamaIsActivated && active}
-        <Input bind:value={$input} onSubmit={handleSubmit} />
+        <Input bind:value={$input} on:submit={handleSubmit} on:stop={stop} writing={writing} />
       {:else}
         <div
           class="absolute bottom-2 left-2 right-2 pb-10 z-10 bg-gradient-to-r from-white dark:from-black-800 from-80% to-90%"

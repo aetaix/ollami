@@ -2,10 +2,13 @@
   import Arrow from "../icons/Arrow.svelte";
   import { modal } from "$lib/stores/prompts";
   import PromptModal from "./PromptModal.svelte";
+  import { createEventDispatcher } from "svelte";
 
+  const dispatch = createEventDispatcher();
   export let value = "";
-  export let onSubmit;
-  let textarea;
+  export let writing = false;
+
+  let textarea = null;
   let promptModal;
 
   $: {
@@ -20,24 +23,56 @@
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if ($modal) {
-        promptModal.setPrompt(/* Provide necessary data */);
+        promptModal.setPrompt();
       } else {
-        onSubmit();
+        submit();
       }
     } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
       e.preventDefault();
       promptModal.navigate({ direction: e.key });
     }
   }
+
+  function setPrompt(e) {
+    const prompt = e.detail.prompt;
+
+    value = prompt;
+
+    if (prompt.includes("[")) {
+      const start = prompt.indexOf("[");
+      const end = prompt.indexOf("]");
+      textarea.focus();
+      setTimeout(() => {
+        textarea.setSelectionRange(start, end + 1);
+      }, 0);
+    }
+
+    if (prompt.includes("{{CLIPBOARD}}")) {
+      navigator.clipboard.readText().then((text) => {
+        value = prompt.replace("{{CLIPBOARD}}", text);
+      });
+    }
+    
+    modal.set(false);
+  }
+
+  function submit() {
+    dispatch("submit");
+  }
+
+  function stop() {
+    writing = false;
+    dispatch("stop");
+  }
 </script>
 
 <div
-  class="absolute bottom-2 left-2 right-2 pb-10 z-10 bg-gradient-to-r from-white dark:from-black-800 from-80% to-90%"
+  class="absolute bottom-2 left-2 right-2 pb-8 z-10 bg-gradient-to-r from-white dark:from-black-800 from-80% to-90%"
 >
-  <PromptModal bind:this={promptModal} bind:value />
+  <PromptModal bind:this={promptModal} bind:value on:prompt={setPrompt} />
   <form
-    on:submit|preventDefault={onSubmit}
-    class="w-full max-w-2xl mx-auto flex items-center border shadow-lg bg-white dark:bg-black-700 border-black-200 dark:border-black-600 rounded-xl pl-4 relative"
+    on:submit|preventDefault={submit}
+    class="w-full max-w-[700px] mx-auto flex items-center border shadow-lg bg-white dark:bg-black-700 border-black-200 dark:border-black-600 rounded-xl pl-4 relative"
   >
     <textarea
       type="text"
@@ -48,15 +83,28 @@
       row="1"
       placeholder="Ask me anything..."
     ></textarea>
-    <button
-      type="submit"
-      class="
+    {#if writing}
+      <button
+        on:click={stop}
+        class="w-10 h-10 rounded-lg flex items-center justify-center absolute right-2 bottom-2"
+      >
+        <div
+          class="w-7 h-7 rounded-full border-2 border-black-700 dark:border-white flex justify-center items-center"
+        >
+          <div class="w-3 h-3 bg-black-700 dark:bg-white"></div>
+        </div>
+      </button>
+    {:else}
+      <button
+        type="submit"
+        class="
         {value.length > 0
-        ? 'dark:bg-white dark:text-black bg-black-700 text-white'
-        : ' dark:bg-black-800 dark:text-black-600 bg-black-100 text-black-300 pointer-events-none'}
+          ? 'dark:bg-white dark:text-black bg-black-700 text-white'
+          : ' dark:bg-black-800 dark:text-black-600 bg-black-100 text-black-300 pointer-events-none'}
         w-10 h-10 rounded-lg flex items-center justify-center absolute right-2 bottom-2"
-    >
-      <Arrow />
-    </button>
+      >
+        <Arrow />
+      </button>
+    {/if}
   </form>
 </div>

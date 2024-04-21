@@ -21,8 +21,8 @@
     <a
       href="/prompts"
       class="
-      {$page.url.pathname.includes('prompts') ? 'bg-black-900 text-white dark:bg-black-700' : 'hover:bg-black-100 dark:hover:bg-black-800'}
-      flex px-4 items-center gap-2 py-3 rounded-lg transition-colors text-sm"
+      {$page.url.pathname.includes('prompts') ? 'bg-white dark:bg-black-700 shadow-lg' : 'hover:bg-black-100 dark:hover:bg-black-800'}
+      flex px-4 items-center gap-2 py-3 rounded-lg text-sm transition-all"
     >
       <Prompt />
       Prompts Librairy</a
@@ -31,8 +31,8 @@
     <a
       href="/models"
       class="
-      {$page.url.pathname.includes('models') ? 'bg-black-900 text-white dark:bg-black-700' : 'hover:bg-black-100 dark:hover:bg-black-800'}
-      flex items-center gap-2 px-4 py-3 rounded-lg transition-colors text-sm"
+      {$page.url.pathname.includes('models') ? 'bg-white dark:bg-black-700 shadow-lg' : 'hover:bg-black-100 dark:hover:bg-black-800'}
+      flex items-center gap-2 px-4 py-3 rounded-lg text-sm transition-all"
     >
       <Model class="w-5" />
 

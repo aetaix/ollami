@@ -1,6 +1,9 @@
 <script>
   import { browser } from "$app/environment";
   import { prompts, modal } from "$lib/stores/prompts";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   export let value = "";
   let selectedIndex = 0;
@@ -26,19 +29,12 @@
 
   export function setPrompt() {
     let prompt = filteredPrompts[selectedIndex].content;
-
-    if (prompt.includes("{{CLIPBOARD}}")) {
-      navigator.clipboard.readText().then((text) => {
-        value = prompt.replace("{{CLIPBOARD}}", text);
-      });
-    } else {
-      value = prompt;
-    }
-    modal.set(false);
+    dispatch("prompt", { prompt });
   }
 
-  function clickToSetPrompt(prompt) {
-    setPrompt(prompt);
+  function clickToSetPrompt(index) {
+    let prompt = filteredPrompts[index].content;
+    dispatch("prompt", { prompt });
   }
 
   export function navigate(event) {
@@ -60,11 +56,11 @@
   >
     {#each filteredPrompts as prompt, index}
       <button
-        on:click={() => clickToSetPrompt(prompt)}
+        on:click={() => clickToSetPrompt(index)}
         class="{index === selectedIndex ? 'bg-black-100' : ''}
       p-2 text-start hover:bg-black-50 w-full rounded-lg"
       >
-        <h3 class="mb-0 block">/{prompt.command}</h3>
+        <h3 class="text-sm font-semibold font-mono">/{prompt.command}</h3>
         <span class="text-xs text-black-400 block">{prompt.name}</span>
       </button>
     {/each}

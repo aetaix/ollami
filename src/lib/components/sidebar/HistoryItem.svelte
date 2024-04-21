@@ -19,8 +19,8 @@
 <li
   class="
         {id === $page.params.id
-    ? 'dark:bg-black-700 bg-black-800 text-white '
-    : '  hover:bg-black-100  dark:hover:bg-black-700'} 
+    ? 'dark:bg-black-700 bg-black-100  '
+    : ' hover:bg-black-100  dark:hover:bg-black-700'} 
     group rounded-lg transition-colors flex justify-between items-center relative"
 >
   <a
@@ -28,7 +28,7 @@
     class="w-full p-2 flex justify-start items-center gap-2"
   >
     {#if id === $page.params.id}
-      <div class="shrink-0 text-white">
+      <div class="shrink-0 text-black-600 dark:text-white">
         <svg
           width="18"
           viewBox="0 0 14 15"
@@ -65,7 +65,7 @@
       <div
         class="absolute bg-gradient-to-r from-transparent from-70% to-90%
               {id === $page.params.id
-          ? 'dark:to-black-700 to-black-800 '
+          ? 'to-black-100'
           : ' dark:to-black-800 to-white group-hover:to-black-100 dark:group-hover:to-black-700 '}
                inset-0"
       ></div>

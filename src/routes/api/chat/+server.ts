@@ -1,20 +1,30 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatOllama } from "@langchain/community/chat_models/ollama";
-import { BytesOutputParser } from "langchain/schema/output_parser";
+import { BytesOutputParser } from "@langchain/core/output_parsers";
 import { type Message as VercelChatMessage, StreamingTextResponse } from "ai";
 import type { RequestHandler } from "./$types";
 
 const formatMessage = (message: VercelChatMessage) => {
-  return [message.role , message.content];
+  return [message.role, message.content];
+};
+
+const sanitizeContent = (content: string): string => {
+  return content.replace(/{/g, "\\{").replace(/}/g, "\\}").replace(/`/g, "\\`").replace(/\$/g, '\\$');
 };
 
 export const POST = (async ({ request }) => {
   const { messages, model } = await request.json();
 
+  // Directly modify each message's content
+  messages.forEach((message) => {
+    message.content = sanitizeContent(message.content);
+  });
+
+  console.log(messages);
+
   const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
   const currentMessageContent = messages[messages.length - 1].content;
 
-  
   const prompt = ChatPromptTemplate.fromMessages([
     ...formattedPreviousMessages,
     ["user", "{input}"],

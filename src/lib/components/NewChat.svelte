@@ -59,7 +59,7 @@
       <Welcome />
 
       {#if $ollamaIsActivated}
-        <Input bind:value={$input} onSubmit={createChat} />
+        <Input bind:value={$input} on:submit={createChat} />
       {/if}
     </div>
   </div>
