@@ -112,8 +112,6 @@
       };
     });
 
-    console.log(chat);
-
     if (chat.length === 2) {
       renameChat(chat);
     }

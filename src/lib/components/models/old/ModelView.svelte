@@ -6,18 +6,6 @@ import ollama from 'ollama/browser'
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
 
-  import { io } from 'socket.io-client'
-
-  const socket = io()
-
-  socket.on('eventFromServer', (message) => {
-    console.log(message)
-  })
-
-  socket.on('modelPullProgress', (data) => {
-    progress = data.progress
-  })
-
   export let model = {};
 
   function setCurrentModel() {

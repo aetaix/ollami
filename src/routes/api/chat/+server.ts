@@ -20,7 +20,6 @@ export const POST = (async ({ request }) => {
     message.content = sanitizeContent(message.content);
   });
 
-  console.log(messages);
 
   const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
   const currentMessageContent = messages[messages.length - 1].content;

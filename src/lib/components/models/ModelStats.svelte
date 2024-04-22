@@ -2,7 +2,6 @@
   import { models } from "$lib/stores/models";
 
   let installed = $models.filter((model) => model.installed);
-    console.log(installed);
   // calculate total size of installed models
     let totalSize = installed.reduce((acc, model) => {
         return acc + parseFloat(model.size);
