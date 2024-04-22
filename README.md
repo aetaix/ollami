@@ -42,10 +42,10 @@ curl -fsSL https://ollama.com/install.sh | sh
 Interact with models like Mistral effortlessly:
 
 ```bash
-ollama run mistral
+ollama run llama3:latest
 ```
 
-## Install Ollami 🔧
+## Install Ollami (Dev) 🔧
 
 Clone the repository to your local machine development folder using the following command: 
 

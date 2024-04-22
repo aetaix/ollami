@@ -2,6 +2,45 @@ import { writable } from "svelte/store";
 
 export let initialModels = [
   {
+    name: "Llama 3",
+    image: "llama3:latest",
+    context: 4096,
+    parameters: "8B",
+    icon: "llama.svg",
+    size: 4.7,
+    tags: ["chat", "text", "reasoning"],
+    description: `Meta Llama 3, a family of models developed by Meta Inc. are new state-of-the-art , available in both 8B and 70B parameter sizes (pre-trained or instruction-tuned).
+
+      Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
+    installed: false,
+    derived: false,
+  },
+  {
+    name: "Llama 2",
+    image: "llama2:13b",
+    parameters: "13B",
+    icon: "llama.svg",
+    tags: ["chat", "text", "reasoning"],
+    size: 7.5,
+    context: 4096,
+    description:
+      "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
+    installed: false,
+    derived: false,
+  },
+  {
+    name: "Llama 2 Uncensored",
+    image: "llama2-uncensored:latest",
+    parameters: "7B",
+    icon: "llama.svg",
+    size: 3.8,
+    tags: ["chat", "text", "uncensored"],
+    description:
+      "Llama 2 Uncensored is based on Meta’s Llama 2 model, and was created by George Sung and Jarrad Hope using the process defined by Eric Hartford in his blog post.",
+    installed: false,
+    derived: false,
+  },
+  {
     name: "Mistral",
     image: "mistral:latest",
     icon: "mistral.svg",
@@ -52,7 +91,7 @@ export let initialModels = [
     parameters: "7B",
     context: 4096,
     size: 4.8,
-    icon: "google.svg",
+    icon: "gemma.svg",
     tags: ["chat", "text", "code"],
     description:
       "Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.",
@@ -65,10 +104,22 @@ export let initialModels = [
     parameters: "2B",
     context: 4096,
     size: 1.4,
-    icon: "google.svg",
-    tags: ["chat", "text","reasoning"],
+    icon: "gemma.svg",
+    tags: ["chat", "text", "reasoning"],
     description:
       "Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.",
+    installed: false,
+    derived: false,
+  },
+  {
+    name: "CodeGemma",
+    image: "codegemma:latest",
+    icon: "gemma.svg",
+    parameters: "7B",
+    context: 8000,
+    size: 5,
+    tags: ["code", "natural language understanding"],
+    description: `CodeGemma is a collection of powerful, lightweight models that can perform a variety of coding tasks like fill-in-the-middle code completion, code generation, and natural language understanding.`,
     installed: false,
     derived: false,
   },
@@ -79,52 +130,13 @@ export let initialModels = [
     parameters: "7B",
     icon: "llama.svg",
     size: 3.8,
-    tags: ["chat", "text","reasoning"],
+    tags: ["chat", "text", "reasoning"],
     description:
       "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
     installed: false,
     derived: false,
   },
-  {
-    name: "Llama 3",
-    image: "llama3:latest",
-    context: 4096,
-    parameters: "8B",
-    icon: "llama.svg",
-    size: 4.7,
-    tags: ["chat", "text","reasoning"],
-    description:
-      `Meta Llama 3, a family of models developed by Meta Inc. are new state-of-the-art , available in both 8B and 70B parameter sizes (pre-trained or instruction-tuned).
 
-      Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
-    installed: false,
-    derived: false,
-  },
-  {
-    name: "Llama 2",
-    image: "llama2:13b",
-    parameters: "13B",
-    icon: "llama.svg",
-    tags: ["chat", "text","reasoning"],
-    size: 7.5,
-    context: 4096,
-    description:
-      "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
-    installed: false,
-    derived: false,
-  },
-  {
-    name: "Llama 2 Uncensored",
-    image: "llama2-uncensored:latest",
-    parameters: "7B",
-    icon: "llama.svg",
-    size: 3.8,
-    tags: ["chat", "text", "uncensored"],
-    description:
-      "Llama 2 Uncensored is based on Meta’s Llama 2 model, and was created by George Sung and Jarrad Hope using the process defined by Eric Hartford in his blog post.",
-    installed: false,
-    derived: false,
-  },
   {
     name: "llava",
     image: "llava:7b",
@@ -231,7 +243,7 @@ export let initialModels = [
   {
     name: "Starcoder",
     image: "starcoder:7b",
-    tags: [ "code"],
+    tags: ["code"],
     parameters: "7B",
     size: 4.3,
     description:

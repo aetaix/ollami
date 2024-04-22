@@ -1,7 +1,6 @@
 <script>
-import { ollamaIsActivated } from "$lib/stores/states";
+  import { ollamaIsActivated } from "$lib/stores/states";
   import { onMount } from "svelte";
-
 
   async function detectOllama() {
     try {
@@ -14,7 +13,6 @@ import { ollamaIsActivated } from "$lib/stores/states";
       } else {
         ollamaIsActivated.set(false);
       }
-      
     } catch (e) {
       console.log(e);
     }
@@ -23,12 +21,16 @@ import { ollamaIsActivated } from "$lib/stores/states";
 </script>
 
 {#if $ollamaIsActivated}
-  <div class="rounded-full bg-green-50 dark:bg-black-800 px-3 py-2 flex items-center gap-2 text-green">
+  <div
+    class="rounded-full bg-green-50 dark:bg-black-800 px-3 py-2 flex items-center gap-2 text-green"
+  >
     <span class="w-2 h-2 bg-green rounded-full"></span>
     <span class="text-[10px] font-semibold uppercase">Ready</span>
   </div>
 {:else}
-  <div class="rounded-full bg-black-800 px-3 py-2 flex items-center gap-2 text-red">
+  <div
+    class="rounded-full bg-black-800 px-3 py-2 flex items-center gap-2 text-red"
+  >
     <span class="w-2 h-2 bg-red rounded-full"></span>
     <span class="text-[10px] font-semibold uppercase">Not connected</span>
   </div>
