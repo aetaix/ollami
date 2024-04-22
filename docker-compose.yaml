@@ -1,10 +1,12 @@
+version: '0.2'
 services:
-   app:
+   svelte:
     restart: always
-    image: svelte-docker
+    image: ollami-svelte
     build:
       context: .
       dockerfile: Dockerfile
-      target: run
     ports:
-      - 3000:5050
+      - 5050:5050
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

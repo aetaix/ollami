@@ -16,10 +16,9 @@ export const POST = (async ({ request }) => {
   const { messages, model } = await request.json();
 
   // Directly modify each message's content
-  messages.forEach((message) => {
+  messages.forEach((message: { content: string }) => {
     message.content = sanitizeContent(message.content);
   });
-
 
   const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
   const currentMessageContent = messages[messages.length - 1].content;
@@ -31,6 +30,7 @@ export const POST = (async ({ request }) => {
 
   const chat = new ChatOllama({
     model: model.image,
+    baseUrl: "http://localhost:11434",
   });
 
   const outputParser = new BytesOutputParser();

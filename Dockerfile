@@ -1,16 +1,17 @@
-FROM node:18-alpine AS build
-
+FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json .
-RUN rm -rf node_modules
-RUN npm install
+RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --production
 
-FROM node:18-alpine AS run
-
+FROM node:18-alpine
 WORKDIR /app
-COPY --from=build /app/package.json ./package.json
-COPY --from=build /app/build ./build
-RUN npm install --production
-CMD ["node", "build"] 
+COPY --from=builder /app/build build/
+COPY --from=builder /app/node_modules node_modules/
+COPY package.json .
+ENV PORT 5050
+EXPOSE 5050
+ENV NODE_ENV=production
+CMD [ "node", "build" ]
