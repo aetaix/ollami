@@ -1,11 +1,13 @@
 # Ollami 🌟
+> "Oh l'ami" - French for "Hi friend!"
 
-This package is a frontend application designed specifically to utilize local Ollama Models for text generation. Feel free to experiment with any number of models from the extensive Ollama library!
+Ollami is a frontend application designed to interact with local Ollama models for text generation, reasoning, chat and more.
 
 **Why Use Ollami?** 💡
 
-- Seamlessly test and evaluate local model performance in a real-world application context.
 - Save time and resources by running your favorite models directly on your machine.
+- Quickly access and interact with a wide range of models, available directly in the interface.
+- Seamlessly test and evaluate local model performance in a real-world application context.
 
 ## Prerequisites 🏗️
 
