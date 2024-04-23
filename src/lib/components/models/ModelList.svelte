@@ -7,7 +7,7 @@
   let filters = {
     search: "",
     tags: "",
-    installed: true,
+    installed: false,
     sort: "name",
   };
 
