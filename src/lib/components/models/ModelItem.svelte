@@ -1,5 +1,5 @@
 <script>
- import ollama from 'ollama/browser'
+  import ollama from "ollama/browser";
   import { browser } from "$app/environment";
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
@@ -11,10 +11,15 @@
   export let description = "";
   export let tags = [];
   export let size = "";
+  export let popularity = 1;
   export let installed = false;
 
   let sizeColor =
-    size < 2 ? "bg-green-100 dark:bg-green/10 dark:text-green" : size < 5 ? "bg-orange-100 dark:bg-orange-400/10 dark:text-orange-400" : "bg-red-100 dark:bg-red-400/10 dark:text-red-400";
+    parseFloat(size) < 2
+      ? "bg-green-100 dark:bg-green/10 dark:text-green"
+      : parseFloat(size) < 5
+        ? "bg-orange-100 dark:bg-orange-400/10 dark:text-orange-400"
+        : "bg-red-100 dark:bg-red-400/10 dark:text-red-400";
 
   /**
    * Model I/O
@@ -35,7 +40,6 @@
           JSON.stringify(queue.filter((item) => item !== image))
         );
       }
-   
     }
   }
 
@@ -77,7 +81,8 @@
 
       <h2 class="text-sm">
         <span class="font-semibold">{name}</span><span
-          class="font-mono ml-1 text-black-500 dark:text-black-200">{parameters}</span
+          class="font-mono ml-1 text-black-500 dark:text-black-200"
+          >{parameters}</span
         >
       </h2>
     </div>
@@ -99,8 +104,23 @@
       </div>
     {:else if loading}
       <div class="flex items-center gap-2">
-        <svg width="20" stroke="#000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g class="spinner_V8m1"><circle cx="12" cy="12" r="9.5" fill="none" stroke-width="3" class=" stroke-green-500"></circle></g></svg>
-        <span class="text-xs ">Installing...</span>
+        <svg
+          width="20"
+          stroke="#000"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          ><g class="spinner_V8m1"
+            ><circle
+              cx="12"
+              cy="12"
+              r="9.5"
+              fill="none"
+              stroke-width="3"
+              class=" stroke-green-500"
+            ></circle></g
+          ></svg
+        >
+        <span class="text-xs">Installing...</span>
       </div>
     {:else}
       <button
@@ -120,6 +140,7 @@
           >{tag}</span
         >
       {/each}
+      <span class="text-xs ml-1">{popularity > 1000 ? popularity/1000 + 'M' : popularity + 'K'} Pulls</span>
     </div>
     <span
       class="text-xs text-black-500 {sizeColor} dark:text-black-300 px-2 py-1 rounded-full"
@@ -128,4 +149,33 @@
   </footer>
 </div>
 
-<style>.spinner_V8m1{transform-origin:center;animation:spinner_zKoa 2s linear infinite}.spinner_V8m1 circle{stroke-linecap:round;animation:spinner_YpZS 1.5s ease-in-out infinite}@keyframes spinner_zKoa{100%{transform:rotate(360deg)}}@keyframes spinner_YpZS{0%{stroke-dasharray:0 150;stroke-dashoffset:0}47.5%{stroke-dasharray:42 150;stroke-dashoffset:-16}95%,100%{stroke-dasharray:42 150;stroke-dashoffset:-59}}</style>
+<style>
+  .spinner_V8m1 {
+    transform-origin: center;
+    animation: spinner_zKoa 2s linear infinite;
+  }
+  .spinner_V8m1 circle {
+    stroke-linecap: round;
+    animation: spinner_YpZS 1.5s ease-in-out infinite;
+  }
+  @keyframes spinner_zKoa {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes spinner_YpZS {
+    0% {
+      stroke-dasharray: 0 150;
+      stroke-dashoffset: 0;
+    }
+    47.5% {
+      stroke-dasharray: 42 150;
+      stroke-dashoffset: -16;
+    }
+    95%,
+    100% {
+      stroke-dasharray: 42 150;
+      stroke-dashoffset: -59;
+    }
+  }
+</style>
