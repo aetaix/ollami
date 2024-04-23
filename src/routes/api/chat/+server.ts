@@ -9,7 +9,11 @@ const formatMessage = (message: VercelChatMessage) => {
 };
 
 const sanitizeContent = (content: string): string => {
-  return content.replace(/{/g, "\\").replace(/}/g, "\\").replace(/`/g, "\\`").replace(/\$/g, '\\$');
+  return content
+    .replace(/{/g, "\\")
+    .replace(/}/g, "\\")
+    .replace(/`/g, "\\`")
+    .replace(/\$/g, "\\$");
 };
 
 export const POST = (async ({ request }) => {
@@ -29,7 +33,7 @@ export const POST = (async ({ request }) => {
   ]);
 
   const chat = new ChatOllama({
-    model: model.image
+    model: model.image,
   });
 
   const outputParser = new BytesOutputParser();
@@ -39,5 +43,6 @@ export const POST = (async ({ request }) => {
   const stream = await chain.stream({
     input: currentMessageContent,
   });
+
   return new StreamingTextResponse(stream);
 }) satisfies RequestHandler;
