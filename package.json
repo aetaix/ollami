@@ -27,12 +27,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@langchain/community": "^0.0.34",
 		"ai": "^3.0.2",
-		"langchain": "^0.1.25",
 		"ollama": "^0.4.9",
 		"openai": "^4.38.3",
-		"svelte-markdown": "^0.4.1",
-		"ws": "^8.16.0"
+		"svelte-markdown": "^0.4.1"
 	}
 }
