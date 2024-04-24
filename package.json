@@ -1,6 +1,6 @@
 {
-	"name": "modelbase",
-	"version": "0.0.1",
+	"name": "ollami",
+	"version": "0.2.1",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
