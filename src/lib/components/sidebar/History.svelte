@@ -30,7 +30,6 @@
   }
 
   // if search changes, filter history
-
   let filteredHistory = [];
 
   $: {
@@ -46,14 +45,15 @@
 
 <div
   class="
-
-  bg-white dark:bg-black-800  border-black-200 dark:border-black-700 border shadow-lg rounded-2xl p-2 mb-6"
+  bg-white dark:bg-black-800 border-black-200 dark:border-black-700 border shadow-lg rounded-2xl space-y-2 p-2 mb-2"
 >
   <a
     href="/"
     class="
-    {$page.url.pathname === '/' ? 'bg-black-100 dark:bg-black-700 ' : 'hover:bg-black-100 dark:hover:bg-black-700'}
-    flex w-full justify-between items-center rounded-lg   transition-colors p-2"
+    {$page.url.pathname === '/'
+      ? 'bg-black-100 dark:bg-black-700 '
+      : 'hover:bg-black-100 dark:hover:bg-black-700'}
+    flex w-full justify-between items-center rounded-lg transition-colors p-2"
   >
     <div class="text-sm flex items-center gap-2">
       <svg
@@ -76,13 +76,17 @@
 
       New chat
     </div>
-    <span class="
-    {$page.url.pathname === '/' ? 'bg-black-200 dark:bg-black-700 ' : 'dark:bg-black-700 bg-black-100'}
-     p-1 rounded text-xs">⌘+o</span>
+    <span
+      class="
+    {$page.url.pathname === '/'
+        ? 'bg-black-200 dark:bg-black-700 '
+        : 'dark:bg-black-700 bg-black-100'}
+     p-1 rounded text-xs">⌘+o</span
+    >
   </a>
   {#if $history.length > 0}
     <div
-      class="border rounded-lg border-black-200 dark:border-black-600 p-1 flex gap-2 my-2"
+      class="border rounded-lg border-black-200 dark:border-black-600 p-1 flex gap-2"
     >
       <svg
         width="24"
@@ -110,12 +114,12 @@
         class="text-sm focus:outline-none bg-transparent w-full py-1"
       />
     </div>
-    <ul class="space-y-2 max-h-[50vh] overflow-y-auto mt-2">
+    <ul class="space-y-2 max-h-[50vh] overflow-y-auto ">
       {#each filteredHistory as chat}
         {#if chat.name.length > 0}
           <HistoryItem id={chat.id} name={chat.name} />
         {/if}
       {/each}
     </ul>
-  {/if}
+    {/if}
 </div>

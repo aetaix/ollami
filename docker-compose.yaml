@@ -1,26 +1,13 @@
 version: '4.2'
 services:
-  ollama:
-    image: ollama/ollama
-    volumes:
-      - ./data/ollama:/root/.ollama
-    container_name: ollama
-    pull_policy: always
-    tty: true
-    restart: unless-stopped
-    ports:
-      - 11434:11434
-
   ollami:
     container_name: ollami
     restart: always
-    depends_on:
-      - ollama
     image: ollami
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 5050:5050
     extra_hosts:
       - host.docker.internal:host-gateway

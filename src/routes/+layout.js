@@ -1,5 +1,4 @@
 import { initialModels } from "$lib/stores/models";
-
 /**
  * Load models from API and merge with initial models.
  * @type {import('./$types').LayoutServerLoad}
@@ -22,7 +21,7 @@ export async function load({fetch}) {
       return response.json();
     }
 
-    let { models: apiModels } = await fetchModels(); // ollama.list();
+    let { models: apiModels } = await fetchModels() || []; // ollama.list();
 
     if (apiModels.length === 0) {
       return { props: { models } };

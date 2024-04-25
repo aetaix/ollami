@@ -1,18 +1,12 @@
-import Ollama from 'openai';
-import { OpenAIStream as OllamaStream, StreamingTextResponse } from 'ai';
-
-// Create an OpenAI API client (that's edge friendly!)
+import Ollama from "openai";
+import { OpenAIStream as OllamaStream, StreamingTextResponse } from "ai";
 const ollama = new Ollama({
-  baseURL: 'http://127.0.0.1:11434/v1',
-  apiKey: 'ollama',
+  baseURL: "http://127.0.0.1:11434/v1",
+  apiKey: "IGNORED",
 });
 
-
-export async function POST({request}) {
+export async function POST({ request }) {
   const { messages, model } = await request.json();
-
-
-
   try {
     const response = await ollama.chat.completions.create({
       model: model.image,
@@ -22,12 +16,11 @@ export async function POST({request}) {
     });
 
     // Convert the response into a friendly text-stream
-  const stream = OllamaStream(response);
+    const stream = OllamaStream(response);
 
-  // Respond with the stream
-  return new StreamingTextResponse(stream);
+    // Respond with the stream
+    return new StreamingTextResponse(stream);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
-
 }

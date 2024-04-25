@@ -15,9 +15,9 @@ COPY --from=builder /app/node_modules node_modules/
 COPY package.json .
 
 ENV NODE_ENV=production \
-    PORT=8080
+    PORT=5050 
         
-EXPOSE 8080
+EXPOSE 5050
 
 CMD [ "node", "build" ]
  

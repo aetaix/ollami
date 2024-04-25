@@ -100,8 +100,8 @@
   </div>
 </div>
 
-<div class="grid grid-cols-2 gap-4">
-  {#if filteredModels.length > 0}
+{#if filteredModels.length > 0}
+  <div class="grid grid-cols-2 gap-4">
     {#each filteredModels as model}
       <ModelItem
         name={model.name}
@@ -116,9 +116,13 @@
         installed={model.installed}
       />
     {/each}
-  {:else}
+  </div>
+{:else}
+  <div
+    class="bg-black-50 flex justify-center items-center h-[calc(100%-140px)] w-full rounded-lg border border-black-200"
+  >
     <p class="text-center text-black-500 dark:text-black-300">
       No models found
     </p>
-  {/if}
-</div>
+  </div>
+{/if}
