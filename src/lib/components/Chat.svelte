@@ -1,10 +1,9 @@
 <script>
-  import ollama from "ollama/browser";
   import { page } from "$app/stores";
   import { browser } from "$app/environment";
   import { history } from "$lib/stores/history";
   import { useChat } from "ai/svelte";
-  import { models, currentModel } from "$lib/stores/models";
+  import { models } from "$lib/stores/models";
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import AssistantMessage from "./chat/AssistantMessage.svelte";
   import UserMessage from "./chat/UserMessage.svelte";
@@ -58,33 +57,20 @@
   }
 
   async function renameChat(chat) {
-    await ollama
-      .generate({
-        model: chatModel.image,
-        prompt: `Capture the main topic, idea, or subject of the following chat and use it to generate a short title for organizing my historic of chat. 
-        You only return the title as a string, never use formating. 
-        The chat's messages: ${JSON.stringify(chat)}.
-        Return title:
-        `,
-      })
-      .then((response) => {
-        const title = response.response.replace(/"/g, "");
+    // generate a title for the chat fetching /api/rename-chat
+    const response = await fetch("/api/rename-chat", {
+      method: "POST",
+      body: JSON.stringify({ image: chatModel.image, messages: chat }),
+    });
 
-        // update the chat with the new title in the local storage and the history store
-        history.update((chats) => {
-          const index = chats.findIndex((conv) => conv.id === $page.params.id);
-          chats[index].name = title;
-          return chats;
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+    let title = await response.json();
+    title = title.replace(/"/g, "");
 
-  // Trigger ollama with currentModel to make load time faster for the model
-  $: if ($ollamaIsActivated && $currentModel) {
-    ollama.chat({ model: chatModel.image, prompt: "" });
+    history.update((chats) => {
+      const index = chats.findIndex((conv) => conv.id === $page.params.id);
+      chats[index].name = title;
+      return chats;
+    });
   }
 
   function handleSubmit() {

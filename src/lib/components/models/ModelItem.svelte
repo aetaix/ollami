@@ -1,5 +1,4 @@
 <script>
-  import ollama from "ollama/browser";
   import { browser } from "$app/environment";
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
@@ -63,12 +62,14 @@
     });
   }
 
-  function deleteModel() {
-    ollama.delete({ model: image }).then(() => {
-      models.update((models) =>
-        models.filter((model) => model.image !== image)
-      );
+  async function deleteModel() {
+    // Use fetch on api/delete-model to delete the model
+    console.log("Deleting model", image);
+    const response = await fetch("/api/delete-model", {
+      method: "POST",
+      body: JSON.stringify({ image }),
     });
+    models.update((models) => models.filter((model) => model.image !== image));
   }
 </script>
 
@@ -140,7 +141,9 @@
           >{tag}</span
         >
       {/each}
-      <span class="text-xs ml-1">{popularity > 1000 ? popularity/1000 + 'M' : popularity + 'K'} Pulls</span>
+      <span class="text-xs ml-1"
+        >{popularity > 1000 ? popularity / 1000 + "M" : popularity + "K"} Pulls</span
+      >
     </div>
     <span
       class="text-xs text-black-500 {sizeColor} dark:text-black-300 px-2 py-1 rounded-full"

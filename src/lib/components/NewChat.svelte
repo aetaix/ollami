@@ -1,5 +1,4 @@
 <script>
-import ollama from 'ollama/browser'
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import { currentModel } from "$lib/stores/models";
   import { history } from "$lib/stores/history";
@@ -8,11 +7,6 @@ import ollama from 'ollama/browser'
   import Welcome from "./chat/Welcome.svelte";
   import Input from "./chat/Input.svelte";
   import { writable } from "svelte/store";
-
-  // Trigger ollama with currentModel to make load time faster for the model
-  $: if ($ollamaIsActivated && $currentModel) {
-    ollama.chat({ model: $currentModel.image, prompt: "" });
-  }
 
   let input = writable("");
 

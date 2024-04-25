@@ -1,4 +1,3 @@
-import ollama from "ollama/browser";
 import { initialModels } from "$lib/stores/models";
 
 /**
@@ -20,7 +19,6 @@ export async function load({fetch}) {
       });
 
       const response = await request;
-      console.log("response", response);
       return response.json();
     }
 
