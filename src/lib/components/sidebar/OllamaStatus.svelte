@@ -29,9 +29,9 @@
   </div>
 {:else}
   <div
-    class="rounded-full bg-black-800 px-3 py-2 flex items-center gap-2 text-red"
+    class="rounded-full bg-red-100 dark:bg-black-800 px-3 py-2 flex items-center gap-2 text-red"
   >
     <span class="w-2 h-2 bg-red rounded-full"></span>
-    <span class="text-[10px] font-semibold uppercase">Not connected</span>
+    <span class="text-[10px] font-semibold uppercase">Ollamout</span>
   </div>
 {/if}
