@@ -27,6 +27,7 @@
 	"type": "module",
 	"dependencies": {
 		"ai": "^3.0.2",
+		"mode-watcher": "^0.3.0",
 		"ollama": "^0.4.9",
 		"openai": "^4.38.3",
 		"svelte-markdown": "^0.4.1"
