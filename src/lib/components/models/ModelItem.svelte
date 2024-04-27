@@ -58,6 +58,9 @@
     // Use fetch on api/pull-model to install the model
     const response = await fetch("/api/pull-model", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ image }),
     });
   }
@@ -67,6 +70,9 @@
     console.log("Deleting model", image);
     const response = await fetch("/api/delete-model", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ image }),
     });
     models.update((models) => models.filter((model) => model.image !== image));

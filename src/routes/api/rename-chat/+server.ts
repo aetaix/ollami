@@ -1,4 +1,5 @@
-import ollama from "ollama";
+import { Ollama } from 'ollama'
+const ollama = new Ollama({ host: 'http://host.docker.internal:11434' })
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {

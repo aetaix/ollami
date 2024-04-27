@@ -1,4 +1,6 @@
 import { initialModels } from "$lib/stores/models";
+
+const ollamaURL = process.env.VITE_APP_ENV === 'dev' ? 'http://127.0.0.1:11434':'http://host.docker.internal:11434';
 /**
  * Load models from API and merge with initial models.
  * @type {import('./$types').LayoutServerLoad}
@@ -9,7 +11,7 @@ export async function load({fetch}) {
 
   try {
     async function fetchModels() {
-      const url = "http://127.0.0.1:11434/api/tags"
+      const url = ollamaURL + "/api/tags"
       const request = fetch(url, {
         method: "GET",
         headers: {

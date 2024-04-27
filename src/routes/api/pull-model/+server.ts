@@ -1,4 +1,6 @@
-import ollama from "ollama";
+import { Ollama } from "ollama";
+const ollama = new Ollama({ host: "http://host.docker.internal:11434/" });
+
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
   try {
@@ -31,7 +33,7 @@ async function startModelPull(image: string) {
 
   const pulledModel = await ollama.pull({
     model: image,
-    stream: true
+    stream: true,
   });
 
   for await (const update of pulledModel) {

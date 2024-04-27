@@ -1,7 +1,7 @@
 version: '4.2'
 services:
   ollami:
-    container_name: ollami
+    container_name: app
     restart: always
     image: ollami
     build:
@@ -10,4 +10,4 @@ services:
     ports:
       - 5050:5050
     extra_hosts:
-      - host.docker.internal:host-gateway
+      - "host.docker.internal:host-gateway"

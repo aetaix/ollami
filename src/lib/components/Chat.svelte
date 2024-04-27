@@ -60,6 +60,9 @@
     // generate a title for the chat fetching /api/rename-chat
     const response = await fetch("/api/rename-chat", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ image: chatModel.image, messages: chat }),
     });
 
