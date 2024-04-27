@@ -41,7 +41,8 @@ That's it! Your first model is up and running!
 
 ### With Docker 🐳
 
-> [!NOTE] This guide assumes that you have Docker Desktop installed locally. If not please [install Docker](https://docs.docker.com/get-docker/)
+> [!NOTE] 
+> This guide assumes that you have Docker Desktop installed locally. If not please [install Docker](https://docs.docker.com/get-docker/)
 
 Clone the repository with git to your local machine development folder using the following command: 
 
@@ -51,14 +52,16 @@ cd ollami
 ```
 
 Make sure Docker Desktop is open, then run the following command:
-``bash
+
+```bash
 docker compose up -d
 ```
 Go to [localhost:5050](http://localhost:5050) to access Ollami!
 
 ### With NPM (Developpers only) 🧰
 
-> [!NOTE] This guide assumes that you have installed the latest version of Node.js and npm. If not : [Download Node.js (Node.js + npm)](https://nodejs.org/en/download/)
+> [!NOTE] 
+> This guide assumes that you have installed the latest version of Node.js and npm. If not : [Download Node.js (Node.js + npm)](https://nodejs.org/en/download/)
 
 Clone the repository to your local machine development folder using the following command: 
 
@@ -79,7 +82,8 @@ Launch the app:
 npm run dev
 ```
 
-> Note : No need to add .env variable, the app will use the default Ollama server locally started while using the `ollama run` command. By default the server is running on `http://127.0.0.1:11434`
+> [!TIP]
+> No need to add .env variable, the app will use the default Ollama server locally started while using the `ollama run` command. By default the server is running on `http://127.0.0.1:11434`
 
 #### Explore Available Models
 
@@ -104,4 +108,5 @@ Here are some example models that can be downloaded:
 | Gemma              | 2B         | 1.4GB | `ollama run gemma:2b`          |
 | Gemma              | 7B         | 4.8GB | `ollama run gemma:7b`          |
 
-> Note: You should have at least 8 GB of RAM available to run the 7B models, 16 GB to run the 13B models, and 32 GB to run the 33B models.
+> [!TIP]  
+> You should have at least 8 GB of RAM available to run the 7B models, 16 GB to run the 13B models, and 32 GB to run the 33B models.
