@@ -7,6 +7,8 @@
 
   let search = "";
 
+  let isHome = $page.url.pathname === '/';
+
   if (browser) {
     if (localStorage.getItem("chats")) {
       history.set(JSON.parse(localStorage.getItem("chats")));
@@ -45,40 +47,45 @@
 
 <div
   class="
-  bg-white dark:bg-black-800 border-black-200 dark:border-black-700 border shadow-lg rounded-2xl space-y-2 p-2 mb-2"
+  {$page.url.pathname.includes('chat') || isHome ? 'bg-white dark:bg-black-800 border-black-200 dark:border-black-700 shadow-lg' : 'hover:bg-black-100 border-transparent dark:hover:bg-black-800'}
+   border  rounded-2xl
+   space-y-2 p-2 mb-2 relative transition-colors"
 >
   <a
     href="/"
     class="
-    {$page.url.pathname === '/'
+    {isHome
       ? 'bg-black-100 dark:bg-black-700 '
       : 'hover:bg-black-100 dark:hover:bg-black-700'}
     flex w-full justify-between items-center rounded-lg transition-colors p-2"
   >
     <div class="text-sm flex items-center gap-2">
       <svg
-        width="18"
-        viewBox="0 0 14 15"
+        width="22"
+        viewBox="0 0 24 23"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M6.7709 0.00361241C6.77155 0.003592 6.77219 0.00357168 6.77284 0.00355144C7.29762 -0.0129214 7.80998 0.0281921 8.30403 0.121028C11.6128 0.742766 14.1002 3.68436 13.9969 7.18434C13.887 10.9415 10.7411 13.966 6.96769 13.9483C5.91491 13.9448 4.91706 13.7064 4.02202 13.2862C3.87137 13.2156 3.6959 13.2138 3.53993 13.2774L1.53185 14.0896C0.87607 14.3544 0.209658 13.7312 0.432976 13.062L1.08343 11.1198C1.14015 10.9521 1.12242 10.7667 1.02849 10.6149C0.365624 9.53611 -0.0118886 8.26665 0.000517726 6.90714C0.0334338 3.62342 2.38961 0.843742 5.51092 0.161783C5.91786 0.0728723 6.33781 0.0196182 6.76731 0.00555292C6.76795 0.00553178 6.7686 0.00551073 6.76925 0.00548976C6.76982 0.00547119 6.77039 0.00545268 6.77096 0.00543425L6.76919 0.00366693C6.76976 0.00364869 6.77033 0.00363052 6.7709 0.00361241ZM6.94939 1.0002C10.3501 0.973212 13.0975 3.76029 12.9973 7.15484L12.9973 7.1551C12.9034 10.3653 10.2075 12.9635 6.97237 12.9483L6.97105 12.9483C6.06856 12.9453 5.21425 12.7412 4.447 12.381L4.44648 12.3808C4.03106 12.186 3.56485 12.1878 3.16378 12.3509C3.16337 12.351 3.16296 12.3512 3.16254 12.3514L1.50043 13.0236L2.03074 11.4402C2.03092 11.4396 2.03111 11.4391 2.03129 11.4385C2.17833 11.0022 2.1365 10.5064 1.87997 10.0905C1.31276 9.16705 0.989928 8.08187 1.00047 6.91673C1.03252 3.74223 3.61086 1.10779 6.80317 1.00492L6.94939 1.0002Z"
-          fill="currentColor"
-        />
-        <path
-          d="M10 7.45882H7.49412V10H6.49412V7.45882H4V6.55294H6.49412V4H7.49412V6.55294H10V7.45882Z"
-          fill="currentColor"
-        />
+        <g clip-path="url(#clip0_2223_30)">
+          <path
+            d="M17.87 12.52C17.8 12.88 17.69 13.24 17.55 13.58C17.25 14.31 16.8 14.97 16.25 15.53C15.69 16.08 15.03 16.52 14.3 16.83C13.57 17.13 12.79 17.28 12 17.28H10V19.76C4.47 17.25 2 14.89 2 11.28C2 9.69003 2.64 8.17003 3.76 7.04003C4.89 5.91003 6.41 5.28003 8 5.28003H10V3.28003H8C5.88 3.28003 3.85 4.13003 2.35 5.63003C0.85 7.13003 0 9.16003 0 11.28C0 17.78 7 20.78 12 22.78V19.28C14.13 19.28 16.16 18.44 17.66 16.94C18.86 15.74 19.64 14.18 19.9 12.52H17.87Z"
+            fill="currentColor"
+          />
+          <path d="M23.18 3.28003H14.63V5.27003H23.18V3.28003Z" fill="currentColor" />
+          <path d="M19.9 8.55V0L17.91 0V8.55H19.9Z" fill="currentColor" />
+        </g>
+        <defs>
+          <clipPath id="clip0_2223_30">
+            <rect width="23.18" height="22.78" fill="white" />
+          </clipPath>
+        </defs>
       </svg>
 
       New chat
     </div>
     <span
       class="
-    {$page.url.pathname === '/'
+    {isHome
         ? 'bg-black-200 dark:bg-black-700 '
         : 'dark:bg-black-700 bg-black-100'}
      p-1 rounded text-xs">⌘+o</span
@@ -114,12 +121,12 @@
         class="text-sm focus:outline-none bg-transparent w-full py-1"
       />
     </div>
-    <ul class="space-y-2 max-h-[50vh] overflow-y-auto ">
+    <ul class="space-y-2 max-h-[50vh] overflow-y-auto">
       {#each filteredHistory as chat}
         {#if chat.name.length > 0}
           <HistoryItem id={chat.id} name={chat.name} />
         {/if}
       {/each}
     </ul>
-    {/if}
+  {/if}
 </div>

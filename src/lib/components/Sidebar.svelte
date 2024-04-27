@@ -6,10 +6,13 @@
   import OllamaStatus from "./sidebar/OllamaStatus.svelte";
   import Prompt from "./icons/Prompt.svelte";
   import Model from "./icons/Model.svelte";
+
 </script>
 
 <div class="h-screen p-4 pr-2 w-1/5 relative">
-  <header class="flex justify-between items-center mb-5">
+  
+
+  <header class="flex justify-between items-center mb-5 relative">
     <a href="/" class="inline-flex items-center space-x-2">
       <Logo class="w-6" />
       <span class=" font-semibold">Ollami</span>
