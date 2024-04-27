@@ -1,6 +1,5 @@
 import { initialModels } from "$lib/stores/models";
-
-const ollamaURL = process.env.VITE_APP_ENV === 'dev' ? 'http://127.0.0.1:11434':'http://host.docker.internal:11434';
+import {fetchOllama} from "$lib/utils/ollamaClient";
 /**
  * Load models from API and merge with initial models.
  * @type {import('./$types').LayoutServerLoad}
@@ -10,20 +9,7 @@ export async function load({fetch}) {
   let models = JSON.parse(JSON.stringify(initialModels));
 
   try {
-    async function fetchModels() {
-      const url = ollamaURL + "/api/tags"
-      const request = fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const response = await request;
-      return response.json();
-    }
-
-    let { models: apiModels } = await fetchModels() || []; // ollama.list();
+    let { models: apiModels } = await fetchOllama("/api/tags", "GET") || []; // ollama.list();
 
     if (apiModels.length === 0) {
       return { props: { models } };

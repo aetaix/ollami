@@ -1,7 +1,13 @@
 import Ollama from "openai";
 import { OpenAIStream as OllamaStream, StreamingTextResponse } from "ai";
+
+const url =
+  process.env.VITE_APP_ENV === "dev"
+    ? "http://127.0.0.1:11434"
+    : "http://host.docker.internal:11434";
+
 const ollama = new Ollama({
-  baseURL: "http://host.docker.internal:11434/v1",
+  baseURL: url + "/v1",
   apiKey: "IGNORED",
 });
 

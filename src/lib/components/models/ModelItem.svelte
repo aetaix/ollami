@@ -2,6 +2,7 @@
   import { browser } from "$app/environment";
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
+  import ModelSize from "./ModelSize.svelte";
 
   export let name = "";
   export let image = "";
@@ -9,21 +10,9 @@
   export let parameters = "";
   export let description = "";
   export let tags = [];
-  export let size = "";
+  export let size = 0;
   export let popularity = 1;
   export let installed = false;
-
-  let sizeColor =
-    parseFloat(size) < 2
-      ? "bg-green-100 dark:bg-green/10 dark:text-green"
-      : parseFloat(size) < 5
-        ? "bg-orange-100 dark:bg-orange-400/10 dark:text-orange-400"
-        : "bg-red-100 dark:bg-red-400/10 dark:text-red-400";
-
-  /**
-   * Model I/O
-   */
-
   let loading = false;
 
   $: {
@@ -49,14 +38,12 @@
 
   async function installModel() {
     loading = true;
-
     // Add the model to the installation queue
     if (browser) {
       const queue = JSON.parse(localStorage.getItem("queue") || "[]");
       localStorage.setItem("queue", JSON.stringify([...queue, image]));
     }
-    // Use fetch on api/pull-model to install the model
-    const response = await fetch("/api/pull-model", {
+    await fetch("/api/pull-model", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,9 +53,7 @@
   }
 
   async function deleteModel() {
-    // Use fetch on api/delete-model to delete the model
-    console.log("Deleting model", image);
-    const response = await fetch("/api/delete-model", {
+    await fetch("/api/delete-model", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -151,10 +136,7 @@
         >{popularity > 1000 ? popularity / 1000 + "M" : popularity + "K"} Pulls</span
       >
     </div>
-    <span
-      class="text-xs text-black-500 {sizeColor} dark:text-black-300 px-2 py-1 rounded-full"
-      >{size}Go</span
-    >
+    <ModelSize size={size} />
   </footer>
 </div>
 

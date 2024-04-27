@@ -111,7 +111,7 @@
         description={model.description ||
           "This model is derived, meaning it use its parent model's weights to generate responses."}
         tags={model.tags || []}
-        size={model.size}
+        size={parseFloat(model.size)}
         popularity={model.popularity}
         installed={model.installed}
       />
