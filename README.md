@@ -9,16 +9,7 @@ Ollami is a frontend application designed to interact with local Ollama models f
 - Quickly access and interact with a wide range of models, available directly in the interface.
 - Seamlessly test and evaluate local model performance in a real-world application context.
 
-## Prerequisites 🏗️
-
-You have installed the latest version of Node.js and npm. If not :
-
-- [Download Node.js (Node.js + npm)](https://nodejs.org/en/download/)
-
-> Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows you to run JavaScript applications on your local machine, and much more.
-
-
-## Install Ollama 🤝
+## How to install Ollama 🤝
 
 Get up and running with large language models locally.
 
@@ -37,15 +28,37 @@ _[Find detailed instructions on installing Ollama here](https://ollama.com)_
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-### Install your first model ⚡
+### Install your first model (CLI) ⚡
 
-Interact with models like Mistral effortlessly:
+Open your favorite terminal, and run the following commands:
 
 ```bash
 ollama run llama3:latest
 ```
+That's it! Your first model is up and running!
 
-## Install Ollami (Dev) 🔧
+## Install Ollami 🔧
+
+### With Docker 🐳
+
+> [!NOTE] This guide assumes that you have Docker Desktop installed locally. If not please [install Docker](https://docs.docker.com/get-docker/)
+
+Clone the repository with git to your local machine development folder using the following command: 
+
+```bash
+git clone https://github.com/aetaix/ollami.git ollami
+cd ollami
+```
+
+Make sure Docker Desktop is open, then run the following command:
+``bash
+docker compose up -d
+```
+Go to [localhost:5050](http://localhost:5050) to access Ollami!
+
+### With NPM (Developpers only) 🧰
+
+> [!NOTE] This guide assumes that you have installed the latest version of Node.js and npm. If not : [Download Node.js (Node.js + npm)](https://nodejs.org/en/download/)
 
 Clone the repository to your local machine development folder using the following command: 
 
@@ -76,10 +89,9 @@ Here are some example models that can be downloaded:
 
 | Model              | Parameters | Size  | Download                       |
 | ------------------ | ---------- | ----- | ------------------------------ |
-| Llama 2            | 7B         | 3.8GB | `ollama run llama2`            |
+| Llama 3            | 7B         | 3.8GB | `ollama run llama3`            |
 | Mistral            | 7B         | 4.1GB | `ollama run mistral`           |
-| Dolphin Phi        | 2.7B       | 1.6GB | `ollama run dolphin-phi`       |
-| Phi-2              | 2.7B       | 1.7GB | `ollama run phi`               |
+| Phi-3              | 3.8B       | 2.3GB | `ollama run phi3`               |
 | Neural Chat        | 7B         | 4.1GB | `ollama run neural-chat`       |
 | Starling           | 7B         | 4.1GB | `ollama run starling-lm`       |
 | Code Llama         | 7B         | 3.8GB | `ollama run codellama`         |
