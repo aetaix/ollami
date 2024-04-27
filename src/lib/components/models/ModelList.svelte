@@ -51,7 +51,7 @@
 </script>
 
 <div class="flex items-center justify-between">
-  <div class="flex items-center gap-2">
+  <div class="flex items-center gap-2 ">
     <input
       type="text"
       class=" p-2 border text-sm border-black-200 dark:border-black-600 bg-transparent rounded-md"

@@ -51,20 +51,30 @@
 </script>
 
 {#if $modal}
-  <div
-    class="modal w-full mb-4 max-w-2xl mx-auto bg-white bottom border border-black-200 rounded-xl p-2 shadow"
-  >
-    {#each filteredPrompts as prompt, index}
-      <button
-        on:click={() => clickToSetPrompt(index)}
-        class="{index === selectedIndex ? 'bg-black-100' : ''}
+  {#if filteredPrompts.length > 0}
+    <div
+      class="modal w-full mb-4 max-w-[700px] mx-auto bg-white bottom border border-black-200 rounded-xl p-2 shadow"
+    >
+      {#each filteredPrompts as prompt, index}
+        <button
+          on:click={() => clickToSetPrompt(index)}
+          class="{index === selectedIndex ? 'bg-black-100' : ''}
       p-2 text-start hover:bg-black-50 w-full rounded-lg"
-      >
-        <h3 class="text-sm font-semibold font-mono">/{prompt.command}</h3>
-        <span class="text-xs text-black-400 block">{prompt.name}</span>
-      </button>
-    {/each}
-  </div>
+        >
+          <h3 class="text-sm font-semibold font-mono">/{prompt.command}</h3>
+          <span class="text-xs text-black-400 block">{prompt.name}</span>
+        </button>
+      {/each}
+    </div>
+  {:else}
+    <div
+      class="modal w-full mb-4 max-w-[700px] mx-auto text-start bg-white bottom border border-black-200 rounded-xl p-4 shadow"
+    >
+    <a href="/prompts" class="text-center text-black-400">
+        No prompts found:<span class="text-black underline ml-1"> Add a prompt</span> 
+      </a>
+    </div>
+  {/if}
 {/if}
 
 <style>

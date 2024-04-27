@@ -1,4 +1,4 @@
-version: '4.2'
+version: "3.9"
 services:
   ollami:
     container_name: app
@@ -9,5 +9,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5050:5050
-    extra_hosts:
-      - "host.docker.internal:host-gateway"

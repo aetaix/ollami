@@ -30,6 +30,10 @@
     } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
       e.preventDefault();
       promptModal.navigate({ direction: e.key });
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      modal.set(false);
+      textarea.value = "";
     }
   }
 
@@ -52,7 +56,7 @@
         value = prompt.replace("{{CLIPBOARD}}", text);
       });
     }
-    
+
     modal.set(false);
   }
 

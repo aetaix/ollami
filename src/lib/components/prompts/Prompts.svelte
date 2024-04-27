@@ -40,8 +40,8 @@
           on:click={() => {
             setPrompt(index);
           }}
-          class="{$currentPrompt === index ? 'bg-black-100 dark:bg-black-600' : 'hover:bg-black-200 dark:hover:bg-black-700'} 
-        p-2 block mb-2 w-full rounded-lg cursor-pointer text-start "
+          class="{$currentPrompt === index ? 'bg-black-100 dark:bg-black-600' : 'hover:bg-black-100 dark:hover:bg-black-600'} 
+        p-2 block mb-2 w-full rounded-lg cursor-pointer text-start transition-colors"
         >
           <h2 class="font-bold text-sm">
             {prompt.name}
