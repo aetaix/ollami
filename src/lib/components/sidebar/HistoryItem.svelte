@@ -4,6 +4,7 @@
   import { goto } from "$app/navigation";
   export let id = "";
   export let name = "";
+  export let model = "";
 
   function deleteConversation(id) {
     history.update((conversations) => {
@@ -25,7 +26,7 @@
 >
   <a href="/chat/{id}" class="w-full p-2 flex justify-start items-center gap-2">
     {#if id === $page.params.id}
-      <div class="shrink-0 text-black-400 dark:text-black-800">
+      <div class="shrink-0 text-{model.image.split(":")[0]}">
         <svg
           width="18"
           viewBox="0 0 20 20"
@@ -34,19 +35,19 @@
         >
           <path
             d="M20 8C20 10.13 19.16 12.16 17.66 13.66C16.16 15.16 14.13 16 12 16V19.5C7 17.5 0 14.5 0 8C0 5.88 0.85 3.85 2.35 2.35C3.85 0.85 5.88 0 8 0H12C14.13 0 16.16 0.85 17.66 2.35C19.16 3.85 20 5.88 20 8Z"
-            fill="url(#paint0_linear_2203_27)"
+            fill="url(#gradient)"
           />
           <defs>
             <linearGradient
-              id="paint0_linear_2203_27"
+              id="gradient"
               x1="16"
               y1="14"
               x2="6"
               y2="5.60527e-07"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="currentColor" />
-              <stop offset="1" stop-color="white" />
+              <stop  stop-color="currentColor"/>
+              <stop offset="1" stop-color="currentColor"  />
             </linearGradient>
           </defs>
         </svg>
@@ -96,3 +97,24 @@
     </svg>
   </button>
 </li>
+
+<style>
+  .text-llama3 stop:first-child {
+    stop-color:#1D90FB;
+  }
+  .text-llama3 stop:last-child{
+    stop-color:#0B6BE1;
+  }
+  .text-mistral stop:first-child {
+    stop-color: #f94128;
+  }
+  .text-mistral stop:last-child {
+    stop-color: #ffd738;
+  }
+  .text-codegemma stop:first-child {
+    stop-color:#F9DBBC;
+  }
+  .text-codegemma stop:last-child{
+    stop-color:#468BEF;
+  }
+</style>

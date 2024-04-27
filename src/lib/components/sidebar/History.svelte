@@ -124,7 +124,7 @@
     <ul class="space-y-2 max-h-[50vh] overflow-y-auto">
       {#each filteredHistory as chat}
         {#if chat.name.length > 0}
-          <HistoryItem id={chat.id} name={chat.name} />
+          <HistoryItem id={chat.id} name={chat.name} model={chat.model} />
         {/if}
       {/each}
     </ul>
