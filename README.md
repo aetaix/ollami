@@ -1,6 +1,8 @@
 # Ollami 🖐️
 > "Oh l'ami" - French for "Hi friend!"
 
+![Ollami](./screenshot.png)
+
 Ollami is a frontend application designed to interact with local Ollama models for text generation, reasoning, chat and more.
 
 **Why Use Ollami?** 💡
@@ -11,9 +13,7 @@ Ollami is a frontend application designed to interact with local Ollama models f
 
 ## How to install Ollama 🤝
 
-Get up and running with large language models locally.
-
-_[Find detailed instructions on installing Ollama here](https://ollama.com)_
+Get up and running with large language models locally: [Ollama Website](https://ollama.com).
 
 ### macOS 🍎 
 
