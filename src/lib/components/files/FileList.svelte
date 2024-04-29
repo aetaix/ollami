@@ -37,6 +37,7 @@
         type={file.type}
         collection={file.collection}
         chatID={file.chat}
+        id={file.id}
       />
     {/each}
   </tbody>

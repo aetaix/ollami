@@ -4,11 +4,15 @@ const client = new ChromaClient({
 });
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
-  const { name } = await request.json();
+  const { id, name } = await request.json();
 
-  console.log(name)
-
-await client.deleteCollection({name: name}) 
+  //await client.deleteCollection({name: name})
+  let collection = await client.getCollection({
+    name: name,
+  });
+  await collection.delete({
+    ids: [id], //ids
+  });
 
   return new Response(JSON.stringify({ status: 200 }));
 }

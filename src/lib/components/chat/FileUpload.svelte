@@ -1,6 +1,6 @@
 <script>
   import { models } from "$lib/stores/models";
-  import { rag, files } from "$lib/stores/files";
+  import {  files } from "$lib/stores/files";
   import File from "$lib/components/icons/File.svelte";
   import Check from "../icons/Check.svelte";
 
@@ -26,9 +26,14 @@
 
   function saveFile() {
     loading = true;
-    const file = inputFile.files[0];
+    const inputFiles = inputFile.files;
+
+    //const file = inputFile.files[0];
     const formData = new FormData();
-    formData.append("file", file);
+    for (let i = 0; i < inputFiles.length; i++) {
+      formData.append("files", inputFiles[i]);
+    }
+
     formData.append("id", id);
     formData.append(
       "image",
@@ -43,7 +48,7 @@
       .then((res) => res.json())
       .then(async (data) => {
         console.log(data);
-        rag.set(true);
+    
         // update files for each data.ids
 
         for (let i = 0; i < data.ids.length; i++) {
@@ -52,10 +57,10 @@
             {
               id: data.ids[i],
               chat: id,
-              name: file.name,
+              name: inputFiles[i].name,
               collection: data.collection,
-              type: file.type,
-              size: file.size,
+              type: inputFiles[i].type,
+              size: inputFiles[i].size,
               created_at: new Date().toISOString(),
             },
           ]);
@@ -76,7 +81,9 @@
     <span class="loader text-purple-600"></span>
   </div>
 {:else if success}
-  <div class="w-8 h-8 animate-success rounded-full flex justify-center items-center bg-purple-600 text-white">
+  <div
+    class="w-8 h-8 animate-success rounded-full flex justify-center items-center bg-purple-600 text-white"
+  >
     <Check class="w-5" />
   </div>
 {:else}
@@ -94,6 +101,7 @@
   id="file"
   class="hidden"
   accept=".pdf,.txt,.doc,.docx,.csv,.pptx"
+  multiple
 />
 
 <style>

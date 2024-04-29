@@ -2,7 +2,6 @@
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import { currentModel } from "$lib/stores/models";
   import { history } from "$lib/stores/history";
-  import { rag } from "$lib/stores/files";
   import { goto } from "$app/navigation";
   import Tooglefullsize from "./chat/Tooglefullsize.svelte";
   import Welcome from "./chat/Welcome.svelte";
@@ -32,16 +31,10 @@
       messages,
     };
 
-    if ($rag) {
-      newChat.rag = true;
-    }
-
     history.update((chats) => {
       chats.unshift(newChat);
       return chats;
     });
-
-    rag.set(false);
 
     goto(`/chat/${newChat.id}`);
   }

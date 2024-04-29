@@ -1,15 +1,17 @@
 <script>
   import { page } from "$app/stores";
   import { browser } from "$app/environment";
-  import { history } from "$lib/stores/history";
   import { useChat } from "ai/svelte";
+  import { history } from "$lib/stores/history";
   import { models } from "$lib/stores/models";
+  import { files } from "$lib/stores/files";
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import AssistantMessage from "./chat/AssistantMessage.svelte";
   import UserMessage from "./chat/UserMessage.svelte";
   import Tooglefullsize from "./chat/Tooglefullsize.svelte";
   import Input from "./chat/Input.svelte";
   import LoadingModel from "./chat/LoadingModel.svelte";
+  import RagState from "./chat/RagState.svelte";
 
   let chatModel = "";
   let rag = { state: false, collection: null };
@@ -35,13 +37,18 @@
         chatModel = currentChat.model;
         collectionID = currentChat.id;
         active = $models.find((model) => model.image === chatModel.image);
-        if (currentChat.rag !== undefined && currentChat.rag) {
-          rag = {
-            state: true,
-            collection: collectionID,
-          };
-        } else {
-          rag.state = false;
+
+        if ($files) {
+          const files = JSON.parse(localStorage.getItem("files"));
+          const chatFiles = files.filter((f) => f.chat === $page.params.id);
+          if (chatFiles.length > 0) {
+            rag = {
+              state: true,
+              collection: collectionID,
+            };
+          } else {
+            rag.state = false;
+          }
         }
 
         setMessages(currentChat.messages);
@@ -159,10 +166,7 @@
         >{chatModel.image}</span
       >
       {#if rag.state}
-        <span
-          class=" bg-purple/10 text-purple px-3 font-mono text-xs py-2 rounded-md"
-          >RAG</span
-        >
+        <RagState id={collectionID} />
       {/if}
     </div>
 
