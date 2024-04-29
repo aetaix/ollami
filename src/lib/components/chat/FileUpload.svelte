@@ -8,6 +8,7 @@
 
   let loading = false;
   let success = false;
+  let count = 0;
   let inputFile;
 
   function upload() {
@@ -27,6 +28,7 @@
   function saveFile() {
     loading = true;
     const inputFiles = inputFile.files;
+    count = inputFiles.length;
 
     //const file = inputFile.files[0];
     const formData = new FormData();
@@ -49,9 +51,7 @@
         .then((res) => res.json())
         .then(async (data) => {
           console.log(data);
-
           // update files for each data.ids
-
           for (let i = 0; i < data.ids.length; i++) {
             files.update((f) => [
               ...f,
@@ -93,9 +93,14 @@
 {:else}
   <button
     on:click|preventDefault={upload}
-    class="w-8 h-8 rounded-full hover:bg-black-100 dark:hover:bg-black-500 transition-colors flex justify-center items-center"
+    class="w-8 h-8 rounded-full relative hover:bg-black-100 dark:hover:bg-black-500 transition-colors flex justify-center items-center"
   >
     <File class="w-5" />
+    {#if count > 0}
+      <span class="absolute -top-1 -right-1 bg-purple-600 text-white text-xs rounded-full w-4 h-4 flex justify-center items-center">
+        {count}
+      </span>
+    {/if}
   </button>
 {/if}
 <input

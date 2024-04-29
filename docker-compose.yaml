@@ -3,7 +3,6 @@ services:
   ollami:
     container_name: app
     restart: always
-    image: ollami
     build:
       context: .
       dockerfile: Dockerfile

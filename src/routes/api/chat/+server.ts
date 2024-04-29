@@ -8,6 +8,11 @@ const url =
     ? "http://127.0.0.1:11434"
     : "http://host.docker.internal:11434";
 
+const chromaUrl =
+  process.env.VITE_APP_ENV === "dev"
+    ? "http://localhost:8000"
+    : "http://host.docker.internal:8000";
+
 const ollama = new Ollama({
   baseURL: url + "/v1",
   apiKey: "IGNORED",
@@ -17,9 +22,9 @@ export async function POST({ request }) {
   const { messages, model, rag } = await request.json();
 
   if (rag.state) {
-   
     const vectorStore = await Chroma.fromExistingCollection(embeddings, {
       collectionName: "collection-" + rag.collection,
+      url: chromaUrl,
     });
 
     // get last message
