@@ -1,6 +1,6 @@
 {
 	"name": "ollami",
-	"version": "0.3",
+	"version": "0.4",
 	"private": true,
 	"scripts": {
 		"dev": "VITE_APP_ENV=dev vite dev",
