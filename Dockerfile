@@ -16,7 +16,8 @@ COPY package.json .
 
 ENV NODE_ENV=production \
     PORT=5050 \
-    ORIGIN=http://localhost:5050 
+    ORIGIN=http://localhost:5050 \
+    BODY_SIZE_LIMIT=20000000 
         
 EXPOSE 5050
 

@@ -1,15 +1,11 @@
 <script>
+  import { page } from "$app/stores";
   import { models } from "$lib/stores/models";
   import { files } from "$lib/stores/files";
   import File from "$lib/components/icons/File.svelte";
   import Check from "../icons/Check.svelte";
 
   export let id;
-
-  $: {
-    console.log(id);
-  }
-
 
   let loading = false;
   let success = false;
@@ -34,7 +30,6 @@
     loading = true;
     const inputFiles = inputFile.files;
     count = inputFiles.length;
-
     //const file = inputFile.files[0];
     const formData = new FormData();
     for (let i = 0; i < inputFiles.length; i++) {
@@ -65,10 +60,10 @@
               {
                 id: data.ids[i],
                 chat: id,
-                name: inputFiles[i].name,
+                name: inputFiles[0].name + i,
                 collection: data.collection,
-                type: inputFiles[i].type,
-                size: inputFiles[i].size,
+                type: inputFiles[0].type,
+                size: inputFiles[0].size / data.ids.length,
                 created_at: new Date().toISOString(),
               },
             ]);
@@ -103,7 +98,7 @@
     class="w-8 h-8 rounded-full relative hover:bg-black-100 dark:hover:bg-black-500 transition-colors flex justify-center items-center"
   >
     <File class="w-5" />
-    {#if count > 0}
+    {#if count > 0 && !$page.url.pathname.includes("chat")}
       <span class="absolute -top-1 -right-1 bg-purple-600 text-white text-xs rounded-full w-4 h-4 flex justify-center items-center">
         {count}
       </span>
