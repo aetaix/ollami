@@ -4,7 +4,6 @@
   import Clip from "../icons/Clip.svelte";
   import Check from "../icons/Check.svelte";
 
-  export let raw = "";
   export let lang = "";
   export let text = "";
   let copied = false;
