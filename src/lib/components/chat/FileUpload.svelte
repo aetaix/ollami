@@ -6,6 +6,11 @@
 
   export let id;
 
+  $: {
+    console.log(id);
+  }
+
+
   let loading = false;
   let success = false;
   let count = 0;
@@ -35,6 +40,8 @@
     for (let i = 0; i < inputFiles.length; i++) {
       formData.append("files", inputFiles[i]);
     }
+
+    console.log(id);
 
     formData.append("id", id);
     formData.append(
@@ -109,7 +116,7 @@
   type="file"
   id="file"
   class="hidden"
-  accept=".pdf,.txt,.doc,.docx,.csv,.pptx"
+  accept=".pdf,.txt,.docx,.csv,.pptx"
   multiple
 />
 

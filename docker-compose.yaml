@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5050:5050
-  
+    
   chroma:
     container_name: chroma
     restart: always
