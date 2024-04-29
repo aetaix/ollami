@@ -1,7 +1,9 @@
 import { embeddings } from "$lib/utils/ollamaClient";
 import { CSVLoader } from "langchain/document_loaders/fs/csv";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import { DocxLoader } from "langchain/document_loaders/fs/docx";
+import { PPTXLoader } from "langchain/document_loaders/fs/pptx";
+import { TextLoader } from "langchain/document_loaders/fs/text";
 import { Chroma } from "@langchain/community/vectorstores/chroma";
 
 /** @type {import('./$types').RequestHandler} */
@@ -13,17 +15,23 @@ export async function POST({ request }) {
   embeddings.model = image;
   let loader = null;
 
-  console.log(file);
-
   switch (file.type) {
     case "application/pdf":
       loader = new PDFLoader(file, {
         splitPages: false,
       });
-
       break;
     case "text/csv":
       loader = new CSVLoader(file);
+      break;
+    case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+      loader = new DocxLoader(file);
+      break;
+    case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+      loader = new PPTXLoader(file);
+      break;
+    case "text/plain":
+      loader = new TextLoader(file);
       break;
     default:
       loader = null;
@@ -40,24 +48,11 @@ export async function POST({ request }) {
 
   const vectorStore = new Chroma(embeddings, {
     collectionName,
-    url: "http://localhost:8000", // Optional, will default to this value
+    url: "http://localhost:8000"
   });
 
-// Also supports an additional {ids: []} parameter for upsertion
+  // Also supports an additional {ids: []} parameter for upsertion
   const ids = await vectorStore.addDocuments(docs);
-
-  console.log(ids)
-
-  /*
-  await Chroma.fromDocuments(docs, embeddings, {
-    collectionName,
-    url: "http://localhost:8000", // Optional, will default to this value
-    collectionMetadata: {
-      "hnsw:space": "cosine",
-      "documentName": file.name,
-      "documentType": file.type,
-    }, // Optional, can be used to specify the distance method of the embedding space https://docs.trychroma.com/usage-guide#changing-the-distance-function
-  });*/
 
   return new Response(
     JSON.stringify({

@@ -23,7 +23,7 @@
     <span>{lang}</span>
     <button
       on:click={copytoclipboard}
-      class="opacity-50 hover:opacity-100 text-sm cursor-pointer text-purple-600 hover:underline"
+      class="opacity-50 hover:opacity-100 text-sm cursor-pointer  hover:underline"
     >
       {#if !copied}
         <Clip />

@@ -9,7 +9,7 @@
 </script>
 
 {#if $files.length === 0}
-<div class="flex justify-center flex-col items-center h-96 border border-black-200 rounded-xl shadow">
+<div class="flex justify-center flex-col items-center h-[calc(100vh-130px)] bg-black-100 rounded-xl">
   <p class="text-black-500 mb-2">No files found</p>
   <a
     href="/"
