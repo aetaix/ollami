@@ -3,10 +3,12 @@
   import { modal } from "$lib/stores/prompts";
   import PromptModal from "./PromptModal.svelte";
   import { createEventDispatcher } from "svelte";
+  import FileUpload from "./FileUpload.svelte";
 
   const dispatch = createEventDispatcher();
   export let value = "";
   export let writing = false;
+  export let id;
 
   let textarea = null;
   let promptModal;
@@ -24,7 +26,7 @@
       e.preventDefault();
       if ($modal) {
         promptModal.setPrompt();
-      } else {
+      } else if (value.length > 0) {
         submit();
       }
     } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
@@ -76,8 +78,10 @@
   <PromptModal bind:this={promptModal} bind:value on:prompt={setPrompt} />
   <form
     on:submit|preventDefault={submit}
-    class="w-full max-w-[700px] mx-auto flex items-center border shadow-lg bg-white dark:bg-black-700 border-black-200 dark:border-black-600 rounded-xl pl-4 relative"
+    class="w-full max-w-[700px] mx-auto gap-2 flex items-center border shadow-lg bg-white dark:bg-black-700 border-black-200 dark:border-black-600 rounded-xl pl-4 relative"
   >
+    <FileUpload {id}/>
+
     <textarea
       type="text"
       class="w-full bg-transparent focus:outline-none h-[56px] pr-8 py-4 resize-none"

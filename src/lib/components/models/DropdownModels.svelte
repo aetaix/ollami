@@ -69,7 +69,7 @@
         </div>
       {:else}
         {#each $models as model}
-          {#if model.installed && model.name !== $currentModel.name}
+          {#if model.installed && model.name !== $currentModel.name && !model.tags.includes("embeddings")}
             <button
               on:click={() => setCurrentModel(model)}
               class="flex items-center gap-2 p-2 mb-1 w-full hover:bg-black-100 dark:hover:bg-black-600 rounded-md cursor-pointer"

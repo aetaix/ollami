@@ -6,6 +6,7 @@
   import OllamaStatus from "./sidebar/OllamaStatus.svelte";
   import Prompt from "./icons/Prompt.svelte";
   import Model from "./icons/Model.svelte";
+  import File from "$lib/components/icons/File.svelte";
 
 </script>
 
@@ -40,6 +41,16 @@
       <Model class="w-5" />
 
       Models</a
+    >
+    <a
+      href="/files"
+      class="
+      {$page.url.pathname.includes('files') ? 'bg-white dark:bg-black-700 shadow-lg border border-black-200 dark:border-black-600' : 'hover:bg-black-100 border-transparent dark:hover:bg-black-800'}
+      flex items-center gap-2 px-4 py-3 rounded-xl border  text-sm transition-all active:scale-95"
+    >
+    <File class="w-5" />
+
+      Files</a
     >
   </div>
   <div class="absolute bottom-4 left-4 right-1">

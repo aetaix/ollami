@@ -1,4 +1,7 @@
 import Ollama from "openai";
+import { ChatOllama } from "@langchain/community/chat_models/ollama";
+import { Chroma } from "@langchain/community/vectorstores/chroma";
+import { embeddings } from "$lib/utils/ollamaClient";
 import { OpenAIStream as OllamaStream, StreamingTextResponse } from "ai";
 
 const url =
@@ -12,7 +15,37 @@ const ollama = new Ollama({
 });
 
 export async function POST({ request }) {
-  const { messages, model } = await request.json();
+  const { messages, model, rag } = await request.json();
+
+  console.log(messages)
+
+  if (rag.state) {
+   
+    const vectorStore = await Chroma.fromExistingCollection(embeddings, {
+      collectionName: "collection-" + rag.collection,
+    });
+
+    // get last message
+    const lastMessage = messages[messages.length - 1];
+
+    //const response = await vectorStore.similaritySearch(lastMessage.content);
+
+    const retriever = vectorStore.asRetriever(3);
+    const results = await retriever.invoke(lastMessage.content);
+
+    const prompt = `Your are a helpfull assistant answering the user query. To better anser you will use a extracted set of documents:
+      <query>
+      ${lastMessage.content}
+      </query>
+      --------
+      <document>
+      ${JSON.stringify(results)}
+      </document>
+      `;
+    // update message system message with the new syste
+    lastMessage.content = prompt;
+  }
+
   try {
     const response = await ollama.chat.completions.create({
       model: model.image,

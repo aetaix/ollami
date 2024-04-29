@@ -64,7 +64,7 @@
     >
       <option value="">All tags</option>
       {#each tags as tag}
-        <option value={tag}>{tag}</option>
+        <option value={tag} class="capitalize">{tag}</option>
       {/each}
     </select>
     <select

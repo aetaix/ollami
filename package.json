@@ -1,6 +1,6 @@
 {
 	"name": "ollami",
-	"version": "0.2.1",
+	"version": "0.3",
 	"private": true,
 	"scripts": {
 		"dev": "VITE_APP_ENV=dev vite dev",
@@ -27,9 +27,13 @@
 	"type": "module",
 	"dependencies": {
 		"ai": "^3.0.2",
+		"chromadb": "^1.8.1",
+		"d3-dsv": "^2.0.0",
+		"langchain": "^0.1.36",
 		"mode-watcher": "^0.3.0",
 		"ollama": "^0.4.9",
 		"openai": "^4.38.3",
+		"pdf-parse": "^1.1.1",
 		"svelte-markdown": "^0.4.1"
 	}
 }

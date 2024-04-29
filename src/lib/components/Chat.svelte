@@ -12,6 +12,8 @@
   import LoadingModel from "./chat/LoadingModel.svelte";
 
   let chatModel = "";
+  let rag = { state: false, collection: null };
+  let collectionID = "";
   let active = false;
   let chatContainer = null;
   let ram = false;
@@ -29,14 +31,19 @@
     if (browser) {
       const currentChat = $history.find((conv) => conv.id === $page.params.id);
       if (currentChat) {
-        // Check that the currentChat model is installed by comparing it with the models
+        // Set up all chat parameters
         chatModel = currentChat.model;
-
-        if ($models.find((model) => model.image === chatModel.image)) {
-          active = true;
+        collectionID = currentChat.id;
+        active = $models.find((model) => model.image === chatModel.image);
+        if (currentChat.rag !== undefined && currentChat.rag) {
+          rag = {
+            state: true,
+            collection: collectionID,
+          };
         } else {
-          active = false;
+          rag.state = false;
         }
+
         setMessages(currentChat.messages);
         // chat handler if first message is the first from user and the model is installed, triggering a conversation
         if (
@@ -48,7 +55,7 @@
           append(
             { role: "user", content: currentChat.messages[1].content },
             {
-              options: { body: { model: chatModel } },
+              options: { body: { model: chatModel, rag } },
             }
           );
         }
@@ -85,7 +92,7 @@
       append(
         { role: "user", content: $input },
         {
-          options: { body: { model: chatModel } },
+          options: { body: { model: chatModel, rag } },
         }
       );
     }
@@ -146,10 +153,19 @@
   <div
     class="h-full overflow-hidden relative p-4 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600"
   >
-    <span
-      class="absolute top-4 left-4 bg-black-100 dark:bg-black-600 px-3 font-mono text-xs py-2 rounded-md"
-      >{chatModel.image}</span
-    >
+    <div class="flex gap-2 absolute top-4 left-4 items-center">
+      <span
+        class=" bg-black-100 dark:bg-black-600 px-3 font-mono text-xs py-2 rounded-md"
+        >{chatModel.image}</span
+      >
+      {#if rag.state}
+        <span
+          class=" bg-purple/10 text-purple px-3 font-mono text-xs py-2 rounded-md"
+          >RAG</span
+        >
+      {/if}
+    </div>
+
     <Tooglefullsize />
 
     <div bind:this={chatContainer} class="h-full overflow-y-auto pt-20 pb-32">
@@ -177,6 +193,7 @@
           on:submit={handleSubmit}
           on:stop={stop}
           {writing}
+          id={collectionID}
         />
       {:else}
         <div

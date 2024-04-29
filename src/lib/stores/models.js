@@ -1,3 +1,4 @@
+import { sineIn } from "svelte/easing";
 import { writable } from "svelte/store";
 
 export let initialModels = [
@@ -14,7 +15,7 @@ export let initialModels = [
       Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
     installed: false,
     derived: false,
-    popularity: 143.7,
+    popularity: 490.9,
   },
   {
     name: "Llama 2",
@@ -84,7 +85,7 @@ export let initialModels = [
     parameters: "35B",
     context: 128000,
     size: 20,
-    tags: ["chat", "long context tasks", "RAG"],
+    tags: ["chat", "RAG"],
     description: `Command R is a generative model optimized for long context tasks such as retrieval-augmented generation (RAG) and using external APIs and tools. As a model built for companies to implement at scale`,
     installed: false,
     derived: false,
@@ -97,7 +98,7 @@ export let initialModels = [
     parameters: "104B",
     context: 128000,
     size: 59,
-    tags: ["chat", "long context tasks", "RAG"],
+    tags: ["chat", "RAG"],
     description: `Command R is a generative model optimized for long context tasks such as retrieval-augmented generation (RAG) and using external APIs and tools. As a model built for companies to implement at scale`,
     installed: false,
     derived: false,
@@ -124,7 +125,7 @@ export let initialModels = [
     context: 4096,
     size: 4.8,
     icon: "gemma.svg",
-    tags: ["chat", "text", "code"],
+    tags: ["chat", "text"],
     description:
       "Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.",
     installed: false,
@@ -177,7 +178,7 @@ export let initialModels = [
     name: "llava",
     image: "llava:7b",
     parameters: "7B",
-    tags: ["multimodal", "vision", "chat"],
+    tags: ["multimodal", "vision"],
     size: 4.7,
     description:
       "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6.",
@@ -189,7 +190,7 @@ export let initialModels = [
     name: "Dolphin Phi",
     image: "dolphin-phi",
     parameters: "2.7B",
-    tags: ["chat", "multilangual", "reasoning", "agent"],
+    tags: [ "small","uncensored"],
     size: 1.6,
     description:
       "Dolphin-phi 2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language model by Microsoft Research. ",
@@ -208,26 +209,26 @@ export let initialModels = [
     icon: "microsoft.svg",
     installed: false,
     derived: false,
-    popularity: 19.9,
+    popularity: 30.4,
   },
   {
     name: "Phi 3",
     image: "phi3:latest",
     parameters: "3.8B",
-    tags: ["chat", "text", "understanding"],
+    tags: [ "text", "small","performance"],
     size: 2.3,
     context: 128000,
     description:
       "Phi-3 Mini is a 3.8B parameters, lightweight, state-of-the-art open model trained with the Phi-3 datasets that includes both synthetic data and the filtered publicly available websites data with a focus on high-quality and reasoning dense properties.",
     installed: false,
     derived: false,
-    popularity: 5.141,
+    popularity: 43.1,
   },
   {
     name: "Phi-2",
     image: "phi:latest",
     parameters: "2.7B",
-    tags: ["chat", "text", "understanding"],
+    tags: ["text","small","performance"],
     size: 1.7,
     description:
       "Phi-2 is a small language model capable of common-sense reasoning and language understanding. It showcases “state-of-the-art performance” among language models with less than 13 billion parameters.",
@@ -289,7 +290,7 @@ export let initialModels = [
   {
     name: "Orca Mini",
     image: "orca-mini:3b",
-    tags: ["mini", "text"],
+    tags: ["small", "text"],
     parameters: "3B",
     icon: "orca.svg",
     size: 1.9,
@@ -361,6 +362,17 @@ export let initialModels = [
     derived: false,
     popularity: 36.3,
   },
+  {
+    name:'Nomic',
+    image:"nomic-embed-text:latest",
+    parameters:"137M",
+    tags:["embeddings"],
+    size:0.274,
+    description:"A high-performing open embedding model with a large token context window: nomic-embed-text is a large context length text encoder that surpasses OpenAI text-embedding-ada-002 and text-embedding-3-small performance on short and long context tasks.",
+    installed:false,
+    derived:false,
+    popularity:75.1
+  }
 ];
 
 export const models = writable([]);

@@ -81,12 +81,15 @@
 
     {#if installed}
       <div class="flex items-center justify-end gap-2">
-        <button
-          on:click={setCurrentModel}
-          class="border bg-green-500 border-green-300 text-white shadow px-2 py-1 rounded-md text-sm"
-        >
-          Chat
-        </button>
+        {#if !tags.includes("embeddings")}
+          <button
+            on:click={setCurrentModel}
+            class="border bg-green-500 border-green-300 text-white shadow px-2 py-1 rounded-md text-sm"
+          >
+            Chat
+          </button>
+        {/if}
+
         <button
           on:click={deleteModel}
           class="border border-black-200 dark:border-black-500 bg-white dark:bg-black-600 px-2 py-1 rounded-md text-sm"
@@ -136,7 +139,7 @@
         >{popularity > 1000 ? popularity / 1000 + "M" : popularity + "K"} Pulls</span
       >
     </div>
-    <ModelSize size={size} />
+    <ModelSize {size} />
   </footer>
 </div>
 

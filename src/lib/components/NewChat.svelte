@@ -2,12 +2,14 @@
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import { currentModel } from "$lib/stores/models";
   import { history } from "$lib/stores/history";
+  import { rag } from "$lib/stores/files";
   import { goto } from "$app/navigation";
   import Tooglefullsize from "./chat/Tooglefullsize.svelte";
   import Welcome from "./chat/Welcome.svelte";
   import Input from "./chat/Input.svelte";
   import { writable } from "svelte/store";
 
+  const id = Math.random().toString(36).substring(2, 11);
   let input = writable("");
 
   async function createChat() {
@@ -23,19 +25,25 @@
       },
     ];
 
-    let newchat = {
-      id: Math.random().toString(36).substring(2, 11),
+    let newChat = {
+      id,
       name: "",
       model: $currentModel,
       messages,
     };
 
+    if ($rag) {
+      newChat.rag = true;
+    }
+
     history.update((chats) => {
-      chats.unshift(newchat);
+      chats.unshift(newChat);
       return chats;
     });
 
-    goto(`/chat/${newchat.id}`);
+    rag.set(false);
+
+    goto(`/chat/${newChat.id}`);
   }
 </script>
 
@@ -53,7 +61,7 @@
       <Welcome />
 
       {#if $ollamaIsActivated}
-        <Input bind:value={$input} on:submit={createChat} />
+        <Input bind:value={$input} on:submit={createChat} {id} />
       {/if}
     </div>
   </div>

@@ -9,3 +9,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5050:5050
+  
+  chroma:
+    container_name: chroma
+    restart: always
+    image: chromadb/chroma
+    ports:
+      - 8000:8000

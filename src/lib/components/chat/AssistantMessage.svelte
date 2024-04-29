@@ -45,7 +45,7 @@
   <div class="flex pl-11 pt-6 pb-2 items-center gap-2">
     <button
       on:click={copytoclipboard}
-      class="opacity-50 hover:opacity-100 text-sm cursor-pointer text-purple-600 hover:underline"
+      class="opacity-50 hover:opacity-100 text-sm cursor-pointer  hover:underline"
     >
       {#if !copied}
         <Clip />
@@ -55,7 +55,7 @@
     </button>
     <button
       on:click={regenerate}
-      class="opacity-50 hover:opacity-100 text-sm text-purple-600 hover:underline"
+      class="opacity-50 hover:opacity-100 text-sm  hover:underline"
     >
       <svg
         width="24"

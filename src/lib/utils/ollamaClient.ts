@@ -1,4 +1,6 @@
 import { Ollama } from 'ollama'
+import { OllamaEmbeddings } from "@langchain/community/embeddings/ollama";
+
 const ollamaURL =
   process.env.VITE_APP_ENV === "dev"
     ? "http://127.0.0.1:11434"
@@ -22,3 +24,8 @@ export async function fetchOllama(url: string, method: string, body: string) {
   const response = await request;
   return response.json();
 }
+
+export const embeddings = new OllamaEmbeddings({
+ // model: "nomic-embed-text:latest", // default value
+  baseUrl: ollamaURL, // default value
+});
