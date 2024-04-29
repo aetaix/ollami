@@ -1,5 +1,4 @@
 import Ollama from "openai";
-import { ChatOllama } from "@langchain/community/chat_models/ollama";
 import { Chroma } from "@langchain/community/vectorstores/chroma";
 import { embeddings } from "$lib/utils/ollamaClient";
 import { OpenAIStream as OllamaStream, StreamingTextResponse } from "ai";
@@ -16,8 +15,6 @@ const ollama = new Ollama({
 
 export async function POST({ request }) {
   const { messages, model, rag } = await request.json();
-
-  console.log(messages)
 
   if (rag.state) {
    

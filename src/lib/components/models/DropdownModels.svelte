@@ -55,7 +55,7 @@
       </p>
    
     </div>
-    <Chevron class="{dropdown.state ? 'rotate-90':''}" />
+    <Chevron class="{dropdown.state ? 'rotate-180':''} transition-transform" />
   </button>
   {#if dropdown.state}
     <div

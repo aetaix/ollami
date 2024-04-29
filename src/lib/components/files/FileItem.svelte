@@ -1,6 +1,5 @@
 <script>
   import { files } from "$lib/stores/files";
-  import { history } from "$lib/stores/history";
   export let name = "";
   export let size = 0;
   export let type = "";
@@ -33,23 +32,10 @@
     files.update((f) => f.filter((file) => file.id !== id));
     localStorage.setItem("files", JSON.stringify($files));
 
-    /*
-    // recursive change the chat history to put the rag key false
-    history.update((h) => {
-      return h.map((chat) => {
-        if (chat.id === chatID) {
-          delete chat.rag;
-          return chat;
-        } else {
-          return chat;
-        }
-      });
-    });
-    */
   }
 </script>
 
-<tr class="border-b border-black-100 hover:bg-black-50">
+<tr class="border-b border-black-100 dark:border-black-700 hover:bg-black-50 dark:hover:bg-black-700">
   <td class="py-4 px-2">
     <div>
       <h3 class="font-semibold">{name}</h3>
@@ -59,7 +45,7 @@
     </div>
   </td>
   <td class="p-2">
-    <span class="bg-purple-100 text-purple rounded p-1">{collection}</span>
+    <span class="bg-purple/10 text-purple rounded p-1">{collection}</span>
   </td>
   <td class="p-2">
     <a href="/chat/{chatID}" class="underline">/chat/{chatID}</a>

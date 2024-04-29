@@ -39,7 +39,7 @@
         active = $models.find((model) => model.image === chatModel.image);
 
         if ($files) {
-          const files = JSON.parse(localStorage.getItem("files"));
+          const files = JSON.parse(localStorage.getItem("files")) ?? [];
           const chatFiles = files.filter((f) => f.chat === $page.params.id);
           if (chatFiles.length > 0) {
             rag = {

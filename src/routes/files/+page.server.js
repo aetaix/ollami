@@ -1,11 +1,8 @@
-import { ChromaClient } from "chromadb";
-const client = new ChromaClient({
-  path: "http://localhost:8000",
-});
+import { chroma } from "$lib/utils/chromaClient";
 
 /** @type {import('./$types').PageLoad} */
 export async function load() {
-    const collections = await client.listCollections();
+    const collections = await chroma.listCollections();
 	return {
 		collections
 	};

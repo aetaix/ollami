@@ -9,8 +9,8 @@
 </script>
 
 {#if $files.length === 0}
-<div class="flex justify-center flex-col items-center h-[calc(100vh-130px)] bg-black-100 rounded-xl">
-  <p class="text-black-500 mb-2">No files found</p>
+<div class="flex justify-center flex-col items-center h-[calc(100vh-130px)] bg-black-100 dark:bg-black-900 rounded-xl">
+  <p class="text-black-500 dark:text-black-200 mb-2">No files found</p>
   <a
     href="/"
   class="border flex gap-2 items-center border-black-200 z-10 hover:bg-black-50 transition-colors text-black bg-white shadow px-4 py-2 rounded-lg"
@@ -22,7 +22,7 @@
 
 <table class="w-full">
   <thead class="">
-    <tr class="bg-black-100">
+    <tr class="bg-black-100 dark:bg-black-700">
       <th class="text-start p-2 rounded-l-lg">File</th>
       <th class="text-start p-2">Collection</th>
       <th class="text-start p-2">Usage</th>

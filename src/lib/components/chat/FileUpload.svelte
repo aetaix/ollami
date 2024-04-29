@@ -1,6 +1,6 @@
 <script>
   import { models } from "$lib/stores/models";
-  import {  files } from "$lib/stores/files";
+  import { files } from "$lib/stores/files";
   import File from "$lib/components/icons/File.svelte";
   import Check from "../icons/Check.svelte";
 
@@ -41,38 +41,42 @@
         ?.image
     );
 
-    fetch("/api/embedding", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        console.log(data);
-    
-        // update files for each data.ids
+    try {
+      fetch("/api/embedding", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then(async (data) => {
+          console.log(data);
 
-        for (let i = 0; i < data.ids.length; i++) {
-          files.update((f) => [
-            ...f,
-            {
-              id: data.ids[i],
-              chat: id,
-              name: inputFiles[i].name,
-              collection: data.collection,
-              type: inputFiles[i].type,
-              size: inputFiles[i].size,
-              created_at: new Date().toISOString(),
-            },
-          ]);
-        }
-        // Update local storage files with the new file
-        localStorage.setItem("files", JSON.stringify($files));
-        loading = false;
-        success = true;
-        setTimeout(() => {
-          success = false;
-        }, 2000);
-      });
+          // update files for each data.ids
+
+          for (let i = 0; i < data.ids.length; i++) {
+            files.update((f) => [
+              ...f,
+              {
+                id: data.ids[i],
+                chat: id,
+                name: inputFiles[i].name,
+                collection: data.collection,
+                type: inputFiles[i].type,
+                size: inputFiles[i].size,
+                created_at: new Date().toISOString(),
+              },
+            ]);
+          }
+          // Update local storage files with the new file
+          localStorage.setItem("files", JSON.stringify($files));
+          loading = false;
+          success = true;
+          setTimeout(() => {
+            success = false;
+          }, 2000);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   }
 </script>
 
@@ -84,7 +88,7 @@
   <div
     class="w-8 h-8 animate-success rounded-full flex justify-center items-center bg-purple-600 text-white"
   >
-    <Check class="w-5" />
+    <Check />
   </div>
 {:else}
   <button
