@@ -1,6 +1,6 @@
 <script>
   import { models } from "$lib/stores/models";
-  import ModelFile from "./ModelFile.svelte";
+
   import ModelItem from "./ModelItem.svelte";
   let search = "";
 
@@ -95,9 +95,7 @@
       <span>Installed</span>
     </button>
   </div>
-  <div class="flex items-center justify-end">
-    <ModelFile />
-  </div>
+
 </div>
 
 {#if filteredModels.length > 0}

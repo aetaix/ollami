@@ -30,7 +30,7 @@
     >
       <header class="flex items-center justify-between mb-4">
         <h1 class="text-xl font-semibold flex gap-2 items-center">
-          <Prompt class="w-6" />
+          <Prompt class="w-5" />
           Prompt Libary
         </h1>
         <ButtonCreate />

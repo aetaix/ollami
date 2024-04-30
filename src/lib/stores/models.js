@@ -1,4 +1,3 @@
-import { sineIn } from "svelte/easing";
 import { writable } from "svelte/store";
 
 export let initialModels = [
@@ -14,7 +13,7 @@ export let initialModels = [
 
       Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
     installed: false,
-    derived: false,
+
     popularity: 490.9,
   },
   {
@@ -28,7 +27,7 @@ export let initialModels = [
     description:
       "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
     installed: false,
-    derived: false,
+
     popularity: 1200,
   },
   {
@@ -41,7 +40,7 @@ export let initialModels = [
     description:
       "Llama 2 Uncensored is based on Meta’s Llama 2 model, and was created by George Sung and Jarrad Hope using the process defined by Eric Hartford in his blog post.",
     installed: false,
-    derived: false,
+
     popularity: 155.1,
   },
   {
@@ -60,7 +59,7 @@ export let initialModels = [
       Outperforms Llama 1 34B on many benchmarks
       Approaches CodeLlama 7B performance on code, while remaining good at English tasks`,
     installed: false,
-    derived: false,
+
     popularity: 621.4,
   },
   {
@@ -70,12 +69,12 @@ export let initialModels = [
     parameters: "8x7B",
     context: 32000,
     size: 26,
-    tags: ["chat", "text",  "reasoning"],
+    tags: ["chat", "text", "reasoning"],
     description: `The Mixtral-8x7B Large Language Model (LLM) is a pretrained generative Sparse Mixture of Experts. It outperforms Llama 2 70B on many benchmarks.
 
     As of December 2023, it is the strongest open-weight model with a permissive license and the best model overall regarding cost/performance trade-offs.`,
     installed: false,
-    derived: false,
+
     popularity: 177,
   },
   {
@@ -88,7 +87,7 @@ export let initialModels = [
     tags: ["chat", "RAG"],
     description: `Command R is a generative model optimized for long context tasks such as retrieval-augmented generation (RAG) and using external APIs and tools. As a model built for companies to implement at scale`,
     installed: false,
-    derived: false,
+
     popularity: 23.7,
   },
   {
@@ -101,7 +100,7 @@ export let initialModels = [
     tags: ["chat", "RAG"],
     description: `Command R is a generative model optimized for long context tasks such as retrieval-augmented generation (RAG) and using external APIs and tools. As a model built for companies to implement at scale`,
     installed: false,
-    derived: false,
+
     popularity: 20.3,
   },
   {
@@ -115,7 +114,7 @@ export let initialModels = [
     description: `Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the Mistral 7B model using the OpenOrca dataset.
   HuggingFace Leaderboard evals place this model as leader for all models smaller than 30B at the release time, outperforming all other 7B and 13B models.`,
     installed: false,
-    derived: false,
+
     popularity: 118.6,
   },
   {
@@ -129,7 +128,7 @@ export let initialModels = [
     description:
       "Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.",
     installed: false,
-    derived: false,
+
     popularity: 855.1,
   },
   {
@@ -143,7 +142,7 @@ export let initialModels = [
     description:
       "Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.",
     installed: false,
-    derived: false,
+
     popularity: 855.1,
   },
   {
@@ -156,7 +155,7 @@ export let initialModels = [
     tags: ["code"],
     description: `CodeGemma is a collection of powerful, lightweight models that can perform a variety of coding tasks like fill-in-the-middle code completion, code generation, and natural language understanding.`,
     installed: false,
-    derived: false,
+
     popularity: 22.5,
   },
   {
@@ -170,7 +169,7 @@ export let initialModels = [
     description:
       "Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.",
     installed: false,
-    derived: false,
+
     popularity: 1200,
   },
 
@@ -183,19 +182,19 @@ export let initialModels = [
     description:
       "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6.",
     installed: false,
-    derived: false,
+
     popularity: 142.5,
   },
   {
     name: "Dolphin Phi",
     image: "dolphin-phi",
     parameters: "2.7B",
-    tags: [ "small","uncensored"],
+    tags: ["small", "uncensored"],
     size: 1.6,
     description:
       "Dolphin-phi 2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language model by Microsoft Research. ",
     installed: false,
-    derived: false,
+
     popularity: 18,
   },
   {
@@ -208,32 +207,32 @@ export let initialModels = [
       `,
     icon: "microsoft.svg",
     installed: false,
-    derived: false,
+
     popularity: 30.4,
   },
   {
     name: "Phi 3",
     image: "phi3:latest",
     parameters: "3.8B",
-    tags: [ "text", "small","performance"],
+    tags: ["text", "small", "performance"],
     size: 2.3,
     context: 128000,
     description:
       "Phi-3 Mini is a 3.8B parameters, lightweight, state-of-the-art open model trained with the Phi-3 datasets that includes both synthetic data and the filtered publicly available websites data with a focus on high-quality and reasoning dense properties.",
     installed: false,
-    derived: false,
+
     popularity: 43.1,
   },
   {
     name: "Phi-2",
     image: "phi:latest",
     parameters: "2.7B",
-    tags: ["text","small","performance"],
+    tags: ["text", "small", "performance"],
     size: 1.7,
     description:
       "Phi-2 is a small language model capable of common-sense reasoning and language understanding. It showcases “state-of-the-art performance” among language models with less than 13 billion parameters.",
     installed: false,
-    derived: false,
+
     popularity: 82.6,
   },
   {
@@ -245,7 +244,7 @@ export let initialModels = [
     description:
       "NeuralChat is a fine-tuned model released by Intel that’s based on Mistral, designed to be used for high-performance chatbot applications.",
     installed: false,
-    derived: false,
+
     popularity: 22.1,
   },
   {
@@ -258,7 +257,7 @@ export let initialModels = [
 
     The model harnesses the power of our new GPT-4 labeled ranking dataset, Nectar, and our new reward training and policy tuning pipeline. Starling-7B-alpha scores 8.09 in MT Bench with GPT-4 as a judge, outperforming every model to date on MT-Bench except for OpenAI’s GPT-4 and GPT-4 Turbo.`,
     installed: false,
-    derived: false,
+
     popularity: 17.9,
   },
   {
@@ -271,7 +270,7 @@ export let initialModels = [
     description:
       "Code Llama is a model for generating and discussing code, built on top of Llama 2. It’s designed to make workflows faster and efficient for developers and make it easier for people to learn how to code. It can generate both code and natural language about code. Code Llama supports many of the most popular programming languages used today, including Python, C++, Java, PHP, Typescript (Javascript), C#, Bash and more.",
     installed: false,
-    derived: false,
+
     popularity: 338.7,
   },
   {
@@ -284,7 +283,7 @@ export let initialModels = [
     description:
       "Code Llama is a model for generating and discussing code, built on top of Llama 2. It’s designed to make workflows faster and efficient for developers and make it easier for people to learn how to code. It can generate both code and natural language about code. Code Llama supports many of the most popular programming languages used today, including Python, C++, Java, PHP, Typescript (Javascript), C#, Bash and more.",
     installed: false,
-    derived: false,
+
     popularity: 338.7,
   },
   {
@@ -297,7 +296,7 @@ export let initialModels = [
     description:
       "Orca Mini is a Llama and Llama 2 model trained on Orca Style datasets created using the approaches defined in the paper, Orca: Progressive Learning from Complex Explanation Traces of GPT-4. There are two variations available. The original Orca Mini based on Llama in 3, 7, and 13 billion parameter sizes, and v3 based on Llama 2 in 7, 13, and 70 billion parameter sizes.",
     installed: false,
-    derived: false,
+
     popularity: 67.4,
   },
   {
@@ -310,7 +309,7 @@ export let initialModels = [
     description:
       "StarCoder2 is the next generation of transparently trained open code LLMs. It was trained on 17 programming languages and 3.5+ trillion tokens, and is available in 3B, 7B and 13B sizes. StarCoder2 is designed to be more transparent and easier to use than previous models, with a focus on code generation and understanding.",
     installed: false,
-    derived: false,
+
     popularity: 28.2,
   },
   {
@@ -323,7 +322,7 @@ export let initialModels = [
     description:
       "StarCoder2 is the next generation of transparently trained open code LLMs. It was trained on 17 programming languages and 3+ trillion tokens, and is available in 3B, 7B and 13B sizes. StarCoder2 is designed to be more transparent and easier to use than previous models, with a focus on code generation and understanding.",
     installed: false,
-    derived: false,
+
     popularity: 28.2,
   },
   {
@@ -335,7 +334,7 @@ export let initialModels = [
     description:
       "DeepSeek Coder is trained from scratch on both 87% code and 13% natural language in English and Chinese. Each of the models are pre-trained on 2 trillion tokens.",
     installed: false,
-    derived: false,
+
     popularity: 100.4,
   },
   {
@@ -347,7 +346,7 @@ export let initialModels = [
     description:
       "DeepSeek Coder is trained from scratch on both 87% code and 13% natural language in English and Chinese. Each of the models are pre-trained on 2 trillion tokens.",
     installed: false,
-    derived: false,
+
     popularity: 100.4,
   },
   {
@@ -359,20 +358,21 @@ export let initialModels = [
     description:
       "Vicuna is a chat assistant model. It includes 3 different variants in 3 different sizes. v1.3 is trained by fine-tuning Llama and has a context size of 2048 tokens. v1.5 is trained by fine-tuning Llama 2 and has a context size of 2048 tokens. v1.5-16k is trained by fine-tuning Llama 2 and has a context size of 16k tokens. All three variants are trained using conversations collected from ShareGPT.",
     installed: false,
-    derived: false,
+
     popularity: 36.3,
   },
   {
-    name:'Nomic',
-    image:"nomic-embed-text:latest",
-    parameters:"137M",
-    tags:["embeddings"],
-    size:0.274,
-    description:"A high-performing open embedding model with a large token context window: nomic-embed-text is a large context length text encoder that surpasses OpenAI text-embedding-ada-002 and text-embedding-3-small performance on short and long context tasks.",
-    installed:false,
-    derived:false,
-    popularity:75.1
-  }
+    name: "Nomic",
+    image: "nomic-embed-text:latest",
+    parameters: "137M",
+    tags: ["embeddings"],
+    size: 0.274,
+    description:
+      "A high-performing open embedding model with a large token context window: nomic-embed-text is a large context length text encoder that surpasses OpenAI text-embedding-ada-002 and text-embedding-3-small performance on short and long context tasks.",
+    installed: false,
+    derived: false,
+    popularity: 75.1,
+  },
 ];
 
 export const models = writable([]);

@@ -1,46 +1,37 @@
 import { initialModels } from "$lib/stores/models";
-import {fetchOllama} from "$lib/utils/ollamaClient";
+import { fetchOllama } from "$lib/utils/ollamaClient";
+
+const modelsService = {
+  async loadModels() {
+    let models = [...initialModels];
+    let companions = [];
+    try {
+      const { models: apiModels } = await fetchOllama("/api/tags", "GET");
+      const modelMap = models.reduce((dict, model) => ({ ...dict, [model.image]: model }), {});
+
+      apiModels.forEach((apiModel) => {
+        const model = modelMap[apiModel.model];
+        if (model) {
+          model.installed = true;
+        } else {
+          companions.push(apiModel);
+        }
+      });
+
+      return { models, companions };
+    } catch (error) {
+      console.error("Failed to load models:", error);
+      // Handle errors or return a default error state
+      return models.map(model => ({ ...model, error: "Failed to load data from Ollama." }));
+    }
+  },
+};
+
 /**
  * Load models from API and merge with initial models.
  * @type {import('./$types').LayoutServerLoad}
  */
 export async function load() {
-  // Create a deep copy of initialModels to avoid mutating the original array
-  let models = JSON.parse(JSON.stringify(initialModels));
-
-  try {
-    let { models: apiModels } = await fetchOllama("/api/tags", "GET") || []; // ollama.list();
-
-    if (apiModels.length === 0) {
-      return { props: { models } };
-    }
-
-    const modelMap = new Map(models.map((model) => [model.image, model]));
-
-    apiModels.forEach((apiModel) => {
-      let model = modelMap.get(apiModel.model);
-
-      if (model) {
-        model.installed = true;
-      } else {
-        const sizeGB = (apiModel.size / 1024 / 1024 / 1024).toFixed(2);
-        models.push({
-          name: apiModel.model,
-          image: apiModel.model,
-          parameters: apiModel.details.parameter_size,
-          size: sizeGB,
-          installed: true,
-          tags: ["custom"],
-          derived: true,
-          description: apiModel.details.description,
-        });
-      }
-    });
-
-    return { props: { models } };
-  } catch (error) {
-    console.error("Failed to load models:", error);
-    // Handle errors or return a default error state
-    return { props: { models: [], error: "Failed to load data from Ollama." } };
-  }
+  const {models, companions} = await modelsService.loadModels();
+  return { props: { models, companions } };
 }

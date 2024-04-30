@@ -16,7 +16,7 @@
       >
       <header class="flex justify-between items-center">
         <h1 class="items-center flex gap-3 text-xl font-semibold">
-          <Model class="w-6" /> Manage local models
+          <Model class="w-5" /> Manage local models
         </h1>
         <ModelStats />
       </header>

@@ -2,11 +2,7 @@
   import Sidebar from "$lib/components/Sidebar.svelte";
   import FileList from "$lib/components/files/FileList.svelte";
   import File from "$lib/components/icons/File.svelte";
-  /*
-  Get Chroma direct list of collections : not usefull right now
-  export let data;
-  let collections = data.collections;
-  */
+
 </script>
 
 <main class="flex">

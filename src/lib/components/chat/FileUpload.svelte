@@ -2,7 +2,7 @@
   import { page } from "$app/stores";
   import { models } from "$lib/stores/models";
   import { files } from "$lib/stores/files";
-  import File from "$lib/components/icons/File.svelte";
+  import Clipboard from "../icons/Clipboard.svelte";
   import Check from "../icons/Check.svelte";
 
   export let id;
@@ -97,9 +97,11 @@
     on:click|preventDefault={upload}
     class="w-8 h-8 rounded-full relative hover:bg-black-100 dark:hover:bg-black-500 transition-colors flex justify-center items-center"
   >
-    <File class="w-5" />
+    <Clipboard class="w-5" />
     {#if count > 0 && !$page.url.pathname.includes("chat")}
-      <span class="absolute -top-1 -right-1 bg-purple-600 text-white text-xs rounded-full w-4 h-4 flex justify-center items-center">
+      <span
+        class="absolute -top-1 -right-1 bg-purple-600 text-white text-xs rounded-full w-4 h-4 flex justify-center items-center"
+      >
         {count}
       </span>
     {/if}
