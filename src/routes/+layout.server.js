@@ -4,7 +4,7 @@ import {fetchOllama} from "$lib/utils/ollamaClient";
  * Load models from API and merge with initial models.
  * @type {import('./$types').LayoutServerLoad}
  */
-export async function load({fetch}) {
+export async function load() {
   // Create a deep copy of initialModels to avoid mutating the original array
   let models = JSON.parse(JSON.stringify(initialModels));
 
