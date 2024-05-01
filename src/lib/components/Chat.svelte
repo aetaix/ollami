@@ -4,6 +4,7 @@
   import { useChat } from "ai/svelte";
   import { history } from "$lib/stores/history";
   import { models } from "$lib/stores/models";
+  import {companions} from "$lib/stores/companions";
   import { files } from "$lib/stores/files";
   import { fullscreen, ollamaIsActivated } from "$lib/stores/states";
   import AssistantMessage from "./chat/AssistantMessage.svelte";
@@ -36,7 +37,7 @@
         // Set up all chat parameters
         chatModel = currentChat.model;
         collectionID = currentChat.id;
-        active = $models.find((model) => model.image === chatModel.image);
+        active = $models.find((model) => model.image === chatModel.image) || $companions.find((companion) => companion.model === chatModel.image);
 
         if ($files) {
           const files = JSON.parse(localStorage.getItem("files")) ?? [];

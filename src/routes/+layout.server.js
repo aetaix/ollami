@@ -4,7 +4,7 @@ import { fetchOllama } from "$lib/utils/ollamaClient";
 const modelsService = {
   async loadModels() {
     let models = [...initialModels];
-    let companions = [];
+    //let companions = [];
     try {
       const { models: apiModels } = await fetchOllama("/api/tags", "GET");
       const modelMap = models.reduce((dict, model) => ({ ...dict, [model.image]: model }), {});
@@ -13,12 +13,12 @@ const modelsService = {
         const model = modelMap[apiModel.model];
         if (model) {
           model.installed = true;
-        } else {
+        } /*else {
           companions.push(apiModel);
-        }
+        }*/
       });
 
-      return { models, companions };
+      return { models, /*companion*/ };
     } catch (error) {
       console.error("Failed to load models:", error);
       // Handle errors or return a default error state
@@ -33,5 +33,5 @@ const modelsService = {
  */
 export async function load() {
   const {models, companions} = await modelsService.loadModels();
-  return { props: { models, companions } };
+  return { props: { models, /*companions*/ } };
 }

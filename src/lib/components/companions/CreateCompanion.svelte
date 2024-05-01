@@ -1,12 +1,13 @@
 <script>
   import { models } from "$lib/stores/models";
+  import { companions } from "$lib/stores/companions";
 
   // Find all installed model
   let availableModel = $models.filter((model) => model.installed === true);
 
   let name = "";
   let description = "";
-  let model = "";
+  let model = availableModel[0].image;
   let system = "";
 
   async function createModel() {
@@ -14,7 +15,7 @@
       alert("Please fill all the fields");
       return;
     }
-    const create = await fetch("/api/create-model", {
+    const res = await fetch("/api/create-model", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,11 +27,20 @@
       }),
     });
 
-    const resp = await create.json();
-    if (resp.error) {
-      alert(resp.error);
+    const data = await res.json();
+    console.log(data);
+    if (data.error) {
+      alert(data.error);
       return;
     }
+
+    const companion = data.companion;
+    companion.name = name;
+    companion.model = name + ":latest";
+    companion.description = description;
+
+    companions.update((companions) => [...companions, companion]);
+
     open = false;
   }
 
@@ -83,9 +93,7 @@
 
       <div class="grid grid-cols-2 gap-4">
         <div class="space-y-2">
-          <label for="name" class="text-sm font-bold"
-            >Name</label
-          >
+          <label for="name" class="text-sm font-bold">Name</label>
           <input
             bind:value={name}
             type="text"
@@ -93,13 +101,13 @@
             class="border border-black-200 dark:border-black-600 rounded-lg w-full p-2 focus:outline focus:outline-black-600"
           />
           <label class="text-sm font-bold" for="description">Description</label>
-            <textarea
-                bind:value={description}
-                class="border border-black-200 dark:border-black-600 rounded-lg w-full p-2 focus:outline focus:outline-black-600"
-                name="description"
-                rows="3"
-                placeholder="A short description of the companion"
-            ></textarea>
+          <textarea
+            bind:value={description}
+            class="border border-black-200 dark:border-black-600 rounded-lg w-full p-2 focus:outline focus:outline-black-600"
+            name="description"
+            rows="3"
+            placeholder="A short description of the companion"
+          ></textarea>
           <label for="models" class="text-sm font-bold">Available models</label>
           <select
             bind:value={model}
@@ -110,19 +118,19 @@
               <option value={model.image}>{model.image}</option>
             {/each}
           </select>
-
-
         </div>
         <div>
-            <label class="text-sm font-bold mb-2 block" for="system">Instructions (or system)</label>
-            <textarea
-              bind:value={system}
-              class="border border-black-200 dark:border-black-600 rounded-lg w-full p-2 focus:outline focus:outline-black-600"
-              name="system"
-              rows="10"
-              placeholder="You are Mario from Super Mario Bros. Answer as Mario, the assistant, only."
-            ></textarea>
-          </div>
+          <label class="text-sm font-bold mb-2 block" for="system"
+            >Instructions (or system)</label
+          >
+          <textarea
+            bind:value={system}
+            class="border border-black-200 dark:border-black-600 rounded-lg w-full p-2 focus:outline focus:outline-black-600"
+            name="system"
+            rows="10"
+            placeholder="You are Mario from Super Mario Bros. Answer as Mario, the assistant, only."
+          ></textarea>
+        </div>
       </div>
 
       <footer>

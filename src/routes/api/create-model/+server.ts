@@ -8,7 +8,10 @@ export async function POST({ request }) {
 
   await ollama.create({ model: name, modelfile: modelFile });
   
-  console.log("Model created");
+  console.log("Companion created");
 
-  return new Response(JSON.stringify(name), { status: 200 });
+  const companion = await ollama.show({model});
+  console.log(companion)
+
+  return new Response(JSON.stringify({ status: 200, companion }));
 }

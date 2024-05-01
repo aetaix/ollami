@@ -12,7 +12,7 @@
     class="w-full max-w-lg mx-auto flex flex-col items-center text-center h-full justify-center"
   >
   {#if $currentModel}
-  <Logo class="w-12 text-black-700" />
+  <Logo class="w-10 text-black-700 dark:text-white" />
   <h1 class="text-3xl mt-5 mb-2">
     The Home of LLMs, on your computer.
   </h1>
