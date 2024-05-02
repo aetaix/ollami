@@ -3,6 +3,7 @@
   import { goto } from "$app/navigation";
   import { currentModel, models } from "$lib/stores/models";
   import ModelSize from "./ModelSize.svelte";
+  import Trash from "../icons/Trash.svelte";
 
   export let name = "";
   export let image = "";
@@ -84,7 +85,7 @@
         {#if !tags.includes("embeddings")}
           <button
             on:click={setCurrentModel}
-            class="border bg-green-500 border-green-300 text-white shadow px-2 py-1 rounded-md text-sm"
+            class="border bg-green-500 hover:bg-green border-green-300 transition-colors text-white shadow px-2 py-1 rounded-md text-sm"
           >
             Chat
           </button>
@@ -92,10 +93,11 @@
 
         <button
           on:click={deleteModel}
-          class="border border-black-200 dark:border-black-500 bg-white dark:bg-black-600 px-2 py-1 rounded-md text-sm"
+          class=" w-8 h-8 flex justify-center items-center rounded bg-black-100 hover:bg-black-200 transition-all"
         >
-          Delete
+        <Trash class="w-4" />
         </button>
+
       </div>
     {:else if loading}
       <div class="flex items-center gap-2">

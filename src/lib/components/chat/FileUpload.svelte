@@ -4,24 +4,18 @@
   import { files } from "$lib/stores/files";
   import Clipboard from "../icons/Clipboard.svelte";
   import Check from "../icons/Check.svelte";
+  import Tooltip from "./Tooltip.svelte";
 
   export let id;
 
+  let active =  $models.some( (model) => model.tags.includes("embeddings") && model.installed );
   let loading = false;
   let success = false;
   let count = 0;
   let inputFile;
 
   function upload() {
-    // If $models contains at least one model that have the tag "embeddings" and is instaled:true, then upload the file.
-    // Otherwise, do nothing.
-    if (
-      $models.some(
-        (model) => model.tags.includes("embeddings") && model.installed
-      )
-    ) {
-      inputFile.click();
-    }
+    inputFile.click();
   }
 
   // When inputFile changes, use the embedding api to save the file and embed it, then use the answer to properly update the local storage with te meta data
@@ -92,10 +86,19 @@
   >
     <Check />
   </div>
+{:else if !active}
+  <button
+    type="button"
+    class="text-black-300 group dark:text-black-600 dark:bg-black-800 bg-black-100 cursor-default
+w-8 h-8 rounded-full relative transition-colors flex justify-center items-center"
+  >
+    <Tooltip />
+    <Clipboard class="w-5" />
+  </button>
 {:else}
   <button
     on:click|preventDefault={upload}
-    class="w-8 h-8 rounded-full relative hover:bg-black-100 dark:hover:bg-black-500 transition-colors flex justify-center items-center"
+    class=" hover:bg-black-100 dark:hover:bg-black-500 w-8 h-8 rounded-full relative transition-colors flex justify-center items-center"
   >
     <Clipboard class="w-5" />
     {#if count > 0 && !$page.url.pathname.includes("chat")}
@@ -112,7 +115,7 @@
   bind:this={inputFile}
   type="file"
   id="file"
-  class="hidden"
+  class=" sr-only"
   accept=".pdf,.txt,.docx,.csv,.pptx"
   multiple
 />

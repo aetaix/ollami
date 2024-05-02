@@ -217,6 +217,7 @@ export let initialModels = [
     tags: ["text", "small", "performance"],
     size: 2.3,
     context: 128000,
+    icon: "microsoft.svg",
     description:
       "Phi-3 Mini is a 3.8B parameters, lightweight, state-of-the-art open model trained with the Phi-3 datasets that includes both synthetic data and the filtered publicly available websites data with a focus on high-quality and reasoning dense properties.",
     installed: false,
@@ -229,6 +230,7 @@ export let initialModels = [
     parameters: "2.7B",
     tags: ["text", "small", "performance"],
     size: 1.7,
+    icon: "microsoft.svg",
     description:
       "Phi-2 is a small language model capable of common-sense reasoning and language understanding. It showcases “state-of-the-art performance” among language models with less than 13 billion parameters.",
     installed: false,

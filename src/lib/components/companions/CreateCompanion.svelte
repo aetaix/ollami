@@ -15,13 +15,17 @@
       alert("Please fill all the fields");
       return;
     }
+
+    // Check name character to remove special characters like spaces, !, ; etc
+    const trimeddName = name.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+
     const res = await fetch("/api/create-model", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,
+        name:trimeddName,
         model,
         system,
       }),
@@ -36,10 +40,11 @@
 
     const companion = data.companion;
     companion.name = name;
-    companion.model = name + ":latest";
+    companion.model = trimeddName + ":latest";
     companion.description = description;
 
     companions.update((companions) => [...companions, companion]);
+    localStorage.setItem("companions", JSON.stringify($companions))
 
     open = false;
   }

@@ -20,10 +20,11 @@
     companions.update((models) =>
       models.filter((model) => model.model !== image)
     );
+    localStorage.setItem("companions", JSON.stringify($companions))
   }
 
   function setCurrentCompanion() {
-    currentModel.set({ name, image: model, description });
+    currentModel.set({ name, image: model, parameters:'', description });
     goto("/");
   }
 </script>
@@ -31,7 +32,7 @@
 <div
   class="flex group relative items-center justify-between hover:shadow transition-shadow p-4 pt-10 flex-col border border-black-200 dark:border-black-600 rounded-xl"
 >
-  <div class="rounded-full bg-black-100 w-12 h-12 mb-2"></div>
+
   <h2 class="text-lg font-semibold mb-2">{name}</h2>
   <span class=" bg-black-100 rounded p-1 text-sm block mb-4 text-black-700 font-mono">{model}</span>
   <p class="mb-4">{description}</p>
