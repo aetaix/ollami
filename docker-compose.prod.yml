@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  sveltekit-ts-static:
+    image: sveltekit-ts-static-build
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      target: deploy-static-svelte
+    ports:
+      - 5002:80
+
+  sveltekit-ts-node:
+    image: sveltekit-ts-node-build
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      target: deploy-node-svelte
+    ports:
+      - 5003:3000
+
+  chroma:
+    container_name: chroma
+    restart: always
+    image: chromadb/chroma
+    ports:
+      - 8000:8000

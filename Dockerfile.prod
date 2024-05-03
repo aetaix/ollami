@@ -1,0 +1,21 @@
+FROM node:18-alpine AS build
+
+WORKDIR /var/www/html
+COPY . .
+RUN npm install
+RUN npm run build
+
+FROM nginx:1.23.3-alpine-slim AS deploy-static-svelte
+
+WORKDIR /usr/share/nginx/html
+RUN rm -rf ./*
+COPY --from=build /var/www/html/build-static .
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+FROM node:18-alpine AS deploy-node-svelte
+
+WORKDIR /var/www/html
+RUN rm -rf ./*
+COPY --from=build /var/www/html/package.json .
+COPY --from=build /var/www/html/build-node .
+CMD ["node", "index.js"]

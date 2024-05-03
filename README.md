@@ -1,112 +1,122 @@
-# Ollami 🖐️
-> "Oh l'ami" - French for "Hi friend!"
 
-![Ollami](./screenshot.png)
 
-Ollami is a frontend application designed to interact with local Ollama models for text generation, reasoning, chat and more.
 
-**Why Use Ollami?** 💡
+## Docker
 
-- Save time and resources by running your favorite models directly on your machine.
-- Quickly access and interact with a wide range of models, available directly in the interface.
-- Seamlessly test and evaluate local model performance in a real-world application context.
+This skelton Docker Development and Production for SvelteKit using `Typescript` if you prefer using `Javascript` you can check this repo
+[sveltekit-js-docker](https://github.com/adityadees/sveltekit-js-docker)
 
-## How to install Ollama 🤝
+### Docker Dev and Prod
+- If you run docker dev, this action same like `npm run dev`
+- If you run docker prod, this action same like `npm run build`
+- for production build will have two image and container (static and node)
 
-Get up and running with large language models locally: [Ollama Website](https://ollama.com).
+  - If you don't have an image run this first
+  - this will build a docker image
+    - for development mode
+      ```make
+      make build 
+      ```
+    - for deployment production mode
+      ```make
+      make build-prod
+      ```
 
-### macOS 🍎 
+  - (if you already have an image run this or you can just run this if you don't have image, this will automate pull an image depedency)
+  - this will run the container
+    - for development mode
+      ```make
+      make up 
+      ```
+    - for deployment production mode
+      ```make
+      make up-prod
+      ```
 
-[Download Ollama for macOS](https://ollama.com/download/Ollama-darwin.zip)
+  - run this if you want to stop the container
+    - for development mode
+      ```make
+      make stop
+      ```
+    - for deployment production mode
+      ```make
+      make stop-prod
+      ```
 
-### Windows 🪟 (Preview)
+  - run this if you want to delete the container
+    - for development mode
+      ```make
+      make down
+      ```
+    - for deployment production mode
+      ```make
+      make down-prod
+      ```
 
-[Download Ollama for Windows](https://ollama.com/download/OllamaSetup.exe)
+### note
 
-### Linux 🐧 
-```bash
-curl -fsSL https://ollama.com/install.sh | sh
+make sure you know about the port
+
+rules : example `5001:5173`
+
+Left is your port
+
+Right is port inside docker
+
+For docker port I used default port
+
+```
+5173 : default vite port
+80 : default nginx port
+3000 : default node port
 ```
 
-### Install your first model (CLI) ⚡
+you can config port for yourself
 
-Open your favorite terminal, and run the following commands:
+example :
+if you want to change vite port 
+you can change this line `"dev": "vite dev --host"` inside  `package.json` to `"dev": "vite dev --host 0.0.0.0 --port 5005"` and don't forget to change others `5173` to `5005`
 
-```bash
-ollama run llama3:latest
-```
-That's it! Your first model is up and running!
 
-## Install Ollami 🔧
+------------
 
-### With Docker 🐳
 
-> [!NOTE] 
-> This guide assumes that you have Docker Desktop installed locally. If not please [install Docker](https://docs.docker.com/get-docker/)
+# create-svelte
 
-Clone the repository with git to your local machine development folder using the following command: 
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-```bash
-git clone https://github.com/aetaix/ollami.git ollami
-cd ollami
-```
+## Creating a project
 
-Make sure Docker Desktop is open, then run the following command:
+If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
-docker compose up -d
-```
-Go to [localhost:5050](http://localhost:5050) to access Ollami!
+# create a new project in the current directory
+npm create svelte@latest
 
-### With NPM (Developpers only) 🧰
-
-> [!NOTE] 
-> This guide assumes that you have installed the latest version of Node.js and npm. If not : [Download Node.js (Node.js + npm)](https://nodejs.org/en/download/)
-
-Clone the repository to your local machine development folder using the following command: 
-
-```bash
-git clone https://github.com/aetaix/ollami.git ollami
-cd ollami
+# create a new project in my-app
+npm create svelte@latest my-app
 ```
 
-Install packages and start the app:
+## Developing
 
-```bash
-npm install
-```
-
-Launch the app:
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
 npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-> [!TIP]
-> No need to add .env variable, the app will use the default Ollama server locally started while using the `ollama run` command. By default the server is running on `http://127.0.0.1:11434`
+## Building
 
-#### Explore Available Models
+To create a production version of your app:
 
-Discover an extensive array of models at [ollama.com/library](https://ollama.com/library "ollama model library")
+```bash
+npm run build
+```
 
-Here are some example models that can be downloaded:
+You can preview the production build with `npm run preview`.
 
-| Model              | Parameters | Size  | Download                       |
-| ------------------ | ---------- | ----- | ------------------------------ |
-| Llama 3            | 7B         | 3.8GB | `ollama run llama3`            |
-| Mistral            | 7B         | 4.1GB | `ollama run mistral`           |
-| Phi-3              | 3.8B       | 2.3GB | `ollama run phi3`               |
-| Neural Chat        | 7B         | 4.1GB | `ollama run neural-chat`       |
-| Starling           | 7B         | 4.1GB | `ollama run starling-lm`       |
-| Code Llama         | 7B         | 3.8GB | `ollama run codellama`         |
-| Llama 2 Uncensored | 7B         | 3.8GB | `ollama run llama2-uncensored` |
-| Llama 2 13B        | 13B        | 7.3GB | `ollama run llama2:13b`        |
-| Llama 2 70B        | 70B        | 39GB  | `ollama run llama2:70b`        |
-| Orca Mini          | 3B         | 1.9GB | `ollama run orca-mini`         |
-| Vicuna             | 7B         | 3.8GB | `ollama run vicuna`            |
-| LLaVA              | 7B         | 4.5GB | `ollama run llava`             |
-| Gemma              | 2B         | 1.4GB | `ollama run gemma:2b`          |
-| Gemma              | 7B         | 4.8GB | `ollama run gemma:7b`          |
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
-> [!TIP]  
-> You should have at least 8 GB of RAM available to run the 7B models, 16 GB to run the 13B models, and 32 GB to run the 33B models.

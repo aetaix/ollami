@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  ollami:
+    image: ollami-dev
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5050:5173"
+    volumes:
+      - ./src:/var/www/html/src
+      - ./static:/var/www/html/static
+      - ./vite.config.ts:/var/www/html/vite.config.ts
+      - ./postcss.config.js:/var/www/html/postcss.config.js
+      - ./tailwind.config.js:/var/www/html/tailwind.config.js
+      - ./tsconfig.json:/var/www/html/tsconfig.json
+      - ./svelte.config.js:/var/www/html/svelte.config.js
+    command: npm run dev
+    environment:
+      - PORT=5173
+      - HOST=0.0.0.0
+
+  chroma:
+    container_name: chroma
+    restart: always
+    image: chromadb/chroma
+    ports:
+      - 8000:8000
