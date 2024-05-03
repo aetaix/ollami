@@ -19,6 +19,7 @@ export async function POST({ request }) {
     const image = formData.get("image") as string;
     const id = formData.get("id") as string | undefined;
     embeddings.model = image;
+
     const collectionName = "collection-" + id;
     const vectorStore = new Chroma(embeddings, {
       collectionName,
