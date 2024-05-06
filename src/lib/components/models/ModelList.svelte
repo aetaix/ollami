@@ -35,7 +35,7 @@
     $models
       ?.filter(
         (model) =>
-          model.name.toLowerCase().includes(search.toLowerCase()) &&
+            model.name.toLowerCase().replace(/\s/g, '').includes(search.toLowerCase().replace(/\s/g, '')) &&
           (filters.tags ? model.tags?.includes(filters.tags) : true) &&
           (filters.installed ? model.installed : true)
       )

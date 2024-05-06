@@ -364,7 +364,7 @@ export let initialModels = [
     popularity: 36.3,
   },
   {
-    name: "Nomic",
+    name: "Nomic Embed Text",
     image: "nomic-embed-text:latest",
     parameters: "137M",
     tags: ["embeddings"],
