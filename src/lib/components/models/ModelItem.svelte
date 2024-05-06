@@ -39,10 +39,10 @@
 		loading = true;
 	
 		// Add the model to the installation queue
-		if (browser) {
-			const queue = JSON.parse(localStorage.getItem('queue') || '[]');
-			localStorage.setItem('queue', JSON.stringify([...queue, image]));
-		}
+		const queue = JSON.parse(localStorage.getItem('queue') || '[]');
+
+		localStorage.setItem('queue', JSON.stringify([...queue, image]));
+		
 		const response = await fetch('/api/pull-model', {
 			method: 'POST',
 			headers: {
@@ -51,7 +51,11 @@
 			body: JSON.stringify({ image })
 		});
 
-		console.log(response)
+		console.log(response);
+		loading = false;
+		installed = true;
+		localStorage.setItem('queue', JSON.stringify(queue.filter((item) => item !== image))
+		);
 		/*
 		const reader = response.body.getReader();
 		console.log(reader);
@@ -73,7 +77,12 @@
 			},
 			body: JSON.stringify({ image })
 		});
-		models.update((models) => models.filter((model) => model.image !== image));
+		models.update((models) => models.map((model) => {
+			if (model.image === image) {
+				model.installed = false;
+			}
+			return model;
+		}));
 	}
 </script>
 
