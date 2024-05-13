@@ -21,7 +21,7 @@
   }
 
   async function deleteCollection(id, name) {
-    fetch("api/chroma/delete", {
+    fetch("api/files/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

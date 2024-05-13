@@ -40,7 +40,7 @@
     );
 
     try {
-      fetch("/api/embedding", {
+      fetch("/api/files/load", {
         method: "POST",
         body: formData,
       })

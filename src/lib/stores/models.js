@@ -14,7 +14,7 @@ export let initialModels = [
       Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
     installed: false,
 
-    popularity: 490.9,
+    popularity: 1200,
   },
   {
     name: "Llama 2",
@@ -62,12 +62,13 @@ export let initialModels = [
 
     popularity: 621.4,
   },
+  
   {
     name: "Mixtral",
-    image: "mixtral:8x7b",
+    image: "mixtral:latest",
     icon: "mistral.svg",
     parameters: "8x7B",
-    context: 32000,
+    context: 47000,
     size: 26,
     tags: ["chat", "text", "reasoning"],
     description: `The Mixtral-8x7B Large Language Model (LLM) is a pretrained generative Sparse Mixture of Experts. It outperforms Llama 2 70B on many benchmarks.
@@ -75,7 +76,7 @@ export let initialModels = [
     As of December 2023, it is the strongest open-weight model with a permissive license and the best model overall regarding cost/performance trade-offs.`,
     installed: false,
 
-    popularity: 177,
+    popularity: 230.4,
   },
   {
     name: "Command R",
@@ -222,7 +223,7 @@ export let initialModels = [
       "Phi-3 Mini is a 3.8B parameters, lightweight, state-of-the-art open model trained with the Phi-3 datasets that includes both synthetic data and the filtered publicly available websites data with a focus on high-quality and reasoning dense properties.",
     installed: false,
 
-    popularity: 43.1,
+    popularity: 164.3,
   },
   {
     name: "Phi-2",
@@ -373,7 +374,7 @@ export let initialModels = [
       "A high-performing open embedding model with a large token context window: nomic-embed-text is a large context length text encoder that surpasses OpenAI text-embedding-ada-002 and text-embedding-3-small performance on short and long context tasks.",
     installed: false,
     derived: false,
-    popularity: 75.1,
+    popularity: 103.4,
   },
 ];
 

@@ -43,7 +43,7 @@
 
 		localStorage.setItem('queue', JSON.stringify([...queue, image]));
 		
-		const response = await fetch('/api/pull-model', {
+		const response = await fetch('/api/models/pull', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -70,7 +70,7 @@
 	}
 
 	async function deleteModel() {
-		await fetch('/api/delete-model', {
+		await fetch('/api/models/delete', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

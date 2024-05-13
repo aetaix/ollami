@@ -10,7 +10,7 @@
         JSON.stringify([...queue, "nomic-embed-text:latest"])
       );
     }
-    await fetch("/api/pull-model", {
+    await fetch("/api/models/pull", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -10,7 +10,7 @@
   export let parameters = "";
 
   async function deleteCompanion() {
-    await fetch("/api/delete-model", {
+    await fetch("/api/models/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -73,7 +73,7 @@
 
   async function renameChat(chat) {
     // generate a title for the chat fetching /api/rename-chat
-    const response = await fetch("/api/rename-chat", {
+    const response = await fetch("/api/chat/rename", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

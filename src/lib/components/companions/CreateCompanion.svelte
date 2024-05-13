@@ -19,7 +19,7 @@
     // Check name character to remove special characters like spaces, !, ; etc
     const trimeddName = name.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
 
-    const res = await fetch("/api/create-model", {
+    const res = await fetch("/api/models/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
