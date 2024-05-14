@@ -1,11 +1,11 @@
 import { initialModels } from '$lib/stores/models';
-import { fetchOllama } from '$lib/utils/ollamaClient';
+import { ollamaJS } from '$lib/utils/ollamaClient';
 
 export const prerender = true;
 
 const modelsService = {
 	async loadModels() {
-		const { models: apiModels } = await fetchOllama('/api/tags', 'GET');
+		const { models: apiModels } = await ollamaJS.list();
 		const models = [...initialModels];
 		try {
 			// compare models with apiModels and set the ones that are common to instaled=true

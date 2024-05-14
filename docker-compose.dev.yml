@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     ports:
-      - "5050:5173"
+      - 5050:5173
     volumes:
       - ./src:/var/www/html/src
       - ./static:/var/www/html/static
@@ -20,6 +20,8 @@ services:
     environment:
       - PORT=5173
       - HOST=0.0.0.0
+      - OLLAMA_API_URL=http://host.docker.internal:11434
+      - CHROMA_API_URL=http://host.docker.internal:8000
 
   chroma:
     container_name: chroma

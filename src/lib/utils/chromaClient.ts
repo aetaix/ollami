@@ -1,10 +1,24 @@
-import { ChromaClient } from "chromadb";
+import { ChromaClient } from 'chromadb';
+import { Chroma } from '@langchain/community/vectorstores/chroma';
+import { type OllamaEmbeddings } from '@langchain/community/embeddings/ollama';
+import { env } from '$env/dynamic/private'
 
-const url =
-  process.env.VITE_APP_ENV === "dev"
-    ? "http://localhost:8000"
-    : "http://host.docker.internal:8000";
+let url = env.CHROMA_API_URL || '';
 
 export const chroma = new ChromaClient({
-  path: url,
+	path: url
 });
+
+export const newChromaVectorStore = (model: OllamaEmbeddings, name: string) => {
+	return new Chroma(model, {
+		collectionName: name,
+		url
+	});
+};
+
+export const existingChromaVectorStore = async (model: OllamaEmbeddings, name: string) => {
+	return Chroma.fromExistingCollection(model, {
+		collectionName: name,
+		url
+	});
+};

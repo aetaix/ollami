@@ -1,4 +1,4 @@
-import { ollama } from '$lib/utils/ollamaClient';
+import { ollamaJS } from '$lib/utils/ollamaClient';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
@@ -8,7 +8,7 @@ export async function POST({ request }) {
 		console.log('Pulling', image);
 
 		// const pulledModel: AsyncGenerator<ProgressResponse, any, unknown>
-		const pulledModel = await ollama.pull({
+		const pulledModel = await ollamaJS.pull({
 			model: image,
 			stream: true
 		});
