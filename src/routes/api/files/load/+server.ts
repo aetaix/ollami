@@ -5,21 +5,28 @@ import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { DocxLoader } from 'langchain/document_loaders/fs/docx';
 import { PPTXLoader } from 'langchain/document_loaders/fs/pptx';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
 	try {
 		const formData = await request.formData();
 		const files = formData.getAll('files') as Blob[];
+		const fileName = formData.get('fileName') as string;
 		const image = formData.get('image') as string;
-		const id = formData.get('id') as string | undefined;
+	
 		ollamaEmbedding.model = image;
+
+		const id = Math.random().toString(36).substring(7);
 
 		const collectionName = 'collection-' + id;
 		const vectorStore = newChromaVectorStore(ollamaEmbedding, collectionName);
 
-		let ids = [] as string[];
-
+		let collection = {
+			name: collectionName as string,
+			files: [] as any[]
+		};
+	
 		await Promise.all(
 			files.map(async (file) => {
 				let loader = null;
@@ -49,18 +56,36 @@ export async function POST({ request }) {
 					return new Response(JSON.stringify({ error: 'Invalid file type', status: 400 }));
 				}
 				const doc = await loader.load();
-				const id = await vectorStore.addDocuments(doc);
-				id.forEach((id) => {
-					ids.push(id);
+
+				const splitter = new RecursiveCharacterTextSplitter({
+					chunkSize: 333,
+					chunkOverlap: 10
 				});
+			
+				const chunkHeader = `FILE NAME: ${fileName.replace(/_|-|\.pdf/g, ' ')}`;
+			
+				const docChunk = await splitter.splitDocuments(doc, {
+					chunkHeader,
+					appendChunkOverlapHeader: true
+				});
+
+				const registeredChunk = await vectorStore.addDocuments(docChunk);
+
+				console.log('registeredChunk', registeredChunk);
+				
+				collection.files.push({
+					name: fileName,
+					id: registeredChunk[0],
+					type: file.type,
+					chunks: registeredChunk.length
+				})
 			})
 		);
 
 		return new Response(
 			JSON.stringify({
 				message: 'Successfull embedding',
-				ids,
-				collection: collectionName,
+				collection,
 				status: 200
 			})
 		);

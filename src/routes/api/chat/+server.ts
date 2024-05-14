@@ -1,6 +1,9 @@
 import { ollamaAISDK } from '$lib/utils/ollamaClient';
 import { streamText, StreamingTextResponse } from 'ai';
-import { naiveRAG } from './retrieval/naiveRAG';
+//import { naiveRAG } from '$lib/utils/retrieval/naiveRAG';
+import { contextualCompression } from '$lib/utils/retrieval/contextualCompression.js';
+
+const system = `You are a helpfull assistant answering the user queries, questions, and helping in their tasks. You always answer in the tongue of the user, and you are always polite and helpful. Sometimes the user will passe a <context /> tag that you can use the refine your answer and provide the most accurate information.`;
 
 export async function POST({ request }) {
 	const { messages, model, rag } = await request.json();
@@ -8,15 +11,20 @@ export async function POST({ request }) {
 	const ollama = ollamaAISDK(model.image);
 
 	if (rag.state) {
+		console.log('rag')
 		const lastMessage = messages[messages.length - 1];
-		const prompt = await naiveRAG(lastMessage, rag);
-		lastMessage.message = prompt;
+		//const prompt = await naiveRAG(lastMessage.content, rag.collection);
+		const prompt = await contextualCompression(lastMessage.content, messages, rag.collection, model.image);
+		console.log('prompt', prompt);
+		lastMessage.content = prompt;
 	}
+
 
 	try {
 		const result = await streamText({
 			model: ollama,
-			temperature: 0.63,
+			temperature: 0.75,
+			system,
 			messages
 		});
 

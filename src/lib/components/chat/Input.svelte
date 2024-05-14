@@ -3,12 +3,12 @@
   import { modal } from "$lib/stores/prompts";
   import PromptModal from "./PromptModal.svelte";
   import { createEventDispatcher } from "svelte";
-  import FileUpload from "./FileUpload.svelte";
+  import Upload from "./Upload.svelte";
 
   const dispatch = createEventDispatcher();
   export let value = "";
   export let writing = false;
-  export let id;
+
 
   let textarea = null;
   let promptModal;
@@ -80,7 +80,7 @@
     on:submit|preventDefault={submit}
     class="w-full max-w-[700px] mx-auto gap-2 flex items-center border shadow-lg bg-white dark:bg-black-700 border-black-200 dark:border-black-600 rounded-xl pl-4 relative"
   >
-    <FileUpload {id}/>
+    <Upload />
 
     <textarea
       type="text"

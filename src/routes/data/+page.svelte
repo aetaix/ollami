@@ -1,6 +1,6 @@
 <script>
   import Sidebar from "$lib/components/Sidebar.svelte";
-  import FileList from "$lib/components/files/FileList.svelte";
+  import Collections from "$lib/components/collections/Collections.svelte";
   import File from "$lib/components/icons/File.svelte";
 
 </script>
@@ -19,11 +19,11 @@
         <h1 class="items-center flex gap-3 text-xl font-semibold">
 
           <File class="w-5" />
-          Manage Files
+          Data
         </h1>
       </header>
 
-      <FileList />
+      <Collections />
     </div>
   </div>
 </main>

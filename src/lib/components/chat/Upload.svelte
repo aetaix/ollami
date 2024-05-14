@@ -1,12 +1,13 @@
 <script>
   import { page } from "$app/stores";
   import { models } from "$lib/stores/models";
-  import { files } from "$lib/stores/files";
+  import {collections} from "$lib/stores/collections";
   import Clipboard from "../icons/Clipboard.svelte";
   import Check from "../icons/Check.svelte";
   import Tooltip from "./Tooltip.svelte";
+	import { d } from "svelte-highlight/languages";
 
-  export let id;
+
 
   let active =  $models.some( (model) => model.tags.includes("embeddings") && model.installed );
   let loading = false;
@@ -26,13 +27,12 @@
     count = inputFiles.length;
     //const file = inputFile.files[0];
     const formData = new FormData();
+
     for (let i = 0; i < inputFiles.length; i++) {
       formData.append("files", inputFiles[i]);
+      formData.append("fileName", inputFiles[i].name);
     }
 
-    console.log(id);
-
-    formData.append("id", id);
     formData.append(
       "image",
       $models.filter((m) => m.tags.includes("embeddings") && m.installed)[0]
@@ -46,24 +46,14 @@
       })
         .then((res) => res.json())
         .then(async (data) => {
-          console.log(data);
-          // update files for each data.ids
-          for (let i = 0; i < data.ids.length; i++) {
-            files.update((f) => [
-              ...f,
-              {
-                id: data.ids[i],
-                chat: id,
-                name: inputFiles[0].name + i,
-                collection: data.collection,
-                type: inputFiles[0].type,
-                size: inputFiles[0].size / data.ids.length,
-                created_at: new Date().toISOString(),
-              },
-            ]);
-          }
-          // Update local storage files with the new file
-          localStorage.setItem("files", JSON.stringify($files));
+          console.log(data.collection);
+          data.collection.created_at = new Date().toISOString();
+          collections.update((c) => [
+            ...c,
+            data.collection,
+          ]);
+          localStorage.setItem("collections", JSON.stringify($collections));
+          
           loading = false;
           success = true;
           setTimeout(() => {

@@ -36,7 +36,7 @@
       Models
     </SidebarItem>
 
-    <SidebarItem url="files">
+    <SidebarItem url="data">
       <File class="w-4" />
       Files
     </SidebarItem>
