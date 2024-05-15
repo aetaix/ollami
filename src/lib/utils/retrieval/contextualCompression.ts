@@ -12,7 +12,7 @@ export const contextualCompression = async (
 	const llm = ollamaLangChain(model);
 	const baseCompressor = LLMChainExtractor.fromLLM(llm);
 
-	const vectorStore = await existingChromaVectorStore(ollamaEmbedding, 'collection-' + collection);
+	const vectorStore = await existingChromaVectorStore(ollamaEmbedding, collection);
 
 	const retriever = new ContextualCompressionRetriever({
 		baseCompressor,

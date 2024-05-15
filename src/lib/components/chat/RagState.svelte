@@ -1,15 +1,15 @@
 <script>
   import { browser } from "$app/environment";
-  import { files } from "$lib/stores/files";
-  export let id = "";
+  import { collections } from "$lib/stores/collections";
+  export let name= "";
   let count = 0;
 
   $: {
-    if (browser && $files) {
+    if (browser && $collections) {
       // find the files in localstroage that have the chat id
-      const files = JSON.parse(localStorage.getItem("files"));
-      const chatFiles = files.filter((f) => f.chat === id);
-      count = chatFiles.length;
+      const collections = JSON.parse(localStorage.getItem("collections"));
+      const collection = collections.find((col) => col.name === name);
+      count = collection.files.length;
     }
   }
 </script>

@@ -80,7 +80,7 @@
     on:submit|preventDefault={submit}
     class="w-full max-w-[700px] mx-auto gap-2 flex items-center border shadow-lg bg-white dark:bg-black-700 border-black-200 dark:border-black-600 rounded-xl pl-4 relative"
   >
-    <Upload />
+    <Upload on:uploaded />
 
     <textarea
       type="text"

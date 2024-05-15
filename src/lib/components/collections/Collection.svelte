@@ -1,19 +1,23 @@
 <script>
+	import { browser } from '$app/environment';
 	import { collections } from '$lib/stores/collections';
-	import { c } from 'svelte-highlight/languages';
+	import Trash from '../icons/Trash.svelte';
+	import Url from '../icons/Url.svelte';
 	export let collection = {};
 
-	// function to round file size to ko, mo or go
-	function formatBytes(bytes, decimals = 2) {
-		if (bytes === 0) return '0 Bytes';
+	// Check the localstorage chats and find the one that have this collection name and add them to usedBy array
 
-		const k = 1024;
-		const dm = decimals < 0 ? 0 : decimals;
-		const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+	let usedBy = [];
+	if (browser) {
+		const chats = JSON.parse(localStorage.getItem('chats')) || [];
 
-		const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-		return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+		chats.forEach((chat) => {
+			// chat.collections is an array, check if the collection name is in the array
+			if (chat.collections?.includes(collection.name)) {
+				usedBy.push(chat.id);
+				console.log(usedBy);
+			}
+		});
 	}
 
 	async function deleteCollection(name) {
@@ -27,11 +31,6 @@
 
 		collections.update((c) => c.filter((col) => col.name !== name));
 		localStorage.setItem('collections', JSON.stringify($collections));
-
-		/*
-		files.update((f) => f.filter((file) => file.id !== id));
-		localStorage.setItem('files', JSON.stringify($files));
-    */
 	}
 
 	async function deleteFile(id, name) {
@@ -56,54 +55,61 @@
 		}
 
 		localStorage.setItem('collections', JSON.stringify($collections));
-
-		/*
-
-    files.update((f) => f.filter((file) => file.id !== id));
-    localStorage.setItem('files', JSON.stringify($files));
-    */
 	}
 </script>
 
-<div class="flex gap-2 items-center py-4 border-b">
-	<div class="w-1/5">
-		<h3 class="font-bold">{collection.name}</h3>
-	</div>
-	<div class="w-1/5">
-		<h3 class="font-bold">{collection.files.length}</h3>
-	</div>
-	<div class="w-1/5">
-		<h3 class="font-bold">{collection.created_at}</h3>
-	</div>
-	<div class="w-1/5">
-		<button
-			class="bg-red-500 px-2 py-1 rounded-lg"
-			on:click={() => deleteCollection(collection.name)}
-		>
-			Delete
-		</button>
-	</div>
-</div>
-<div>
-	{#each collection.files as file}
-		<div class="flex gap-2 items-center py-4 border-b">
-			<div class="w-1/5">
-				<h3 class="font-bold">{file.name}</h3>
+<div id="{collection.name}" class="bg-white rounded-xl mb-4 shadow-sm border border-black-200">
+	<header class="flex gap-4 items-center justify-between mb-4 p-4 pb-0">
+		<div class="flex gap-2 items-center">
+			<div class="">
+				<h2 class="font-bold">{collection.name}</h2>
 			</div>
-			<div class="w-2/5">
-				<h3 class="">{file.id}</h3>
+			<div class="">
+				<span class="p-2 text-sm rounded bg-purple-100">{collection.files.length} File</span>
 			</div>
-			<div class="w-1/5">
-				<h3 class="font-bold">{file.chunks}</h3>
-			</div>
-			<div class="w-1/5">
-				<button
-					class="bg-red-500 px-2 py-1 rounded-lg"
-					on:click={() => deleteFile(file.id, collection.name)}
-				>
-					Delete
-				</button>
-			</div>
+	
 		</div>
-	{/each}
+		<button
+			on:click={() => deleteCollection(collection.name)}
+			class=" w-8 h-8 flex justify-center items-center rounded bg-black-100 hover:bg-black-200 transition-all"
+		>
+			<Trash class="w-4" />
+		</button>
+	</header>
+	<div class="px-4">
+		<div class="ml-2 pl-2 border-l border-black-200">
+			{#each collection.files as file}
+				<div
+					class="group flex justify-between gap-4 items-center p-2 hover:bg-black-100 transition-colors border-b border-black-200 hover:rounded-lg hover:border-transparent text-sm mb-2 last:border-transparent"
+				>
+					<div class="flex items-center gap-2">
+						<div class="">
+							<h3 class="font-semibold bg-white shadow rounded border border-black-200 p-1">
+								{file.name}
+							</h3>
+						</div>
+						<div class="">
+							<span class="p-2 text-sm rounded bg-black-100">{file.chunks} Chunks</span>
+						</div>
+					</div>
+					<button
+						on:click={() => deleteFile(file.id, collection.name)}
+						class=" w-8 h-8 opacity-0 group-hover:opacity-100 flex justify-center items-center rounded bg-black-100 hover:bg-black-200 transition-all"
+					>
+						<Trash class="w-4" />
+					</button>
+				</div>
+			{/each}
+		</div>
+	</div>
+	
+	<footer class="p-4 border-t border-black-200 ">
+
+			<p class="text-sm mb-2">Context for</p>
+			<div class="flex gap-2 items-center">
+			{#each usedBy as id}
+				<a href={`/chat/${id}`} class="text-sm flex gap-1 items-center  p-2 shadow rounded bg-white border border-black-200">{id} <Url class="w-4" /> </a>
+			{/each}
+		</div>
+	</footer>
 </div>
