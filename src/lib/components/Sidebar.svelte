@@ -38,7 +38,7 @@
 
     <SidebarItem url="data">
       <File class="w-4" />
-      Files
+      Data
     </SidebarItem>
   </div>
   <div class="absolute bottom-4 left-4 right-1">

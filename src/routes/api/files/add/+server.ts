@@ -1,5 +1,5 @@
 import { ollamaEmbedding } from '$lib/utils/ollamaClient';
-import { newChromaVectorStore } from '$lib/utils/chromaClient';
+import { existingChromaVectorStore } from '$lib/utils/chromaClient';
 import { CSVLoader } from 'langchain/document_loaders/fs/csv';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { DocxLoader } from 'langchain/document_loaders/fs/docx';
@@ -14,20 +14,16 @@ export async function POST({ request }) {
 		const files = formData.getAll('files') as Blob[];
 		const fileName = formData.get('fileName') as string;
 		const image = formData.get('image') as string;
+		const name = formData.get('name') as string;
 
 		ollamaEmbedding.model = image;
 
-		const id = Math.random().toString(36).substring(7);
-
-		const collectionName = `collection-${id}`;
+		const collectionName = name;
 		console.log('collectionName', collectionName);
 
-		const vectorStore = newChromaVectorStore(ollamaEmbedding, collectionName);
+		const vectorStore = await existingChromaVectorStore(ollamaEmbedding, collectionName);
 
-		let collection = {
-			name: collectionName as string,
-			files: [] as any[]
-		};
+		let newFiles = [] as any[];
 
 		await Promise.all(
 			files.map(async (file) => {
@@ -75,7 +71,7 @@ export async function POST({ request }) {
 
 				console.log('registeredChunk', registeredChunk);
 
-				collection.files.push({
+				newFiles.push({
 					name: fileName,
 					id: registeredChunk[0],
 					type: file.type,
@@ -87,7 +83,7 @@ export async function POST({ request }) {
 		return new Response(
 			JSON.stringify({
 				message: 'Successfull embedding',
-				collection,
+				newFiles,
 				status: 200
 			})
 		);

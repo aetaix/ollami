@@ -7,7 +7,7 @@
 </script>
 
 <div
-  class="absolute group top-1/2 -translate-y-1/2 {$fullscreen ? 'left-2' : 'left-2'}"
+  class="absolute group top-1/2 -translate-y-1/2 left-0"
 >
   <button
     on:click={toggleFullscreen}
@@ -17,10 +17,10 @@
       : ''}"
   >
     <div
-      class="h-3 w-1 rounded-full bg-black-500 dark:bg-white group-hover:rotate-[15deg] transition-all translate-y-[0.15rem]"
+      class="h-3 w-1 rounded-full bg-black-400 dark:bg-white group-hover:rotate-[15deg] transition-all translate-y-[0.15rem]"
     ></div>
     <div
-      class="h-3 w-1 rounded-full bg-black-500 dark:bg-white group-hover:rotate-[-15deg] transition-all translate-y-[-0.15rem]"
+      class="h-3 w-1 rounded-full bg-black-400 dark:bg-white group-hover:rotate-[-15deg] transition-all translate-y-[-0.15rem]"
     ></div>
    
   </button>

@@ -179,7 +179,7 @@
 	>
 		<div class="flex gap-2 absolute top-4 left-4 items-center">
 			<span class=" bg-black-100 dark:bg-black-600 px-3 font-mono text-xs py-2 rounded-md"
-				>{chatModel.image}</span
+				>{chatModel.image.split(':')[0]}</span
 			>
 			{#if rag}
 				<RagState name={collectionName} />

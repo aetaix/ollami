@@ -3,7 +3,7 @@
 	import { browser } from '$app/environment';
 	import Collection from './Collection.svelte';
 
-  console.log($collections.length);
+	console.log($collections.length);
 
 	if ($collections.length === 0 && browser && localStorage.getItem('collections')) {
 		collections.set(JSON.parse(localStorage.getItem('collections')));
@@ -12,22 +12,29 @@
 
 {#if $collections.length === 0}
 	<div
-		class="flex justify-center flex-col items-center h-96 border border-black-200 dark:border-black-600 shadow dark:bg-black-900 rounded-xl"
+		class="flex justify-center flex-grow flex-col items-center  border bg-black-50 border-black-200 dark:border-black-600 shadow-sm dark:bg-black-900 rounded-xl"
 	>
-		<p class="text-black-500 dark:text-black-200 mb-2">No data found</p>
-		<a
-			href="/"
-			class="border flex gap-2 items-center border-black-200 z-10 hover:bg-black-50 transition-colors text-black bg-white shadow px-4 py-2 rounded-lg"
-		>
-			Start a RAG chat</a
-		>
+	<div class="w-full flex-grow flex justify-center items-center">
+		<div class="bg-white dark:bg-black-700 max-w-lg mx-auto shadow-lg rounded-xl border border-black-200 dark:border-black-600">
+		  <header class="h-[240px]">
+			<img src="/img/db.png" class="w-full h-full object-cover rounded-t-xl" alt="">
+		  </header>
+		  <div class="p-4">
+			<h2 class="font-semibold text-lg">Data context for your chats</h2>
+			<p>Data collection help your chat give more relevant answer to your queries: submit and put your data in context to extend your model capacities beyond its own knowledge.</p>
+		  </div>
+		  <footer class="border-t border-black-200 dark:border-black-600 p-4 flex items-center justify-end">
+			<button class="bg-black hover:bg-black-800 rounded-lg px-3 py-2 text-white">
+			  Create your first data collection
+			</button>
+		  </footer>
+		</div>
+	  </div>
 	</div>
 {:else}
-<div>
-  {#each $collections as collection}
-				<Collection
-          {collection}
-				/>
-			{/each}
-</div>
+	<div class="">
+		{#each $collections as collection}
+			<Collection {collection} />
+		{/each}
+	</div>
 {/if}
