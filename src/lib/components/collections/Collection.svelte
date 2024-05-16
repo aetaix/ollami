@@ -22,7 +22,7 @@
 			// chat.collections is an array, check if the collection name is in the array
 			if (chat.collections?.includes(collection.name)) {
 				usedBy.push(chat.id);
-				console.log(usedBy);
+		
 			}
 		});
 	}

@@ -2,11 +2,13 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import { useChat } from 'ai/svelte';
+	// Stores
 	import { history } from '$lib/stores/history';
 	import { models } from '$lib/stores/models';
 	import { companions } from '$lib/stores/companions';
 	import { collections } from '$lib/stores/collections';
 	import { fullscreen, ollamaIsActivated } from '$lib/stores/states';
+	// Components
 	import AssistantMessage from './chat/AssistantMessage.svelte';
 	import UserMessage from './chat/UserMessage.svelte';
 	import Tooglefullsize from './chat/Tooglefullsize.svelte';
@@ -14,6 +16,7 @@
 	import LoadingModel from './chat/LoadingModel.svelte';
 	import RagState from './chat/RagState.svelte';
 	import Locker from './icons/Locker.svelte';
+	import SidebarData from './chat/SidebarData.svelte';
 
 	let chatModel = '';
 	let active = false;
@@ -77,7 +80,7 @@
 
 		if (currentChat?.collections?.length > 0) {
 			// Get the collection if it exists in the collections store
-			const collection = $collections.find((col) => col.name === currentChat.collections[0]);
+			const collection = $collections.find((col) => currentChat.collections.includes(col.name));
 
 			if (collection && collection.files.length > 0) {
 				// Set the collection name and enable rag
@@ -86,6 +89,8 @@
 			} else {
 				rag = false;
 			}
+		} else {
+			rag = false;
 		}
 	}
 
@@ -166,6 +171,12 @@
 		);
 	}
 
+	let sidebarDataOpen = false;
+
+	function toggleSidebarData() {
+		sidebarDataOpen = !sidebarDataOpen;
+	}
+
 	$: if ($messages.length > 1) {
 		chatContainer.scrollTop = chatContainer.scrollHeight;
 	}
@@ -177,12 +188,12 @@
 	<div
 		class="h-full overflow-hidden relative p-4 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600"
 	>
-		<div class="flex gap-2 absolute top-4 left-4 items-center">
+		<div class="flex justify-between right-4 gap-2 absolute top-4 left-4 items-center">
 			<span class=" bg-black-100 dark:bg-black-600 px-3 font-mono text-xs py-2 rounded-md"
-				>{chatModel.image.split(':')[0]}</span
+				>{chatModel?.image?.split(':')[0]}</span
 			>
 			{#if rag}
-				<RagState name={collectionName} />
+				<RagState name={collectionName} on:open={toggleSidebarData} />
 			{/if}
 		</div>
 
@@ -223,5 +234,9 @@
 				</div>
 			{/if}
 		</div>
+
+		{#if sidebarDataOpen}
+			<SidebarData name={collectionName} on:close={toggleSidebarData} />
+		{/if}
 	</div>
 </div>
