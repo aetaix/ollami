@@ -41,7 +41,7 @@
 <div class="relative w-full opening-animation">
   <button
     on:click|stopPropagation={dropdown.open}
-    class="text-sm flex items-center justify-between w-full border border-black-200 dark:border-black-600 gap-2 bg-white hover:bg-black-50  dark:hover:bg-black-600 dark:bg-black-700 rounded-xl transition-all hover:shadow px-4 pr-2 py-3 shadow"
+    class="text-sm flex items-center justify-between w-full border border-black-200 dark:border-black-600 gap-2 bg-white hover:bg-black-50/50 s  dark:hover:bg-black-600 dark:bg-black-700 rounded-xl transition-all px-4 pr-2 py-3 hover:shadow"
   >
     <div class="flex items-center gap-2">
      

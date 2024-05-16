@@ -7,11 +7,11 @@
 <div
 class="flex justify-center flex-grow flex-col items-center border bg-black-50 border-black-200 dark:border-black-600 shadow-sm dark:bg-black-900 rounded-xl"
 >
-    <div class="bg-white dark:bg-black-700 max-w-lg mx-auto shadow-lg rounded-xl border border-black-200 dark:border-black-600">
+    <div class="bg-white dark:bg-black-700 max-w-md mx-auto shadow-lg rounded-xl border border-black-200 dark:border-black-600">
       <header class="h-[240px]">
         <img src="/img/companions.png" class="w-full h-full object-cover rounded-t-xl" alt="">
       </header>
-      <div class="p-4">
+      <div class="p-6">
         <h2 class="font-semibold text-lg">Discover Companions!</h2>
         <p>Companions are here to help you in any task, just give them the correct instructions and they will then be avaialbe in the chats options.</p>
       </div>
