@@ -23,6 +23,6 @@
 
 <button
 on:click={openSidebarData}
-	class=" bg-purple/10 text-purple p-2 pl-3 flex gap-2 items-center text-sm rounded-md hover:shadow-lg hover:shadow-purple-300 transition-shadow"
+	class=" bg-purple/10 text-purple p-2 pl-3 flex gap-2 items-center text-sm rounded-md hover:shadow-lg hover:shadow-purple-200 transition-shadow"
 	>RAG <span class="p-1 px-2 rounded bg-purple-600 text-white">{count} File</span></button
 >

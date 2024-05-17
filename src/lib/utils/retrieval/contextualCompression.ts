@@ -32,17 +32,17 @@ export const contextualCompression = async (
 		result.pageContent = result.pageContent.replace(/[\n\r]+/g, ' ');
 	});
 
-	const prompt = `${query}. Use the following context to make your answer more accurate:
-    --------
+	const prompt = `Try to answer the user query using the following context and your knowledge.
     <context>
     EXTRACTED CONTEXT:
     ${results.map((result) => result.pageContent).join('\n')}
     INFORMATIONS IN OUR CURRENT CONVERSATION:
     ${messages.slice(-5).map((message) => {return message.role + ':' + message.content}).join('\n')}
     </context>
-	---------
     If you need more information, please ask me. Don't invent information, always provide accurate information.
     Answer the user's question in the most accurate way possible but don't mention where the information comes from.
+	---------
+	Query: ${query}	
     `;
 
 	return prompt;
