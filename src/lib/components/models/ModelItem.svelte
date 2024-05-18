@@ -37,13 +37,13 @@
 
 	async function installModel() {
 		loading = true;
-	
+
 		// Add the model to the installation queue
 		const queue = JSON.parse(localStorage.getItem('queue') || '[]');
 
 		localStorage.setItem('queue', JSON.stringify([...queue, image]));
-		
-		const response = await fetch('/api/models/pull', {
+
+		const stream = await fetch('/api/models/pull', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -51,22 +51,25 @@
 			body: JSON.stringify({ image })
 		});
 
-		console.log(response);
-		loading = false;
-		installed = true;
-		localStorage.setItem('queue', JSON.stringify(queue.filter((item) => item !== image))
-		);
-		/*
-		const reader = response.body.getReader();
-		console.log(reader);
+		const reader = stream.body.getReader();
+		const decoder = new TextDecoder();
+
 		reader.read().then(function processText({ done, value }) {
 			if (done) {
+				console.log('Done!');
+				progress = 100;
 				loading = false;
+				installed = true;
+				localStorage.setItem('queue', JSON.stringify(queue.filter((item) => item !== image)));
 				return;
 			}
-			progress += value.length;
-			reader.read().then(processText);
-		});*/
+			const data = decoder.decode(value || new Uint8Array(), {
+				stream: !done
+			});
+			progress = parseFloat(data);
+
+			return reader.read().then(processText);
+		});
 	}
 
 	async function deleteModel() {
@@ -77,12 +80,14 @@
 			},
 			body: JSON.stringify({ image })
 		});
-		models.update((models) => models.map((model) => {
-			if (model.image === image) {
-				model.installed = false;
-			}
-			return model;
-		}));
+		models.update((models) =>
+			models.map((model) => {
+				if (model.image === image) {
+					model.installed = false;
+				}
+				return model;
+			})
+		);
 	}
 </script>
 
@@ -132,7 +137,7 @@
 						/></g
 					></svg
 				>
-				<span class="text-xs">Installing...</span>
+				<span class="text-xs">{progress}%</span>
 			</div>
 		{:else}
 			<button

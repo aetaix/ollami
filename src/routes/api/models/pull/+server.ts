@@ -15,32 +15,30 @@ export async function POST({ request }) {
 
 		let progress = 0;
 
-		for await (const chunk of pulledModel) {
-			const total = chunk.total;
-			const completed = chunk.completed;
-			progress = (completed / total) * 100;
-			//process.stdout.write(`\r${progress.toFixed(2)}%`);
-			// showPercentage(`${progress.toFixed(2)}%`);
-			if ( progress < 100) {
-				console.log(`${progress.toFixed(2)}%`);
-			}
-	
-		}
-		
-		const stream = new ReadableStream({
+		const encoder = new TextEncoder();
+		const readableStream = new ReadableStream({
 			async start(controller) {
-				while (pulledModel.next()) {
-					controller.enqueue(progress);
-					await pulledModel.next();
+				for await (const chunk of pulledModel) {
+					const total = chunk.total;
+					const completed = chunk.completed;
+					progress = (completed / total) * 100;
+					//process.stdout.write(`\r${progress.toFixed(2)}%`);
+					// showPercentage(`${progress.toFixed(2)}%`);
+					if (progress < 100) {
+						console.log(`${progress.toFixed(2)}%`);
+						controller.enqueue(encoder.encode(`${progress.toFixed(0)}`));
+					}
 				}
+
+				controller.close();
 			}
 		});
 
-		return new Response(
-			JSON.stringify({
-				status: 200
-			})
-		);
+		return new Response(readableStream, {
+			headers: {
+			  "Content-Type": "text/html; charset=utf-8",
+			},
+		  });
 	} catch (error) {
 		return new Response(JSON.stringify({ error: 'Failed to initiate model pull' }), {
 			status: 500,
@@ -50,4 +48,3 @@ export async function POST({ request }) {
 		});
 	}
 }
-

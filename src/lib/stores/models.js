@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 
 export let initialModels = [
 	{
-		name: 'Llama 3',
+		name: 'Llama3',
 		image: 'llama3:latest',
 		context: 4096,
 		parameters: '8B',
@@ -14,7 +14,22 @@ export let initialModels = [
       Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
 		installed: false,
 
-		popularity: 1200
+		popularity: 1300
+	},
+	{
+		name: 'Llama3 Instruct',
+		image: 'llama3:instruct',
+		context: 4096,
+		parameters: '8B',
+		icon: 'llama.svg',
+		size: 4.7,
+		tags: ['chat', 'text', 'reasoning'],
+		description: `Meta Llama 3, a family of models developed by Meta Inc. are new state-of-the-art , available in both 8B and 70B parameter sizes (pre-trained or instruction-tuned).
+
+      Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
+		installed: false,
+
+		popularity: 1300
 	},
 	{
 		name: 'Llama 2',
