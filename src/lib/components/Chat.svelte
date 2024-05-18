@@ -186,11 +186,11 @@
 	class="h-screen p-2 {$fullscreen ? 'w-full' : 'w-4/5 pl-2'} transition-all absolute right-0 top-0"
 >
 	<div
-		class="h-full overflow-hidden relative p-4 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600"
+		class="h-full overflow-hidden relative p-4 pr-2 rounded-2xl border bg-white text-black dark:text-white border-black-200 dark:bg-black-800 dark:border-black-600"
 	>
-		<div class="flex justify-between right-4 gap-2 absolute top-4 left-4 items-center">
+		<div class="flex justify-between right-6 gap-2 absolute top-4 left-4 items-center">
 			<span class=" bg-black-100 dark:bg-black-600 px-3 font-mono text-xs py-2 rounded-md"
-				>{chatModel?.image?.split(':')[0]}</span
+				>{chatModel?.image}</span
 			>
 			{#if rag}
 				<RagState name={collectionName} on:open={toggleSidebarData} />

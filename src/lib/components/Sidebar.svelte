@@ -21,10 +21,7 @@
   <History />
   <div class="space-y-2">
 
-    <SidebarItem url="companions">
-     <Bot class="w-6" />
-      Companions
-    </SidebarItem>
+
 
     <SidebarItem url="prompts">
       <Prompt class="w-5" />
