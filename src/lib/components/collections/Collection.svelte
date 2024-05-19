@@ -5,6 +5,7 @@
 	import Plus from '../icons/Plus.svelte';
 	import Trash from '../icons/Trash.svelte';
 	import Url from '../icons/Url.svelte';
+	import ChatSelection from './ChatSelection.svelte';
 	export let collection = {};
 
 	// Check the localstorage chats and find the one that have this collection name and add them to usedBy array
@@ -123,12 +124,19 @@
 					>{id} <Url class="w-4" />
 				</a>
 			{/each}
-			<button
+			<div class="relative">
+				<button
 				on:click={addChat}
 				class=" w-8 h-8 flex justify-center items-center rounded bg-black-100 hover:bg-black-200 transition-all"
 			>
 				<Plus class="w-6" />
+
+			
+
 			</button>
+			<ChatSelection currentCollection={collection.name} />
+			</div>
+
 		</div>
 	</footer>
 </div>

@@ -2,6 +2,9 @@
   import { page } from "$app/stores";
   import { history } from "$lib/stores/history";
   import { goto } from "$app/navigation";
+	import Trash from "../icons/Trash.svelte";
+	import Pencil from "../icons/Pencil.svelte";
+	import MessageIcon from "../icons/MessageIcon.svelte";
   export let id = "";
   export let name = "";
   export let model = "";
@@ -94,17 +97,7 @@
         </div>
       {:else}
         <div>
-          <svg
-            width="18"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 0H12C14.1217 0 16.1566 0.842855 17.6569 2.34315C19.1571 3.84344 20 5.87827 20 8C20 10.1217 19.1571 12.1566 17.6569 13.6569C16.1566 15.1571 14.1217 16 12 16V19.5C7 17.5 0 14.5 0 8C0 5.87827 0.842855 3.84344 2.34315 2.34315C3.84344 0.842855 5.87827 0 8 0V0ZM10 14H12C12.7879 14 13.5681 13.8448 14.2961 13.5433C15.0241 13.2417 15.6855 12.7998 16.2426 12.2426C16.7998 11.6855 17.2417 11.0241 17.5433 10.2961C17.8448 9.56815 18 8.78793 18 8C18 7.21207 17.8448 6.43185 17.5433 5.7039C17.2417 4.97595 16.7998 4.31451 16.2426 3.75736C15.6855 3.20021 15.0241 2.75825 14.2961 2.45672C13.5681 2.15519 12.7879 2 12 2H8C6.4087 2 4.88258 2.63214 3.75736 3.75736C2.63214 4.88258 2 6.4087 2 8C2 11.61 4.462 13.966 10 16.48V14Z"
-              fill="currentColor"
-            />
-          </svg>
+         <MessageIcon class="w-6 h-6" />
         </div>
       {/if}
       <div class="overflow-hidden min-h-5 flex-grow w-full relative text-sm">
@@ -124,40 +117,13 @@
       on:click={editModeOn}
       class="group-hover:opacity-100 opacity-0 absolute right-6 shrink-0 p-1 mr-2 text-sm text-left text-black dark:text-white  hover:bg-black-700/10 dark:hover:bg-black-600 rounded transition-all"
     >
-      <svg
-        width="14"
-        viewBox="0 0 18 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M9.9 3.85801L14.142 8.10101L4.242 18H0V13.757L9.9 3.85701V3.85801ZM11.314 2.44401L13.435 0.322007C13.6225 0.134536 13.8768 0.0292206 14.142 0.0292206C14.4072 0.0292206 14.6615 0.134536 14.849 0.322007L17.678 3.15101C17.8655 3.33853 17.9708 3.59284 17.9708 3.85801C17.9708 4.12317 17.8655 4.37748 17.678 4.56501L15.556 6.68601L11.314 2.44401Z"
-          fill="currentColor"
-        />
-      </svg>
+      <Pencil class="w-4" />
     </button>
     <button
       class="group-hover:opacity-100 opacity-0 absolute right-0 shrink-0 p-1 mr-2 text-sm text-left text-black dark:text-white hover:bg-black-700/10 dark:hover:bg-black-600 rounded transition-all"
       on:click={() => deleteConversation(id)}
     >
-      <svg
-        width="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g clip-path="url(#clip0_21_8752)">
-          <path
-            d="M17 4H22V6H20V21C20 21.2652 19.8946 21.5196 19.7071 21.7071C19.5196 21.8946 19.2652 22 19 22H5C4.73478 22 4.48043 21.8946 4.29289 21.7071C4.10536 21.5196 4 21.2652 4 21V6H2V4H7V2H17V4ZM9 9V17H11V9H9ZM13 9V17H15V9H13Z"
-            fill="currentColor"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_21_8752">
-            <rect width="24" height="24" fill="white" />
-          </clipPath>
-        </defs>
-      </svg>
+      <Trash class="w-4" />
     </button>
   {/if}
 </li>
