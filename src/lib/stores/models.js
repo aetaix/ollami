@@ -227,7 +227,7 @@ export let initialModels = [
 		popularity: 30.4
 	},
 	{
-		name: 'Phi 3',
+		name: 'Phi 3 Mini',
 		image: 'phi3:latest',
 		parameters: '3.8B',
 		tags: ['text', 'small', 'performance'],
@@ -235,23 +235,24 @@ export let initialModels = [
 		context: 128000,
 		icon: 'microsoft.svg',
 		description:
-			'Phi-3 Mini is a 3.8B parameters, lightweight, state-of-the-art open model trained with the Phi-3 datasets that includes both synthetic data and the filtered publicly available websites data with a focus on high-quality and reasoning dense properties.',
+			'Phi-3 Mini is a 3.8B parameters, lightweight, state-of-the-art open model trained with the Phi-3 datasets that includes both synthetic data and the filtered publicly available websites data with a focus on high-quality and reasoning dense properties. ',
 		installed: false,
 
 		popularity: 164.3
 	},
 	{
-		name: 'Phi-2',
-		image: 'phi:latest',
-		parameters: '2.7B',
+		name: 'Phi 3 Medium',
+		image: 'phi3:latest',
+		parameters: '14B',
 		tags: ['text', 'small', 'performance'],
-		size: 1.7,
+		size: 7.9,
+		context: 128000,
 		icon: 'microsoft.svg',
 		description:
-			'Phi-2 is a small language model capable of common-sense reasoning and language understanding. It showcases “state-of-the-art performance” among language models with less than 13 billion parameters.',
+			'Phi-3 Medium is a 14B parameter language model, and outperforms Gemini 1.0 Pro. The model has underwent a post-training process that incorporates both supervised fine-tuning and direct preference optimization to ensure precise instruction adherence and robust safety measures. Our model is designed to accelerate research on language and multimodal models, for use as a building block for generative AI powered features. ',
 		installed: false,
 
-		popularity: 82.6
+		popularity: 164.3
 	},
 	{
 		name: 'Neural Chat',

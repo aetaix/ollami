@@ -60,7 +60,10 @@
 		localStorage.setItem('collections', JSON.stringify($collections));
 	}
 
-	async function addChat() {}
+	let showChats = true;
+	async function toogleChatSelection() {
+		showChats = !showChats;
+	}
 
 	
 </script>
@@ -126,15 +129,12 @@
 			{/each}
 			<div class="relative">
 				<button
-				on:click={addChat}
+				on:click={toogleChatSelection}
 				class=" w-8 h-8 flex justify-center items-center rounded bg-black-100 hover:bg-black-200 transition-all"
 			>
 				<Plus class="w-6" />
-
-			
-
 			</button>
-			<ChatSelection currentCollection={collection.name} />
+			<ChatSelection currentCollection={collection.name} hide={showChats} />
 			</div>
 
 		</div>
