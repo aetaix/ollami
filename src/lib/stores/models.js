@@ -242,7 +242,7 @@ export let initialModels = [
 	},
 	{
 		name: 'Phi 3 Medium',
-		image: 'phi3:latest',
+		image: 'phi3:14b',
 		parameters: '14B',
 		tags: ['text', 'small', 'performance'],
 		size: 7.9,

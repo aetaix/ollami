@@ -31,7 +31,7 @@
 	}
 
 	function setCurrentModel() {
-		currentModel.set({ name, image, icon, description, tags, size, installed });
+		currentModel.set({ name, image, icon, description, tags, size, installed, parameters });
 		goto('/');
 	}
 

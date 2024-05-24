@@ -2,7 +2,7 @@
 	import { browser } from '$app/environment';
 	import { models, currentModel } from '$lib/stores/models';
 	import { companions } from '$lib/stores/companions';
-  import { collections } from '$lib/stores/collections';
+	import { collections } from '$lib/stores/collections';
 	import '../app.css';
 	export let data;
 
