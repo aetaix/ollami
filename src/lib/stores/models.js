@@ -425,6 +425,17 @@ export let initialModels = [
     installed: false,
     derived: false,
     popularity: 34.5
+  },
+  {
+    name: "Codestral",
+    image: "codestral:latest",
+    parameters: "22.2B",
+    tags: ["embeddings"],
+    size: 13,
+    description: "Codestral is Mistral AI’s first-ever code model designed for code generation tasks.Codestral is trained on a dataset of over 80 programming languages, including Python, Java, C, C++, JavaScript, Swift, Fortran and Bash. The model can complete coding functions, write tests, and complete any partial code using a fill-in-the-middle mechanism.",
+    installed: false,
+    derived: false,
+    popularity: 15.2
   }
 ];
 
