@@ -14,7 +14,7 @@ export let initialModels = [
       Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
 		installed: false,
 
-		popularity: 1300
+		popularity: 2100
 	},
 	{
 		name: 'Llama3 Instruct',
@@ -29,7 +29,7 @@ export let initialModels = [
       Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
 		installed: false,
 
-		popularity: 1300
+		popularity: 2100
 	},
 	{
 		name: 'Llama 2',
@@ -92,6 +92,43 @@ export let initialModels = [
 		installed: false,
 
 		popularity: 230.4
+	},
+	{
+		name:'Aya',
+		image:'aya:latest',
+		icon:'cohere.svg',
+		parameters:'8B',
+		context:4096,
+		size:4.8,
+		tags:['chat','text'],
+		description:`Aya 23, released by Cohere, is a new family of state-of-the-art, multilingual models that support 23 languages. Aya is trained on a diverse range of text data and is optimized for performance on a wide range of tasks.`,
+		installed:false,
+		popularity: 34.4
+
+	},
+	{
+		name:'Granite Code 8B',
+		image:'granite-code:8b',
+		icon:'ibm.svg',
+		parameters:'8B',
+		context:4096,
+		size:4.6,
+		tags:['code'],
+		description:`Granite Code is a large language model trained by IBM Research. Granite Code is a family of decoder-only code model designed for code generative tasks (e.g. code generation, code explanation, code fixing, etc.).`,
+		installed:false,
+		popularity: 9
+	},
+	{
+		name:'Granite Code 3B',
+		image:'granite-code:3b',
+		icon:'ibm.svg',
+		parameters:'3B',
+		context:4096,
+		size:2,
+		tags:['code'],
+		description:`Granite Code is a large language model trained by IBM Research. Granite Code is a family of decoder-only code model designed for code generative tasks (e.g. code generation, code explanation, code fixing, etc.).`,
+		installed:false,
+		popularity: 9
 	},
 	{
 		name: 'Command R',
@@ -415,28 +452,32 @@ export let initialModels = [
 		installed: false,
 		derived: false,
 		popularity: 6.8
-	}, {
-    name: "mxbai Embed Large",
-    image: "mxbai-embed-large:latest",
-    parameters: "334M",
-    tags: ["embeddings"],
-    size: 0.67,
-    description: "As of March 2024, this model archives SOTA performance for Bert-large sized models on the MTEB. It outperforms commercial models like OpenAIs text-embedding-3-large model and matches the performance of model 20x its size.",
-    installed: false,
-    derived: false,
-    popularity: 34.5
-  },
-  {
-    name: "Codestral",
-    image: "codestral:latest",
-    parameters: "22.2B",
-    tags: ["embeddings"],
-    size: 13,
-    description: "Codestral is Mistral AI’s first-ever code model designed for code generation tasks.Codestral is trained on a dataset of over 80 programming languages, including Python, Java, C, C++, JavaScript, Swift, Fortran and Bash. The model can complete coding functions, write tests, and complete any partial code using a fill-in-the-middle mechanism.",
-    installed: false,
-    derived: false,
-    popularity: 15.2
-  }
+	},
+	{
+		name: 'mxbai Embed Large',
+		image: 'mxbai-embed-large:latest',
+		parameters: '334M',
+		tags: ['embeddings'],
+		size: 0.67,
+		description:
+			'As of March 2024, this model archives SOTA performance for Bert-large sized models on the MTEB. It outperforms commercial models like OpenAIs text-embedding-3-large model and matches the performance of model 20x its size.',
+		installed: false,
+		derived: false,
+		popularity: 34.5
+	},
+	{
+		name: 'Codestral',
+		image: 'codestral:latest',
+		parameters: '22.2B',
+		tags: ['code', 'tools'],
+		icon: 'mistral.svg',
+		size: 13,
+		description:
+			'Codestral is Mistral AI’s first-ever code model designed for code generation tasks.Codestral is trained on a dataset of over 80 programming languages, including Python, Java, C, C++, JavaScript, Swift, Fortran and Bash. The model can complete coding functions, write tests, and complete any partial code using a fill-in-the-middle mechanism.',
+		installed: false,
+		derived: false,
+		popularity: 15.2
+	}
 ];
 
 export const models = writable([]);
