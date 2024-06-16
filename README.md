@@ -1,7 +1,7 @@
 # Ollami 🖐️
 > "Oh l'ami" - French for "Hi friend!"
 
-![Ollami](https://raw.githubusercontent.com/aetaix/ollami/main/static/img/Ollami-screenshot.png)
+![Ollami](https://raw.githubusercontent.com/aetaix/ollami/main/static/img/screenshot.png)
 
 Ollami is a frontend application designed to interact with local Ollama models for text generation, reasoning, chat and more.
 
@@ -89,7 +89,7 @@ npm run dev
 
 Ollami have a built in library of available models that can be downloaded and run locally.
 
-![Ollami](https://raw.githubusercontent.com/aetaix/ollami/main/static/img/Models.png)
+![Ollami](https://raw.githubusercontent.com/aetaix/ollami/main/static/img/models.png)
 
 Of course, take the time to explore the different models available and choose the one that best suits your needs.
 
