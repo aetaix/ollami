@@ -1,7 +1,7 @@
 # Ollami 🖐️
 > "Oh l'ami" - French for "Hi friend!"
 
-![Ollami](./Ollami-screenshot.png)
+![Ollami](https://raw.githubusercontent.com/aetaix/ollami/main/static/img/Ollami-screenshot.png)
 
 Ollami is a frontend application designed to interact with local Ollama models for text generation, reasoning, chat and more.
 
