@@ -87,7 +87,11 @@ npm run dev
 
 #### Explore Available Models
 
-Discover an extensive array of models at [ollama.com/library](https://ollama.com/library "ollama model library")
+Ollami have a built in library of available models that can be downloaded and run locally.
+
+![Ollami](https://raw.githubusercontent.com/aetaix/ollami/main/static/img/Models.png)
+
+Of course, take the time to explore the different models available and choose the one that best suits your needs.
 
 Here are some example models that can be downloaded:
 
