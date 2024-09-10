@@ -418,6 +418,26 @@ export let initialModels = [
 		popularity: 100.4
 	},
 	{
+		name: 'Deepseek Coder V2',
+		image: 'deepseek-coder-v2:16b',
+		parameters: '16B',
+		tags: ['code'],
+		size: 8.9,
+		description:
+			'DeepSeek-Coder-V2 is an open-source Mixture-of-Experts (MoE) code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks. DeepSeek-Coder-V2 is further pre-trained from DeepSeek-Coder-V2-Base with 6 trillion tokens sourced from a high-quality and multi-source corpus.',
+		installed: false
+	},
+	{
+		name: 'Deepseek Coder V2',
+		image: 'deepseek-coder-v2:236b',
+		parameters: '236B',
+		tags: ['code'],
+		size: 133,
+		description:
+			'DeepSeek-Coder-V2 is an open-source Mixture-of-Experts (MoE) code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks. DeepSeek-Coder-V2 is further pre-trained from DeepSeek-Coder-V2-Base with 6 trillion tokens sourced from a high-quality and multi-source corpus.',
+		installed: false
+	},
+	{
 		name: 'Vicuna',
 		image: 'vicuna:7b',
 		parameters: '7B',
