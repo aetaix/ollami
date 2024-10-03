@@ -1,3 +1,4 @@
+import { pop } from 'svelte-highlight/styles';
 import { writable } from 'svelte/store';
 
 export let initialModels = [
@@ -13,8 +14,8 @@ export let initialModels = [
 
       Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
 		installed: false,
-
-		popularity: 2100
+		popularity: 2100,
+		fav: false
 	},
 	{
 		name: 'Llama3.1',
@@ -26,8 +27,8 @@ export let initialModels = [
 		tags: ['chat', 'text', 'reasoning'],
 		description: `The upgraded versions of the 8B and 70B models are multilingual and have a significantly longer context length of 128K, state-of-the-art tool use, and overall stronger reasoning capabilities. This enables Meta’s latest models to support advanced use cases, such as long-form text summarization, multilingual conversational agents, and coding assistants.`,
 		installed: false,
-
-		popularity: 2100
+		popularity: 5800,
+		fav: false
 	},
 	{
 		name: 'Llama3.2',
@@ -37,7 +38,9 @@ export let initialModels = [
 		icon: 'llama.svg',
 		size: 2.0,
 		tags: ['chat', 'text', 'reasoning'],
-		description: `The Meta Llama 3.2 collection of multilingual large language models (LLMs) is a collection of pretrained and instruction-tuned generative models in 1B and 3B sizes (text in/text out). The Llama 3.2 instruction-tuned text only models are optimized for multilingual dialogue use cases, including agentic retrieval and summarization tasks. They outperform many of the available open source and closed chat models on common industry benchmarks.`
+		description: `The Meta Llama 3.2 collection of multilingual large language models (LLMs) is a collection of pretrained and instruction-tuned generative models in 1B and 3B sizes (text in/text out). The Llama 3.2 instruction-tuned text only models are optimized for multilingual dialogue use cases, including agentic retrieval and summarization tasks. They outperform many of the available open source and closed chat models on common industry benchmarks.`,
+		popularity: 271.1,
+		fav: true
 	},
 	{
 		name: 'Llama3 Instruct',
@@ -52,7 +55,8 @@ export let initialModels = [
       Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
 		installed: false,
 
-		popularity: 2100
+		popularity: 2100,
+		fav: false
 	},
 	{
 		name: 'Llama 2',
@@ -66,7 +70,8 @@ export let initialModels = [
 			'Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.',
 		installed: false,
 
-		popularity: 1200
+		popularity: 1200,
+		fav: false
 	},
 	{
 		name: 'Llama 2 Uncensored',
@@ -79,7 +84,8 @@ export let initialModels = [
 			'Llama 2 Uncensored is based on Meta’s Llama 2 model, and was created by George Sung and Jarrad Hope using the process defined by Eric Hartford in his blog post.',
 		installed: false,
 
-		popularity: 155.1
+		popularity: 155.1,
+		fav: false
 	},
 	{
 		name: 'Mistral',
@@ -98,7 +104,8 @@ export let initialModels = [
       Approaches CodeLlama 7B performance on code, while remaining good at English tasks`,
 		installed: false,
 
-		popularity: 621.4
+		popularity: 621.4,
+		fav: false
 	},
 
 	{
@@ -114,7 +121,8 @@ export let initialModels = [
     As of December 2023, it is the strongest open-weight model with a permissive license and the best model overall regarding cost/performance trade-offs.`,
 		installed: false,
 
-		popularity: 230.4
+		popularity: 230.4,
+		fav: false
 	},
 	{
 		name: 'Aya',
@@ -126,7 +134,8 @@ export let initialModels = [
 		tags: ['chat', 'text'],
 		description: `Aya 23, released by Cohere, is a new family of state-of-the-art, multilingual models that support 23 languages. Aya is trained on a diverse range of text data and is optimized for performance on a wide range of tasks.`,
 		installed: false,
-		popularity: 34.4
+		popularity: 34.4,
+		fav: false
 	},
 	{
 		name: 'Granite Code 8B',
@@ -138,7 +147,8 @@ export let initialModels = [
 		tags: ['code'],
 		description: `Granite Code is a large language model trained by IBM Research. Granite Code is a family of decoder-only code model designed for code generative tasks (e.g. code generation, code explanation, code fixing, etc.).`,
 		installed: false,
-		popularity: 9
+		popularity: 9,
+		fav: false
 	},
 	{
 		name: 'Granite Code 3B',
@@ -150,7 +160,8 @@ export let initialModels = [
 		tags: ['code'],
 		description: `Granite Code is a large language model trained by IBM Research. Granite Code is a family of decoder-only code model designed for code generative tasks (e.g. code generation, code explanation, code fixing, etc.).`,
 		installed: false,
-		popularity: 9
+		popularity: 9,
+		fav: false
 	},
 	{
 		name: 'Command R',
@@ -163,7 +174,8 @@ export let initialModels = [
 		description: `Command R is a generative model optimized for long context tasks such as retrieval-augmented generation (RAG) and using external APIs and tools. As a model built for companies to implement at scale`,
 		installed: false,
 
-		popularity: 23.7
+		popularity: 23.7,
+		fav: false
 	},
 	{
 		name: 'Command R +',
@@ -176,7 +188,8 @@ export let initialModels = [
 		description: `Command R is a generative model optimized for long context tasks such as retrieval-augmented generation (RAG) and using external APIs and tools. As a model built for companies to implement at scale`,
 		installed: false,
 
-		popularity: 20.3
+		popularity: 20.3,
+		fav: false
 	},
 	{
 		name: 'Mistral Open Orca',
@@ -190,7 +203,8 @@ export let initialModels = [
   HuggingFace Leaderboard evals place this model as leader for all models smaller than 30B at the release time, outperforming all other 7B and 13B models.`,
 		installed: false,
 
-		popularity: 118.6
+		popularity: 118.6,
+		fav: false
 	},
 	{
 		name: 'Gemma',
@@ -204,7 +218,8 @@ export let initialModels = [
 			'Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.',
 		installed: false,
 
-		popularity: 855.1
+		popularity: 855.1,
+		fav: false
 	},
 	{
 		name: 'Gemma',
@@ -218,7 +233,8 @@ export let initialModels = [
 			'Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.',
 		installed: false,
 
-		popularity: 855.1
+		popularity: 855.1,
+		fav: false
 	},
 	{
 		name: 'CodeGemma',
@@ -231,7 +247,8 @@ export let initialModels = [
 		description: `CodeGemma is a collection of powerful, lightweight models that can perform a variety of coding tasks like fill-in-the-middle code completion, code generation, and natural language understanding.`,
 		installed: false,
 
-		popularity: 22.5
+		popularity: 22.5,
+		fav: false
 	},
 	{
 		name: 'Llama 2',
@@ -245,7 +262,8 @@ export let initialModels = [
 			'Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.',
 		installed: false,
 
-		popularity: 1200
+		popularity: 1200,
+		fav: false
 	},
 
 	{
@@ -258,7 +276,8 @@ export let initialModels = [
 			'🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6.',
 		installed: false,
 
-		popularity: 142.5
+		popularity: 142.5,
+		fav: false
 	},
 	{
 		name: 'Dolphin Phi',
@@ -270,7 +289,8 @@ export let initialModels = [
 			'Dolphin-phi 2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language model by Microsoft Research. ',
 		installed: false,
 
-		popularity: 18
+		popularity: 18,
+		fav: false
 	},
 	{
 		name: 'Wizardlm2',
@@ -283,7 +303,8 @@ export let initialModels = [
 		icon: 'microsoft.svg',
 		installed: false,
 
-		popularity: 30.4
+		popularity: 30.4,
+		fav: false
 	},
 	{
 		name: 'Phi 3 Mini',
@@ -297,7 +318,8 @@ export let initialModels = [
 			'Phi-3 Mini is a 3.8B parameters, lightweight, state-of-the-art open model trained with the Phi-3 datasets that includes both synthetic data and the filtered publicly available websites data with a focus on high-quality and reasoning dense properties. ',
 		installed: false,
 
-		popularity: 164.3
+		popularity: 164.3,
+		fav: false
 	},
 	{
 		name: 'Phi 3 Medium',
@@ -311,7 +333,8 @@ export let initialModels = [
 			'Phi-3 Medium is a 14B parameter language model, and outperforms Gemini 1.0 Pro. The model has underwent a post-training process that incorporates both supervised fine-tuning and direct preference optimization to ensure precise instruction adherence and robust safety measures. Our model is designed to accelerate research on language and multimodal models, for use as a building block for generative AI powered features. ',
 		installed: false,
 
-		popularity: 164.3
+		popularity: 164.3,
+		fav: false
 	},
 	{
 		name: 'Neural Chat',
@@ -323,7 +346,8 @@ export let initialModels = [
 			'NeuralChat is a fine-tuned model released by Intel that’s based on Mistral, designed to be used for high-performance chatbot applications.',
 		installed: false,
 
-		popularity: 22.1
+		popularity: 22.1,
+		fav: false
 	},
 	{
 		name: 'Starling',
@@ -336,7 +360,8 @@ export let initialModels = [
     The model harnesses the power of our new GPT-4 labeled ranking dataset, Nectar, and our new reward training and policy tuning pipeline. Starling-7B-alpha scores 8.09 in MT Bench with GPT-4 as a judge, outperforming every model to date on MT-Bench except for OpenAI’s GPT-4 and GPT-4 Turbo.`,
 		installed: false,
 
-		popularity: 17.9
+		popularity: 17.9,
+		fav: false
 	},
 	{
 		name: 'Code Llama',
@@ -349,7 +374,8 @@ export let initialModels = [
 			'Code Llama is a model for generating and discussing code, built on top of Llama 2. It’s designed to make workflows faster and efficient for developers and make it easier for people to learn how to code. It can generate both code and natural language about code. Code Llama supports many of the most popular programming languages used today, including Python, C++, Java, PHP, Typescript (Javascript), C#, Bash and more.',
 		installed: false,
 
-		popularity: 338.7
+		popularity: 338.7,
+		fav: false
 	},
 	{
 		name: 'Code Llama',
@@ -362,7 +388,8 @@ export let initialModels = [
 			'Code Llama is a model for generating and discussing code, built on top of Llama 2. It’s designed to make workflows faster and efficient for developers and make it easier for people to learn how to code. It can generate both code and natural language about code. Code Llama supports many of the most popular programming languages used today, including Python, C++, Java, PHP, Typescript (Javascript), C#, Bash and more.',
 		installed: false,
 
-		popularity: 338.7
+		popularity: 338.7,
+		fav: false
 	},
 	{
 		name: 'Orca Mini',
@@ -375,7 +402,8 @@ export let initialModels = [
 			'Orca Mini is a Llama and Llama 2 model trained on Orca Style datasets created using the approaches defined in the paper, Orca: Progressive Learning from Complex Explanation Traces of GPT-4. There are two variations available. The original Orca Mini based on Llama in 3, 7, and 13 billion parameter sizes, and v3 based on Llama 2 in 7, 13, and 70 billion parameter sizes.',
 		installed: false,
 
-		popularity: 67.4
+		popularity: 67.4,
+		fav: false
 	},
 	{
 		name: 'Starcoder 2',
@@ -388,7 +416,8 @@ export let initialModels = [
 			'StarCoder2 is the next generation of transparently trained open code LLMs. It was trained on 17 programming languages and 3.5+ trillion tokens, and is available in 3B, 7B and 13B sizes. StarCoder2 is designed to be more transparent and easier to use than previous models, with a focus on code generation and understanding.',
 		installed: false,
 
-		popularity: 28.2
+		popularity: 28.2,
+		fav: false
 	},
 	{
 		name: 'Starcoder 2',
@@ -401,7 +430,8 @@ export let initialModels = [
 			'StarCoder2 is the next generation of transparently trained open code LLMs. It was trained on 17 programming languages and 3+ trillion tokens, and is available in 3B, 7B and 13B sizes. StarCoder2 is designed to be more transparent and easier to use than previous models, with a focus on code generation and understanding.',
 		installed: false,
 
-		popularity: 28.2
+		popularity: 28.2,
+		fav: false
 	},
 	{
 		name: 'Deepseek Coder',
@@ -413,7 +443,8 @@ export let initialModels = [
 			'DeepSeek Coder is trained from scratch on both 87% code and 13% natural language in English and Chinese. Each of the models are pre-trained on 2 trillion tokens.',
 		installed: false,
 
-		popularity: 100.4
+		popularity: 100.4,
+		fav: false
 	},
 	{
 		name: 'Deepseek Coder',
@@ -425,7 +456,8 @@ export let initialModels = [
 			'DeepSeek Coder is trained from scratch on both 87% code and 13% natural language in English and Chinese. Each of the models are pre-trained on 2 trillion tokens.',
 		installed: false,
 
-		popularity: 100.4
+		popularity: 100.4,
+		fav: false
 	},
 	{
 		name: 'Deepseek Coder V2',
@@ -437,7 +469,8 @@ export let initialModels = [
 			'DeepSeek-Coder-V2 is an open-source Mixture-of-Experts (MoE) code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks. DeepSeek-Coder-V2 is further pre-trained from DeepSeek-Coder-V2-Base with 6 trillion tokens sourced from a high-quality and multi-source corpus.',
 		installed: false,
 
-		popularity: 100.2
+		popularity: 100.2,
+		fav: false
 	},
 	{
 		name: 'Deepseek Coder V2',
@@ -449,7 +482,8 @@ export let initialModels = [
 			'DeepSeek-Coder-V2 is an open-source Mixture-of-Experts (MoE) code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks. DeepSeek-Coder-V2 is further pre-trained from DeepSeek-Coder-V2-Base with 6 trillion tokens sourced from a high-quality and multi-source corpus.',
 		installed: false,
 
-		popularity: 100.1
+		popularity: 100.1,
+		fav: false
 	},
 	{
 		name: 'Vicuna',
@@ -461,7 +495,8 @@ export let initialModels = [
 			'Vicuna is a chat assistant model. It includes 3 different variants in 3 different sizes. v1.3 is trained by fine-tuning Llama and has a context size of 2048 tokens. v1.5 is trained by fine-tuning Llama 2 and has a context size of 2048 tokens. v1.5-16k is trained by fine-tuning Llama 2 and has a context size of 16k tokens. All three variants are trained using conversations collected from ShareGPT.',
 		installed: false,
 
-		popularity: 36.3
+		popularity: 36.3,
+		fav: false
 	},
 	{
 		name: 'Nomic Embed Text',
@@ -473,7 +508,8 @@ export let initialModels = [
 			'A high-performing open embedding model with a large token context window: nomic-embed-text is a large context length text encoder that surpasses OpenAI text-embedding-ada-002 and text-embedding-3-small performance on short and long context tasks.',
 		installed: false,
 		derived: false,
-		popularity: 103.4
+		popularity: 103.4,
+		fav: false
 	},
 	{
 		name: 'Snowflake Artic Embed Small',
@@ -485,7 +521,8 @@ export let initialModels = [
 			'Snowflake Artic Embed Small is a small, high-performing text encoder model that is trained on a variety of text data and is optimized for performance on a wide range of tasks.',
 		installed: false,
 		derived: false,
-		popularity: 6.7
+		popularity: 6.7,
+		fav: false
 	},
 	{
 		name: 'Snowflake Artic Embed Large',
@@ -497,7 +534,8 @@ export let initialModels = [
 			'Snowflake Artic Embed Large is a large, high-performing text encoder model that is trained on a variety of text data and is optimized for performance on a wide range of tasks.',
 		installed: false,
 		derived: false,
-		popularity: 6.8
+		popularity: 6.8,
+		fav: false
 	},
 	{
 		name: 'mxbai Embed Large',
@@ -509,7 +547,8 @@ export let initialModels = [
 			'As of March 2024, this model archives SOTA performance for Bert-large sized models on the MTEB. It outperforms commercial models like OpenAIs text-embedding-3-large model and matches the performance of model 20x its size.',
 		installed: false,
 		derived: false,
-		popularity: 34.5
+		popularity: 34.5,
+		fav: false
 	},
 	{
 		name: 'Codestral',
@@ -522,7 +561,8 @@ export let initialModels = [
 			'Codestral is Mistral AI’s first-ever code model designed for code generation tasks.Codestral is trained on a dataset of over 80 programming languages, including Python, Java, C, C++, JavaScript, Swift, Fortran and Bash. The model can complete coding functions, write tests, and complete any partial code using a fill-in-the-middle mechanism.',
 		installed: false,
 		derived: false,
-		popularity: 15.2
+		popularity: 15.2,
+		fav: false
 	}
 ];
 

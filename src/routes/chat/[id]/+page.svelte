@@ -7,7 +7,5 @@
   <title>Chat | Ollami</title>
 </svelte:head>
 
-<main class="flex">
-  <Sidebar />
-  <Chat />
-</main>
+<Chat />
+

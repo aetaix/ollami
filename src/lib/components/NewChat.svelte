@@ -20,7 +20,6 @@
 
   function setRAG(event) {
     newChat.collections = [event.detail.collection];
-    console.log('RAG Set')
   }
 
 	async function createChat() {
