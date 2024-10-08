@@ -85,6 +85,33 @@ npm run dev
 > [!TIP]
 > No need to add .env variable, the app will use the default Ollama server locally started while using the `ollama run` command. By default the server is running on `http://127.0.0.1:11434`
 
+### Install Tauri 
+
+You'll need to first make sure that you have [Rust](https://www.rust-lang.org/) installed as that's what Tauri uses under the hood.
+
+Consult the [Tauri documentation](https://tauri.app/v1/guides/getting-started/prerequisites) before continuing and follow the guide to install Rust on your operating system. You can skip this step if Rust is already installed.
+
+Use docker compose to start the containers or else the Svelte app will crash once Tauri loads.
+
+```bash
+docker compose -f docker-compose.dev.yml up -d
+```
+
+Install the dependencies:
+
+```bash
+yarn
+```
+
+A single command will launch the Svelte front-end and Tauri back-end into development mode. 
+
+```bash
+yarn tauri dev
+```
+
+> [!NOTE]
+> Bear in mind that the desktop app is a WIP. Future development will reduce the dependency on Docker so that Ollami can one day be released as a packaged application for Windows, MacOS, and Linux. 
+
 #### Explore Available Models
 
 Ollami have a built in library of available models that can be downloaded and run locally.
