@@ -4,6 +4,8 @@
 	import { currentModel, models } from '$lib/stores/models';
 	import ModelSize from './ModelSize.svelte';
 	import Trash from '../icons/Trash.svelte';
+	import StarLine from '../icons/StarLine.svelte';
+	import StartFill from '../icons/StartFill.svelte';
 
 	export let name = '';
 	export let image = '';
@@ -14,6 +16,7 @@
 	export let size = 0;
 	export let popularity = 1;
 	export let installed = false;
+	export let fav = false;
 	let loading = false;
 	let progress = 0;
 
@@ -72,6 +75,21 @@
 		});
 	}
 
+	function setFavorite() {
+		// change current fav model to false
+
+		models.update((models) =>
+			models.map((model) => ({
+				...model,
+				fav: model.image === image
+			}))
+		);
+
+		// update local storage
+
+		localStorage.setItem('fav-model', image);
+	}
+
 	async function deleteModel() {
 		await fetch('/api/models/delete', {
 			method: 'POST',
@@ -108,6 +126,21 @@
 		{#if installed}
 			<div class="flex items-center justify-end gap-2">
 				{#if !tags.includes('embeddings')}
+					{#if fav}
+						<button
+							on:click={setFavorite}
+							class=" w-8 h-8 flex justify-center items-center rounded bg-yellow-400 text-white transition-all"
+						>
+							<StartFill class="w-4" />
+						</button>
+					{:else}
+						<button
+							on:click={setFavorite}
+							class=" w-8 h-8 flex justify-center items-center rounded bg-black-100 dark:bg-black-600 hover:bg-black-500 dark:hover:bg-black-500 hover:text-white transition-all"
+						>
+							<StarLine class="w-4" />
+						</button>
+					{/if}
 					<button
 						on:click={setCurrentModel}
 						class="border bg-green-500 hover:bg-green border-green-300 transition-colors text-white shadow px-2 py-1 rounded-md text-sm"
@@ -118,7 +151,7 @@
 
 				<button
 					on:click={deleteModel}
-					class=" w-8 h-8 flex justify-center items-center rounded bg-black-100 hover:bg-black-200 transition-all"
+					class=" w-8 h-8 flex justify-center items-center rounded bg-black-100 dark:bg-black-600 hover:bg-red dark:hover:bg-red hover:text-white transition-all"
 				>
 					<Trash class="w-4" />
 				</button>

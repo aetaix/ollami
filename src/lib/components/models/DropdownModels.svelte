@@ -61,7 +61,7 @@
   {#if dropdown.state}
     <div
       use:clickOutside={dropdown.close}
-      class="absolute dropdown-animation top-12 bg-white dark:bg-black-700 shadow-lg rounded-xl mt-2 p-2 w-full border border-black-200 dark:border-black-600 h-44 overflow-y-auto"
+      class="absolute dropdown-animation top-12 bg-white dark:bg-black-700 shadow-lg rounded-xl mt-2 p-2 w-full border border-black-200 dark:border-black-600 max-h-44 overflow-y-auto"
     >
       {#if $models.filter(model => model.installed).length <= 1}
         <div class="h-32 flex flex-col justify-center items-center">

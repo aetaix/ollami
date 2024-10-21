@@ -1,12 +1,10 @@
 <script>
-  import Sidebar from "$lib/components/Sidebar.svelte";
   import CompanionsList from "$lib/components/companions/CompanionsList.svelte";
   import CreateCompanion from "$lib/components/companions/CreateCompanion.svelte";
   import Bot from "$lib/components/icons/Bot.svelte";
 </script>
 
-<main class="flex">
-  <Sidebar />
+
   <div
     class="h-screen p-2
             w-4/5 pl-2 transition-all absolute right-0 top-0"
@@ -26,4 +24,4 @@
       <CompanionsList />
     </div>
   </div>
-</main>
+
