@@ -2,21 +2,7 @@ import { pop } from 'svelte-highlight/styles';
 import { writable } from 'svelte/store';
 
 export let initialModels = [
-	{
-		name: 'Llama3',
-		image: 'llama3:latest',
-		context: 8000,
-		parameters: '8B',
-		icon: 'llama.svg',
-		size: 4.7,
-		tags: ['chat', 'text', 'reasoning'],
-		description: `Meta Llama 3, a family of models developed by Meta Inc. are new state-of-the-art , available in both 8B and 70B parameter sizes (pre-trained or instruction-tuned).
 
-      Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
-		installed: false,
-		popularity: 2100,
-		fav: false
-	},
 	{
 		name: 'Llama3.1',
 		image: 'llama3.1:latest',
@@ -28,7 +14,8 @@ export let initialModels = [
 		description: `The upgraded versions of the 8B and 70B models are multilingual and have a significantly longer context length of 128K, state-of-the-art tool use, and overall stronger reasoning capabilities. This enables Meta’s latest models to support advanced use cases, such as long-form text summarization, multilingual conversational agents, and coding assistants.`,
 		installed: false,
 		popularity: 5800,
-		fav: false
+		fav: false,
+		className: 'llama'
 	},
 	{
 		name: 'Llama3.2',
@@ -39,57 +26,27 @@ export let initialModels = [
 		size: 2.0,
 		tags: ['chat', 'text', 'reasoning'],
 		description: `The Meta Llama 3.2 collection of multilingual large language models (LLMs) is a collection of pretrained and instruction-tuned generative models in 1B and 3B sizes (text in/text out). The Llama 3.2 instruction-tuned text only models are optimized for multilingual dialogue use cases, including agentic retrieval and summarization tasks. They outperform many of the available open source and closed chat models on common industry benchmarks.`,
-		popularity: 271.1,
-		fav: true
+		popularity: 3900,
+		fav: true,
+		className: 'llama'
 	},
 	{
-		name: 'Llama3 Instruct',
-		image: 'llama3:instruct',
-		context: 8000,
-		parameters: '8B',
+		name: 'Llama3.2 1B',
+		image: 'llama3.2:1b',
+		context: 32000,
+		parameters: '1B',
 		icon: 'llama.svg',
-		size: 4.7,
+		size: 1.3,
 		tags: ['chat', 'text', 'reasoning'],
-		description: `Meta Llama 3, a family of models developed by Meta Inc. are new state-of-the-art , available in both 8B and 70B parameter sizes (pre-trained or instruction-tuned).
-
-      Llama 3 instruction-tuned models are fine-tuned and optimized for dialogue/chat use cases and outperform many of the available open-source chat models on common benchmarks.`,
-		installed: false,
-
-		popularity: 2100,
-		fav: false
+		description: `The Meta Llama 3.2 collection of multilingual large language models (LLMs) is a collection of pretrained and instruction-tuned generative models in 1B and 3B sizes (text in/text out). The Llama 3.2 instruction-tuned text only models are optimized for multilingual dialogue use cases, including agentic retrieval and summarization tasks. They outperform many of the available open source and closed chat models on common industry benchmarks.`,
+		popularity: 3900,
+		fav: false,
+		className: 'llama'
 	},
-	{
-		name: 'Llama 2',
-		image: 'llama2:13b',
-		parameters: '13B',
-		icon: 'llama.svg',
-		tags: ['chat', 'text', 'reasoning'],
-		size: 7.5,
-		context: 4096,
-		description:
-			'Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.',
-		installed: false,
 
-		popularity: 1200,
-		fav: false
-	},
-	{
-		name: 'Llama 2 Uncensored',
-		image: 'llama2-uncensored:latest',
-		parameters: '7B',
-		icon: 'llama.svg',
-		size: 3.8,
-		tags: ['chat', 'text', 'uncensored'],
-		description:
-			'Llama 2 Uncensored is based on Meta’s Llama 2 model, and was created by George Sung and Jarrad Hope using the process defined by Eric Hartford in his blog post.',
-		installed: false,
-
-		popularity: 155.1,
-		fav: false
-	},
 	{
 		name: 'Mistral',
-		image: 'mistral:latest',
+		image: 'mistral:7b',
 		icon: 'mistral.svg',
 		parameters: '7B',
 		context: 4096,
@@ -104,8 +61,25 @@ export let initialModels = [
       Approaches CodeLlama 7B performance on code, while remaining good at English tasks`,
 		installed: false,
 
-		popularity: 621.4,
-		fav: false
+		popularity: 6200,
+		fav: false,
+		className: 'mistral'
+	},
+
+	{
+		name: 'Mistral Nemo',
+		image: 'mistral-nemo:latest',
+		icon: 'mistral.svg',
+		parameters: '12B',
+		context: 128000,
+		size: 7.1,
+		tags: ['chat', 'text', 'reasoning'],
+		description: `Mistral NeMo is a 12B model built in collaboration with NVIDIA. Mistral NeMo offers a large context window of up to 128k tokens. Its reasoning, world knowledge, and coding accuracy are state-of-the-art in its size category. As it relies on standard architecture, Mistral NeMo is easy to use and a drop-in replacement in any system using Mistral 7B.`,
+		installed: false,
+
+		popularity: 636.4,
+		fav: false,
+		className: 'mistral'
 	},
 
 	{
@@ -121,22 +95,11 @@ export let initialModels = [
     As of December 2023, it is the strongest open-weight model with a permissive license and the best model overall regarding cost/performance trade-offs.`,
 		installed: false,
 
-		popularity: 230.4,
-		fav: false
+		popularity: 492.5,
+		fav: false,
+		className: 'mistral'
 	},
-	{
-		name: 'Aya',
-		image: 'aya:latest',
-		icon: 'cohere.svg',
-		parameters: '8B',
-		context: 4096,
-		size: 4.8,
-		tags: ['chat', 'text'],
-		description: `Aya 23, released by Cohere, is a new family of state-of-the-art, multilingual models that support 23 languages. Aya is trained on a diverse range of text data and is optimized for performance on a wide range of tasks.`,
-		installed: false,
-		popularity: 34.4,
-		fav: false
-	},
+
 	{
 		name: 'Granite Code 8B',
 		image: 'granite-code:8b',
@@ -149,6 +112,7 @@ export let initialModels = [
 		installed: false,
 		popularity: 9,
 		fav: false
+		
 	},
 	{
 		name: 'Granite Code 3B',
@@ -187,111 +151,37 @@ export let initialModels = [
 		tags: ['chat', 'RAG'],
 		description: `Command R is a generative model optimized for long context tasks such as retrieval-augmented generation (RAG) and using external APIs and tools. As a model built for companies to implement at scale`,
 		installed: false,
-
 		popularity: 20.3,
 		fav: false
 	},
 	{
-		name: 'Mistral Open Orca',
-		image: 'mistral-openorca:latest',
-		icon: 'orca.svg',
-		parameters: '7B',
-		context: 4096,
-		size: 4.1,
-		tags: ['chat', 'text', 'reasoning'],
-		description: `Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the Mistral 7B model using the OpenOrca dataset.
-  HuggingFace Leaderboard evals place this model as leader for all models smaller than 30B at the release time, outperforming all other 7B and 13B models.`,
-		installed: false,
-
-		popularity: 118.6,
-		fav: false
-	},
-	{
-		name: 'Gemma',
-		image: 'gemma:7b',
-		parameters: '7B',
-		context: 4096,
-		size: 4.8,
+		name: 'Gemma2 9B',
+		image: 'gemma2:9b',
+		parameters: '9B',
+		context: 32000,
+		size: 5.4,
 		icon: 'gemma.svg',
-		tags: ['chat', 'text'],
-		description:
-			'Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.',
+		tags: ['chat', 'text', 'reasoning'],
+		description: 'Google’s Gemma 2 model is available in three sizes, 2B, 9B and 27B, featuring a brand new architecture designed for class leading performance and efficiency.',
 		installed: false,
 
-		popularity: 855.1,
+		popularity: 2100,
 		fav: false
 	},
 	{
-		name: 'Gemma',
-		image: 'gemma:2b',
+		name: 'Gemma2 2B',
+		image: 'gemma2:2b',
 		parameters: '2B',
-		context: 4096,
-		size: 1.4,
-		icon: 'gemma.svg',
-		tags: ['chat', 'text', 'reasoning'],
-		description:
-			'Gemma is a new open model developed by Google and its DeepMind team. It’s inspired by Gemini models at Google.',
-		installed: false,
-
-		popularity: 855.1,
-		fav: false
-	},
-	{
-		name: 'CodeGemma',
-		image: 'codegemma:latest',
-		icon: 'gemma.svg',
-		parameters: '7B',
-		context: 8000,
-		size: 5,
-		tags: ['code'],
-		description: `CodeGemma is a collection of powerful, lightweight models that can perform a variety of coding tasks like fill-in-the-middle code completion, code generation, and natural language understanding.`,
-		installed: false,
-
-		popularity: 22.5,
-		fav: false
-	},
-	{
-		name: 'Llama 2',
-		image: 'llama2:7b',
-		context: 4096,
-		parameters: '7B',
-		icon: 'llama.svg',
-		size: 3.8,
-		tags: ['chat', 'text', 'reasoning'],
-		description:
-			'Llama 2 is released by Meta Platforms, Inc. This model is trained on 2 trillion tokens, and by default supports a context length of 4096. Llama 2 Chat models are fine-tuned on over 1 million human annotations, and are made for chat.',
-		installed: false,
-
-		popularity: 1200,
-		fav: false
-	},
-
-	{
-		name: 'llava',
-		image: 'llava:7b',
-		parameters: '7B',
-		tags: ['multimodal', 'vision'],
-		size: 4.7,
-		description:
-			'🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6.',
-		installed: false,
-
-		popularity: 142.5,
-		fav: false
-	},
-	{
-		name: 'Dolphin Phi',
-		image: 'dolphin-phi',
-		parameters: '2.7B',
-		tags: ['small', 'uncensored'],
+		context: 32000,
 		size: 1.6,
-		description:
-			'Dolphin-phi 2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language model by Microsoft Research. ',
+		icon: 'gemma.svg',
+		tags: ['chat', 'text', 'reasoning'],
+		description: 'Google’s Gemma 2 model is available in three sizes, 2B, 9B and 27B, featuring a brand new architecture designed for class leading performance and efficiency.',
 		installed: false,
-
-		popularity: 18,
+		popularity: 2100,
 		fav: false
 	},
+
 	{
 		name: 'Wizardlm2',
 		image: 'wizardlm2:latest',
@@ -336,33 +226,8 @@ export let initialModels = [
 		popularity: 164.3,
 		fav: false
 	},
-	{
-		name: 'Neural Chat',
-		image: 'neural-chat:7b',
-		parameters: '7B',
-		tags: ['chat'],
-		size: 4.1,
-		description:
-			'NeuralChat is a fine-tuned model released by Intel that’s based on Mistral, designed to be used for high-performance chatbot applications.',
-		installed: false,
 
-		popularity: 22.1,
-		fav: false
-	},
-	{
-		name: 'Starling',
-		image: 'starling-lm:7b',
-		parameters: '7B',
-		tags: ['chat', 'text'],
-		size: 4.1,
-		description: `Starling-7B is an open (non-commercial) large language model (LLM) trained by reinforcement learning from AI feedback. (RLAIF)
 
-    The model harnesses the power of our new GPT-4 labeled ranking dataset, Nectar, and our new reward training and policy tuning pipeline. Starling-7B-alpha scores 8.09 in MT Bench with GPT-4 as a judge, outperforming every model to date on MT-Bench except for OpenAI’s GPT-4 and GPT-4 Turbo.`,
-		installed: false,
-
-		popularity: 17.9,
-		fav: false
-	},
 	{
 		name: 'Code Llama',
 		image: 'codellama:7b',
@@ -375,34 +240,6 @@ export let initialModels = [
 		installed: false,
 
 		popularity: 338.7,
-		fav: false
-	},
-	{
-		name: 'Code Llama',
-		image: 'codellama:34b',
-		tags: ['code'],
-		icon: 'llama.svg',
-		parameters: '34B',
-		size: 20,
-		description:
-			'Code Llama is a model for generating and discussing code, built on top of Llama 2. It’s designed to make workflows faster and efficient for developers and make it easier for people to learn how to code. It can generate both code and natural language about code. Code Llama supports many of the most popular programming languages used today, including Python, C++, Java, PHP, Typescript (Javascript), C#, Bash and more.',
-		installed: false,
-
-		popularity: 338.7,
-		fav: false
-	},
-	{
-		name: 'Orca Mini',
-		image: 'orca-mini:3b',
-		tags: ['small', 'text'],
-		parameters: '3B',
-		icon: 'orca.svg',
-		size: 1.9,
-		description:
-			'Orca Mini is a Llama and Llama 2 model trained on Orca Style datasets created using the approaches defined in the paper, Orca: Progressive Learning from Complex Explanation Traces of GPT-4. There are two variations available. The original Orca Mini based on Llama in 3, 7, and 13 billion parameter sizes, and v3 based on Llama 2 in 7, 13, and 70 billion parameter sizes.',
-		installed: false,
-
-		popularity: 67.4,
 		fav: false
 	},
 	{

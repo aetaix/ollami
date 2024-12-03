@@ -66,7 +66,7 @@
 	{:else}
 		<a href="/chat/{id}" class="w-full p-2 flex justify-start items-center gap-2">
 			{#if id === $page.params.id}
-				<div class="shrink-0 text-{model.image.split(':')[0].replace('.','-')}">
+				<div class="shrink-0 text-{model.className ? model.className : 'unknown' }">
 					<svg width="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
 							d="M20 8C20 10.13 19.16 12.16 17.66 13.66C16.16 15.16 14.13 16 12 16V19.5C7 17.5 0 14.5 0 8C0 5.88 0.85 3.85 2.35 2.35C3.85 0.85 5.88 0 8 0H12C14.13 0 16.16 0.85 17.66 2.35C19.16 3.85 20 5.88 20 8Z"
@@ -121,10 +121,10 @@
 </li>
 
 <style>
-	.text-llama3 stop:first-child, .text-llama3-1 stop:first-child, .text-llama3-2 stop:first-child {
+	.text-llama stop:first-child {
 		stop-color: #1d90fb;
 	}
-	.text-llama3 stop:last-child, .text-llama3-1 stop:last-child, .text-llama3-2 stop:last-child {
+	.text-llama stop:last-child {
 		stop-color: #0b6be1;
 	}
 	.text-mistral stop:first-child {
