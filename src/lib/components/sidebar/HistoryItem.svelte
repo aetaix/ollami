@@ -127,6 +127,12 @@
 	.text-llama stop:last-child {
 		stop-color: #0b6be1;
 	}
+	.text-qwen stop:first-child {
+		stop-color: hsl(261, 72%, 75%);
+	}
+	.text-qwen stop:last-child {
+		stop-color: #150638;
+	}
 	.text-mistral stop:first-child {
 		stop-color: #f94128;
 	}

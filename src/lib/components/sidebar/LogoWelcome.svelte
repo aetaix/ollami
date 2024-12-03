@@ -33,12 +33,20 @@
 	.o-icon-llama stop:last-child {
 		stop-color: #0b6be1;
 	}
+
+	.o-icon-qwen stop:first-child {
+		stop-color: #2f2f7b;
+	}
+	.o-icon-qwen stop:last-child {
+		stop-color: #9e88df;
+	}
+
 	.o-icon-mistral stop:first-child,
-	.ollami-icon-mistral-nemo stop:first-child {
+	.o-icon-mistral-nemo stop:first-child {
 		stop-color: #ffd738;
 	}
 	.o-icon-mistral stop:last-child,
-	.ollami-icon-mistral-nemo stop:last-child {
+	.ollami-mistral stop:last-child {
 		stop-color: #f94128;
 	}
 	.o-icon-gemma stop:first-child {

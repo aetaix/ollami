@@ -99,6 +99,62 @@ export let initialModels = [
 		fav: false,
 		className: 'mistral'
 	},
+	{
+		name: 'Qwen2.5-coder',
+		image: 'qwen2.5-coder',
+		icon: 'qwen.svg',
+		parameters: '7.62B',
+		context: 128000,
+		size: 7.61,
+		tags: ['code', 'text', 'reasoning'],
+		description: `Code capabilities reaching state of the art for open-source models. An intelligent programming assistant should be familiar with all programming languages. Qwen 2.5 Coder 32B performs excellent across more than 40 programming languages, scoring 65.9 on McEval, with impressive performances in languages like Haskell and Racket.`,
+		installed: false,
+		popularity: 752,
+		fav: false,
+		className: 'qwen'
+	},
+	{
+		name: 'Qwen2.5-coder 3B',
+		image: 'qwen2.5-coder:3b',
+		icon: 'qwen.svg',
+		parameters: '2.77B',
+		context: 32000,
+		size: 3.09,
+		tags: ['code', 'text', 'reasoning'],
+		description: `Code capabilities reaching state of the art for open-source models. An intelligent programming assistant should be familiar with all programming languages. Qwen 2.5 Coder 32B performs excellent across more than 40 programming languages, scoring 65.9 on McEval, with impressive performances in languages like Haskell and Racket.`,
+		installed: false,
+		popularity: 752,
+		fav: false,
+		className: 'qwen'
+	},
+	{
+		name: 'Qwen2.5-coder 1B',
+		image: 'qwen2.5-coder:1b',
+		icon: 'qwen.svg',
+		parameters: '1.54B',
+		context: 32000,
+		size: 1.31,
+		tags: ['code', 'text', 'reasoning'],
+		description: `Code capabilities reaching state of the art for open-source models. An intelligent programming assistant should be familiar with all programming languages. Qwen 2.5 Coder 32B performs excellent across more than 40 programming languages, scoring 65.9 on McEval, with impressive performances in languages like Haskell and Racket.`,
+		installed: false,
+		popularity: 752,
+		fav: false,
+		className: 'qwen'
+	},
+	{
+		name: 'Qwen2.5-coder 0.5B',
+		image: 'qwen2.5-coder:0.5b',
+		icon: 'qwen.svg',
+		parameters: '0.36B',
+		context: 32000,
+		size: 0.49,
+		tags: ['code', 'text', 'reasoning'],
+		description: `Code capabilities reaching state of the art for open-source models. An intelligent programming assistant should be familiar with all programming languages. Qwen 2.5 Coder 32B performs excellent across more than 40 programming languages, scoring 65.9 on McEval, with impressive performances in languages like Haskell and Racket.`,
+		installed: false,
+		popularity: 752,
+		fav: false,
+		className: 'qwen'
+	},
 
 	{
 		name: 'Granite Code 8B',
@@ -112,7 +168,7 @@ export let initialModels = [
 		installed: false,
 		popularity: 9,
 		fav: false
-		
+
 	},
 	{
 		name: 'Granite Code 3B',
@@ -222,7 +278,6 @@ export let initialModels = [
 		description:
 			'Phi-3 Medium is a 14B parameter language model, and outperforms Gemini 1.0 Pro. The model has underwent a post-training process that incorporates both supervised fine-tuning and direct preference optimization to ensure precise instruction adherence and robust safety measures. Our model is designed to accelerate research on language and multimodal models, for use as a building block for generative AI powered features. ',
 		installed: false,
-
 		popularity: 164.3,
 		fav: false
 	},
