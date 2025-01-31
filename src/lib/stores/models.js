@@ -83,6 +83,21 @@ export let initialModels = [
 	},
 
 	{
+		name: 'Mistral Small 3',
+		image: 'mistral-small',
+		icon: 'mistral.svg',
+		parameters: '24B',
+		context: 32000,
+		size: 14,
+		tags: ['agent', 'chat', 'text', 'reasoning'],
+		description: `Mistral Small 3 is a powerful 24B parameter multilingual LLM with state-of-the-art reasoning, low-latency deployment on local hardware, and an open Apache 2.0 license, making it ideal for conversational AI, function calling, and expert fine-tuning.`,
+		installed: false,
+		popularity: 73.4,
+		fav: false,
+		className: 'mistral'
+	},
+
+	{
 		name: 'Mixtral',
 		image: 'mixtral:latest',
 		icon: 'mistral.svg',
