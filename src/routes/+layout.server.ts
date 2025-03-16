@@ -11,7 +11,7 @@ const modelsService = {
 			// compare models with apiModels and set the ones that are common to instaled=true
 
 			const processedModels = models.map((model) => {
-				const compare = apiModels.find((apiModel) => apiModel.model === model.image);
+				const compare = apiModels.find((apiModel: any) => apiModel.model === model.image);
 				if (compare) {
 					return { ...model, installed: true };
 				} else {

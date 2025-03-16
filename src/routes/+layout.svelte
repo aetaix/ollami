@@ -25,11 +25,18 @@
 
 		// Fav
 		if (!localStorage.getItem('fav-model')) {
-			currentModel.set($models.find((model) => model.fav));
-			localStorage.setItem('fav-model', JSON.stringify([]));
+			const favModel = $models.find((model) => model.fav);
+			if (favModel) {
+				currentModel.set(favModel);
+				localStorage.setItem('fav-model', favModel.image);
+			} else {
+				currentModel.set($models[0]);
+				localStorage.setItem('fav-model', $models[0].image);
+			}
 		} else {
 			const favModel = localStorage.getItem('fav-model');
 			// set the models to fav model and to current model
+			console.log(favModel);
 
 			models.update((models) =>
 				models.map((model) => ({

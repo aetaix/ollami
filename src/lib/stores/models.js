@@ -30,6 +30,7 @@ export let initialModels = [
 		fav: true,
 		className: 'llama'
 	},
+	
 	{
 		name: 'Llama3.2 1B',
 		image: 'llama3.2:1b',
@@ -226,6 +227,19 @@ export let initialModels = [
 		fav: false
 	},
 	{
+		name: 'Gemma 3 4B',
+		image: 'gemma3:4b',
+		parameters: '4B',
+		context: 128000,
+		size: 3.3,
+		icon: 'gemma.svg',
+		tags: ['chat', 'text', 'reasoning'],
+		description: 'The Gemma 3 models are multimodal—processing text and images—and feature a 128K context window with support for over 140 languages. ',
+		installed: false,
+		popularity: 2100,
+		fav: false
+	},
+	{
 		name: 'Gemma2 9B',
 		image: 'gemma2:9b',
 		parameters: '9B',
@@ -239,19 +253,7 @@ export let initialModels = [
 		popularity: 2100,
 		fav: false
 	},
-	{
-		name: 'Gemma2 2B',
-		image: 'gemma2:2b',
-		parameters: '2B',
-		context: 32000,
-		size: 1.6,
-		icon: 'gemma.svg',
-		tags: ['chat', 'text', 'reasoning'],
-		description: 'Google’s Gemma 2 model is available in three sizes, 2B, 9B and 27B, featuring a brand new architecture designed for class leading performance and efficiency.',
-		installed: false,
-		popularity: 2100,
-		fav: false
-	},
+
 
 	{
 		name: 'Wizardlm2',
