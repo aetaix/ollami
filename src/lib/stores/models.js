@@ -253,8 +253,6 @@ export let initialModels = [
 		popularity: 2100,
 		fav: false
 	},
-
-
 	{
 		name: 'Wizardlm2',
 		image: 'wizardlm2:latest',
@@ -340,6 +338,48 @@ export let initialModels = [
 		installed: false,
 
 		popularity: 28.2,
+		fav: false
+	},
+	{
+		name: 'DeepSeek-R1',
+		image: 'deepseek-r1:8b',
+		parameters: '8B',
+		tags: ['chat', 'text', 'reasoning'],
+		size: 5.2,
+		context: 128000,
+		icon: 'deepseek.svg',
+		description: `DeepSeek-R1 is a 1B parameter language model, and outperforms Gemini 1.0 Pro. The model has underwent a post-training process that incorporates both supervised fine-tuning and direct preference optimization to ensure precise instruction adherence and robust safety measures. Our model is designed to accelerate research on language and multimodal models, for use as a building block for generative AI powered features.`,
+		installed: false,
+
+		popularity: 55000,
+		fav: false
+	},
+	{
+		name: 'DeepSeek-R1',
+		image: 'deepseek-r1:14b',
+		parameters: '14B',
+		tags: ['chat', 'text', 'reasoning'],
+		size: 9.0,
+		context: 128000,
+		icon: 'deepseek.svg',
+		description: `DeepSeek-R1 is a 1B parameter language model, and outperforms Gemini 1.0 Pro. The model has underwent a post-training process that incorporates both supervised fine-tuning and direct preference optimization to ensure precise instruction adherence and robust safety measures. Our model is designed to accelerate research on language and multimodal models, for use as a building block for generative AI powered features.`,
+		installed: false,
+
+		popularity: 55000,
+		fav: false
+	},
+	{
+		name: 'DeepSeek-R1',
+		image: 'deepseek-r1:32b',
+		parameters: '32B',
+		tags: ['chat', 'text', 'reasoning'],
+		size: 20.0,
+		context: 128000,
+		icon: 'deepseek.svg',
+		description: `DeepSeek-R1 is a 1B parameter language model, and outperforms Gemini 1.0 Pro. The model has underwent a post-training process that incorporates both supervised fine-tuning and direct preference optimization to ensure precise instruction adherence and robust safety measures. Our model is designed to accelerate research on language and multimodal models, for use as a building block for generative AI powered features.`,
+		installed: false,
+
+		popularity: 55000,
 		fav: false
 	},
 	{
