@@ -12,9 +12,7 @@
 	>
 		{#if $currentModel}
 			<LogoWelcome
-				class="w-10 transition-colors duration-700 ollami-icon-{$currentModel.image.split(
-					':'
-				)[0]} dark:text-white"
+				class="w-10 transition-colors duration-700 o-icon{$currentModel.className ? '-' + $currentModel.className : ''} dark:text-white"
 			/>
 			<h1 class="text-3xl mt-5 mb-2">The Home of LLMs, on your computer.</h1>
 			<p class="opacity-50 mb-5">
