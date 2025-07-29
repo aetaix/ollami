@@ -3,8 +3,9 @@ import { Ollama as OllamaLLM } from "@langchain/community/llms/ollama"; // Langc
 import { OllamaEmbeddings } from '@langchain/community/embeddings/ollama'; // Langchain Embeddings
 import { createOllama } from 'ollama-ai-provider'; // Vercel Provider
 import { env } from '$env/dynamic/private'
+import { URL } from 'url';
 
-const baseURL = env.OLLAMA_API_URL || '';
+const baseURL = env.OLLAMA_API_URL || 'http://localhost:11434';
 
 // Ollama JavaScript Library - https://github.com/ollama/ollama-js
 export const ollamaJS = new Ollama({
@@ -13,7 +14,7 @@ export const ollamaJS = new Ollama({
 
 // Ollama Vercel AI SDK Provider - https://github.com/sgomez/ollama-ai-provider
 export const ollamaAISDK = createOllama({
-	baseURL: baseURL + '/api'
+	baseURL: new URL('/api', baseURL).href
 });
 
 // Ollama Langchain LLM - https://js.langchain.com/docs/integrations/llms/ollama 

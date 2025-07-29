@@ -7,7 +7,8 @@ export const contextualCompression = async (
 	query: string,
 	messages: [{ role: string; content: string }],
 	collection: string,
-	model: string
+	model: string,
+	fetch?: typeof globalThis.fetch
 ) => {
 	const llm = ollamaLangChain(model);
 	const baseCompressor = LLMChainExtractor.fromLLM(llm);
