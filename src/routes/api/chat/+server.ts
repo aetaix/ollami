@@ -6,13 +6,21 @@ import { type Model } from '$lib/stores/models.svelte.js';
 export async function POST({ request }) {
 	const { messages, model }: { messages: UIMessage[]; model: Model } = await request.json();
 
-	const client = Provider(model.provider);
+	try {
+		const client = Provider(model.provider);
 
-	const result = streamText({
-		model: client(model.api),
-		messages: convertToModelMessages(messages),
-		system
-	});
+		const result = streamText({
+			model: client(model.api),
+			messages: convertToModelMessages(messages),
+			system
+		});
 
-	return result.toUIMessageStreamResponse();
+		return result.toUIMessageStreamResponse();
+	} catch (error) {
+		console.error('Error in POST /api/chat:', error);
+		return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
+			status: 500,
+			headers: { 'Content-Type': 'application/json' }
+		});
+	}
 }

@@ -39,6 +39,10 @@
 		]
 	},
 	"dependencies": {
+		"@humanspeak/svelte-markdown": "^0.8.9",
+		"@lucide/svelte": "^0.536.0",
+		"bits-ui": "^2.9.1",
+		"mode-watcher": "^1.1.0",
 		"svelte-persisted-store": "^0.12.0"
 	}
 }

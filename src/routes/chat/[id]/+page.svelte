@@ -7,6 +7,7 @@
 
 	let initialized = false;
 	let input = $state('');
+	let isError = $state(false);
 
 	const chat = new SDKChat({
 		get id() {
@@ -18,6 +19,10 @@
 			if (chat.messages.length === 2) {
 				renameChat(chat.messages, page.params.id);
 			}
+		},
+		onError: (error) => {
+			console.error(error);
+			isError = true;
 		}
 	});
 
@@ -64,4 +69,8 @@
 	}
 </script>
 
-<Chat messages={chat.messages} bind:input onSubmit={handleSubmit} />
+{#if isError}
+	<div class="text-red-500">An error occurred. Please try again.</div>
+{:else}
+	<Chat messages={chat.messages} bind:input onSubmit={handleSubmit} />
+{/if}

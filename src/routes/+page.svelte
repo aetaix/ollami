@@ -29,21 +29,19 @@
 	}
 </script>
 
-<main>
-	<form onsubmit={handleSubmit}>
-		<select
-			name="model"
-			id="model"
-			onchange={(e) => {
-				selectedModel = models.find((model) => model.api === e.currentTarget.value) || models[0];
-			}}
-		>
-			{#each models as model}
-				<option value={model.api}>{model.name}</option>
-			{/each}
-		</select>
+<form onsubmit={handleSubmit}>
+	<select
+		name="model"
+		id="model"
+		onchange={(e) => {
+			selectedModel = models.find((model) => model.api === e.currentTarget.value) || models[0];
+		}}
+	>
+		{#each models as model}
+			<option value={model.api}>{model.name}</option>
+		{/each}
+	</select>
 
-		<input bind:value={input} />
-		<button type="submit">Send</button>
-	</form>
-</main>
+	<input bind:value={input} />
+	<button type="submit">Send</button>
+</form>
