@@ -1,5 +1,5 @@
 import { generateText, convertToModelMessages, type UIMessage } from 'ai';
-import { mistral } from '$lib/server/mistralClient';
+import { Provider } from '$lib/server/modelClients';
 import { renamePrompt as system } from '$lib/stores/prompts.svelte.js';
 
 export async function POST({ request }) {
@@ -25,8 +25,10 @@ export async function POST({ request }) {
     User message: ${userMessageText}
 `;
 
+	const client = Provider('mistral');
+
 	const { text } = await generateText({
-		model: mistral('mistral-small-latest'),
+		model: client('mistral-small-latest'),
 		prompt,
 		system
 	});
