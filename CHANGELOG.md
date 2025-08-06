@@ -22,15 +22,15 @@ As I embark on this journey, I remain steadfast in my core principles:
 
 In addition to my core principles, I am thrilled to introduce a range of new features that will elevate the Ollami experience:
 
-| Feature | Description |
-|---------|-------------|
-| **Agents** | Intelligent entities that can perform tasks autonomously. |
-| **Cloud Models Integration** | Incorporating advanced models from Mistral, Groq, and more. |
-| **Enhanced Tools** | A suite of tools to augment functionality and user experience. |
-| **Advanced Reasoning Capabilities** | Leveraging the latest models for improved reasoning and decision-making. |
-| **Improved RAG (Retrieval-Augmented Generation)** | Enhancing the generation process with better retrieval mechanisms. |
-| **Document Loading** | Simplifying the process of loading and managing documents. |
-| **Connectors to Other Services** | Exploring integrations with popular services like Google Drive, Notion, and more. |
+| Feature                                           | Description                                                                       |
+| ------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **Agents**                                        | Intelligent entities that can perform tasks autonomously.                         |
+| **Cloud Models Integration**                      | Incorporating advanced models from Mistral, Groq, and more.                       |
+| **Enhanced Tools**                                | A suite of tools to augment functionality and user experience.                    |
+| **Advanced Reasoning Capabilities**               | Leveraging the latest models for improved reasoning and decision-making.          |
+| **Improved RAG (Retrieval-Augmented Generation)** | Enhancing the generation process with better retrieval mechanisms.                |
+| **Document Loading**                              | Simplifying the process of loading and managing documents.                        |
+| **Connectors to Other Services**                  | Exploring integrations with popular services like Google Drive, Notion, and more. |
 
 ### Join Me on This Journey
 

@@ -18,15 +18,18 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 <ModeWatcher />
-<main class="flex h-screen justify-end  bg-cover bg-center bg-no-repeat">
+<main class="flex h-screen justify-end bg-cover bg-center bg-no-repeat">
 	<Sidebar ontogglesidebar={toggleSidebar} />
 	<main
-		class="relative bg-white/90 dark:bg-zinc-900/30 backdrop-blur-[100px] transition-all {isSidebarOpen
+		class="relative bg-white/90 backdrop-blur-[100px] transition-all dark:bg-zinc-900/30 {isSidebarOpen
 			? 'w-[calc(100%-320px)]'
 			: 'w-full'}"
 	>
 		{#if !isSidebarOpen}
-			<button onclick={toggleSidebar} class="absolute top-4 left-4 rounded-lg p-2 transition-colors hover:bg-neutral-50 dark:hover:bg-zinc-800 hover:shadow-none z-10">
+			<button
+				onclick={toggleSidebar}
+				class="absolute top-4 left-4 z-10 rounded-lg p-2 transition-colors hover:bg-neutral-50 hover:shadow-none dark:hover:bg-zinc-800"
+			>
 				<PanelLeft size={20} />
 			</button>
 		{/if}

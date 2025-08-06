@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Spring } from 'svelte/motion';
 	import { SunIcon, MoonIcon } from '@lucide/svelte';
-	import { mode, setMode} from 'mode-watcher';
+	import { mode, setMode } from 'mode-watcher';
 	let x = new Spring(0);
 
 	const modes = [
