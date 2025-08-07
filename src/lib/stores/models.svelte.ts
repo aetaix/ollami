@@ -1,3 +1,5 @@
+import ollama from 'ollama';
+
 export interface Model {
 	name: string;
 	description?: string;
@@ -5,7 +7,24 @@ export interface Model {
 	provider: 'mistral' | 'openai' | 'ollama';
 }
 
+const localModels = await ollama.list();
+
 export let models = $state<Model[]>([
+	...localModels.models.map(
+		(model: {
+			name: string;
+			details?: {
+				parameter_size: string;
+			};
+			model: string;
+		}) => ({
+			name: model.name,
+			description: model.details?.parameter_size,
+			api: model.model,
+			provider: 'ollama' as 'ollama'
+		})
+	),
+
 	{
 		name: 'Mistral Medium 3',
 		description: "Mistral AI's Mistral Medium 3 model",

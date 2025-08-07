@@ -36,6 +36,9 @@
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"esbuild"
+		],
+		"ignoredBuiltDependencies": [
+			"@tailwindcss/oxide"
 		]
 	},
 	"dependencies": {
@@ -46,6 +49,8 @@
 		"@tiptap/starter-kit": "^3.0.9",
 		"bits-ui": "^2.9.1",
 		"mode-watcher": "^1.1.0",
+		"ollama": "^0.5.16",
+		"ollama-ai-provider": "^1.2.0",
 		"svelte-persisted-store": "^0.12.0"
 	}
 }
