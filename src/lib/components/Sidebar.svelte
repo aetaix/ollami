@@ -5,6 +5,7 @@
 	import ToggleMode from './sidebar-ui/ToggleMode.svelte';
 	import Settings from './Settings.svelte';
 	import { fly } from 'svelte/transition';
+	import Ollami from './custom-icons/Ollami.svelte';
 
 	let { ontogglesidebar } = $props();
 
@@ -22,7 +23,7 @@
 	>
 		<div class="flex flex-col gap-4">
 			<div class="flex items-center justify-between">
-				<h1 class="text-lg">Ollami</h1>
+				<Ollami size={64} />
 				<button
 					onclick={ontogglesidebar}
 					class="rounded-lg p-2 transition-colors hover:bg-white hover:shadow-none dark:hover:bg-zinc-800"

@@ -9,10 +9,10 @@
 	import InputTextarea from './input-textarea.svelte';
 	let {
 		input = $bindable(''),
-		onSubmit
+		onsubmit
 	}: {
 		input: string;
-		onSubmit: (e: Event) => void;
+		onsubmit: (e: Event) => void;
 	} = $props();
 
 	function handleModelChange(e: Event) {
@@ -23,10 +23,10 @@
 </script>
 
 <form
-	onsubmit={onSubmit}
+	{onsubmit}
 	class="w-full max-w-2xl rounded-xl border border-zinc-200 bg-white p-2 shadow dark:border-zinc-700 dark:bg-zinc-900"
 >
-	<InputTextarea bind:content={input} onsubmit={onSubmit} />
+	<InputTextarea bind:content={input} {onsubmit} />
 
 	<div class="flex items-center justify-between">
 		{#if models}

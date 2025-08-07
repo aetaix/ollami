@@ -18,25 +18,24 @@
 		editor = new Editor({
 			element: element,
 			extensions: [StarterKit],
-			content: '',
+			content: content,
 			autofocus: true,
 			editorProps: {
 				attributes: {
-					class: 'focus:outline-none'
+					class: 'focus:outline-none max-h-44 overflow-y-auto p-1'
 				},
 				handleKeyDown: (view, event) => {
 					if (event.key === 'Enter' && !event.shiftKey) {
 						event.preventDefault();
 						onsubmit(event);
-                    // element?.dispatchEvent(enterEvent);
+						editor?.commands.clearContent();
+						return true;
 					}
 					return false;
 				}
 			},
-			onTransaction: () => {
-				// force re-render so `editor.isActive` works as expected
-				editor = editor;
-				content = editor?.getText() || '';
+			onUpdate: ({ editor }) => {
+				content = editor.getText();
 			}
 		});
 	});

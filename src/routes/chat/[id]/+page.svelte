@@ -57,7 +57,7 @@
 		}
 	});
 
-	function handleSubmit(event: SubmitEvent) {
+	function onsubmit(event: SubmitEvent) {
 		event.preventDefault();
 		if (!page.params.id) return;
 
@@ -65,12 +65,11 @@
 
 		saveMessage({ role: 'user', parts: [{ type: 'text', text: input }] }, page.params.id);
 		chat.sendMessage({ text: input }, { body: { model: currentChat?.model } });
-		input = '';
 	}
 </script>
 
 {#if isError}
 	<div class="text-red-500">An error occurred. Please try again.</div>
 {:else}
-	<Chat messages={chat.messages} bind:input onSubmit={handleSubmit} />
+	<Chat messages={chat.messages} bind:input {onsubmit} />
 {/if}

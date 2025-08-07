@@ -5,9 +5,9 @@
 	import { getSelectedModel } from '$lib/stores/models.svelte';
 	import Input from '$lib/components/chat-ui/input.svelte';
 
-	let input = $state('');
+	let input = '';
 
-	function handleSubmit(e: Event) {
+	function onsubmit(e: Event) {
 		e.preventDefault();
 		const id = generateId();
 
@@ -30,5 +30,5 @@
 </script>
 
 <div class="flex h-full w-full flex-col items-center justify-center gap-2">
-	<Input bind:input onSubmit={handleSubmit} />
+	<Input bind:input {onsubmit} />
 </div>

@@ -6,7 +6,7 @@
 	{#each message.parts as part, partIndex (partIndex)}
 		{#if part.type === 'text'}
 			<div class="flex justify-end">
-				<div class="rounded-lg bg-neutral-100 p-2">{part.text}</div>
+				<div class="rounded-xl bg-zinc-100 dark:bg-zinc-800 p-3">{part.text}</div>
 			</div>
 		{/if}
 	{/each}
