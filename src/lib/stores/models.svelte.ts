@@ -50,3 +50,13 @@ export let models = $state<Model[]>([
 		provider: 'openai'
 	}
 ]);
+
+let selectedModel = $state<Model>(models[0]);
+
+export function getSelectedModel() {
+	return selectedModel;
+}
+
+export function setSelectedModel(model: Model) {
+	selectedModel = model;
+}

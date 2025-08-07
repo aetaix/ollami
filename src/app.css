@@ -1,3 +1,7 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 @custom-variant dark (&:where(.dark, .dark *));
+
+body {  
+    @apply bg-white dark:bg-zinc-950;
+}

@@ -19,9 +19,11 @@
 </svelte:head>
 <ModeWatcher />
 <main class="flex h-screen justify-end bg-cover bg-center bg-no-repeat">
-	<Sidebar ontogglesidebar={toggleSidebar} />
-	<main
-		class="relative bg-white/90 backdrop-blur-[100px] transition-all dark:bg-zinc-900/30 {isSidebarOpen
+	{#if isSidebarOpen}
+		<Sidebar ontogglesidebar={toggleSidebar} />
+	{/if}
+	<div
+		class="relative transition-all duration-300 ease-in-out {isSidebarOpen
 			? 'w-[calc(100%-320px)]'
 			: 'w-full'}"
 	>
@@ -34,5 +36,5 @@
 			</button>
 		{/if}
 		{@render children?.()}
-	</main>
+	</div>
 </main>

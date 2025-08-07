@@ -41,6 +41,9 @@
 	"dependencies": {
 		"@humanspeak/svelte-markdown": "^0.8.9",
 		"@lucide/svelte": "^0.536.0",
+		"@tiptap/core": "^3.0.9",
+		"@tiptap/pm": "^3.0.9",
+		"@tiptap/starter-kit": "^3.0.9",
 		"bits-ui": "^2.9.1",
 		"mode-watcher": "^1.1.0",
 		"svelte-persisted-store": "^0.12.0"

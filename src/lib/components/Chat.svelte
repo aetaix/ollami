@@ -1,8 +1,10 @@
 <script lang="ts">
 	import AssistantMessage from './chat-ui/assistantMessage.svelte';
+	import Input from './chat-ui/input.svelte';
 	import UserMessage from './chat-ui/userMessage.svelte';
 
 	let { messages, input = $bindable(''), onSubmit } = $props();
+
 </script>
 
 <main class="relative flex h-screen w-full flex-col">
@@ -18,9 +20,6 @@
 		</ul>
 	</div>
 	<div class="absolute right-0 bottom-0 left-0 flex justify-center p-6">
-		<form onsubmit={onSubmit} class="w-[300px] rounded-lg bg-neutral-100 p-2">
-			<input bind:value={input} class="w-full" />
-			<button type="submit">Send</button>
-		</form>
+		<Input bind:input {onSubmit} />
 	</div>
 </main>
