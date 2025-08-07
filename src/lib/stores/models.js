@@ -2,7 +2,6 @@ import { pop } from 'svelte-highlight/styles';
 import { writable } from 'svelte/store';
 
 export let initialModels = [
-
 	{
 		name: 'Llama3.1',
 		image: 'llama3.1:latest',
@@ -30,7 +29,7 @@ export let initialModels = [
 		fav: true,
 		className: 'llama'
 	},
-	
+
 	{
 		name: 'Llama3.2 1B',
 		image: 'llama3.2:1b',
@@ -184,7 +183,6 @@ export let initialModels = [
 		installed: false,
 		popularity: 9,
 		fav: false
-
 	},
 	{
 		name: 'Granite Code 3B',
@@ -227,6 +225,20 @@ export let initialModels = [
 		fav: false
 	},
 	{
+		name: 'Gemma 3n',
+		image: 'gemma3n:latest',
+		parameters: '4B',
+		context: 32000,
+		size: 7.5,
+		icon: 'gemma.svg',
+		tags: ['chat', 'text', 'reasoning'],
+		description:
+			'Gemma 3n models are designed for efficient execution on everyday devices such as laptops, tablets or phones. These models were trained with data in over 140 spoken languages.',
+		installed: false,
+		popularity: 10,
+		fav: false
+	},
+	{
 		name: 'Gemma 3 4B',
 		image: 'gemma3:4b',
 		parameters: '4B',
@@ -234,7 +246,8 @@ export let initialModels = [
 		size: 3.3,
 		icon: 'gemma.svg',
 		tags: ['chat', 'text', 'reasoning'],
-		description: 'The Gemma 3 models are multimodal—processing text and images—and feature a 128K context window with support for over 140 languages. ',
+		description:
+			'The Gemma 3 models are multimodal—processing text and images—and feature a 128K context window with support for over 140 languages. ',
 		installed: false,
 		popularity: 2100,
 		fav: false
@@ -247,7 +260,8 @@ export let initialModels = [
 		size: 5.4,
 		icon: 'gemma.svg',
 		tags: ['chat', 'text', 'reasoning'],
-		description: 'Google’s Gemma 2 model is available in three sizes, 2B, 9B and 27B, featuring a brand new architecture designed for class leading performance and efficiency.',
+		description:
+			'Google’s Gemma 2 model is available in three sizes, 2B, 9B and 27B, featuring a brand new architecture designed for class leading performance and efficiency.',
 		installed: false,
 
 		popularity: 2100,
@@ -296,7 +310,6 @@ export let initialModels = [
 		popularity: 164.3,
 		fav: false
 	},
-
 
 	{
 		name: 'Code Llama',
