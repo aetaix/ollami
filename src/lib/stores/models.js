@@ -267,7 +267,6 @@ export let initialModels = [
 		popularity: 2100,
 		fav: false
 	},
-
 	{
 		name: 'Wizardlm2',
 		image: 'wizardlm2:latest',
@@ -355,6 +354,48 @@ export let initialModels = [
 		fav: false
 	},
 	{
+		name: 'DeepSeek-R1',
+		image: 'deepseek-r1:8b',
+		parameters: '8B',
+		tags: ['chat', 'text', 'reasoning'],
+		size: 5.2,
+		context: 128000,
+		icon: 'deepseek.svg',
+		description: `DeepSeek-R1 is a 1B parameter language model, and outperforms Gemini 1.0 Pro. The model has underwent a post-training process that incorporates both supervised fine-tuning and direct preference optimization to ensure precise instruction adherence and robust safety measures. Our model is designed to accelerate research on language and multimodal models, for use as a building block for generative AI powered features.`,
+		installed: false,
+
+		popularity: 55000,
+		fav: false
+	},
+	{
+		name: 'DeepSeek-R1',
+		image: 'deepseek-r1:14b',
+		parameters: '14B',
+		tags: ['chat', 'text', 'reasoning'],
+		size: 9.0,
+		context: 128000,
+		icon: 'deepseek.svg',
+		description: `DeepSeek-R1 is a 1B parameter language model, and outperforms Gemini 1.0 Pro. The model has underwent a post-training process that incorporates both supervised fine-tuning and direct preference optimization to ensure precise instruction adherence and robust safety measures. Our model is designed to accelerate research on language and multimodal models, for use as a building block for generative AI powered features.`,
+		installed: false,
+
+		popularity: 55000,
+		fav: false
+	},
+	{
+		name: 'DeepSeek-R1',
+		image: 'deepseek-r1:32b',
+		parameters: '32B',
+		tags: ['chat', 'text', 'reasoning'],
+		size: 20.0,
+		context: 128000,
+		icon: 'deepseek.svg',
+		description: `DeepSeek-R1 is a 1B parameter language model, and outperforms Gemini 1.0 Pro. The model has underwent a post-training process that incorporates both supervised fine-tuning and direct preference optimization to ensure precise instruction adherence and robust safety measures. Our model is designed to accelerate research on language and multimodal models, for use as a building block for generative AI powered features.`,
+		installed: false,
+
+		popularity: 55000,
+		fav: false
+	},
+	{
 		name: 'Deepseek Coder',
 		image: 'deepseek-coder:6.7b',
 		parameters: '6.7B',
@@ -405,6 +446,26 @@ export let initialModels = [
 
 		popularity: 100.1,
 		fav: false
+	},
+	{
+		name: 'Deepseek Coder V2',
+		image: 'deepseek-coder-v2:16b',
+		parameters: '16B',
+		tags: ['code'],
+		size: 8.9,
+		description:
+			'DeepSeek-Coder-V2 is an open-source Mixture-of-Experts (MoE) code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks. DeepSeek-Coder-V2 is further pre-trained from DeepSeek-Coder-V2-Base with 6 trillion tokens sourced from a high-quality and multi-source corpus.',
+		installed: false
+	},
+	{
+		name: 'Deepseek Coder V2',
+		image: 'deepseek-coder-v2:236b',
+		parameters: '236B',
+		tags: ['code'],
+		size: 133,
+		description:
+			'DeepSeek-Coder-V2 is an open-source Mixture-of-Experts (MoE) code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks. DeepSeek-Coder-V2 is further pre-trained from DeepSeek-Coder-V2-Base with 6 trillion tokens sourced from a high-quality and multi-source corpus.',
+		installed: false
 	},
 	{
 		name: 'Vicuna',
