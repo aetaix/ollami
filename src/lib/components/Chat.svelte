@@ -9,15 +9,12 @@
 
 	$effect(() => {
 		if (messages && messages.length > 0) {
-			// Scroll to bottom of messages container
 			messagesContainer.scrollTo({
 				top: messagesContainer.scrollHeight,
 				behavior: 'instant'
 			});
 		}
 	});
-
-	$inspect(messages);
 </script>
 
 <main class="relative flex h-screen w-full flex-col">

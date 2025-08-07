@@ -2,6 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
+	import { Placeholder } from '@tiptap/extensions';
 
 	let {
 		content = $bindable(''),
@@ -17,7 +18,12 @@
 	onMount(() => {
 		editor = new Editor({
 			element: element,
-			extensions: [StarterKit],
+			extensions: [
+				StarterKit,
+				Placeholder.configure({
+					placeholder: 'Type your message here...'
+				})
+			],
 			content: content,
 			autofocus: true,
 			editorProps: {

@@ -1,4 +1,4 @@
-import { createOllama } from 'ollama-ai-provider';
+// import { createOllama } from '../../../node_modules/ollama-ai-provider/packages/ollama/src' 
 import { createMistral } from '@ai-sdk/mistral';
 import { createOpenAI } from '@ai-sdk/openai';
 
@@ -12,7 +12,7 @@ const openai = createOpenAI({
 	apiKey: OPENAI_API_KEY || ''
 });
 
-const ollama = createOllama();
+// const ollama = createOllama();
 
 export const Provider = (provider: string) => {
 	if (provider === 'mistral') {
@@ -20,7 +20,7 @@ export const Provider = (provider: string) => {
 	} else if (provider === 'openai') {
 		return openai;
 	} else if (provider === 'ollama') {
-		return ollama;
+		return false
 	} else {
 		throw new Error('Invalid provider');
 	}
