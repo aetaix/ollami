@@ -42,6 +42,7 @@
 		]
 	},
 	"dependencies": {
+		"@ai-sdk/openai-compatible": "^1.0.5",
 		"@ai-sdk/provider": "^2.0.0",
 		"@humanspeak/svelte-markdown": "^0.8.9",
 		"@lucide/svelte": "^0.536.0",

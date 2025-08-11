@@ -7,6 +7,13 @@ declare global {
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
+		interface Model {
+			name: string;
+			description: string;
+			api: string;
+			provider: 'ollama' | 'openai' | 'mistral';
+			version?: string;
+		}
 	}
 }
 
