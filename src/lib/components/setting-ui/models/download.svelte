@@ -3,38 +3,62 @@
 
 	let { model } = $props();
 
-    let isDownloading = $state(false);
-    let progress = $state(0);
+	// state
+	let isDownloading = $state(false);
+	let progress = $state(0); // 0 - 100
+	let status = $state<string | null>(null);
+	const isComplete = () => progress === 100;
+
+	function reset() {
+		progress = 0;
+		status = null;
+	}
 
 	async function pullModel() {
-        isDownloading = true;
-		const modelName = model.api;
-		const response = await ollama.pull({
-			model: modelName,
-			stream: true
-		});
-		console.log(response);
-		for await (const part of response) {
-			console.log(part);
-            progress = Math.round(part.completed / part.total * 100);
+		if (isDownloading || isComplete()) return; // prevent unnecessary calls
+		isDownloading = true;
+		reset();
+		status = 'Starting…';
+		try {
+			const response = await ollama.pull({ model: model.api, stream: true });
 
-			//{
-			// "status": "pulling a3de86cd1c13",
-			// "digest": "sha256:a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
-			// "total": 5225374496,
-			// "completed": 2824595558
-
-             if (progress === 1) {
-                isDownloading = false;
-            }
+			for await (const part of response) {
+				if (part?.status) status = part.status;
+				if (
+					typeof part?.total === 'number' &&
+					typeof part?.completed === 'number' &&
+					part.total > 0
+				) {
+					progress = Math.min(100, Math.round((part.completed / part.total) * 100));
+				}
+			}
+			if (!isComplete()) {
+				progress = 100;
+			}
+			status = 'Completed';
+		} catch (e: any) {
+			console.error('Model pull failed', e);
+			status = e?.message || 'Failed';
+		} finally {
+			isDownloading = false;
 		}
 	}
 </script>
 
-<button onclick={pullModel} class="text-sm opacity-50 hover:opacity-100">
-	{model.name}
-    
-    {#if isDownloading}
-        {progress} %
-    {/if}
+<button
+	onclick={pullModel}
+	class="text-sm opacity-70 hover:opacity-100 transition disabled:opacity-40 flex flex-col items-start gap-1"
+	disabled={isDownloading || isComplete()}
+	aria-busy={isDownloading}
+	aria-label={`Download model ${model.name}${isDownloading ? ' (downloading)' : ''}`}
+>
+	<span>{model.name}</span>
+	{#if isDownloading}
+		<span class="text-xs tabular-nums">{progress}% {status}</span>
+		<div class="h-1 w-full bg-neutral-700 rounded overflow-hidden" role="progressbar" aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100">
+			<div class="h-full bg-green-500 transition-[width] duration-150" style={`width:${progress}%`}></div>
+		</div>
+	{:else if isComplete()}
+		<span class="text-xs text-green-500">Downloaded</span>
+	{/if}
 </button>

@@ -7,11 +7,15 @@
 
 	let initialized = false;
 	let input = $state('');
+	let modelLoading = $state(false);
 	let isError = $state(false);
 
 	const chat = new SDKChat({
 		get id() {
 			return page.params.id;
+		},
+		onData: () => {
+			modelLoading = false;
 		},
 		onFinish: (response) => {
 			if (!page.params.id) return;
@@ -39,7 +43,9 @@
 				const firstPart = firstMessage.parts[0];
 
 				if (firstPart.type === 'text') {
+					modelLoading = true;
 					const text = firstPart.text;
+
 					chat.sendMessage(
 						{ text },
 						{
@@ -63,7 +69,7 @@
 
 		const currentChat = $chats.find((chat) => chat.id === page.params.id);
 
-		saveMessage({ role: 'user', parts: [{ type: 'text', text: input }] }, page.params.id);
+		saveMessage({ id: crypto.randomUUID(), role: 'user', parts: [{ type: 'text', text: input }] }, page.params.id);
 		chat.sendMessage({ text: input }, { body: { model: currentChat?.model } });
 	}
 </script>
