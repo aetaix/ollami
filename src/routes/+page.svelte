@@ -4,6 +4,7 @@
 	import { chats } from '$lib/stores/chatsStorage';
 	import { getSelectedModel } from '$lib/stores/models.svelte';
 	import Input from '$lib/components/chat-ui/input.svelte';
+	// import WidgetZone from '$lib/components/widgets/WidgetZone.svelte';
 
 	let input = '';
 
@@ -30,5 +31,6 @@
 </script>
 
 <div class="flex h-full w-full flex-col items-center justify-center gap-2">
+
 	<Input bind:input {onsubmit} />
 </div>
