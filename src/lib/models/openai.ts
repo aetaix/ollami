@@ -1,4 +1,12 @@
-export const openaiModels : App.Model[] = [{
+export const openaiModels: App.Model[] = [
+	{
+		name: 'GPT-o4-mini',
+		description: "OpenAI's o4-mini model",
+		api: 'o4-mini',
+		provider: 'openai',
+		reasoning: true
+	},
+	{
 		name: 'GPT-4o',
 		description: "OpenAI's GPT-4o model",
 		api: 'gpt-4o',
@@ -21,4 +29,5 @@ export const openaiModels : App.Model[] = [{
 		description: "OpenAI's GPT-4.1-mini model",
 		api: 'gpt-4.1-mini',
 		provider: 'openai'
-	}]
+	}
+];

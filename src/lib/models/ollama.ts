@@ -9,6 +9,12 @@ export const staticOllamaModels: App.Model[] = [
 		api: 'gemma3:4b',
 		provider: 'ollama'
 	},
+		{
+		name: 'Gemma 3 270M',
+		description: 'The current, most capable model that runs on a single GPU.',
+		api: 'gemma3:270m',
+		provider: 'ollama'
+	},
 	{
 		name: 'Qwen 3',
 		description: 'The latest Qwen 3 model with a context length of 128k.',

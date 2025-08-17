@@ -1,13 +1,20 @@
 export const mistralModels : App.Model[] = [
 	{
 		name: 'Mistral Medium 3',
-		description: "Mistral AI's Mistral Medium 3 model",
+		description: "State-of-the-art performance. Simplified enterprise deployments. Cost-efficient.",
 		api: 'mistral-medium-latest',
 		provider: 'mistral'
 	},
 	{
+		name: 'Magistral Medium',
+		description: "Thinking model excelling in domain-specific, transparent, and multilingual reasoning.",
+		api: 'magistral-medium-latest',
+		provider: 'mistral',
+		reasoning: true
+	},
+	{
 		name: 'Mistral Small',
-		description: "Mistral AI's Mistral Small model",
+		description: "SOTA. Multimodal. Multilingual. Apache 2.0.",
 		api: 'mistral-small-latest',
 		provider: 'mistral'
 	},

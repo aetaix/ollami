@@ -13,6 +13,7 @@ declare global {
 			api: string;
 			provider: 'ollama' | 'openai' | 'mistral';
 			version?: string;
+			reasoning?: boolean;
 		}
 	}
 }
