@@ -1,10 +1,22 @@
 <script lang="ts">
-	import ollama from 'ollama';
-	import { staticOllamaModels } from '$lib/models/ollama';
-	import { Dialog } from 'bits-ui';
-	import Download from './setting-ui/models/download.svelte';
-
-
+	import { Dialog, Tabs } from 'bits-ui';
+	const settings = [
+		{
+			label: 'General',
+			value: 'general',
+			content: 'General settings content goes here.'
+		},
+		{
+			label: 'Account',
+			value: 'account',
+			content: 'Account settings content goes here.'
+		},
+		{
+			label: 'Billing',
+			value: 'billing',
+			content: 'Billing settings content goes here.'
+		}
+	];
 </script>
 
 <Dialog.Root>
@@ -12,16 +24,26 @@
 	<Dialog.Portal>
 		<Dialog.Overlay class="fixed inset-0 z-50 bg-black/80" />
 		<Dialog.Content
-			class="fixed top-[50%] left-[50%] z-50 w-full max-w-xl translate-x-[-50%] translate-y-[-50%] rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800"
+			class="fixed top-[50%] left-[50%] z-50 w-full max-w-3xl translate-x-[-50%] translate-y-[-50%] rounded-lg border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-800"
 		>
-			<Dialog.Title class="text-lg">Settings</Dialog.Title>
-			<Dialog.Description>Update your local Ollami</Dialog.Description>
-			<div>
-				{#each staticOllamaModels as model}
-					<Download {model} />
+			<Tabs.Root class="grid grid-cols-6">
+				<Tabs.List class="col-span-2 flex flex-col border-r border-zinc-200 p-4">
+					<h3 class="mb-4 text-lg">Settings</h3>
+					{#each settings as setting}
+						<Tabs.Trigger class="text-left text-sm" value={setting.label}>
+							{setting.label}
+						</Tabs.Trigger>
+					{/each}
+				</Tabs.List>
+				{#each settings as setting}
+					<Tabs.Content class="col-span-4" value={setting.label}>
+						<div class="p-4">
+							{setting.content}
+						</div>
+					</Tabs.Content>
 				{/each}
-			</div>
-			<Dialog.Close />
+			</Tabs.Root>
+			<Dialog.Close class="absolute top-4 right-4 text-sm">Close</Dialog.Close>
 		</Dialog.Content>
 	</Dialog.Portal>
 </Dialog.Root>
