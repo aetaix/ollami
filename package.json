@@ -51,8 +51,10 @@
 		"@tiptap/pm": "^3.0.9",
 		"@tiptap/starter-kit": "^3.0.9",
 		"bits-ui": "^2.9.1",
+		"highlight.js": "^11.11.1",
 		"mode-watcher": "^1.1.0",
 		"ollama": "^0.5.16",
+		"svelte-highlight": "^7.8.3",
 		"svelte-persisted-store": "^0.12.0"
 	}
 }
