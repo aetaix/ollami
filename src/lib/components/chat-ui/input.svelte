@@ -51,7 +51,7 @@
 									{#snippet children({ selected })}
 										{model.name}
 										{#if model.reasoning}
-											<span class="bg-blue-50 text-xs text-blue-500 rounded p-1"> Reasoning</span>
+											<span class="rounded bg-blue-50 p-1 text-xs text-blue-500"> Reasoning</span>
 										{/if}
 										{#if selected}
 											<div class="ml-auto">

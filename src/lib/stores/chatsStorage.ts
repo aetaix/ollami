@@ -36,7 +36,9 @@ function updateChat(chatId: string, mutate: (chat: Chat) => Chat): void {
 }
 
 // CRUD & utility API ----------------------------------------------------------
-export function createChat(partial: Omit<Chat, 'createdAt' | 'messages'> & { messages?: ChatMessage[] }) {
+export function createChat(
+	partial: Omit<Chat, 'createdAt' | 'messages'> & { messages?: ChatMessage[] }
+) {
 	const chat: Chat = {
 		...partial,
 		createdAt: new Date().toISOString(),

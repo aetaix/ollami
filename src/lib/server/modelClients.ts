@@ -2,7 +2,6 @@ import { createMistral } from '@ai-sdk/mistral';
 import { createOpenAI } from '@ai-sdk/openai';
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 
-
 import { MISTRAL_API_KEY, OPENAI_API_KEY } from '$env/static/private';
 
 const mistral = createMistral({

@@ -69,7 +69,10 @@
 
 		const currentChat = $chats.find((chat) => chat.id === page.params.id);
 
-		saveMessage({ id: crypto.randomUUID(), role: 'user', parts: [{ type: 'text', text: input }] }, page.params.id);
+		saveMessage(
+			{ id: crypto.randomUUID(), role: 'user', parts: [{ type: 'text', text: input }] },
+			page.params.id
+		);
 		chat.sendMessage({ text: input }, { body: { model: currentChat?.model } });
 	}
 </script>

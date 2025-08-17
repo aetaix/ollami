@@ -67,5 +67,3 @@ Task: Count 'r' in "strawberry"
 </think>
 The letter "r" appears 3 times in "strawberry".
 `;
-
-

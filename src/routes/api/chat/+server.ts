@@ -54,7 +54,6 @@ export const POST: RequestHandler = async ({ request }) => {
 			: await createNormalStream(client, model.api, commonConfig);
 
 		return result.toUIMessageStreamResponse();
-
 	} catch (error) {
 		console.error('Chat API error:', error);
 		return createErrorResponse(ERROR_RESPONSES.INTERNAL_ERROR);
@@ -87,7 +86,7 @@ async function createNormalStream(
 	});
 }
 
-function createErrorResponse(response: typeof ERROR_RESPONSES[keyof typeof ERROR_RESPONSES]) {
+function createErrorResponse(response: (typeof ERROR_RESPONSES)[keyof typeof ERROR_RESPONSES]) {
 	return new Response(JSON.stringify(response.body), {
 		status: response.status,
 		headers: { 'Content-Type': 'application/json' }

@@ -49,8 +49,6 @@
 			height = rect.height;
 		}
 	});
-
-
 </script>
 
 <aside
@@ -122,7 +120,10 @@
 							<button
 								aria-label={`Delete chat ${chat.name}`}
 								class="shrink-0 translate-y-0.5 p-2 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
-								onclick={(e) => { e.stopPropagation(); deleteChat(chat.id); }}
+								onclick={(e) => {
+									e.stopPropagation();
+									deleteChat(chat.id);
+								}}
 							>
 								<Trash size={18} />
 							</button>

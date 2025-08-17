@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Tabs } from 'bits-ui';
-    import { ollamaModels } from '$lib/models/ollama';
-    import { mistralModels } from '$lib/models/mistral';
-    import { openaiModels } from '$lib/models/openai';
+	import { ollamaModels } from '$lib/models/ollama';
+	import { mistralModels } from '$lib/models/mistral';
+	import { openaiModels } from '$lib/models/openai';
 	import TabContent from '$lib/components/models-ui/TabContent.svelte';
 	const modelTabs = [
 		{
@@ -24,7 +24,9 @@
 </script>
 
 <div class="flex h-screen flex-col p-4 pl-0">
-	<div class="h-full w-full rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 shadow">
+	<div
+		class="h-full w-full rounded-2xl border border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800"
+	>
 		<header class="flex flex-col items-start p-5">
 			<h1 class="text-xl">Models</h1>
 			<p class="text-sm text-zinc-500">
@@ -33,7 +35,7 @@
 			</p>
 		</header>
 		<Tabs.Root value={modelTabs[0].value}>
-			<Tabs.List class="flex gap-8 border-b border-zinc-200 dark:border-zinc-700 px-5">
+			<Tabs.List class="flex gap-8 border-b border-zinc-200 px-5 dark:border-zinc-700">
 				{#each modelTabs as tab}
 					<Tabs.Trigger
 						value={tab.value}

@@ -73,7 +73,9 @@
 			{/each}
 		</ul>
 	</div>
-	<div class="absolute right-0 bottom-0 left-0 flex justify-center p-6 pt-0 bg-gradient-to-t from-white dark:from-black from-80% mask-x-from-90% mask-x-to-90%">
+	<div
+		class="absolute right-0 bottom-0 left-0 flex justify-center bg-gradient-to-t from-white from-80% mask-x-from-90% mask-x-to-90% p-6 pt-0 dark:from-black"
+	>
 		{#if arrowDownVisible && status !== 'streaming' && status !== 'submitted'}
 			<button
 				in:fly={{ y: 24, duration: 200, delay: 300 }}
