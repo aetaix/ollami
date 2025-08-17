@@ -6,39 +6,58 @@
 	import { ChevronDown } from '@lucide/svelte';
 	import { tick } from 'svelte';
 
-	let { messages, input = $bindable(''), onsubmit } = $props();
+	let { messages, input = $bindable(''), status, onsubmit } = $props();
 
 	let messagesContainer: HTMLDivElement;
 	let arrowDownVisible = $state(false);
+	let autoScroll = $state(true); // whether we should stick to bottom during streaming
+
+	const bottomThreshold = 48; // px tolerance to consider "at bottom"
+
+	function isNearBottom() {
+		if (!messagesContainer) return true;
+		return (
+			messagesContainer.scrollTop + messagesContainer.clientHeight >=
+			messagesContainer.scrollHeight - bottomThreshold
+		);
+	}
 
 	// Scroll helper
-	async function scrollToBottom() {
+	async function scrollToBottom(behavior: ScrollBehavior = 'smooth') {
 		if (!messagesContainer) return;
 		await tick();
 		messagesContainer.scrollTo({
 			top: messagesContainer.scrollHeight,
-			behavior: 'smooth'
+			behavior
 		});
 	}
 
 	// Auto scroll when messages  changes
 	$effect(() => {
-		if (messages[messages.length - 1]) {
-			scrollToBottom();
+		const hasMessages = !!messages[messages.length - 1];
+		if (!hasMessages) return;
+
+		if (status === 'streaming' || status === 'submitted') {
+			// Only auto-scroll while streaming if user hasn't scrolled up
+			if (autoScroll) scrollToBottom();
+		} else {
+			// For non-streaming updates, keep behavior gated by autoScroll as well
+			if (autoScroll) scrollToBottom('instant');
 		}
 	});
 
 	const handleScroll = () => {
 		if (!messagesContainer) return;
-		arrowDownVisible =
-			messagesContainer.scrollTop + messagesContainer.clientHeight < messagesContainer.scrollHeight;
+		const atBottom = isNearBottom();
+		autoScroll = atBottom; // disable sticking to bottom when user scrolls up
+		arrowDownVisible = !atBottom;
 	};
 </script>
 
 <main class="relative flex h-screen w-full flex-col">
 	<div
 		bind:this={messagesContainer}
-		class="overflow-y-auto mask-b-from-85% mask-b-to-90%"
+		class="overflow-y-auto"
 		onscroll={handleScroll}
 		role="log"
 		aria-live="polite"
@@ -54,13 +73,13 @@
 			{/each}
 		</ul>
 	</div>
-	<div class="absolute right-0 bottom-0 left-0 flex justify-center p-6">
-		{#if arrowDownVisible}
+	<div class="absolute right-0 bottom-0 left-0 flex justify-center p-6 pt-0 bg-gradient-to-t from-white from-80%">
+		{#if arrowDownVisible && status !== 'streaming' && status !== 'submitted'}
 			<button
-				in:fly={{ y: 24, duration: 200, delay: 400 }}
+				in:fly={{ y: 24, duration: 200, delay: 300 }}
 				out:fly={{ y: 24, duration: 200 }}
-				onclick={scrollToBottom}
-				class="absolute -top-8 z-10 flex h-10 w-10 justify-center items-center rounded-full bg-white shadow border border-zinc-200 dark:border-zinc-700 transition-all hover:scale-110 dark:bg-zinc-800"
+				onclick={() => scrollToBottom('smooth')}
+				class="absolute -top-12 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white shadow transition-all hover:scale-110 dark:border-zinc-700 dark:bg-zinc-800"
 				aria-label="Scroll to bottom"
 			>
 				<ChevronDown size={24} />

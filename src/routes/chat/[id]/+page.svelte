@@ -77,5 +77,5 @@
 {#if isError}
 	<div class="text-red-500">An error occurred. Please try again.</div>
 {:else}
-	<Chat messages={chat.messages} bind:input {onsubmit} />
+	<Chat messages={chat.messages} bind:input {onsubmit} status={chat.status} />
 {/if}
