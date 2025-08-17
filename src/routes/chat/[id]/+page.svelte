@@ -77,6 +77,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{page.params.id ? `${$chats.find((chat) => chat.id === page.params.id)?.name} | Ollami` : 'New Chat'}</title>
+</svelte:head>
+
 {#if isError}
 	<div class="text-red-500">An error occurred. Please try again.</div>
 {:else}

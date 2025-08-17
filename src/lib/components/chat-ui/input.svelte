@@ -21,7 +21,7 @@
 
 <form
 	{onsubmit}
-	class="flex w-full max-w-2xl flex-col gap-2 rounded-xl border border-zinc-200 bg-white p-2 shadow dark:border-zinc-700 dark:bg-zinc-900"
+	class="flex w-full max-w-2xl flex-col gap-2 rounded-xl  bg-white border-glass p-2 shadow  dark:bg-zinc-800"
 >
 	<InputTextarea bind:content={input} {onsubmit} />
 

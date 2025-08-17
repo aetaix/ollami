@@ -53,18 +53,18 @@
 
 <aside
 	transition:fly={{ x: -320, duration: 200 }}
-	class="fixed top-0 left-0 z-50 h-screen w-[320px] p-4"
+	class="fixed top-0 left-0 z-50 h-screen w-[320px] p-4 "
 >
 	<nav
 		bind:this={navEl}
 		aria-label="Sidebar"
-		class="relative flex h-full flex-col justify-between rounded-2xl border border-neutral-200 bg-neutral-100/90 p-2 shadow backdrop-blur-3xl dark:border-zinc-700 dark:bg-zinc-900/70"
+		class="relative flex h-full flex-col justify-between transition-colors rounded-2xl bg-white/10 border-glass p-2 shadow backdrop-blur-2xl  dark:bg-zinc-800/50"
 	>
 		<div class="flex flex-col gap-2">
 			<div
 				style:height={height + 'px'}
 				style:transform={`translateY(${posY}px)`}
-				class="pointer-events-none absolute right-2 left-2 origin-top rounded-xl border border-zinc-200 bg-white shadow transition-all ease-in-out dark:border-zinc-700 dark:bg-zinc-800"
+				class="pointer-events-none absolute right-2 left-2 origin-top rounded-xl border-glass bg-white shadow transition-all ease-in-out dark:bg-zinc-800"
 			></div>
 			<div class="relative flex items-center justify-between pt-2 pl-2">
 				<Ollami size={64} aria-label="Ollami" />

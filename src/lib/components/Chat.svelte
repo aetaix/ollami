@@ -57,13 +57,13 @@
 <main class="relative flex h-screen w-full flex-col">
 	<div
 		bind:this={messagesContainer}
-		class="overflow-y-auto"
+		class="overflow-y-auto mask-b-from-90% mask-b-to-95%"
 		onscroll={handleScroll}
 		role="log"
 		aria-live="polite"
 		aria-label="Chat messages"
 	>
-		<ul class="mx-auto max-w-2xl pt-20 pb-32">
+		<ul class="mx-auto max-w-2xl pt-20 pb-32 ">
 			{#each messages as message, messageIndex (messageIndex)}
 				{#if message.role === 'user'}
 					<UserMessage {message} />
@@ -74,7 +74,7 @@
 		</ul>
 	</div>
 	<div
-		class="absolute right-0 bottom-0 left-0 flex justify-center bg-gradient-to-t from-white from-80% mask-x-from-90% mask-x-to-90% p-6 pt-0 dark:from-black"
+		class="absolute right-0 bottom-0 left-0 flex justify-center p-6 pt-0 dark:from-black"
 	>
 		{#if arrowDownVisible && status !== 'streaming' && status !== 'submitted'}
 			<button

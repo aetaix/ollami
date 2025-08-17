@@ -3,5 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-	@apply bg-white dark:bg-zinc-950;
+	@apply bg-white dark:bg-zinc-900 transition-colors;
+}
+
+@utility border-glass {
+	@apply border border-t-white/80 border-r-zinc-200/50 border-b-zinc-200/90 border-l-white/90 dark:border-t-zinc-200/20 dark:border-r-zinc-700 dark:border-b-zinc-700 dark:border-l-zinc-200/10;
 }
