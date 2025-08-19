@@ -2,10 +2,35 @@
 @plugin '@tailwindcss/typography';
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
 body {
 	@apply bg-white dark:bg-zinc-900 transition-colors;
 }
 
 @utility border-glass {
-	@apply border border-t-white/80 border-r-zinc-200/50 border-b-zinc-200/90 border-l-white/90 dark:border-t-zinc-200/20 dark:border-r-zinc-700 dark:border-b-zinc-700 dark:border-l-zinc-200/10;
+	@apply border border-t-zinc-200/80 border-r-zinc-400/30 border-b-zinc-200/90 border-l-zinc-100/90 dark:border-t-zinc-500/20 dark:border-r-zinc-700 dark:border-b-zinc-700 dark:border-l-zinc-100/20;
 }
+
+
+
+@keyframes accordion-down {
+		from {
+			height: 0;
+		}
+		to {
+			height: var(--bits-accordion-content-height);
+		}
+	}
+ 
+	@keyframes accordion-up {
+		from {
+			height: var(--bits-accordion-content-height);
+		}
+		to {
+			height: 0;
+		}
+	}

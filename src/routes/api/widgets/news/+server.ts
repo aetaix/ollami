@@ -4,7 +4,7 @@ import { NEWS_API_KEY } from '$env/static/private';
 
 export async function POST({ request }) {
 	const { model, countryCode }: { model: App.Model; countryCode: string } = await request.json();
-	console.log(model, countryCode);
+
 	// GET https://newsapi.org/v2/top-headlines?country=us&apiKey=a97c79e9fc3a460cab028663d25a130b
 
 	const getNews = await fetch(
@@ -18,8 +18,6 @@ export async function POST({ request }) {
 	);
 
 	const newsData = await getNews.json();
-
-	console.log(newsData);
 
 	const prompt = `Summarize the following news articles:\n${newsData.articles.map((article: any) => `- ${article.title}`).join('\n')}`;
 

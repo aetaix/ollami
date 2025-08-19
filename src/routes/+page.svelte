@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { chats } from '$lib/stores/chatsStorage';
 	import { getSelectedModel } from '$lib/stores/models.svelte';
-	import Input from '$lib/components/chat-ui/input.svelte';
+	import Input from '$lib/components/chat-ui/Input.svelte';
 	// import WidgetZone from '$lib/components/widgets/WidgetZone.svelte';
 
 	let input = '';

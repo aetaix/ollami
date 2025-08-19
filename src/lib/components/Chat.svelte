@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import AssistantMessage from './chat-ui/assistantMessage.svelte';
-	import Input from './chat-ui/input.svelte';
-	import UserMessage from './chat-ui/userMessage.svelte';
+	import AssistantMessage from './chat-ui/AssistantMessage.svelte';
+	import Input from './chat-ui/Input.svelte';
+	import UserMessage from './chat-ui/UserMessage.svelte';
 	import { ChevronDown } from '@lucide/svelte';
 	import { tick } from 'svelte';
 
@@ -63,12 +63,12 @@
 		aria-live="polite"
 		aria-label="Chat messages"
 	>
-		<ul class="mx-auto max-w-2xl pt-20 pb-32 ">
+		<ul class="mx-auto max-w-2xl pt-20 pb-32 flex flex-col gap-6 ">
 			{#each messages as message, messageIndex (messageIndex)}
 				{#if message.role === 'user'}
 					<UserMessage {message} />
 				{:else if message.role === 'assistant'}
-					<AssistantMessage {message} />
+					<AssistantMessage {message}  />
 				{/if}
 			{/each}
 		</ul>

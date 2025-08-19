@@ -45,7 +45,7 @@
 
 		if (element) {
 			const rect = element.getBoundingClientRect();
-			posY = rect.top - 25;
+			posY = rect.top - 17;
 			height = rect.height;
 		}
 	});
@@ -58,7 +58,7 @@
 	<nav
 		bind:this={navEl}
 		aria-label="Sidebar"
-		class="relative flex h-full flex-col justify-between transition-colors rounded-2xl bg-white/10 border-glass p-2 shadow backdrop-blur-2xl  dark:bg-zinc-800/50"
+		class="relative flex h-full flex-col justify-between transition-colors rounded-2xl bg-white/10 border-glass p-2 pt-0 shadow backdrop-blur-2xl  dark:bg-zinc-800/50"
 	>
 		<div class="flex flex-col gap-2">
 			<div
@@ -70,7 +70,7 @@
 				<Ollami size={64} aria-label="Ollami" />
 				<button
 					onclick={ontogglesidebar}
-					class="rounded-lg p-2 transition-colors hover:bg-white hover:shadow-none dark:hover:bg-zinc-800"
+					class="rounded-lg p-2 transition-colors hover:bg-zinc-100 hover:shadow-none dark:hover:bg-zinc-800"
 				>
 					<PanelRight size={20} />
 				</button>
@@ -87,7 +87,7 @@
 				class="relative flex flex-col gap-2 p-2"
 			>
 				<div class="flex items-center justify-between gap-2">
-					<h2 class=" text-sm opacity-50">Chats</h2>
+					<h2 class=" text-sm opacity-50">{orderedChats.length} Chats</h2>
 					<a
 						aria-label="Start a new chat"
 						href="/"
@@ -96,14 +96,14 @@
 					>
 				</div>
 
-				<ul class="flex max-h-[400px] flex-col items-stretch gap-2 overflow-y-auto">
+				<ul class="flex max-h-[414px] flex-col items-stretch gap-2 overflow-y-auto">
 					{#if orderedChats.length === 0}
 						<li class="text-center text-sm opacity-50">No chats available</li>
 					{/if}
 
 					{#each orderedChats as chat (chat.id)}
 						<li
-							class="group flex w-full items-center justify-between gap-1 rounded-lg transition-colors
+							class="group flex w-full items-center justify-between gap-1 pr-1 rounded-lg transition-colors
 						{page.url.pathname === `/chat/${chat.id}`
 								? 'bg-zinc-100 dark:bg-zinc-700'
 								: 'hover:bg-zinc-100 dark:hover:bg-zinc-700'}
@@ -112,20 +112,20 @@
 							<a
 								aria-current={page.url.pathname === `/chat/${chat.id}` ? 'page' : undefined}
 								href={`/chat/${chat.id}`}
-								class="flex flex-grow items-center gap-1 truncate p-2 text-ellipsis"
+								class="flex flex-grow items-center gap-2 truncate p-2 text-ellipsis"
 							>
-								<MessageSquare size={18} class="shrink-0" />
-								<span class=" text-sm"> {chat.name}</span>
+								<MessageSquare size={18} class="shrink-0 text-zinc-500" />
+								<span class=" text-sm truncate"> {chat.name}</span>
 							</a>
 							<button
 								aria-label={`Delete chat ${chat.name}`}
-								class="shrink-0 translate-y-0.5 p-2 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
+								class="rounded shrink-0 translate-y-0.5 w-6 h-6 flex justify-center items-center opacity-0 transition-all hover:bg-red-50 hover:text-red-500 group-hover:translate-y-0 group-hover:opacity-100"
 								onclick={(e) => {
 									e.stopPropagation();
 									deleteChat(chat.id);
 								}}
 							>
-								<Trash size={18} />
+								<Trash size={16} />
 							</button>
 						</li>
 					{/each}

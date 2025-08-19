@@ -1,20 +1,15 @@
 <script lang="ts">
 	import SvelteMarkdown from '@humanspeak/svelte-markdown';
-	import CodeBlock from './CodeBlock.svelte';
+	import CodeBlock from './parts/CodeBlock.svelte';
+	import Reasoning from './parts/Reasoning.svelte';
 
 	let { message } = $props();
 </script>
 
-<div class="mb-4">
+<div>
 	{#each message.parts as part, partIndex (partIndex)}
 		{#if part.type === 'reasoning'}
-			<div class="text-sm opacity-50">
-				{#if part.text}
-					<SvelteMarkdown source={part.text} renderers={{ code: CodeBlock }} />
-				{:else}
-					<span class="italic">Thinking...</span>
-				{/if}
-			</div>
+			<Reasoning text={part.text} />
 		{/if}
 		{#if part.type === 'text'}
 			<div class="prose prose-base max-w-none dark:prose-invert">

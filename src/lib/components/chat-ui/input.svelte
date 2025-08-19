@@ -3,7 +3,7 @@
 
 	import { getSelectedModel, models, setSelectedModel } from '$lib/stores/models.svelte';
 	import { ArrowUp, ChevronDown } from '@lucide/svelte';
-	import InputTextarea from './input-textarea.svelte';
+	import InputTextarea from './InputTextarea.svelte';
 	import { Check } from '@lucide/svelte';
 	let {
 		input = $bindable(''),
