@@ -52,3 +52,9 @@ Launch the app:
 ```bash
 npm run dev
 ```
+
+---
+
+## Changelog
+
+See the latest changes in `CHANGELOG.md`.
