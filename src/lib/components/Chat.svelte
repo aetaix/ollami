@@ -6,7 +6,7 @@
 	import { ChevronDown } from '@lucide/svelte';
 	import { tick } from 'svelte';
 
-	let { messages, input = $bindable(''), status, onsubmit } = $props();
+	let { messages, input = $bindable(''), model, status, onsubmit } = $props();
 
 	let messagesContainer: HTMLDivElement;
 	let arrowDownVisible = $state(false);
@@ -55,6 +55,12 @@
 </script>
 
 <main class="relative flex h-screen w-full flex-col">
+	{#if model}
+		<div class="absolute top-4 left-4">
+			<p>{model.name}</p>
+		</div>
+	{/if}
+
 	<div
 		bind:this={messagesContainer}
 		class="overflow-y-auto mask-b-from-90% mask-b-to-95%"
@@ -85,6 +91,6 @@
 				<ChevronDown size={24} />
 			</button>
 		{/if}
-		<Input bind:input {onsubmit} />
+		<Input bind:input {onsubmit} {model} />
 	</div>
 </main>

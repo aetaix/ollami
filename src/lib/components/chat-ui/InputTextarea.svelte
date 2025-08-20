@@ -9,7 +9,7 @@
 		onsubmit
 	}: {
 		content: string;
-		onsubmit: (e: Event) => void;
+		onsubmit: (event: Event) => void;
 	} = $props();
 
 	let element = null as HTMLElement | null;

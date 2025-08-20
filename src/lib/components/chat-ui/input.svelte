@@ -3,13 +3,7 @@
 	import { models, getSelectedModel, setSelectedModel } from '$lib/stores/models.svelte';
 	import { ArrowUp, ChevronDown } from '@lucide/svelte';
 	import InputTextarea from './InputTextarea.svelte';
-	let {
-		input = $bindable(''),
-		onsubmit
-	}: {
-		input: string;
-		onsubmit: (e: Event) => void;
-	} = $props();
+	let { input = $bindable(''), onsubmit, model = models[0] } = $props();
 
 	function handleModelChange(value: string) {
 		const model = models.find((m) => m.api === value) as App.Model;
@@ -27,10 +21,10 @@
 		{#if models}
 			<Select.Root type="single" onValueChange={handleModelChange}>
 				<Select.Trigger
-					class="flex touch-none items-center gap-2 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg border border-zinc-200 bg-white p-2 text-sm shadow transition-colors select-none dark:border-zinc-700 dark:bg-zinc-800"
+					class="flex touch-none items-center gap-2 rounded-lg border border-zinc-200 bg-white p-2 text-sm shadow transition-colors select-none hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 					aria-label="Select a theme"
 				>
-					{getSelectedModel().name}
+					{model?.name || models[0].name}
 					<ChevronDown size={16} />
 				</Select.Trigger>
 				<Select.Portal>
@@ -42,7 +36,7 @@
 						<Select.Viewport class="max-h-[300px] overflow-y-auto p-2">
 							{#each models as model, i (i + model.name)}
 								<Select.Item
-									class="flex w-full transition-colors items-center p-2 gap-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 text-sm outline-hidden select-none data-selected:bg-zinc-100 data-selected:text-zinc-700 dark:data-selected:bg-zinc-700 dark:data-selected:text-white"
+									class="flex w-full items-center gap-2 rounded-lg p-2 text-sm outline-hidden transition-colors select-none hover:bg-zinc-100 data-selected:bg-zinc-100 data-selected:text-zinc-700 dark:hover:bg-zinc-700 dark:data-selected:bg-zinc-700 dark:data-selected:text-white"
 									value={model.api}
 									label={model.name}
 								>
@@ -51,7 +45,6 @@
 										{#if model.reasoning}
 											<span class="rounded bg-blue-50 p-1 text-xs text-blue-500"> Reasoning</span>
 										{/if}
-									
 									{/snippet}
 								</Select.Item>
 							{/each}

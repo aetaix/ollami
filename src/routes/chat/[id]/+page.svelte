@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { untrack } from 'svelte';
 	import { Chat as SDKChat } from '@ai-sdk/svelte';
 	import { chats, saveMessage, renameChat } from '$lib/stores/chatsStorage';
 	import Chat from '$lib/components/Chat.svelte';
 
+	let currentChat = $derived($chats.find((chat) => chat.id === page.params.id));
 	let initialized = false;
 	let input = $state('');
 	let modelLoading = $state(false);
 	let isError = $state(false);
+	let errorMessage = $state<string | null>(null);
 
 	const chat = new SDKChat({
 		get id() {
@@ -27,10 +28,9 @@
 		onError: (error) => {
 			console.error(error);
 			isError = true;
+			errorMessage = error.message;
 		}
 	});
-
-	let currentChat = $derived($chats.find((chat) => chat.id === page.params.id));
 
 	$effect(() => {
 		const localMessages = currentChat?.messages || [];
@@ -63,7 +63,7 @@
 		}
 	});
 
-	function onsubmit(event: SubmitEvent) {
+	function onsubmit(event: Event) {
 		event.preventDefault();
 		if (!page.params.id) return;
 
@@ -84,8 +84,18 @@
 </svelte:head>
 
 {#if isError}
-	<div class="text-red-500">An error occurred. Please try again.</div>
-{:else}
-	
-	<Chat messages={chat.messages} bind:input {onsubmit} status={chat.status} />
+	<div class="-full mx-auto max-w-2xl py-20">
+		<div class="rounded-2xl bg-red-50 p-2 text-red-500">
+			<h3 class="text-xl">Oups, an error occurred</h3>
+			<p class="text-sm">{errorMessage}</p>
+		</div>
+	</div>
+{:else if currentChat && currentChat?.model}
+	<Chat
+		messages={chat.messages}
+		bind:input
+		{onsubmit}
+		status={chat.status}
+		model={currentChat?.model}
+	/>
 {/if}

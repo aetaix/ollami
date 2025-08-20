@@ -11,10 +11,7 @@ export interface Chat {
 	id: string;
 	name: string;
 	createdAt: string; // ISO timestamp
-	model: {
-		name: string;
-		api: string;
-	};
+	model: App.Model | null; // null if no model selected
 	messages: ChatMessage[];
 }
 
