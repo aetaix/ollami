@@ -26,7 +26,7 @@
 <div class="flex h-screen flex-col p-4 pl-0">
 	<div class="border-glass h-full w-full rounded-2xl bg-white/20 shadow dark:bg-zinc-800/50">
 		<header class="flex flex-col items-start p-5">
-			<h1 class="text-2xl mb-2">Models</h1>
+			<h1 class="mb-2 text-2xl">Models</h1>
 			<p class="text-sm text-zinc-500">
 				Browse and install a curated collection of AI models. All Ollama models are not available in
 				Ollami. We curated a selection of models that are small, fast, and efficient.

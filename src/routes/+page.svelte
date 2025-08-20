@@ -31,13 +31,15 @@
 </script>
 
 <div class="flex h-full w-full flex-col items-center justify-center gap-4">
-	<div class="grid grid-cols-6 gap-4 w-full max-w-2xl">
+	<div class="grid w-full max-w-2xl grid-cols-6 gap-4">
 		<div class=" col-span-2 rounded-2xl bg-zinc-50 p-4 dark:bg-zinc-800">
 			<h1 class="text-3xl">Ollami!</h1>
 			<p>Welcome, ask something!</p>
 		</div>
-		<div class="col-span-4 ">
-			<div class="rounded-2xl text-zinc-500 bg-zinc-50 p-4 dark:bg-zinc-800 h-full flex items-center justify-center">
+		<div class="col-span-4">
+			<div
+				class="flex h-full items-center justify-center rounded-2xl bg-zinc-50 p-4 text-zinc-500 dark:bg-zinc-800"
+			>
 				Add a widget
 			</div>
 		</div>

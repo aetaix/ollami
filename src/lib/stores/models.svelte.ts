@@ -3,7 +3,7 @@ import { mistralModels } from '$lib/models/mistral';
 import { openaiModels } from '$lib/models/openai';
 
 // Combine all models
-export let models = $state<App.Model[]>([ ...mistralModels,...ollamaModels, ...openaiModels]);
+export let models = $state<App.Model[]>([...mistralModels, ...ollamaModels, ...openaiModels]);
 
 let selectedModel = $state<App.Model>(models[0]);
 

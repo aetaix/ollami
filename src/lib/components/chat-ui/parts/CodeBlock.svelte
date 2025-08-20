@@ -31,8 +31,9 @@
 		${className}
 	`}
 >
-
-	<header class="flex items-center justify-between border-b border-zinc-200 bg-zinc-100 p-2 dark:border-zinc-700 dark:bg-zinc-800">
+	<header
+		class="flex items-center justify-between border-b border-zinc-200 bg-zinc-100 p-2 dark:border-zinc-700 dark:bg-zinc-800"
+	>
 		<h3 class="font-mono text-xs text-zinc-500">{lang}</h3>
 		<button
 			class=" rounded bg-zinc-100 p-1 text-sm text-zinc-500 hover:text-zinc-700 dark:bg-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300"
