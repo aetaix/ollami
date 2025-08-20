@@ -30,9 +30,9 @@
 		}
 	});
 
+	let currentChat = $derived($chats.find((chat) => chat.id === page.params.id));
+
 	$effect(() => {
-		const id = page.params.id;
-		const currentChat = untrack(() => $chats.find((chat) => chat.id === id));
 		const localMessages = currentChat?.messages || [];
 
 		if (!initialized && localMessages.length === 1) {
@@ -67,8 +67,6 @@
 		event.preventDefault();
 		if (!page.params.id) return;
 
-		const currentChat = $chats.find((chat) => chat.id === page.params.id);
-
 		saveMessage(
 			{ id: crypto.randomUUID(), role: 'user', parts: [{ type: 'text', text: input }] },
 			page.params.id
@@ -88,5 +86,6 @@
 {#if isError}
 	<div class="text-red-500">An error occurred. Please try again.</div>
 {:else}
+	
 	<Chat messages={chat.messages} bind:input {onsubmit} status={chat.status} />
 {/if}

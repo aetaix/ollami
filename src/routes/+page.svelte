@@ -30,6 +30,17 @@
 	}
 </script>
 
-<div class="flex h-full w-full flex-col items-center justify-center gap-2">
+<div class="flex h-full w-full flex-col items-center justify-center gap-4">
+	<div class="grid grid-cols-6 gap-4 w-full max-w-2xl">
+		<div class=" col-span-2 rounded-2xl bg-zinc-50 p-4 dark:bg-zinc-800">
+			<h1 class="text-3xl">Ollami!</h1>
+			<p>Welcome, ask something!</p>
+		</div>
+		<div class="col-span-4 ">
+			<div class="rounded-2xl text-zinc-500 bg-zinc-50 p-4 dark:bg-zinc-800 h-full flex items-center justify-center">
+				Add a widget
+			</div>
+		</div>
+	</div>
 	<Input bind:input {onsubmit} />
 </div>
