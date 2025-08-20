@@ -9,6 +9,12 @@
 		const model = models.find((m) => m.api === value) as App.Model;
 		setSelectedModel(model);
 	}
+
+	$effect(() => {
+		if (model) {
+			setSelectedModel(model);
+		}
+	});
 </script>
 
 <form
@@ -24,7 +30,8 @@
 					class="flex touch-none items-center gap-2 rounded-lg border border-zinc-200 bg-white p-2 text-sm shadow transition-colors select-none hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 					aria-label="Select a theme"
 				>
-					{model?.name || models[0].name}
+					{getSelectedModel()?.name || 'Select a model'}
+
 					<ChevronDown size={16} />
 				</Select.Trigger>
 				<Select.Portal>
