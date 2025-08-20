@@ -30,7 +30,7 @@
 	<div
 		class="relative transition-all duration-300 ease-in-out {isSidebarOpen
 			? 'w-[calc(100%-320px)]'
-			: 'w-full'}"
+			: 'w-full pl-16'}"
 	>
 		{#if !isSidebarOpen}
 			<button

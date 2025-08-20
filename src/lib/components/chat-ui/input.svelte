@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Select } from 'bits-ui';
-
-	import { getSelectedModel, models, setSelectedModel } from '$lib/stores/models.svelte';
+	import { models, getSelectedModel, setSelectedModel } from '$lib/stores/models.svelte';
 	import { ArrowUp, ChevronDown } from '@lucide/svelte';
 	import InputTextarea from './InputTextarea.svelte';
 	import { Check } from '@lucide/svelte';
@@ -29,7 +28,7 @@
 		{#if models}
 			<Select.Root type="single" onValueChange={handleModelChange}>
 				<Select.Trigger
-					class="flex touch-none items-center gap-2 rounded-lg border border-zinc-200 bg-white p-2 text-sm shadow transition-colors select-none dark:border-zinc-700 dark:bg-zinc-800"
+					class="flex touch-none items-center gap-2 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg border border-zinc-200 bg-white p-2 text-sm shadow transition-colors select-none dark:border-zinc-700 dark:bg-zinc-800"
 					aria-label="Select a theme"
 				>
 					{getSelectedModel().name}
@@ -41,10 +40,10 @@
 						align="start"
 						sideOffset={8}
 					>
-						<Select.Viewport class="">
+						<Select.Viewport class="max-h-[300px] overflow-y-auto p-2">
 							{#each models as model, i (i + model.name)}
 								<Select.Item
-									class="rounded-button data-highlighted:bg-muted flex h-10 w-full items-center py-3 pr-1.5 pl-5 text-sm outline-hidden select-none data-disabled:opacity-50"
+									class="flex w-full transition-colors items-center p-2 gap-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 text-sm outline-hidden select-none data-selected:bg-zinc-100 data-selected:text-zinc-700 dark:data-selected:bg-zinc-700 dark:data-selected:text-white"
 									value={model.api}
 									label={model.name}
 								>
@@ -53,11 +52,7 @@
 										{#if model.reasoning}
 											<span class="rounded bg-blue-50 p-1 text-xs text-blue-500"> Reasoning</span>
 										{/if}
-										{#if selected}
-											<div class="ml-auto">
-												<Check aria-label="check" />
-											</div>
-										{/if}
+									
 									{/snippet}
 								</Select.Item>
 							{/each}
@@ -66,7 +61,13 @@
 				</Select.Portal>
 			</Select.Root>
 		{/if}
-		<button type="submit" class="rounded-lg bg-zinc-900 p-2 text-white">
+		<button
+			type="submit"
+			disabled={!input}
+			class="rounded-lg p-2 transition-colors {input
+				? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+				: 'bg-zinc-100 text-zinc-400 dark:bg-zinc-700/50 dark:text-zinc-600'}"
+		>
 			<ArrowUp size={20} />
 		</button>
 	</div>

@@ -2,6 +2,7 @@
 	import { Spring } from 'svelte/motion';
 	import { SunIcon, MoonIcon } from '@lucide/svelte';
 	import { mode, setMode } from 'mode-watcher';
+	import { onMount } from 'svelte';
 	let x = new Spring(0);
 
 	const modes = [
@@ -24,6 +25,12 @@
 			x.target = 100;
 		}
 	}
+
+	onMount(() => {
+		if (mode.current === 'dark') {
+			x.target = 100;
+		}
+	});
 </script>
 
 <div
