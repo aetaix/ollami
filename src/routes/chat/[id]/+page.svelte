@@ -67,11 +67,13 @@
 		event.preventDefault();
 		if (!page.params.id) return;
 
+		console.log('Sending message:', input);
+
+		chat.sendMessage({ text: input }, { body: { model: currentChat?.model } });
 		saveMessage(
 			{ id: crypto.randomUUID(), role: 'user', parts: [{ type: 'text', text: input }] },
 			page.params.id
 		);
-		chat.sendMessage({ text: input }, { body: { model: currentChat?.model } });
 	}
 </script>
 
@@ -85,7 +87,7 @@
 
 {#if isError}
 	<div class="-full mx-auto max-w-2xl py-20">
-		<div class="rounded-2xl bg-red-50 p-2 text-red-500">
+		<div class="rounded-2xl bg-red-50 p-4 text-red-500">
 			<h3 class="text-xl">Oups, an error occurred</h3>
 			<p class="text-sm">{errorMessage}</p>
 		</div>
