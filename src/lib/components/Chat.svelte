@@ -56,7 +56,7 @@
 
 <main class="relative flex h-screen w-full flex-col">
 	{#if model}
-		<div class="absolute top-6 right- p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg ">
+		<div class="absolute top-4 right- p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg ">
 			<p>{model.name}</p>
 		</div>
 	{/if}
