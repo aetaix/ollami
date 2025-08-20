@@ -13,10 +13,12 @@
 	let highlightStyle = $derived(github);
 
 	// Derived language config (with fallback)
-	let languageConfig = $derived({
-		typescript,
-		javascript: typescript,
-	}[lang] || typescript);
+	let languageConfig = $derived(
+		{
+			typescript,
+			javascript: typescript
+		}[lang] || typescript
+	);
 </script>
 
 <svelte:head>

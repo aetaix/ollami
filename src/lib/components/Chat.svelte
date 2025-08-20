@@ -63,19 +63,17 @@
 		aria-live="polite"
 		aria-label="Chat messages"
 	>
-		<ul class="mx-auto max-w-2xl pt-20 pb-32 flex flex-col gap-6 ">
+		<ul class="mx-auto flex max-w-2xl flex-col gap-6 pt-20 pb-32">
 			{#each messages as message, messageIndex (messageIndex)}
 				{#if message.role === 'user'}
 					<UserMessage {message} />
 				{:else if message.role === 'assistant'}
-					<AssistantMessage {message}  />
+					<AssistantMessage {message} />
 				{/if}
 			{/each}
 		</ul>
 	</div>
-	<div
-		class="absolute right-0 bottom-0 left-0 flex justify-center p-6 pt-0 dark:from-black"
-	>
+	<div class="absolute right-0 bottom-0 left-0 flex justify-center p-6 pt-0 dark:from-black">
 		{#if arrowDownVisible && status !== 'streaming' && status !== 'submitted'}
 			<button
 				in:fly={{ y: 24, duration: 200, delay: 300 }}

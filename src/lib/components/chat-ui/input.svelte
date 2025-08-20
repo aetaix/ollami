@@ -66,7 +66,7 @@
 				</Select.Portal>
 			</Select.Root>
 		{/if}
-		<button type="submit" class="rounded-lg p-2 bg-zinc-900  text-white">
+		<button type="submit" class="rounded-lg bg-zinc-900 p-2 text-white">
 			<ArrowUp size={20} />
 		</button>
 	</div>

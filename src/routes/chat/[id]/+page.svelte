@@ -78,7 +78,11 @@
 </script>
 
 <svelte:head>
-	<title>{page.params.id ? `${$chats.find((chat) => chat.id === page.params.id)?.name} | Ollami` : 'New Chat'}</title>
+	<title
+		>{page.params.id
+			? `${$chats.find((chat) => chat.id === page.params.id)?.name} | Ollami`
+			: 'New Chat'}</title
+	>
 </svelte:head>
 
 {#if isError}

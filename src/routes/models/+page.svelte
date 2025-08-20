@@ -24,7 +24,7 @@
 </script>
 
 <div class="flex h-screen flex-col p-4 pl-0">
-	<div class="h-full w-full rounded-2xl border-glass bg-white/20 shadow dark:bg-zinc-800/50">
+	<div class="border-glass h-full w-full rounded-2xl bg-white/20 shadow dark:bg-zinc-800/50">
 		<header class="flex flex-col items-start p-5">
 			<h1 class="text-xl">Models</h1>
 			<p class="text-sm text-zinc-500">

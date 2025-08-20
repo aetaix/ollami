@@ -1,4 +1,5 @@
 # Ollami (WIP) 🖐️
+
 > "Oh l'ami" - French for "Hi friend!"
 
 Ollami is a frontend application designed to interact with local Ollama models for text generation, reasoning, chat and more.
@@ -31,10 +32,10 @@ As I embark on this journey, I remain steadfast in my core principles:
 
 ### With NPM (Developpers only) 🧰
 
-> [!NOTE] 
+> [!NOTE]
 > This guide assumes that you have installed the latest version of Node.js and npm. If not : [Download Node.js (Node.js + npm)](https://nodejs.org/en/download/)
 
-Clone the repository to your local machine development folder using the following command: 
+Clone the repository to your local machine development folder using the following command:
 
 ```bash
 git clone https://github.com/aetaix/ollami.git ollami
