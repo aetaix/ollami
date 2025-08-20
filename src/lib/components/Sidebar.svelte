@@ -10,6 +10,8 @@
 
 	let { ontogglesidebar } = $props();
 
+	let pathname = $derived(page.url.pathname);
+
 	// Avoid mutating the original chats store when sorting
 	const orderedChats = $derived(
 		[...$chats].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -19,16 +21,7 @@
 	let height = $state(0);
 	let navEl: HTMLElement | null = null;
 
-	function moveBackground(event: MouseEvent | KeyboardEvent) {
-		const element = event.currentTarget as HTMLElement | HTMLAnchorElement;
-		if (!navEl) return;
-		const targetRect = element.getBoundingClientRect();
-		posY = targetRect.top - 25;
-		height = targetRect.height;
-	}
-
 	$effect(() => {
-		const pathname = page.url.pathname;
 		if (!navEl) return;
 		let element: HTMLElement | null = null;
 
@@ -53,18 +46,18 @@
 
 <aside
 	transition:fly={{ x: -320, duration: 200 }}
-	class="fixed top-0 left-0 z-50 h-screen w-[320px] p-4 "
+	class="fixed top-0 left-0 z-50 h-screen w-[320px] p-4"
 >
 	<nav
 		bind:this={navEl}
 		aria-label="Sidebar"
-		class="relative flex h-full flex-col justify-between transition-colors rounded-2xl bg-white/10 border-glass p-2 pt-0 shadow backdrop-blur-2xl  dark:bg-zinc-800/50"
+		class="border-glass relative flex h-full flex-col justify-between rounded-2xl bg-white/10 p-2 pt-0 shadow backdrop-blur-2xl transition-colors dark:bg-zinc-800/50"
 	>
 		<div class="flex flex-col gap-2">
 			<div
 				style:height={height + 'px'}
 				style:transform={`translateY(${posY}px)`}
-				class="pointer-events-none absolute right-2 left-2 origin-top rounded-xl border-glass bg-white shadow transition-all ease-in-out dark:bg-zinc-800"
+				class="pointer-events-none border-glass absolute right-2 left-2 origin-top rounded-xl bg-white shadow transition-all ease-in-out dark:bg-zinc-800"
 			></div>
 			<div class="relative flex items-center justify-between pt-2 pl-2">
 				<Ollami size={64} aria-label="Ollami" />
@@ -80,14 +73,12 @@
 				aria-label="Chat list"
 				role="button"
 				tabindex="0"
-				onclick={moveBackground}
-				onkeydown={(e) => {
-					if (e.key === 'Enter' || e.key === ' ') moveBackground(e);
-				}}
-				class="relative flex flex-col gap-2 p-2"
+				class="relative flex flex-col gap-2 rounded-2xl p-2 transition-colors
+
+				{pathname.includes('/chat/') || pathname === '/' ? '' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}"
 			>
 				<div class="flex items-center justify-between gap-2">
-					<h2 class=" text-sm opacity-50">{orderedChats.length} Chats</h2>
+					<h2 class=" ml-2 text-sm opacity-50">{orderedChats.length} Chats</h2>
 					<a
 						aria-label="Start a new chat"
 						href="/"
@@ -103,23 +94,23 @@
 
 					{#each orderedChats as chat (chat.id)}
 						<li
-							class="group flex w-full items-center justify-between gap-1 pr-1 rounded-lg transition-colors
-						{page.url.pathname === `/chat/${chat.id}`
+							class="group flex w-full items-center justify-between gap-1 rounded-lg pr-1 transition-colors
+						{pathname === `/chat/${chat.id}`
 								? 'bg-zinc-100 dark:bg-zinc-700'
 								: 'hover:bg-zinc-100 dark:hover:bg-zinc-700'}
 						"
 						>
 							<a
-								aria-current={page.url.pathname === `/chat/${chat.id}` ? 'page' : undefined}
+								aria-current={pathname === `/chat/${chat.id}` ? 'page' : undefined}
 								href={`/chat/${chat.id}`}
 								class="flex flex-grow items-center gap-2 truncate p-2 text-ellipsis"
 							>
 								<MessageSquare size={18} class="shrink-0 text-zinc-500" />
-								<span class=" text-sm truncate"> {chat.name}</span>
+								<span class=" truncate text-sm"> {chat.name}</span>
 							</a>
 							<button
 								aria-label={`Delete chat ${chat.name}`}
-								class="rounded shrink-0 translate-y-0.5 w-6 h-6 flex justify-center items-center opacity-0 transition-all hover:bg-red-50 hover:text-red-500 group-hover:translate-y-0 group-hover:opacity-100"
+								class="flex h-6 w-6 shrink-0 translate-y-0.5 items-center justify-center rounded opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 hover:bg-red-50 hover:text-red-500"
 								onclick={(e) => {
 									e.stopPropagation();
 									deleteChat(chat.id);
@@ -134,24 +125,16 @@
 			<a
 				id="models"
 				href="/models"
-				onclick={moveBackground}
-				onkeydown={(e) => {
-					if (e.key === 'Enter' || e.key === ' ') moveBackground(e);
-				}}
-				aria-current={page.url.pathname === '/models' ? 'page' : undefined}
+				aria-current={pathname === '/models' ? 'page' : undefined}
 				class="relative rounded-lg px-3 py-2
-			{page.url.pathname === '/models' ? '' : 'hover:bg-white dark:hover:bg-zinc-800'}
+			{pathname === '/models' ? '' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}
 			">Models</a
 			><a
 				id="companions"
 				href="/companions"
-				onclick={moveBackground}
-				onkeydown={(e) => {
-					if (e.key === 'Enter' || e.key === ' ') moveBackground(e);
-				}}
-				aria-current={page.url.pathname === '/companions' ? 'page' : undefined}
+				aria-current={pathname === '/companions' ? 'page' : undefined}
 				class="relative rounded-lg px-3 py-2
-			{page.url.pathname === '/companions' ? '' : 'hover:bg-white dark:hover:bg-zinc-800'}
+			{pathname === '/companions' ? '' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}
 			">Companions</a
 			>
 		</div>

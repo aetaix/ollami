@@ -1,7 +1,3 @@
-import ollama from 'ollama';
-
-const localModels = await ollama.list();
-
 export const staticOllamaModels: App.Model[] = [
 	{
 		name: 'Gemma 3',
@@ -35,7 +31,5 @@ export const staticOllamaModels: App.Model[] = [
 	}
 ];
 
-// only return the models that are available locally
-export const ollamaModels = staticOllamaModels.filter((model) =>
-	localModels.models.some((localModel) => localModel.name === model.api)
-);
+// Expose curated Ollama models. Filtering to locally-available ones is handled server-side when needed.
+export const ollamaModels = staticOllamaModels;

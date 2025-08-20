@@ -1,4 +1,4 @@
-import { generateText, generateObject, convertToModelMessages, type UIMessage } from 'ai';
+import { generateObject, convertToModelMessages, type UIMessage } from 'ai';
 import { Provider } from '$lib/server/modelClients';
 // import { renamePrompt as system } from '$lib/stores/prompts.svelte.js';
 import { RENAME_PROMPT } from '$lib/prompts/rename.js';

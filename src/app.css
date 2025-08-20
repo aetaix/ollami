@@ -8,29 +8,42 @@
 }
 
 body {
-	@apply bg-white dark:bg-zinc-900 transition-colors;
+	@apply bg-white transition-colors dark:bg-zinc-900;
 }
 
 @utility border-glass {
-	@apply border border-t-zinc-200/80 border-r-zinc-400/30 border-b-zinc-200/90 border-l-zinc-100/90 dark:border-t-zinc-500/20 dark:border-r-zinc-700 dark:border-b-zinc-700 dark:border-l-zinc-100/20;
+	@apply relative;
+	&::before {
+		@apply absolute top-0 left-0 z-[-1] h-full w-full rounded-xl border border-transparent mask-exclude content-[''];
+
+		background: linear-gradient(-45deg, #bebebe, #c9c9c9, #eeeeee) border-box;
+		-webkit-mask:
+			linear-gradient(#fff 0 0) padding-box,
+			linear-gradient(#fff 0 0);
+		-webkit-mask-composite: destination-out;
+	}
 }
 
-
+.dark .border-glass {
+	&::before {
+		background: linear-gradient(-45deg, #ffffff11, rgba(255, 255, 255, 0.133), #ffffff40) border-box;
+	}
+}
 
 @keyframes accordion-down {
-		from {
-			height: 0;
-		}
-		to {
-			height: var(--bits-accordion-content-height);
-		}
+	from {
+		height: 0;
 	}
- 
-	@keyframes accordion-up {
-		from {
-			height: var(--bits-accordion-content-height);
-		}
-		to {
-			height: 0;
-		}
+	to {
+		height: var(--bits-accordion-content-height);
 	}
+}
+
+@keyframes accordion-up {
+	from {
+		height: var(--bits-accordion-content-height);
+	}
+	to {
+		height: 0;
+	}
+}

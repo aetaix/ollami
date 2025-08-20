@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ollama from 'ollama';
+	// call server endpoint to avoid bundling Node-only 'ollama' package in the browser
 
 	let { model } = $props();
 
@@ -20,16 +20,37 @@
 		reset();
 		status = 'Starting…';
 		try {
-			const response = await ollama.pull({ model: model.api, stream: true });
-
-			for await (const part of response) {
-				if (part?.status) status = part.status;
-				if (
-					typeof part?.total === 'number' &&
-					typeof part?.completed === 'number' &&
-					part.total > 0
-				) {
-					progress = Math.min(100, Math.round((part.completed / part.total) * 100));
+			const resp = await fetch('/api/models/ollama/pull', {
+				method: 'POST',
+				headers: { 'content-type': 'application/json' },
+				body: JSON.stringify({ model: model.api })
+			});
+			if (!resp.ok || !resp.body) throw new Error('Failed to start pull');
+			const reader = resp.body.getReader();
+			const decoder = new TextDecoder();
+			let buffer = '';
+			while (true) {
+				const { value, done } = await reader.read();
+				if (done) break;
+				buffer += decoder.decode(value, { stream: true });
+				let idx;
+				while ((idx = buffer.indexOf('\n')) !== -1) {
+					const line = buffer.slice(0, idx).trim();
+					buffer = buffer.slice(idx + 1);
+					if (!line) continue;
+					try {
+						const part = JSON.parse(line);
+						if (part?.status) status = part.status;
+						if (
+							typeof part?.total === 'number' &&
+							typeof part?.completed === 'number' &&
+							part.total > 0
+						) {
+							progress = Math.min(100, Math.round((part.completed / part.total) * 100));
+						}
+					} catch (e) {
+						console.error('Parse error', e);
+					}
 				}
 			}
 			if (!isComplete()) {
