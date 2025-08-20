@@ -21,7 +21,7 @@
 
 <form
 	{onsubmit}
-	class="border-glass relative flex w-full max-w-2xl flex-col gap-2 rounded-xl bg-white p-2 shadow dark:bg-zinc-800"
+	class="border-glass flex w-full max-w-2xl flex-col gap-2 rounded-xl bg-white p-2 shadow dark:bg-zinc-800"
 >
 	<InputTextarea bind:content={input} {onsubmit} />
 
@@ -66,7 +66,7 @@
 				</Select.Portal>
 			</Select.Root>
 		{/if}
-		<button type="submit" class="rounded-lg bg-zinc-900 p-2 text-white">
+		<button type="submit" class="rounded-lg p-2 bg-zinc-900  text-white">
 			<ArrowUp size={20} />
 		</button>
 	</div>
