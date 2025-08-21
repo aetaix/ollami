@@ -1,3 +1,5 @@
+// this is the source of thruth for all our model base
+
 const models: App.Model[] = [
 	{
 		name: 'Mistral Medium 3',
