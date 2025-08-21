@@ -16,6 +16,7 @@ declare global {
 			version?: string;
 			reasoning?: boolean;
 			icon?: string;
+			installed?: boolean; // Added to indicate if the model is installed
 		}
 	}
 }

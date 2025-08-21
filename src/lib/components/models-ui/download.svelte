@@ -73,7 +73,7 @@
 	aria-busy={isDownloading}
 	aria-label={`Download model ${model.name}${isDownloading ? ' (downloading)' : ''}`}
 >
-	<span>{model.name}</span>
+	Download
 	{#if isDownloading}
 		<span class="text-xs tabular-nums">{progress}% {status}</span>
 		<div

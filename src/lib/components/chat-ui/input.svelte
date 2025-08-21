@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { Select } from 'bits-ui';
-		import { fly } from 'svelte/transition';
 	import {
 		models,
-		availableModels,
+		extendedModels,
 		getSelectedModel,
 		setSelectedModel
 	} from '$lib/stores/models.svelte';
@@ -12,7 +11,7 @@
 	let { input = $bindable(''), onsubmit, model = models[0] } = $props();
 
 	function handleModelChange(value: string) {
-		const model = availableModels.find((m) => m.api === value) as App.Model;
+		const model = extendedModels.find((m) => m.api === value) as App.Model;
 		setSelectedModel(model);
 	}
 
@@ -46,10 +45,10 @@
 	<InputTextarea bind:content={input} {onsubmit} />
 
 	<div class="flex items-center justify-between">
-		{#if availableModels}
+		{#if extendedModels}
 			<Select.Root type="single" onValueChange={handleModelChange}>
 				<Select.Trigger
-					class="flex touch-none items-center gap-2 rounded-lg border border-zinc-200 bg-white p-2 text-sm shadow transition-colors select-none hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+					class="flex touch-none items-center gap-2 rounded-lg   p-2 text-sm transition-colors select-none bg-zinc-100 hover:bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 					aria-label="Select a theme"
 				>
 					{#if currentModel?.icon}
@@ -76,13 +75,13 @@
 									<a href="/models">+</a>
 								</header>
 
-								{#each availableModels.filter((model) => model.provider === 'ollama') as model, i (i + model.name)}
+								{#each extendedModels.filter((model) => model.provider === 'ollama' && model.installed) as model, i (i + model.name)}
 									{@render selectItem(model)}
 								{/each}
 							</div>
 
 							<h4 class="text-sm text-zinc-500">API</h4>
-							{#each availableModels.filter((model) => model.provider !== 'ollama') as model, i (i + model.name)}
+							{#each extendedModels.filter((model) => model.provider !== 'ollama') as model, i (i + model.name)}
 								{@render selectItem(model, i)}
 							{/each}
 						</Select.Viewport>

@@ -7,19 +7,17 @@ export let models = $state<App.Model[]>(staticModels);
 // Fetch installed models from Ollama
 const installedModels = await ollama.list();
 
-// Export available models
-export let availableModels = $state(
-	staticModels.filter((model) => {
-		if (model.provider === 'ollama') {
-			return installedModels.models.some((installedModel) => installedModel.model === model.api);
-		} else {
-			return true; // we return all api based models
-		}
+
+// Extend the model object with installation status
+export let extendedModels = $state(
+	staticModels.map((model) => {
+		const isInstalled = installedModels.models.some((installedModel) => installedModel.model === model.api);
+		return { ...model, installed: isInstalled };
 	})
 );
 
 // Export the selected model
-let selectedModel = $state<App.Model>(models[0]);
+let selectedModel = $state<App.Model>(extendedModels[0]);
 
 export function getSelectedModel() {
 	return selectedModel;

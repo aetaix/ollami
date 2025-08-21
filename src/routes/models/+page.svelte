@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { models } from '$lib/stores/models.svelte';
-	import { Globe } from '@lucide/svelte';
+	import ModelCard from '$lib/components/models-ui/ModelCard.svelte';
+	import { extendedModels } from '$lib/stores/models.svelte';
 
 	const providerFilters = ['', 'ollama', 'api'];
 
@@ -12,7 +12,7 @@
 
 	// Derive models filtered only by provider and search
 	const filteredModelsByProviderAndSearch = $derived.by(() => {
-		return models.filter((model) => {
+		return extendedModels.filter((model) => {
 			const providerMatch =
 				filters.provider === '' ||
 				(filters.provider === 'ollama' && model.provider === 'ollama') ||
@@ -51,12 +51,14 @@
 		<div class="flex flex-col gap-4">
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
-					<div class="flex items-center gap-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 p-1">
+					<div class="flex items-center gap-2 rounded-xl bg-zinc-100 p-1 dark:bg-zinc-900">
 						{#each providerFilters as provider}
 							<button
 								onclick={() => (filters.provider = provider)}
-								class="rounded-lg px-4 py-2 text-sm capitalize font-medium {provider === filters.provider ? 'bg-zinc-800 text-white' : 'text-zinc-700 dark:text-zinc-400'}"
-								>{provider || 'All'}</button
+								class="rounded-lg transition-colors px-4 py-2 text-sm font-medium capitalize {provider ===
+								filters.provider
+									? 'bg-zinc-800 text-white'
+									: 'text-zinc-700 dark:text-zinc-400'}">{provider || 'All'}</button
 							>
 						{/each}
 					</div>
@@ -66,51 +68,41 @@
 						type="text"
 						placeholder="Search models..."
 						bind:value={filters.search}
-						class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-4 py-2 text-sm text-zinc-700 placeholder:text-zinc-400 focus:border-zinc-500 focus:outline-none"
+						class="rounded-lg border border-zinc-300 bg-transparent px-4 py-2 text-sm text-zinc-700 placeholder:text-zinc-400 focus:border-zinc-500 focus:outline-none dark:border-zinc-700"
 					/>
 				</div>
 			</div>
 			<div
-				class="grid grid-cols-8 overflow-clip rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 shadow"
+				class="grid grid-cols-8 overflow-clip rounded-2xl border border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800"
 			>
+				{#snippet authorOption(author: string)}
+					<button
+						class="flex w-full transition-colors items-center gap-2 rounded-lg p-2 {filters.author === author
+							? 'bg-zinc-800 text-white'
+							: 'text-zinc-700 dark:text-zinc-400'}"
+						onclick={() => (filters.author = author)}
+					>
+						{#if author}
+						<img src="/provider-icons/{author}.svg" alt="" class="size-5" />
+						{/if}
+						{author || 'All'}
+					</button>
+				{/snippet}
 				<!-- Only show author selection if there are filtered models -->
 				{#if filteredModelsByProviderAndSearch.length > 0}
-					<div class="col-span-2 flex flex-col gap-2 border-r border-zinc-200 dark:border-zinc-700 p-2">
-						<button
-							class="flex w-full items-center gap-2 p-2"
-							onclick={() => (filters.author = '')}
-						>
-							All
-						</button>
+					<div
+						class="col-span-2 flex flex-col gap-2 border-r border-zinc-200 p-2 dark:border-zinc-700"
+					>
+						{@render authorOption('')}
 						{#each filteredAuthors as author}
-							<button
-								class="flex w-full items-center gap-2 p-2"
-								onclick={() => (filters.author = author)}
-							>
-								<img src="/provider-icons/{author}.svg" alt="" class="size-5" />
-								{author}
-							</button>
+							{@render authorOption(author)}
 						{/each}
 					</div>
 				{/if}
-				<div class="col-span-6 grid grid-cols-2 gap-4 bg-zinc-50 dark:bg-zinc-900 p-4">
+				<div class="col-span-6 grid grid-cols-2 gap-4 bg-zinc-50 p-4 dark:bg-zinc-900">
 					{#if filteredModels.length > 0}
 						{#each filteredModels as model}
-							<div class="flex flex-col gap-2 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-4">
-								<header class="flex items-center justify-between gap-2">
-									<div class="flex items-center gap-2">
-										<img src="/provider-icons/{model.icon}" alt="" class="size-5" />
-										<h3 >{model.name}</h3>
-									</div>
-									{#if model.provider !== 'ollama'}
-										<Globe class="size-4 text-zinc-400" />
-									{/if}
-								</header>
-								<p class="text-sm text-zinc-500">{model.description}</p>
-								<footer class="flex items-center justify-between">
-									<span class="rounded bg-zinc-100 dark:bg-zinc-700 p-1 text-sm capitalize">{model.author}</span>
-								</footer>
-							</div>
+							<ModelCard model={model} />
 						{/each}
 					{:else}
 						<div class="col-span-8 p-4 text-center text-zinc-500">
