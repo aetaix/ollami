@@ -12,8 +12,10 @@ declare global {
 			description: string;
 			api: string;
 			provider: 'ollama' | 'openai' | 'mistral';
+			author: 'openai' | 'mistral' | 'qwen' | 'google' | 'meta' | 'anthropic' | 'cohere';
 			version?: string;
 			reasoning?: boolean;
+			icon?: string;
 		}
 	}
 }

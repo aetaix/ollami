@@ -15,6 +15,8 @@
 			setSelectedModel(model);
 		}
 	});
+
+	const currentModel = $derived(getSelectedModel());
 </script>
 
 <form
@@ -30,7 +32,14 @@
 					class="flex touch-none items-center gap-2 rounded-lg border border-zinc-200 bg-white p-2 text-sm shadow transition-colors select-none hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 					aria-label="Select a theme"
 				>
-					{getSelectedModel()?.name || 'Select a model'}
+					{#if currentModel?.icon}
+						<img
+							src={`/provider-icons/${currentModel.icon}`}
+							alt={currentModel.name}
+							class="size-5 object-contain"
+						/>
+					{/if}
+					{currentModel?.name || 'Select a model'}
 
 					<ChevronDown size={16} />
 				</Select.Trigger>
@@ -47,12 +56,15 @@
 									value={model.api}
 									label={model.name}
 								>
-									{#snippet children({ selected })}
-										{model.name}
-										{#if model.reasoning}
-											<span class="rounded bg-blue-50 p-1 text-xs text-blue-500"> Reasoning</span>
-										{/if}
-									{/snippet}
+									<img
+										src={`/provider-icons/${model.icon}`}
+										alt={model.name}
+										class="size-5 object-contain"
+									/>
+									{model.name}
+									{#if model.reasoning}
+										<span class="rounded bg-blue-50 p-1 text-xs text-blue-500"> Reasoning</span>
+									{/if}
 								</Select.Item>
 							{/each}
 						</Select.Viewport>

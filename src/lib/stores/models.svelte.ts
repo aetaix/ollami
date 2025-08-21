@@ -1,9 +1,7 @@
-import { ollamaModels } from '$lib/models/ollama';
-import { mistralModels } from '$lib/models/mistral';
-import { openaiModels } from '$lib/models/openai';
+import allModels from '$lib/models';
 
 // Combine all models
-export let models = $state<App.Model[]>([...mistralModels, ...ollamaModels, ...openaiModels]);
+export let models = $state<App.Model[]>(allModels);
 
 let selectedModel = $state<App.Model>(models[0]);
 

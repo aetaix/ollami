@@ -56,7 +56,12 @@
 
 <main class="relative flex h-screen w-full flex-col">
 	{#if model}
-		<div class="right- absolute top-4 rounded-lg bg-zinc-100 p-2 dark:bg-zinc-800">
+		<div class="absolute top-4 flex items-center gap-2 rounded-lg bg-zinc-100 p-2 dark:bg-zinc-800">
+			<img
+				src={`/provider-icons/${model.icon}`}
+				alt={model.name}
+				class="size-5 object-contain"
+			/>
 			<p>{model.name}</p>
 		</div>
 	{/if}
@@ -79,7 +84,7 @@
 			{/each}
 		</ul>
 	</div>
-	<div class="absolute right-0 bottom-0 left-0 flex justify-center p-6 pt-0 dark:bg-zinc-900">
+	<div class="absolute right-0 bottom-0 left-0 flex justify-center p-6 pt-0 ">
 		{#if arrowDownVisible && status !== 'streaming' && status !== 'submitted'}
 			<button
 				in:fly={{ y: 24, duration: 200, delay: 300 }}

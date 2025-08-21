@@ -20,9 +20,9 @@
 <ModeWatcher />
 <main class="flex h-screen justify-end">
 	<!-- <img
-		src="/bg/2.jpg"
+		src="/bg/1.jpg"
 		alt="Background"
-		class="fixed inset-0 -z-10 h-full w-full object-cover brightness-140 dark:brightness-75 blur-md opacity-50 dark:opacity-40"
+		class="fixed inset-0 -z-10 h-full w-full object-cover brightness-120 dark:brightness-75 blur-md opacity-20 dark:opacity-40"
 	/> -->
 	{#if isSidebarOpen}
 		<Sidebar ontogglesidebar={toggleSidebar} />
