@@ -40,7 +40,7 @@
 
 <form
 	{onsubmit}
-	class="border-glass flex w-full max-w-2xl flex-col gap-2 rounded-xl bg-white/70 p-2 shadow dark:bg-zinc-700/50"
+	class="border border-zinc-200 flex w-full max-w-2xl flex-col gap-2 rounded-xl bg-white p-2 shadow dark:bg-zinc-800 dark:border-zinc-700"
 >
 	<InputTextarea bind:content={input} {onsubmit} />
 
