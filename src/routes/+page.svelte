@@ -32,15 +32,15 @@
 </script>
 
 <div class="flex h-full w-full flex-col items-center justify-center gap-4">
-	<div class="grid w-full max-w-2xl grid-cols-6 gap-4">
+	<div class="grid w-full max-w-2xl grid-cols-8 gap-4">
 		<div
 			in:scale={{ duration: 200 }}
-			class=" col-span-2 rounded-2xl bg-zinc-50 p-4 dark:bg-zinc-800"
+			class=" col-span-3 rounded-2xl bg-zinc-50 p-4 dark:bg-zinc-800"
 		>
 			<h1 class="text-3xl">Ollami!</h1>
 			<p>Welcome, ask something!</p>
 		</div>
-		<div class="col-span-4">
+		<div class="col-span-5">
 			<div
 				in:scale={{ duration: 200, delay: 100 }}
 				class="flex h-full items-center justify-center rounded-2xl bg-zinc-50 p-4 text-zinc-500 dark:bg-zinc-800"

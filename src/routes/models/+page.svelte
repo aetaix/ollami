@@ -57,7 +57,7 @@
 								onclick={() => (filters.provider = provider)}
 								class="rounded-lg transition-colors px-4 py-2 text-sm font-medium capitalize {provider ===
 								filters.provider
-									? 'bg-zinc-800 text-white'
+									? 'bg-white'
 									: 'text-zinc-700 dark:text-zinc-400'}">{provider || 'All'}</button
 							>
 						{/each}
@@ -78,7 +78,7 @@
 				{#snippet authorOption(author: string)}
 					<button
 						class="flex w-full transition-colors items-center gap-2 rounded-lg p-2 {filters.author === author
-							? 'bg-zinc-800 text-white'
+							? 'bg-zinc-100 '
 							: 'text-zinc-700 dark:text-zinc-400'}"
 						onclick={() => (filters.author = author)}
 					>
