@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ModelCard from '$lib/components/models-ui/ModelCard.svelte';
 	import { extendedModels } from '$lib/stores/models.svelte';
+	import { Search } from '@lucide/svelte';
 
 	const providerFilters = ['', 'ollama', 'api'];
 
@@ -55,35 +56,40 @@
 						{#each providerFilters as provider}
 							<button
 								onclick={() => (filters.provider = provider)}
-								class="rounded-lg transition-colors px-4 py-2 text-sm font-medium capitalize {provider ===
+								class="rounded-lg border px-4 py-2 text-sm font-medium capitalize transition-colors {provider ===
 								filters.provider
-									? 'bg-white'
-									: 'text-zinc-700 dark:text-zinc-400'}">{provider || 'All'}</button
+									? 'bg-white dark:bg-zinc-800 shadow border-zinc-200 dark:border-zinc-700'
+									: 'text-zinc-700 border-transparent dark:text-zinc-400'}">{provider || 'All'}</button
 							>
 						{/each}
 					</div>
 				</div>
 				<div>
-					<input
+					<div class="rounded-lg border p-2 border-zinc-200 flex items-center gap-2 dark:border-zinc-700 focus-within:outline focus-within:outline-zinc-200">
+						<Search size={20} />
+							<input
 						type="text"
 						placeholder="Search models..."
 						bind:value={filters.search}
-						class="rounded-lg border border-zinc-300 bg-transparent px-4 py-2 text-sm text-zinc-700 placeholder:text-zinc-400 focus:border-zinc-500 focus:outline-none dark:border-zinc-700"
+						class=" bg-transparent text-sm text-zinc-700 placeholder:text-zinc-400  focus:outline-none "
 					/>
+					</div>
+				
 				</div>
 			</div>
 			<div
-				class="grid grid-cols-8 overflow-clip rounded-2xl border border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800"
+				class="grid grid-cols-8 overflow-clip rounded-xl border border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800"
 			>
 				{#snippet authorOption(author: string)}
 					<button
-						class="flex w-full transition-colors items-center gap-2 rounded-lg p-2 {filters.author === author
-							? 'bg-zinc-100 '
+						class="flex w-full items-center gap-2 rounded-lg p-2 capitalize transition-colors {filters.author ===
+						author
+							? 'bg-zinc-100 dark:bg-zinc-700'
 							: 'text-zinc-700 dark:text-zinc-400'}"
 						onclick={() => (filters.author = author)}
 					>
 						{#if author}
-						<img src="/provider-icons/{author}.svg" alt="" class="size-5" />
+							<img src="/provider-icons/{author}.svg" alt="" class="size-5" />
 						{/if}
 						{author || 'All'}
 					</button>
@@ -99,16 +105,18 @@
 						{/each}
 					</div>
 				{/if}
-				<div class="col-span-6 grid grid-cols-2 gap-4 bg-zinc-50 p-4 dark:bg-zinc-900">
-					{#if filteredModels.length > 0}
-						{#each filteredModels as model}
-							<ModelCard model={model} />
-						{/each}
-					{:else}
-						<div class="col-span-8 p-4 text-center text-zinc-500">
-							No models match the current filters.
-						</div>
-					{/if}
+				<div class="col-span-6  bg-zinc-50 p-4 dark:bg-zinc-900">
+					<div class="grid grid-cols-2 gap-4 h-fit">
+						{#if filteredModels.length > 0}
+							{#each filteredModels as model}
+								<ModelCard {model} />
+							{/each}
+						{:else}
+							<div class="col-span-8 p-4 text-center text-zinc-500">
+								No models match the current filters.
+							</div>
+						{/if}
+					</div>
 				</div>
 			</div>
 		</div>

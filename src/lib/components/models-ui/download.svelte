@@ -66,29 +66,32 @@
 	}
 </script>
 
-<button
-	onclick={pullModel}
-	class="flex flex-col items-start gap-1 text-sm opacity-70 transition hover:opacity-100 disabled:opacity-40"
-	disabled={isDownloading || isComplete()}
-	aria-busy={isDownloading}
-	aria-label={`Download model ${model.name}${isDownloading ? ' (downloading)' : ''}`}
->
-	Download
-	{#if isDownloading}
+{#if isDownloading}
+	<div class="w-1/3">
 		<span class="text-xs tabular-nums">{progress}% {status}</span>
 		<div
-			class="h-1 w-full overflow-hidden rounded bg-neutral-700"
+			class="h-1 w-full overflow-hidden rounded bg-zinc-200 dark:bg-zinc-600"
 			role="progressbar"
 			aria-valuenow={progress}
 			aria-valuemin="0"
 			aria-valuemax="100"
 		>
 			<div
-				class="h-full bg-green-500 transition-[width] duration-150"
+				class="h-full bg-zinc-800 dark:bg-zinc-200 transition-[width] duration-150"
 				style={`width:${progress}%`}
 			></div>
 		</div>
-	{:else if isComplete()}
-		<span class="text-xs text-green-500">Downloaded</span>
-	{/if}
-</button>
+	</div>
+{:else if isComplete()}
+	<span class="text-xs text-green-500">Downloaded</span>
+{:else}
+	<button
+		onclick={pullModel}
+		class="rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 py-1 text-sm shadow hover:bg-neutral-50 hover:dark:bg-zinc-800 disabled:opacity-40"
+		disabled={isDownloading || isComplete()}
+		aria-busy={isDownloading}
+		aria-label={`Download model ${model.name}${isDownloading ? ' (downloading)' : ''}`}
+	>
+		Download
+	</button>
+{/if}
