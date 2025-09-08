@@ -1,20 +1,18 @@
 <script lang="ts">
 	import { Dialog, Tabs } from 'bits-ui';
+	import Apparence from './settings-ui/Apparence.svelte';
+	import { X } from '@lucide/svelte';
+
 	const settings = [
 		{
 			label: 'General',
 			value: 'general',
-			content: 'General settings content goes here.'
+			content: null
 		},
 		{
-			label: 'Account',
-			value: 'account',
-			content: 'Account settings content goes here.'
-		},
-		{
-			label: 'Billing',
-			value: 'billing',
-			content: 'Billing settings content goes here.'
+			label: 'Apparence',
+			value: 'apparence',
+			content: Apparence
 		}
 	];
 </script>
@@ -30,7 +28,10 @@
 				<Tabs.List class="col-span-2 flex flex-col border-r border-zinc-200 p-4">
 					<h3 class="mb-4 text-lg">Settings</h3>
 					{#each settings as setting}
-						<Tabs.Trigger class="text-left text-sm" value={setting.label}>
+						<Tabs.Trigger
+							class="rounded-lg border border-transparent p-2 text-left text-sm hover:bg-neutral-100 data-[state=active]:border-neutral-200 data-[state=active]:bg-white data-[state=active]:shadow"
+							value={setting.label}
+						>
 							{setting.label}
 						</Tabs.Trigger>
 					{/each}
@@ -38,12 +39,16 @@
 				{#each settings as setting}
 					<Tabs.Content class="col-span-4" value={setting.label}>
 						<div class="p-4">
-							{setting.content}
+							{#if setting.content}
+								<setting.content></setting.content>
+							{/if}
 						</div>
 					</Tabs.Content>
 				{/each}
 			</Tabs.Root>
-			<Dialog.Close class="absolute top-4 right-4 text-sm">Close</Dialog.Close>
+			<Dialog.Close class="absolute top-4 right-4 text-sm">
+				<X size={20} />
+			</Dialog.Close>
 		</Dialog.Content>
 	</Dialog.Portal>
 </Dialog.Root>

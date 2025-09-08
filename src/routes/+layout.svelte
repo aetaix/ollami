@@ -4,6 +4,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import Sidebar from '$lib/components/Sidebar.svelte';
 	import { PanelLeft } from '@lucide/svelte';
+	import { settings } from '$lib/stores/appStorage.svelte';
 
 	let { children } = $props();
 
@@ -19,11 +20,13 @@
 </svelte:head>
 <ModeWatcher />
 <main class="flex h-screen justify-end">
-	<!-- <img
-		src="/bg/1.jpg"
-		alt="Background"
-		class="fixed inset-0 -z-10 h-full w-full object-cover brightness-120 dark:brightness-75 blur-md opacity-20 dark:opacity-40"
-	/> -->
+	{#if settings.background}
+		<img
+			src={settings.background}
+			alt="Background"
+			class="fixed inset-0 -z-10 h-full w-full object-cover brightness-120 dark:brightness-75 blur-md opacity-20 dark:opacity-40"
+		/>
+	{/if}
 	{#if isSidebarOpen}
 		<Sidebar ontogglesidebar={toggleSidebar} />
 	{/if}

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { chats, deleteChat } from '$lib/stores/chatsStorage';
-
 	import { PanelRight, MessageSquare, Plus, Trash } from '@lucide/svelte';
 	import ToggleMode from './sidebar-ui/ToggleMode.svelte';
 	import Settings from './Settings.svelte';

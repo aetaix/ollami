@@ -59,6 +59,40 @@ const models: App.Model[] = [
 		author: 'google',
 		icon: 'gemma.svg'
 	},
+
+	{
+		name: 'Llama 3.2',
+		description: 'The latest Llama 3 model with a context length of 128k.',
+		api: 'llama3.2:latest',
+		provider: 'ollama',
+		author: 'meta',
+		icon: 'meta.svg'
+	},
+	{
+		name: 'Llama 3.1',
+		description:
+			'Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and 405B parameter sizes.',
+		api: 'llama3.1:latest',
+		provider: 'ollama',
+		author: 'meta',
+		icon: 'meta.svg'
+	},
+	{
+		name: 'Codellama',
+		description: 'Meta AI’s family of Llama 3 models, fine-tuned for coding tasks.',
+		api: 'codellama:latest',
+		provider: 'ollama',
+		author: 'meta',
+		icon: 'meta.svg'
+	},
+	{
+		name: 'Phi 4',
+		description: 'Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft.',
+		api: 'phi4:latest',
+		provider: 'ollama',
+		author: 'microsoft',
+		icon: 'microsoft.svg'
+	},
 	{
 		name: 'Qwen 3',
 		description: 'The latest Qwen 3 model with a context length of 128k.',
@@ -68,13 +102,14 @@ const models: App.Model[] = [
 		icon: 'qwen.svg'
 	},
 	{
-		name: 'Llama 3.2',
-		description: 'The latest Llama 3 model with a context length of 128k.',
-		api: 'llama3.2:latest',
+		name: 'Qwen 2.5 Coder',
+		description: 'The latest Qwen 2.5 model with a context length of 32k.',
+		api: 'qwen2.5-coder:latest',
 		provider: 'ollama',
-		author: 'meta',
-		icon: 'meta.svg'
+		author: 'qwen',
+		icon: 'qwen.svg'
 	},
+
 	{
 		name: 'GPT-o4-mini',
 		description: "OpenAI's o4-mini model",
