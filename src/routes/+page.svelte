@@ -5,6 +5,7 @@
 	import { getSelectedModel } from '$lib/stores/models.svelte';
 	import Input from '$lib/components/chat-ui/Input.svelte';
 	import { scale } from 'svelte/transition';
+	import Clock from '$lib/components/widgets/collection/Clock.svelte';
 	// import WidgetZone from '$lib/components/widgets/WidgetZone.svelte';
 
 	let input = '';
@@ -41,12 +42,7 @@
 			<p>Welcome, ask something!</p>
 		</div>
 		<div class="col-span-5">
-			<div
-				in:scale={{ duration: 200, delay: 100 }}
-				class="flex h-full items-center justify-center rounded-2xl bg-zinc-50 p-4 text-zinc-500 dark:bg-zinc-800"
-			>
-				Add a widget
-			</div>
+			<Clock model={getSelectedModel()} />
 		</div>
 	</div>
 	<Input bind:input {onsubmit} />
