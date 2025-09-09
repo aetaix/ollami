@@ -2,11 +2,12 @@
 	import SvelteMarkdown from '@humanspeak/svelte-markdown';
 	import CodeBlock from './parts/CodeBlock.svelte';
 	import Reasoning from './parts/Reasoning.svelte';
+	import CopyToClipboard from './CopyToClipboard.svelte';
 
 	let { message } = $props();
 </script>
 
-<div>
+<div class="group flex flex-col gap-2">
 	{#each message.parts as part, partIndex (partIndex)}
 		{#if part.type === 'reasoning'}
 			<Reasoning text={part.text} />
@@ -17,4 +18,7 @@
 			</div>
 		{/if}
 	{/each}
+	<div class="flex items-center justify-start gap-2">
+		<CopyToClipboard {message} />
+	</div>
 </div>
