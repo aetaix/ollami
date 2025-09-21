@@ -11,11 +11,10 @@ body {
 	@apply bg-white transition-colors dark:bg-zinc-900;
 }
 
-@utility border-glass {
-	position: relative;
+.border-glass {
 	&::before {
 		@apply absolute top-0 left-0 z-[-1] h-full w-full rounded-xl border border-transparent content-[''];
-		background: linear-gradient(213deg, #ffffff, #bdc8d3, #b4c5d440, #eeeeee) border-box;
+		background: linear-gradient(182deg, #eaeaea82, #9ba5af8f, #b4c5d440, #00000029) border-box;
 		-webkit-mask:
 			linear-gradient(#fff 0 0) padding-box,
 			linear-gradient(#fff 0 0);
