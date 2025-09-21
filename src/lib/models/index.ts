@@ -36,25 +36,28 @@ const models: App.Model[] = [
 		icon: 'mistral.svg'
 	},
 	{
-		name: 'Mistral 7b',
+		name: 'Mistral',
 		description: 'The latest Mistral model with a context length of 32k.',
-		api: 'mistral:latest',
+		api: 'mistral',
 		provider: 'ollama',
 		author: 'mistral',
+		parameters: '7b',
 		icon: 'mistral.svg'
 	},
 	{
 		name: 'Gemma 3',
 		description: 'The current, most capable model that runs on a single GPU.',
-		api: 'gemma3:4b',
+		api: 'gemma3',
+		parameters: '4b',
 		provider: 'ollama',
 		author: 'google',
 		icon: 'gemma.svg'
 	},
 	{
-		name: 'Gemma 3 270M',
+		name: 'Gemma 3',
 		description: 'The current, most capable model that runs on a single GPU.',
-		api: 'gemma3:270m',
+		api: 'gemma3',
+		parameters: '270m',
 		provider: 'ollama',
 		author: 'google',
 		icon: 'gemma.svg'
@@ -63,7 +66,7 @@ const models: App.Model[] = [
 	{
 		name: 'Llama 3.2',
 		description: 'The latest Llama 3 model with a context length of 128k.',
-		api: 'llama3.2:latest',
+		api: 'llama3.2',
 		provider: 'ollama',
 		author: 'meta',
 		icon: 'meta.svg'
@@ -72,7 +75,7 @@ const models: App.Model[] = [
 		name: 'Llama 3.1',
 		description:
 			'Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and 405B parameter sizes.',
-		api: 'llama3.1:latest',
+		api: 'llama3.1',
 		provider: 'ollama',
 		author: 'meta',
 		icon: 'meta.svg'
@@ -80,7 +83,7 @@ const models: App.Model[] = [
 	{
 		name: 'Codellama',
 		description: 'Meta AI’s family of Llama 3 models, fine-tuned for coding tasks.',
-		api: 'codellama:latest',
+		api: 'codellama',
 		provider: 'ollama',
 		author: 'meta',
 		icon: 'meta.svg'
@@ -88,7 +91,7 @@ const models: App.Model[] = [
 	{
 		name: 'Phi 4',
 		description: 'Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft.',
-		api: 'phi4:latest',
+		api: 'phi4',
 		provider: 'ollama',
 		author: 'microsoft',
 		icon: 'microsoft.svg'
@@ -96,7 +99,7 @@ const models: App.Model[] = [
 	{
 		name: 'Qwen 3',
 		description: 'The latest Qwen 3 model with a context length of 128k.',
-		api: 'qwen3:latest',
+		api: 'qwen3',
 		provider: 'ollama',
 		author: 'qwen',
 		icon: 'qwen.svg'
@@ -104,7 +107,7 @@ const models: App.Model[] = [
 	{
 		name: 'Qwen 2.5 Coder',
 		description: 'The latest Qwen 2.5 model with a context length of 32k.',
-		api: 'qwen2.5-coder:latest',
+		api: 'qwen2.5-coder',
 		provider: 'ollama',
 		author: 'qwen',
 		icon: 'qwen.svg'

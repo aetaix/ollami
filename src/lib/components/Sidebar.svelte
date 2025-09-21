@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { chats, deleteChat } from '$lib/stores/chatsStorage';
-	import { PanelRight, MessageSquare, Plus, Trash } from '@lucide/svelte';
+	import { PanelRight, MessageSquare, Plus, Trash, Search } from '@lucide/svelte';
 	import ToggleMode from './sidebar-ui/ToggleMode.svelte';
 	import Settings from './Settings.svelte';
 	import { fly } from 'svelte/transition';
@@ -11,9 +11,13 @@
 
 	let pathname = $derived(page.url.pathname);
 
+	let search = $state('');
+
 	// Avoid mutating the original chats store when sorting
 	const orderedChats = $derived(
-		[...$chats].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+		$chats
+			.filter((chat) => chat.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+			.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 	);
 
 	let posY = $state(0);
@@ -77,7 +81,17 @@
 				{pathname.includes('/chat/') || pathname === '/' ? '' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}"
 			>
 				<div class="flex items-center justify-between gap-2">
-					<h2 class=" ml-2 text-sm opacity-50">{orderedChats.length} Chats</h2>
+					<div
+						class=" flex items-center gap-1 rounded-lg px-2 py-1 outline-neutral-400 focus-within:outline dark:outline-zinc-600"
+					>
+						<Search size={20} />
+						<input
+							bind:value={search}
+							type="text"
+							placeholder="Search in {$chats.length} Chats"
+							class="w-full border-none bg-none p-1 text-sm placeholder:text-neutral-400 focus:outline-none dark:placeholder:text-zinc-500"
+						/>
+					</div>
 					<a
 						aria-label="Start a new chat"
 						href="/"

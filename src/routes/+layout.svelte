@@ -24,7 +24,7 @@
 		<img
 			src={settings.background}
 			alt="Background"
-			class="fixed inset-0 -z-10 h-full w-full object-cover brightness-120 dark:brightness-75 blur-md opacity-20 dark:opacity-40"
+			class="fixed inset-0 -z-10 h-full w-full object-cover opacity-20 blur-md brightness-120 dark:opacity-40 dark:brightness-75"
 		/>
 	{/if}
 	{#if isSidebarOpen}

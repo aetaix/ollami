@@ -18,7 +18,9 @@
 			</div>
 		{/if}
 	{/each}
-	<div class="flex items-center justify-start gap-2">
+	<div
+		class="flex items-center justify-start gap-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+	>
 		<CopyToClipboard {message} />
 	</div>
 </div>

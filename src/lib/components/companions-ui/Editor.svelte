@@ -5,7 +5,7 @@
 	import { Placeholder } from '@tiptap/extensions';
 
 	let {
-		content = $bindable(''),
+		content = $bindable('')
 	}: {
 		content: string;
 	} = $props();
@@ -31,7 +31,7 @@
 				handleKeyDown: (view, event) => {
 					if (event.key === 'Enter' && !event.shiftKey) {
 						event.preventDefault();
-					
+
 						return true;
 					}
 					return false;

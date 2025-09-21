@@ -77,7 +77,7 @@
 			aria-valuemax="100"
 		>
 			<div
-				class="h-full bg-zinc-800 dark:bg-zinc-200 transition-[width] duration-150"
+				class="h-full bg-zinc-800 transition-[width] duration-150 dark:bg-zinc-200"
 				style={`width:${progress}%`}
 			></div>
 		</div>
@@ -87,7 +87,7 @@
 {:else}
 	<button
 		onclick={pullModel}
-		class="rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 py-1 text-sm shadow hover:bg-neutral-50 hover:dark:bg-zinc-800 disabled:opacity-40"
+		class="rounded-md border border-zinc-200 bg-white px-2 py-1 text-sm shadow hover:bg-neutral-50 disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-900 hover:dark:bg-zinc-800"
 		disabled={isDownloading || isComplete()}
 		aria-busy={isDownloading}
 		aria-label={`Download model ${model.name}${isDownloading ? ' (downloading)' : ''}`}

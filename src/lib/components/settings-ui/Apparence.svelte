@@ -1,5 +1,5 @@
 <script lang="ts">
-    	import { settings } from '$lib/stores/appStorage.svelte';
+	import { settings } from '$lib/stores/appStorage.svelte';
 	async function setBackground(event: Event) {
 		event.preventDefault();
 		const form = event.currentTarget as HTMLFormElement;
@@ -16,15 +16,12 @@
 		try {
 			const response = await fetch('/api/settings/background', {
 				method: 'POST',
-				body: formData,
+				body: formData
 			});
 
 			if (!response.ok) {
 				const errorData = await response.json().catch(() => ({}));
-				throw new Error(
-					`HTTP error! status: ${response.status}`,
-					{ cause: errorData }
-				);
+				throw new Error(`HTTP error! status: ${response.status}`, { cause: errorData });
 			}
 
 			const data = await response.json();
@@ -33,7 +30,7 @@
 			form.reset();
 
 			// Update the settings store with the new background URL
-            settings.background = data.path;
+			settings.background = data.path;
 		} catch (error) {
 			console.error('Upload failed:', error);
 			// Consider showing error feedback to the user
@@ -45,13 +42,7 @@
 <div>
 	<form onsubmit={setBackground}>
 		<label for="background-upload">Choose a background image:</label>
-		<input
-			id="background-upload"
-			type="file"
-			name="background"
-			accept="image/*"
-			required
-		/>
+		<input id="background-upload" type="file" name="background" accept="image/*" required />
 		<button type="submit">Save Background</button>
 	</form>
 </div>

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import ModelCard from '$lib/components/models-ui/ModelCard.svelte';
 	import { extendedModels } from '$lib/stores/models.svelte';
-	import { Search } from '@lucide/svelte';
+	import { Search, Layers } from '@lucide/svelte';
 
-	const providerFilters = ['', 'ollama', 'api'];
+	const providerFilters = ['', 'ollama', 'API'];
 
 	let filters = $state({
 		search: '',
@@ -17,7 +17,7 @@
 			const providerMatch =
 				filters.provider === '' ||
 				(filters.provider === 'ollama' && model.provider === 'ollama') ||
-				(filters.provider === 'api' && model.provider !== 'ollama');
+				(filters.provider === 'API' && model.provider !== 'ollama');
 			const searchMatch =
 				!filters.search || model.name.toLowerCase().includes(filters.search.toLowerCase());
 			return providerMatch && searchMatch;
@@ -58,23 +58,25 @@
 								onclick={() => (filters.provider = provider)}
 								class="rounded-lg border px-4 py-2 text-sm font-medium capitalize transition-colors {provider ===
 								filters.provider
-									? 'bg-white dark:bg-zinc-800 shadow border-zinc-200 dark:border-zinc-700'
-									: 'text-zinc-700 border-transparent dark:text-zinc-400'}">{provider || 'All'}</button
+									? 'border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800'
+									: 'border-transparent text-zinc-700 dark:text-zinc-400'}"
+								>{provider || 'All'}</button
 							>
 						{/each}
 					</div>
 				</div>
 				<div>
-					<div class="rounded-lg border p-2 border-zinc-200 flex items-center gap-2 dark:border-zinc-700 focus-within:outline focus-within:outline-zinc-200">
+					<div
+						class="flex items-center gap-2 rounded-lg border border-zinc-200 p-2 focus-within:outline focus-within:outline-zinc-200 dark:border-zinc-700"
+					>
 						<Search size={20} />
-							<input
-						type="text"
-						placeholder="Search models..."
-						bind:value={filters.search}
-						class=" bg-transparent text-sm text-zinc-700 placeholder:text-zinc-400  focus:outline-none "
-					/>
+						<input
+							type="text"
+							placeholder="Search models..."
+							bind:value={filters.search}
+							class=" bg-transparent text-sm text-zinc-700 placeholder:text-zinc-400 focus:outline-none"
+						/>
 					</div>
-				
 				</div>
 			</div>
 			<div
@@ -90,6 +92,8 @@
 					>
 						{#if author}
 							<img src="/provider-icons/{author}.svg" alt="" class="size-5" />
+						{:else}
+							<Layers class="size-5" />
 						{/if}
 						{author || 'All'}
 					</button>
@@ -105,8 +109,8 @@
 						{/each}
 					</div>
 				{/if}
-				<div class="col-span-6  bg-zinc-50 p-4 dark:bg-zinc-900">
-					<div class="grid grid-cols-2 gap-4 h-fit">
+				<div class="col-span-6 bg-zinc-50 p-4 dark:bg-zinc-900">
+					<div class="grid h-fit grid-cols-2 gap-4">
 						{#if filteredModels.length > 0}
 							{#each filteredModels as model}
 								<ModelCard {model} />

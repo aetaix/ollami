@@ -19,9 +19,7 @@
 	>
 		<header class="flex flex-col items-start">
 			<h1 class="mb-2 text-2xl">Companions</h1>
-			<p class="text-sm text-zinc-500">
-				Set prompts and agents configuration.
-			</p>
+			<p class="text-sm text-zinc-500">Set prompts and agents configuration.</p>
 		</header>
 		<div class="flex flex-col gap-4">
 			<div
@@ -48,7 +46,7 @@
 
 				<div class="col-span-6 bg-white p-4 dark:bg-zinc-900">
 					<Editor content={selectPrompt.prompt} />
-                </div>
+				</div>
 			</div>
 		</div>
 	</div>

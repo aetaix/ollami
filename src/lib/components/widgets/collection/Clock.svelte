@@ -26,5 +26,5 @@
 >
 	<!-- hour:min -->
 	<h3 class="text-xl">{new Date().toLocaleTimeString()}</h3>
-    <p>{completion.completion}</p>
+	<p>{completion.completion}</p>
 </div>

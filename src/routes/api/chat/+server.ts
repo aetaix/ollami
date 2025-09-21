@@ -48,10 +48,17 @@ export const POST: RequestHandler = async ({ request }) => {
 			system: model.reasoning ? REASONING_SYSTEM_PROMPT : SYSTEM_PROMPT
 		};
 
+		const api =
+			model.provider === 'ollama'
+				? model.parameters
+					? model.api + ':' + model.parameters
+					: model.api + ':latest'
+				: model.api;
+
 		// 4. Handle reasoning vs normal flow
 		const result = model.reasoning
-			? await createReasoningStream(client, model.api, commonConfig)
-			: await createNormalStream(client, model.api, commonConfig);
+			? await createReasoningStream(client, api, commonConfig)
+			: await createNormalStream(client, api, commonConfig);
 
 		return result.toUIMessageStreamResponse();
 	} catch (error) {

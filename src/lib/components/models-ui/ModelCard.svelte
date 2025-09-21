@@ -12,7 +12,7 @@
 </script>
 
 <article
-	class="group flex flex-col gap-8 rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors"
+	class="group flex flex-col gap-8 rounded-lg border border-zinc-200 bg-white p-4 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 >
 	<div>
 		<header class="flex items-center justify-between gap-2">
@@ -30,12 +30,19 @@
 	</div>
 
 	<footer class="flex items-center justify-between">
-		<span class="rounded bg-zinc-100 p-1 text-sm capitalize dark:bg-zinc-700">{model.author}</span>
+		<div class="flex items-center justify-start gap-2">
+			<span class="rounded bg-zinc-100 p-1 text-sm capitalize dark:bg-zinc-700">{model.author}</span
+			>
+			<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500 capitalize"
+				>{model.parameters || 'latest'}</span
+			>
+		</div>
+
 		{#if model.provider === 'ollama'}
 			{#if model.installed}
 				<div class="flex items-center group-hover:gap-2">
 					<span
-						class="flex items-center gap-2 rounded bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 text-sm text-emerald-500"
+						class="flex items-center gap-2 rounded bg-emerald-50 px-2 py-1 text-sm text-emerald-500 dark:bg-emerald-500/10"
 					>
 						<Check size={20} />
 						Installed</span

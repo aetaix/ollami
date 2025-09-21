@@ -47,7 +47,7 @@
 	>
 		<h3 class="font-mono text-xs text-zinc-500">{lang}</h3>
 		<button
-			class=" rounded bg-zinc-100 flex items-center gap-2 p-1 hover:bg-zinc-200 transition-colors text-sm text-zinc-500 hover:text-zinc-700 dark:bg-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300"
+			class=" flex items-center gap-2 rounded bg-zinc-100 p-1 text-sm text-zinc-500 transition-colors hover:bg-zinc-200 hover:text-zinc-700 dark:bg-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300"
 			onclick={copy}
 		>
 			{#if isCopied}

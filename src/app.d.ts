@@ -12,9 +12,25 @@ declare global {
 			description: string;
 			api: string;
 			provider: 'ollama' | 'openai' | 'mistral';
-			author: 'openai' | 'mistral' | 'qwen' | 'google' | 'meta' | 'anthropic' | 'cohere' | 'gemma' | 'microsoft' | 'claude' | 'llama' | 'vicuna' | 'wizardlm' | 'gemini' | 'custom';
+			author:
+				| 'openai'
+				| 'mistral'
+				| 'qwen'
+				| 'google'
+				| 'meta'
+				| 'anthropic'
+				| 'cohere'
+				| 'gemma'
+				| 'microsoft'
+				| 'claude'
+				| 'llama'
+				| 'vicuna'
+				| 'wizardlm'
+				| 'gemini'
+				| 'custom';
 			version?: string;
 			reasoning?: boolean;
+			parameters?: string;
 			icon?: string;
 			installed?: boolean; // Added to indicate if the model is installed
 		}

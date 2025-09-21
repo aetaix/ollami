@@ -15,6 +15,8 @@
 		setSelectedModel(model);
 	}
 
+	$inspect(extendedModels);
+
 	$effect(() => {
 		if (model) {
 			setSelectedModel(model);
@@ -32,15 +34,20 @@
 	>
 		<img src={`/provider-icons/${model.icon}`} alt={model.name} class="size-5 object-contain" />
 		{model.name}
+		{#if model.parameters}
+			<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500">{model.parameters}</span>
+		{:else if model.provider === 'ollama'}
+			<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500">Latest</span>
+		{/if}
 		{#if model.reasoning}
-			<span class="rounded bg-blue-50 p-1 text-xs text-blue-500"> Reasoning</span>
+			<span class="rounded bg-blue-500/10 p-1 text-xs text-blue-500"> Reasoning</span>
 		{/if}
 	</Select.Item>
 {/snippet}
 
 <form
 	{onsubmit}
-	class="border border-zinc-200 flex w-full max-w-2xl flex-col gap-2 rounded-xl bg-white p-2 shadow dark:bg-zinc-800 dark:border-zinc-700"
+	class="flex w-full max-w-2xl flex-col gap-2 rounded-xl border border-zinc-200 bg-white p-2 shadow dark:border-zinc-700 dark:bg-zinc-800"
 >
 	<InputTextarea bind:content={input} {onsubmit} />
 
@@ -48,7 +55,7 @@
 		{#if extendedModels}
 			<Select.Root type="single" onValueChange={handleModelChange}>
 				<Select.Trigger
-					class="flex touch-none items-center gap-2 rounded-lg   p-2 text-sm transition-colors select-none bg-zinc-100 hover:bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+					class="flex touch-none items-center gap-2 rounded-lg  bg-zinc-100 p-2 text-sm transition-colors select-none hover:bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-700 dark:hover:bg-zinc-600"
 					aria-label="Select a theme"
 				>
 					{#if currentModel?.icon}
@@ -60,18 +67,26 @@
 					{/if}
 					{currentModel?.name || 'Select a model'}
 
+					{#if currentModel && currentModel.parameters}
+						<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500"
+							>{currentModel.parameters}</span
+						>
+					{:else if currentModel.provider === 'ollama'}
+						<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500">Latest</span>
+					{/if}
+
 					<ChevronDown size={16} />
 				</Select.Trigger>
 				<Select.Portal>
 					<Select.Content
-						class="focus-override z-50 w-[300px] overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-700 dark:bg-zinc-800"
+						class="focus-override z-50 w-[300px] overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-lg  dark:border-zinc-700 dark:bg-zinc-800"
 						align="start"
 						sideOffset={8}
 					>
 						<Select.Viewport class="max-h-[300px] overflow-y-auto p-2">
-							<div class="mb-2 border-b border-zinc-200 pb-2">
+							<div class="mb-2 border-b border-zinc-200 pb-2 dark:border-zinc-700">
 								<header class="flex items-center justify-between p-2">
-									<h4 class="text-sm text-zinc-500">Local models</h4>
+									<h4 class="text-sm text-zinc-500 dark:text-zinc-400">Local models</h4>
 									<a href="/models">+</a>
 								</header>
 
@@ -80,7 +95,7 @@
 								{/each}
 							</div>
 
-							<h4 class="text-sm text-zinc-500">API</h4>
+							<h4 class="text-sm text-zinc-500 dark:text-zinc-400">API</h4>
 							{#each extendedModels.filter((model) => model.provider !== 'ollama') as model, i (i + model.name)}
 								{@render selectItem(model, i)}
 							{/each}
