@@ -15,8 +15,6 @@
 		setSelectedModel(model);
 	}
 
-	$inspect(extendedModels);
-
 	$effect(() => {
 		if (model) {
 			setSelectedModel(model);

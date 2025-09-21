@@ -54,13 +54,13 @@
 	<nav
 		bind:this={navEl}
 		aria-label="Sidebar"
-		class="border-glass relative flex h-full flex-col justify-between rounded-2xl bg-white/10 p-2 pt-0 shadow backdrop-blur-2xl transition-colors dark:bg-zinc-800/50"
+		class="border-glass relative flex h-full flex-col justify-between rounded-2xl bg-gradient-to-tl from-gray-100 to-transparent p-2 pt-0 shadow backdrop-blur-2xl transition-colors dark:from-zinc-800/50"
 	>
 		<div class="flex flex-col gap-2">
 			<div
 				style:height={height + 'px'}
 				style:transform={`translateY(${posY}px)`}
-				class="pointer-events-none border-glass absolute right-2 left-2 origin-top rounded-xl bg-white shadow transition-all ease-in-out dark:bg-zinc-800"
+				class="pointer-events-none border-glass absolute right-2 left-2 origin-top rounded-xl bg-gradient-to-tl from-gray-100 to-transparent shadow transition-all ease-in-out dark:from-zinc-800/50"
 			></div>
 			<div class="relative flex items-center justify-between pt-2 pl-2">
 				<Ollami size={64} aria-label="Ollami" />

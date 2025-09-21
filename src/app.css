@@ -12,23 +12,20 @@ body {
 }
 
 @utility border-glass {
-	@apply relative bg-gradient-to-tl from-gray-50 to-transparent;
+	position: relative;
 	&::before {
-		@apply absolute top-0 left-0 z-[-1] h-full w-full rounded-xl border border-transparent mask-exclude content-[''];
-
+		@apply absolute top-0 left-0 z-[-1] h-full w-full rounded-xl border border-transparent content-[''];
 		background: linear-gradient(213deg, #ffffff, #bdc8d3, #b4c5d440, #eeeeee) border-box;
 		-webkit-mask:
 			linear-gradient(#fff 0 0) padding-box,
 			linear-gradient(#fff 0 0);
 		-webkit-mask-composite: destination-out;
+		mask-composite: exclude;
 	}
 }
 
-.dark .border-glass {
-	@apply bg-gradient-to-tl from-zinc-900 to-transparent;
-	&::before {
-		background: linear-gradient(-45deg, #ffffff11, rgba(255, 255, 255, 0.133), #ffffff40) border-box;
-	}
+.dark .border-glass::before {
+	background: linear-gradient(-45deg, #ffffff11, rgba(255, 255, 255, 0.133), #ffffff40) border-box;
 }
 
 @keyframes accordion-down {
