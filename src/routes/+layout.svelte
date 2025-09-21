@@ -1,17 +1,32 @@
 <script lang="ts">
 	import '../app.css';
 	import { ModeWatcher } from 'mode-watcher';
+
 	import favicon from '$lib/assets/favicon.svg';
 	import Sidebar from '$lib/components/Sidebar.svelte';
 	import { PanelLeft } from '@lucide/svelte';
 	import { settings } from '$lib/stores/appStorage.svelte';
+	import { extendedModels, getSelectedModel, setSelectedModel } from '$lib/stores/models.svelte';
+	import staticModels from '$lib/models';
 
-	let { children } = $props();
+	let { children, data } = $props();
 
 	let isSidebarOpen = $state(true);
 
 	function toggleSidebar() {
 		isSidebarOpen = !isSidebarOpen;
+	}
+
+	const updated = staticModels.map((model) => ({
+		...model,
+		installed: data.installedSet.has(model.api + ':' + (model.parameters || 'latest'))
+	}));
+	extendedModels.length = 0;
+	extendedModels.push(...updated);
+
+	const selectedModel = getSelectedModel();
+	if (!extendedModels.find((m) => m.api === selectedModel?.api)) {
+		setSelectedModel(extendedModels[0]);
 	}
 </script>
 

@@ -1,13 +1,22 @@
 <script lang="ts">
 	import { Globe, Laptop, Trash, Check } from '@lucide/svelte';
-	import ollama from 'ollama';
 	import Download from './Download.svelte';
 	let { model } = $props();
 
-	function deleteModel(model: App.Model) {
-		ollama.delete({ model: model.api }).then(() => {
-			model.installed = false;
+	async function deleteModel(model: App.Model) {
+		const res = await fetch('/api/models/delete', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ model })
 		});
+		if (res.ok) {
+			model.installed = false;
+		} else {
+			const errorData: { error: string } = await res.json();
+			console.error('Failed to delete model:', errorData.error);
+		}
 	}
 </script>
 
