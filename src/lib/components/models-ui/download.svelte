@@ -57,7 +57,7 @@
 				progress = 100;
 			}
 			status = 'Completed';
-		} catch (e: any) {
+		} catch (e: Error | any) {
 			console.error('Model pull failed', e);
 			status = e?.message || 'Failed';
 		} finally {

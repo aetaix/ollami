@@ -3,7 +3,7 @@ import { streamText } from 'ai';
 import { NEWS_API_KEY } from '$env/static/private';
 
 export async function POST({ request }) {
-	const { model, countryCode }: { model: App.Model; countryCode: string } = await request.json();
+	const { model }: { model: App.Model } = await request.json();
 
 	// GET https://newsapi.org/v2/top-headlines?country=us&apiKey=a97c79e9fc3a460cab028663d25a130b
 

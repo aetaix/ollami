@@ -1,5 +1,3 @@
-import { browser } from '$app/environment';
-
 interface Settings {
 	background: string | null;
 }

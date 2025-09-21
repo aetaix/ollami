@@ -53,7 +53,7 @@
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
 					<div class="flex items-center gap-2 rounded-xl bg-zinc-100 p-1 dark:bg-zinc-900">
-						{#each providerFilters as provider}
+						{#each providerFilters as provider (provider)}
 							<button
 								onclick={() => (filters.provider = provider)}
 								class="rounded-lg border px-4 py-2 text-sm font-medium capitalize transition-colors {provider ===
@@ -104,7 +104,7 @@
 						class="col-span-2 flex flex-col gap-2 border-r border-zinc-200 p-2 dark:border-zinc-700"
 					>
 						{@render authorOption('')}
-						{#each filteredAuthors as author}
+						{#each filteredAuthors as author (author)}
 							{@render authorOption(author)}
 						{/each}
 					</div>
@@ -112,7 +112,7 @@
 				<div class="col-span-6 bg-zinc-50 p-4 dark:bg-zinc-900">
 					<div class="grid h-fit grid-cols-2 gap-4">
 						{#if filteredModels.length > 0}
-							{#each filteredModels as model}
+							{#each filteredModels as model (model)}
 								<ModelCard {model} />
 							{/each}
 						{:else}

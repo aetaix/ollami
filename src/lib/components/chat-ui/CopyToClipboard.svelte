@@ -6,7 +6,7 @@
 
 	function copy() {
 		if (message.parts.length === 0) return;
-		const consolidatedText = message.parts.map((part: any) => part.text).join('\n\n');
+		const consolidatedText = message.parts.map((part: { text: string }) => part.text).join('\n\n');
 		copyToClipboard(consolidatedText);
 		isCopied = true;
 		setTimeout(() => {

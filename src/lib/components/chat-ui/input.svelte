@@ -26,7 +26,7 @@
 	const currentModel = $derived(getSelectedModel());
 </script>
 
-{#snippet selectItem(model: App.Model, i?: number)}
+{#snippet selectItem(model: App.Model)}
 	<Select.Item
 		class="flex w-full items-center gap-2 rounded-lg p-2 text-sm outline-hidden transition-colors select-none hover:bg-zinc-100 data-selected:bg-zinc-100 data-selected:text-zinc-700 dark:hover:bg-zinc-700 dark:data-selected:bg-zinc-700 dark:data-selected:text-white"
 		value={model.api}
@@ -97,7 +97,7 @@
 
 							<h4 class="text-sm text-zinc-500 dark:text-zinc-400">API</h4>
 							{#each extendedModels.filter((model) => model.provider !== 'ollama') as model, i (i + model.name)}
-								{@render selectItem(model, i)}
+								{@render selectItem(model)}
 							{/each}
 						</Select.Viewport>
 					</Select.Content>

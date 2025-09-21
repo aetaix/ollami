@@ -41,7 +41,7 @@
 		style="transform: translateX({x.current}%); width: calc(100% / {modes.length})"
 	></div>
 
-	{#each modes as { name, icon }}
+	{#each modes as { name, icon } (name)}
 		<button
 			class="opacity-50 hover:opacity-100 {mode.current === name
 				? 'opacity-100'

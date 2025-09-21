@@ -27,7 +27,7 @@
 			<Tabs.Root class="grid grid-cols-6">
 				<Tabs.List class="col-span-2 flex flex-col border-r border-zinc-200 p-4">
 					<h3 class="mb-4 text-lg">Settings</h3>
-					{#each settings as setting}
+					{#each settings as setting (setting.label)}
 						<Tabs.Trigger
 							class="rounded-lg border border-transparent p-2 text-left text-sm hover:bg-neutral-100 data-[state=active]:border-neutral-200 data-[state=active]:bg-white data-[state=active]:shadow"
 							value={setting.label}
@@ -36,7 +36,7 @@
 						</Tabs.Trigger>
 					{/each}
 				</Tabs.List>
-				{#each settings as setting}
+				{#each settings as setting (setting.label)}
 					<Tabs.Content class="col-span-4" value={setting.label}>
 						<div class="p-4">
 							{#if setting.content}

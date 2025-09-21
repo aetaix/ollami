@@ -39,7 +39,7 @@
 				<div
 					class="col-span-2 flex flex-col gap-2 border-r border-zinc-200 p-2 dark:border-zinc-700"
 				>
-					{#each prompts as prompt}
+					{#each prompts as prompt (prompt.id)}
 						{@render menuItem(prompt.id, prompt.name)}
 					{/each}
 				</div>

@@ -1,23 +1,9 @@
 <script lang="ts">
 	import { scale } from 'svelte/transition';
 	import { Completion } from '@ai-sdk/svelte';
-	import { onMount } from 'svelte';
-
-	let { model } = $props();
 	const completion = new Completion({
 		api: '/api/widgets/clock'
 	});
-
-	// onMount(() => {
-	// 	completion.complete(
-	// 		'Based on the current time, make an interesting comment about the time in one sentence: ' + new Date().toLocaleTimeString(),
-	// 		{
-	// 			body: {
-	// 				model
-	// 			}
-	// 		}
-	// 	);
-	// });
 </script>
 
 <div
