@@ -31,6 +31,7 @@ declare global {
 			version?: string;
 			reasoning?: boolean;
 			parameters?: string;
+			size?: number; // in GB
 			icon?: string;
 			installed?: boolean; // Added to indicate if the model is installed
 		}

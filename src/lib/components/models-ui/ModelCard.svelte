@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Globe, Laptop, Trash, Check } from '@lucide/svelte';
+	import { Cloud, Laptop, Trash, Check } from '@lucide/svelte';
 	import Download from './Download.svelte';
 	let { model } = $props();
 
@@ -23,14 +23,19 @@
 <article
 	class="group flex flex-col gap-8 rounded-lg border border-zinc-200 bg-white p-4 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 >
-	<div>
-		<header class="flex items-center justify-between gap-2">
+	<div class="flex-grow">
+		<header class="mb-2 flex items-start justify-between gap-2">
 			<div class="flex items-center gap-2">
 				<img src="/provider-icons/{model.icon}" alt="" class="size-5" />
 				<h3>{model.name}</h3>
+				{#if model.parameters}
+					<span class="rounded bg-indigo-500/10 p-1 py-0 text-sm text-indigo-500 capitalize"
+						>{model.parameters}</span
+					>
+				{/if}
 			</div>
 			{#if model.provider !== 'ollama'}
-				<Globe class="size-4 text-zinc-400" />
+				<Cloud class="size-4 text-zinc-400" />
 			{:else}
 				<Laptop class="size-4 text-zinc-400" />
 			{/if}
@@ -40,11 +45,12 @@
 
 	<footer class="flex items-center justify-between">
 		<div class="flex items-center justify-start gap-2">
-			<span class="rounded bg-zinc-100 p-1 text-sm capitalize dark:bg-zinc-700">{model.author}</span
-			>
-			<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500 capitalize"
-				>{model.parameters || 'latest'}</span
-			>
+			{#if model.size}
+				<span class="rounded bg-zinc-100 p-1 font-mono text-sm tabular-nums dark:bg-zinc-700"
+					>{model.size}GB</span
+				>
+			{/if}
+			<span class="rounded p-1 text-sm capitalize dark:bg-zinc-700">{model.author}</span>
 		</div>
 
 		{#if model.provider === 'ollama'}
