@@ -74,12 +74,12 @@ export function deleteChat(chatId: string) {
 	goto('/');
 }
 
-export async function renameChat(messages: ChatMessage[], chatId: string) {
+export async function renameChat(messages: ChatMessage[], chatId: string, model: App.Model) {
 	try {
 		const response = await fetch('/api/rename', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ messages })
+			body: JSON.stringify({ messages, model })
 		});
 		if (!response.ok) throw new Error(`Rename failed: ${response.status}`);
 		const data = await response.json();

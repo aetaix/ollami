@@ -3,7 +3,7 @@ import ollama from 'ollama';
 export const POST: RequestHandler = async ({ request }) => {
 	const { model }: { model: App.Model } = await request.json();
 
-	await ollama.delete({ model: model.api });
+	await ollama.delete({ model: model.api + (model.parameters ? ':' + model.parameters : '') });
 
 	return new Response(JSON.stringify({ success: true }), {
 		status: 200,

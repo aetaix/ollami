@@ -23,7 +23,11 @@
 			if (!page.params.id) return;
 			saveMessage(response.message, page.params.id);
 			if (chat.messages.length === 2) {
-				renameChat(chat.messages, page.params.id);
+				if (models.selectedModel) {
+					renameChat(chat.messages, page.params.id, models.selectedModel);
+				} else {
+					console.warn('No selected model to rename chat with');
+				}
 			}
 		},
 		onError: (error) => {

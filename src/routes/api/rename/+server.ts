@@ -5,7 +5,7 @@ import { RENAME_PROMPT } from '$lib/prompts/rename.js';
 import { z } from 'zod';
 
 export async function POST({ request }) {
-	const { messages }: { messages: UIMessage[] } = await request.json();
+	const { messages, model }: { messages: UIMessage[]; model: App.Model } = await request.json();
 
 	const convertedMessages = convertToModelMessages(messages);
 
@@ -24,18 +24,30 @@ export async function POST({ request }) {
 	}
 
 	const prompt = `The user initial message: ${userMessageText.trim()}.`;
-	const client = Provider('openai');
+	const client = Provider(model.provider);
+	if (!client) {
+		return new Response(JSON.stringify({ error: 'Model provider not found' }), {
+			status: 400,
+			headers: { 'Content-Type': 'application/json' }
+		});
+	}
+	const api =
+		model.provider === 'ollama'
+			? model.parameters
+				? model.api + ':' + model.parameters
+				: model.api + ':latest'
+			: model.api;
 
 	const { object } = await generateObject({
-		model: client('gpt-5-nano'),
+		model: client(api),
 		schema: z.object({
-			name: z.string()
+			conversation_title: z.string()
 		}),
 		system: RENAME_PROMPT,
 		prompt
 	});
 
-	return new Response(JSON.stringify({ name: object.name }), {
+	return new Response(JSON.stringify({ name: object.conversation_title }), {
 		headers: {
 			'Content-Type': 'application/json'
 		}

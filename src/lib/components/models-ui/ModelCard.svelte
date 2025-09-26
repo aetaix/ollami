@@ -4,7 +4,7 @@
 	let { model } = $props();
 
 	async function deleteModel(model: App.Model) {
-		const res = await fetch('/api/models/delete', {
+		const res = await fetch('/api/models/ollama/delete', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

@@ -61,6 +61,13 @@
 		>
 			<img src={`/provider-icons/${model.icon}`} alt={model.name} class="size-5 object-contain" />
 			<p>{model.name}</p>
+			{#if model.parameters}
+				<span class="rounded bg-indigo-500/10 p-1 py-0 text-sm text-indigo-500"
+					>{model.parameters}</span
+				>
+			{:else if model.provider === 'ollama'}
+				<span class="rounded bg-indigo-500/10 p-1 py-0 text-sm text-indigo-500">Latest</span>
+			{/if}
 		</div>
 	{/if}
 

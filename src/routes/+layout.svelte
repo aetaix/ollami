@@ -17,8 +17,6 @@
 		isSidebarOpen = !isSidebarOpen;
 	}
 
-	$inspect(data, staticModels);
-
 	// initialize models store with static models and mark installed models
 	const updated = staticModels.map((model) => ({
 		...model,
