@@ -23,7 +23,7 @@
 			const resp = await fetch('/api/models/ollama/pull', {
 				method: 'POST',
 				headers: { 'content-type': 'application/json' },
-				body: JSON.stringify({ model: model.api })
+				body: JSON.stringify({ model: model.api, parameters: model.parameters || 'latest' })
 			});
 			if (!resp.ok || !resp.body) throw new Error('Failed to start pull');
 			const reader = resp.body.getReader();

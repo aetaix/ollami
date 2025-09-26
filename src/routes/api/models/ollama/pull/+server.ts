@@ -4,7 +4,8 @@ import ollama from 'ollama';
 // Streams the progress of pulling an Ollama model. Body: { model: string }
 export const POST: RequestHandler = async ({ request }) => {
 	try {
-		const { model } = (await request.json()) as { model?: string };
+		const { model, parameters } = (await request.json()) as { model?: string; parameters?: string };
+		console.log('Pulling model', model, parameters);
 		if (!model) {
 			return new Response(JSON.stringify({ error: 'Missing model' }), {
 				status: 400,
@@ -12,7 +13,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			});
 		}
 
-		const stream = await ollama.pull({ model, stream: true });
+		const stream = await ollama.pull({ model: model + ':' + parameters, stream: true });
 
 		// Create a ReadableStream that forwards NDJSON-like chunks
 		const encoder = new TextEncoder();

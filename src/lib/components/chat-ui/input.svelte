@@ -6,15 +6,18 @@
 	let { input = $bindable(''), onsubmit, model = models.models[0] } = $props();
 
 	function handleModelChange(value: string) {
-		const model = models.models.find((m) => m.api === value) as App.Model;
+		const modelName = value.split(':')[0];
+		const modelParameters = value.split(':')[1];
+
+		const model = models.models.find((m) => {
+			if (modelParameters) {
+				return m.api === modelName && m.parameters === modelParameters;
+			} else {
+				return m.api === modelName;
+			}
+		}) as App.Model;
 		models.selectedModel = model;
 	}
-
-	$effect(() => {
-		if (model) {
-			models.selectedModel = model;
-		}
-	});
 
 	const currentModel = $derived(models.selectedModel);
 </script>
@@ -22,18 +25,20 @@
 {#snippet selectItem(model: App.Model)}
 	<Select.Item
 		class="flex w-full items-center gap-2 rounded-lg p-2 text-sm outline-hidden transition-colors select-none hover:bg-zinc-100 data-selected:bg-zinc-100 data-selected:text-zinc-700 dark:hover:bg-zinc-700 dark:data-selected:bg-zinc-700 dark:data-selected:text-white"
-		value={model.api}
+		value={model.api + (model.parameters ? ':' + model.parameters : '')}
 		label={model.name}
 	>
 		<img src={`/provider-icons/${model.icon}`} alt={model.name} class="size-5 object-contain" />
 		{model.name}
 		{#if model.parameters}
-			<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500">{model.parameters}</span>
+			<span class="rounded bg-indigo-500/10 p-1 py-0 text-sm text-indigo-500"
+				>{model.parameters}</span
+			>
 		{:else if model.provider === 'ollama'}
-			<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500">Latest</span>
+			<span class="rounded bg-indigo-500/10 p-1 py-0 text-sm text-indigo-500">Latest</span>
 		{/if}
 		{#if model.reasoning}
-			<span class="rounded bg-blue-500/10 p-1 text-xs text-blue-500"> Reasoning</span>
+			<span class="rounded bg-blue-500/10 p-1 py-0 text-xs text-blue-500"> Reasoning</span>
 		{/if}
 	</Select.Item>
 {/snippet}
@@ -61,11 +66,11 @@
 					{currentModel?.name || 'Select a model'}
 
 					{#if currentModel && currentModel.parameters}
-						<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500"
+						<span class="rounded bg-indigo-500/10 p-1 py-0 text-sm text-indigo-500"
 							>{currentModel.parameters}</span
 						>
 					{:else if currentModel && currentModel.provider === 'ollama'}
-						<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500">Latest</span>
+						<span class="rounded bg-indigo-500/10 p-1 py-0 text-sm text-indigo-500">Latest</span>
 					{/if}
 
 					<ChevronDown size={16} />

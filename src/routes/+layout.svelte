@@ -17,6 +17,8 @@
 		isSidebarOpen = !isSidebarOpen;
 	}
 
+	$inspect(data, staticModels);
+
 	// initialize models store with static models and mark installed models
 	const updated = staticModels.map((model) => ({
 		...model,
@@ -24,7 +26,7 @@
 	}));
 
 	models.models = updated;
-	models.selectedModel = models.models.find((m) => m.installed) || models.models[0];
+	models.selectedModel = models.models[0];
 </script>
 
 <svelte:head>
