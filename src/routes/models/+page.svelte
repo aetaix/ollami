@@ -38,9 +38,9 @@
 	});
 </script>
 
-<div class="p-4 pl-0">
+<div class="h-screen overflow-hidden p-4 pl-0">
 	<div
-		class="border-glass flex w-full flex-col gap-4 rounded-2xl bg-white/20 p-5 shadow dark:bg-zinc-800/50"
+		class="border-glass relative flex h-full w-full flex-col gap-4 rounded-2xl bg-white/20 p-5 shadow dark:bg-zinc-800/50"
 	>
 		<header class="flex flex-col items-start">
 			<h1 class="mb-2 text-2xl">Models</h1>
@@ -49,78 +49,76 @@
 				Ollami. We curated a selection of models that are small, fast, and efficient.
 			</p>
 		</header>
-		<div class="flex flex-col gap-4">
-			<div class="flex items-center justify-between">
-				<div class="flex items-center gap-2">
-					<div class="flex items-center gap-2 rounded-xl bg-zinc-100 p-1 dark:bg-zinc-900">
-						{#each providerFilters as provider (provider)}
-							<button
-								onclick={() => (filters.provider = provider)}
-								class="rounded-lg border px-4 py-2 text-sm font-medium capitalize transition-colors {provider ===
-								filters.provider
-									? 'border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800'
-									: 'border-transparent text-zinc-700 dark:text-zinc-400'}"
-								>{provider || 'All'}</button
-							>
-						{/each}
-					</div>
-				</div>
-				<div>
-					<div
-						class="flex items-center gap-2 rounded-lg border border-zinc-200 p-2 focus-within:outline focus-within:outline-zinc-200 dark:border-zinc-700"
-					>
-						<Search size={20} />
-						<input
-							type="text"
-							placeholder="Search models..."
-							bind:value={filters.search}
-							class=" bg-transparent text-sm text-zinc-700 placeholder:text-zinc-400 focus:outline-none"
-						/>
-					</div>
+		<div class="flex items-center justify-between">
+			<div class="flex items-center gap-2">
+				<div class="flex items-center gap-2 rounded-xl bg-zinc-100 p-1 dark:bg-zinc-900">
+					{#each providerFilters as provider (provider)}
+						<button
+							onclick={() => (filters.provider = provider)}
+							class="rounded-lg border px-4 py-2 text-sm font-medium capitalize transition-colors {provider ===
+							filters.provider
+								? 'border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800'
+								: 'border-transparent text-zinc-700 dark:text-zinc-400'}"
+							>{provider || 'All'}</button
+						>
+					{/each}
 				</div>
 			</div>
-			<div
-				class="grid grid-cols-8 overflow-clip rounded-xl border border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800"
-			>
-				{#snippet authorOption(author: string)}
-					<button
-						class="flex w-full items-center gap-2 rounded-lg p-2 capitalize transition-colors {filters.author ===
-						author
-							? 'bg-zinc-100 dark:bg-zinc-700'
-							: 'text-zinc-700 dark:text-zinc-400'}"
-						onclick={() => (filters.author = author)}
-					>
-						{#if author}
-							<img src="/provider-icons/{author}.svg" alt="" class="size-5" />
-						{:else}
-							<Layers class="size-5" />
-						{/if}
-						{author || 'All'}
-					</button>
-				{/snippet}
-				<!-- Only show author selection if there are filtered models -->
-				{#if filteredModelsByProviderAndSearch.length > 0}
-					<div
-						class="col-span-2 flex flex-col gap-2 border-r border-zinc-200 p-2 dark:border-zinc-700"
-					>
-						{@render authorOption('')}
-						{#each filteredAuthors as author (author)}
-							{@render authorOption(author)}
+			<div>
+				<div
+					class="flex items-center gap-2 rounded-lg border border-zinc-200 p-2 focus-within:outline focus-within:outline-zinc-200 dark:border-zinc-700"
+				>
+					<Search size={20} />
+					<input
+						type="text"
+						placeholder="Search models..."
+						bind:value={filters.search}
+						class=" bg-transparent text-sm text-zinc-700 placeholder:text-zinc-400 focus:outline-none"
+					/>
+				</div>
+			</div>
+		</div>
+		<div
+			class="grid h-full grid-cols-8 overflow-hidden rounded-xl border border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800"
+		>
+			{#snippet authorOption(author: string)}
+				<button
+					class="flex w-full items-center gap-2 rounded-lg p-2 capitalize transition-colors {filters.author ===
+					author
+						? 'bg-zinc-100 dark:bg-zinc-700'
+						: 'text-zinc-700 dark:text-zinc-400'}"
+					onclick={() => (filters.author = author)}
+				>
+					{#if author}
+						<img src="/provider-icons/{author}.svg" alt="" class="size-5" />
+					{:else}
+						<Layers class="size-5" />
+					{/if}
+					{author || 'All'}
+				</button>
+			{/snippet}
+			<!-- Only show author selection if there are filtered models -->
+			{#if filteredModelsByProviderAndSearch.length > 0}
+				<div
+					class="col-span-2 flex flex-col gap-2 border-r border-zinc-200 p-2 dark:border-zinc-700"
+				>
+					{@render authorOption('')}
+					{#each filteredAuthors as author (author)}
+						{@render authorOption(author)}
+					{/each}
+				</div>
+			{/if}
+			<div class="col-span-6 h-full overflow-y-auto bg-zinc-50 p-4 dark:bg-zinc-900">
+				<div class="grid h-fit grid-cols-2 gap-4">
+					{#if filteredModels.length > 0}
+						{#each filteredModels as model (model)}
+							<ModelCard {model} />
 						{/each}
-					</div>
-				{/if}
-				<div class="col-span-6 bg-zinc-50 p-4 dark:bg-zinc-900">
-					<div class="grid h-fit grid-cols-2 gap-4">
-						{#if filteredModels.length > 0}
-							{#each filteredModels as model (model)}
-								<ModelCard {model} />
-							{/each}
-						{:else}
-							<div class="col-span-8 p-4 text-center text-zinc-500">
-								No models match the current filters.
-							</div>
-						{/if}
-					</div>
+					{:else}
+						<div class="col-span-8 p-4 text-center text-zinc-500">
+							No models match the current filters.
+						</div>
+					{/if}
 				</div>
 			</div>
 		</div>
