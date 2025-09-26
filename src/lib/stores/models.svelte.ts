@@ -1,18 +1,9 @@
-import staticModels from '$lib/models';
-
-// Export all models
-export const models = $state<App.Model[]>(staticModels);
-
-// Extend the model object with installation status (initialized to false; refreshed in browser)
-export const extendedModels = $state(staticModels.map((model) => ({ ...model, installed: false })));
-
-// Export the selected model
-let selectedModel = $state<App.Model>(extendedModels[0]);
-
-export function getSelectedModel() {
-	return selectedModel;
+interface ModelState {
+	models: App.Model[];
+	selectedModel: App.Model | null;
 }
 
-export function setSelectedModel(model: App.Model) {
-	selectedModel = model;
-}
+export const models = $state<ModelState>({
+	models: [],
+	selectedModel: null
+});

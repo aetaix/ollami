@@ -1,27 +1,22 @@
 <script lang="ts">
 	import { Select } from 'bits-ui';
-	import {
-		models,
-		extendedModels,
-		getSelectedModel,
-		setSelectedModel
-	} from '$lib/stores/models.svelte';
+	import { models } from '$lib/stores/models.svelte';
 	import { ArrowUp, ChevronDown } from '@lucide/svelte';
 	import InputTextarea from './InputTextarea.svelte';
-	let { input = $bindable(''), onsubmit, model = models[0] } = $props();
+	let { input = $bindable(''), onsubmit, model = models.models[0] } = $props();
 
 	function handleModelChange(value: string) {
-		const model = extendedModels.find((m) => m.api === value) as App.Model;
-		setSelectedModel(model);
+		const model = models.models.find((m) => m.api === value) as App.Model;
+		models.selectedModel = model;
 	}
 
 	$effect(() => {
 		if (model) {
-			setSelectedModel(model);
+			models.selectedModel = model;
 		}
 	});
 
-	const currentModel = $derived(getSelectedModel());
+	const currentModel = $derived(models.selectedModel);
 </script>
 
 {#snippet selectItem(model: App.Model)}
@@ -50,7 +45,7 @@
 	<InputTextarea bind:content={input} {onsubmit} />
 
 	<div class="flex items-center justify-between">
-		{#if extendedModels}
+		{#if models.models.length > 1}
 			<Select.Root type="single" onValueChange={handleModelChange}>
 				<Select.Trigger
 					class="flex touch-none items-center gap-2 rounded-lg  bg-zinc-100 p-2 text-sm transition-colors select-none hover:bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-700 dark:hover:bg-zinc-600"
@@ -69,7 +64,7 @@
 						<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500"
 							>{currentModel.parameters}</span
 						>
-					{:else if currentModel.provider === 'ollama'}
+					{:else if currentModel && currentModel.provider === 'ollama'}
 						<span class="rounded bg-indigo-500/10 p-1 text-sm text-indigo-500">Latest</span>
 					{/if}
 
@@ -88,13 +83,13 @@
 									<a href="/models">+</a>
 								</header>
 
-								{#each extendedModels.filter((model) => model.provider === 'ollama' && model.installed) as model, i (i + model.name)}
+								{#each models.models.filter((model) => model.provider === 'ollama' && model.installed) as model, i (i + model.name)}
 									{@render selectItem(model)}
 								{/each}
 							</div>
 
 							<h4 class="text-sm text-zinc-500 dark:text-zinc-400">API</h4>
-							{#each extendedModels.filter((model) => model.provider !== 'ollama') as model, i (i + model.name)}
+							{#each models.models.filter((model) => model.provider !== 'ollama') as model, i (i + model.name)}
 								{@render selectItem(model)}
 							{/each}
 						</Select.Viewport>

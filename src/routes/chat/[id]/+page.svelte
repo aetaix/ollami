@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { Chat as SDKChat } from '@ai-sdk/svelte';
 	import { chats, saveMessage, renameChat } from '$lib/stores/chatsStorage';
-	import { getSelectedModel } from '$lib/stores/models.svelte';
+	import { models } from '$lib/stores/models.svelte';
 	import Chat from '$lib/components/Chat.svelte';
 
 	let currentChat = $derived($chats.find((chat) => chat.id === page.params.id));
@@ -68,7 +68,7 @@
 		event.preventDefault();
 		if (!page.params.id) return;
 
-		chat.sendMessage({ text: input }, { body: { model: getSelectedModel() } });
+		chat.sendMessage({ text: input }, { body: { model: models.selectedModel } });
 		saveMessage(
 			{ id: crypto.randomUUID(), role: 'user', parts: [{ type: 'text', text: input }] },
 			page.params.id

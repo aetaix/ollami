@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ModelCard from '$lib/components/models-ui/ModelCard.svelte';
-	import { extendedModels } from '$lib/stores/models.svelte';
+	import { models } from '$lib/stores/models.svelte';
 	import { Search, Layers } from '@lucide/svelte';
 
 	const providerFilters = ['', 'ollama', 'API'];
@@ -13,7 +13,7 @@
 
 	// Derive models filtered only by provider and search
 	const filteredModelsByProviderAndSearch = $derived.by(() => {
-		return extendedModels.filter((model) => {
+		return models.models.filter((model) => {
 			const providerMatch =
 				filters.provider === '' ||
 				(filters.provider === 'ollama' && model.provider === 'ollama') ||

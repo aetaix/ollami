@@ -2,10 +2,10 @@
 	import { generateId } from 'ai';
 	import { goto } from '$app/navigation';
 	import { chats } from '$lib/stores/chatsStorage';
-	import { getSelectedModel } from '$lib/stores/models.svelte';
+	import { models } from '$lib/stores/models.svelte';
 	import Input from '$lib/components/chat-ui/Input.svelte';
 	import { scale } from 'svelte/transition';
-	import Clock from '$lib/components/widgets/collection/Clock.svelte';
+	// import Clock from '$lib/components/widgets/collection/Clock.svelte';
 	// import WidgetZone from '$lib/components/widgets/WidgetZone.svelte';
 
 	let input = '';
@@ -22,7 +22,7 @@
 			{
 				id,
 				name: 'New Chat',
-				model: getSelectedModel(),
+				model: models.selectedModel,
 				createdAt: new Date().toISOString(),
 				messages: [{ id: generateId(), role: 'user', parts: [{ type: 'text', text: content }] }]
 			}
@@ -41,9 +41,7 @@
 			<h1 class="text-3xl">Ollami!</h1>
 			<p>Welcome, ask something!</p>
 		</div>
-		<div class="col-span-5">
-			<Clock model={getSelectedModel()} />
-		</div>
+		<div class="col-span-5"></div>
 	</div>
 	<Input bind:input {onsubmit} />
 </div>
