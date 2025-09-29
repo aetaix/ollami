@@ -16,34 +16,40 @@
 	let editor = null as Editor | null;
 
 	onMount(() => {
-		editor = new Editor({
-			element: element,
-			extensions: [
-				StarterKit,
-				Placeholder.configure({
-					placeholder: 'Type your message here...'
-				})
-			],
-			content: content,
-			autofocus: true,
-			editorProps: {
-				attributes: {
-					class: 'focus:outline-none max-h-44 overflow-y-auto p-1'
-				},
-				handleKeyDown: (view, event) => {
-					if (event.key === 'Enter' && !event.shiftKey) {
-						event.preventDefault();
-						onsubmit(event);
-						editor?.commands.clearContent();
-						return true;
+		try {
+			editor = new Editor({
+				element: element,
+				extensions: [
+					StarterKit,
+					Placeholder.configure({
+						placeholder: 'Type your message here...',
+						emptyEditorClass: 'is-empty', // Add a class when editor is empty
+						emptyNodeClass: 'is-empty-node' // Add a class to empty nodes
+					})
+				],
+				content: content,
+				autofocus: true,
+				editorProps: {
+					attributes: {
+						class: 'focus:outline-none max-h-44 overflow-y-auto p-1'
+					},
+					handleKeyDown: (view, event) => {
+						if (event.key === 'Enter' && !event.shiftKey) {
+							event.preventDefault();
+							onsubmit(event);
+							editor?.commands.clearContent();
+							return true;
+						}
+						return false;
 					}
-					return false;
+				},
+				onUpdate: ({ editor }) => {
+					content = editor.getText();
 				}
-			},
-			onUpdate: ({ editor }) => {
-				content = editor.getText();
-			}
-		});
+			});
+		} catch (error) {
+			console.error('Failed to initialize editor:', error);
+		}
 	});
 
 	onDestroy(() => {
@@ -54,3 +60,15 @@
 </script>
 
 <div bind:this={element}></div>
+
+<style>
+	:global {
+		.is-empty::before {
+			content: attr(data-placeholder);
+			float: left;
+			color: #adb5bd;
+			pointer-events: none;
+			height: 0;
+		}
+	}
+</style>
