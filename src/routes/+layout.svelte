@@ -50,7 +50,7 @@
 		{#if !isSidebarOpen}
 			<button
 				onclick={toggleSidebar}
-				class="absolute top-4 left-4 z-10 rounded-lg p-2 transition-colors hover:bg-neutral-50 hover:shadow-none dark:hover:bg-zinc-800"
+				class="absolute top-4 left-4 z-10 rounded-lg border border-zinc-200 bg-zinc-100 p-2 shadow transition-colors hover:bg-neutral-50 hover:shadow-none dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 			>
 				<PanelLeft size={20} />
 			</button>
