@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
+	import { updateCompanion } from '$lib/stores/companionsStorage';
 	import StarterKit from '@tiptap/starter-kit';
 	import { Placeholder } from '@tiptap/extensions';
 
 	let {
+		id,
 		content = $bindable('')
 	}: {
+		id: string;
 		content: string;
 	} = $props();
 
@@ -39,6 +42,12 @@
 			},
 			onUpdate: ({ editor }) => {
 				content = editor.getText();
+				updateCompanion(id, (companion) => {
+					if (companion) {
+						companion.system = content;
+					}
+					return companion;
+				});
 			}
 		});
 	});

@@ -1,6 +1,8 @@
 import { persisted } from 'svelte-persisted-store';
+
 import type { UIMessage } from 'ai';
 import { goto } from '$app/navigation';
+import type { Companion } from './companionsStorage';
 
 // Types -----------------------------------------------------------------------
 export interface ChatMessage extends UIMessage {
@@ -13,6 +15,7 @@ export interface Chat {
 	createdAt: string; // ISO timestamp
 	model: App.Model | null; // null if no model selected
 	messages: ChatMessage[];
+	companion?: Companion; // undefined if no companion selected
 }
 
 // Store -----------------------------------------------------------------------
@@ -64,7 +67,6 @@ export function appendMessages(chatId: string, newMessages: ChatMessage[]) {
 	updateChat(chatId, (chat) => ({ ...chat, messages: [...(chat.messages ?? []), ...newMessages] }));
 }
 
-// Backward compatible legacy name (was saveMessage)
 export function saveMessage(newMessage: ChatMessage, chatId: string) {
 	appendMessage(chatId, newMessage);
 }

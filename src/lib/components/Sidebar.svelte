@@ -82,14 +82,14 @@
 			>
 				<div class="flex items-center justify-between gap-2">
 					<div
-						class=" flex items-center gap-1 rounded-lg px-2 py-1 outline-neutral-400 focus-within:outline dark:outline-zinc-600"
+						class="flex items-center gap-1 rounded-lg px-2 py-1 outline-zinc-400 transition-colors focus-within:bg-transparent focus-within:outline hover:bg-zinc-100 dark:outline-zinc-600 dark:hover:bg-zinc-700"
 					>
 						<Search size={20} />
 						<input
 							bind:value={search}
 							type="text"
 							placeholder="Search in {$chats.length} Chats"
-							class="w-full border-none bg-none p-1 text-sm placeholder:text-neutral-400 focus:outline-none dark:placeholder:text-zinc-500"
+							class="w-full border-none bg-none p-1 text-sm placeholder:text-zinc-400 focus:outline-none dark:placeholder:text-zinc-500"
 						/>
 					</div>
 					<a

@@ -9,11 +9,13 @@ import {
 } from 'ai';
 import { SYSTEM_PROMPT, REASONING_SYSTEM_PROMPT } from '$lib/prompts/system';
 import type { RequestHandler } from '@sveltejs/kit';
+import type { Companion } from '$lib/stores/companionsStorage';
 
 // Define expected request body shape
 interface ChatRequestBody {
 	messages: UIMessage[];
 	model: App.Model;
+	companion?: Companion;
 }
 
 // Define possible error responses
@@ -35,17 +37,30 @@ const ERROR_RESPONSES = {
 export const POST: RequestHandler = async ({ request }) => {
 	try {
 		// 1. Parse and validate request body
-		const { messages, model }: ChatRequestBody = await request.json();
+		const { messages, model, companion }: ChatRequestBody = await request.json();
 		if (!messages || !model) return createErrorResponse(ERROR_RESPONSES.INVALID_BODY);
 
 		// 2. Initialize model client
 		const client = Provider(model.provider);
 		if (!client) return createErrorResponse(ERROR_RESPONSES.MODEL_ERROR);
 
-		// 3. Prepare common stream configuration
+		// 3. Prepare system prompt
+		let system = SYSTEM_PROMPT;
+		if (companion?.system) {
+			// we replace the whole system prompt if the companion has one, so the user can have a full control
+			system = companion.system;
+		}
+
+		if (model.reasoning) {
+			system = system + '\n' + REASONING_SYSTEM_PROMPT;
+		}
+
+		console.log('Using system prompt:', system);
+
+		// 4. Prepare common stream configuration
 		const commonConfig = {
 			messages: convertToModelMessages(messages),
-			system: model.reasoning ? REASONING_SYSTEM_PROMPT : SYSTEM_PROMPT
+			system
 		};
 
 		const api =

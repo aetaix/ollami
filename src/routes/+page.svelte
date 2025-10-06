@@ -2,13 +2,15 @@
 	import { generateId } from 'ai';
 	import { goto } from '$app/navigation';
 	import { chats } from '$lib/stores/chatsStorage';
+	import { defaultCompanion } from '$lib/stores/companionsStorage';
 	import { models } from '$lib/stores/models.svelte';
 	import Input from '$lib/components/chat-ui/Input.svelte';
 	import { scale } from 'svelte/transition';
 	// import Clock from '$lib/components/widgets/collection/Clock.svelte';
 	// import WidgetZone from '$lib/components/widgets/WidgetZone.svelte';
 
-	let input = '';
+	let input = $state('');
+	let companion = $state(defaultCompanion);
 
 	function onsubmit(e: Event) {
 		e.preventDefault();
@@ -22,12 +24,12 @@
 			{
 				id,
 				name: 'New Chat',
+				companion: companion,
 				model: models.selectedModel,
 				createdAt: new Date().toISOString(),
 				messages: [{ id: generateId(), role: 'user', parts: [{ type: 'text', text: content }] }]
 			}
 		]);
-
 		goto(`/chat/${id}`);
 	}
 </script>
@@ -43,5 +45,5 @@
 		</div>
 		<div class="col-span-5"></div>
 	</div>
-	<Input bind:input {onsubmit} />
+	<Input bind:input {onsubmit} bind:companion />
 </div>
