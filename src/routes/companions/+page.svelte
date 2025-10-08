@@ -3,23 +3,35 @@
 	import {
 		companions,
 		getCompanion,
-		updateCompanion,
-		createCompanion
+		createCompanion,
+		deleteCompanion
 	} from '$lib/stores/companionsStorage';
+	import { Plus, Search } from '@lucide/svelte';
 
 	let currentCompanion = $state(getCompanion('112251102'));
+	let search = $state('');
 
 	const handleCompanionCreation = () => {
-		createCompanion({
-			id: '',
-			name: 'test',
-			system: 'test'
+		const id = createCompanion({
+			id: crypto.randomUUID(),
+			name: 'New Companion',
+			system: 'Start typing your system prompt'
 		});
+		currentCompanion = getCompanion(id);
+	};
+
+	const handleCompanionDeletion = (id: string) => {
+		const firstId = deleteCompanion(id);
+		if (firstId) {
+			currentCompanion = getCompanion(firstId);
+		}
 	};
 
 	const handleSelectCompanion = (id: string) => {
-		currentCompanion = $companions.find((c) => c.id === id);
+		currentCompanion = getCompanion(id);
 	};
+
+	const filteredCompanions = $derived($companions.filter((c) => c.name.includes(search)));
 </script>
 
 <div class="h-screen overflow-hidden p-4 pl-0">
@@ -36,7 +48,10 @@
 				onclick={() => {
 					handleCompanionCreation();
 				}}
-				class="rounded-lg bg-black px-4 py-1 text-white">Create</button
+				class="flex items-center gap-1 rounded-lg bg-black px-4 py-2 text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-700"
+			>
+				<Plus size={18} />
+				Create</button
 			>
 		</header>
 		<div class="flex h-full flex-col gap-4">
@@ -50,8 +65,8 @@
 						}}
 						class="flex w-full items-center gap-2 rounded-lg p-2 transition-colors {currentCompanion?.id ===
 						id
-							? 'bg-zinc-100 '
-							: 'text-zinc-700 dark:text-zinc-400'}"
+							? 'bg-zinc-100 dark:bg-zinc-700'
+							: 'text-zinc-700 hover:bg-zinc-100 dark:text-zinc-100 dark:hover:bg-zinc-700'}"
 					>
 						{name}
 					</button>
@@ -60,41 +75,43 @@
 				<div
 					class="col-span-2 flex flex-col gap-2 border-r border-zinc-200 p-2 dark:border-zinc-700"
 				>
-					{#each $companions as companion (companion.id)}
+					<header class="flex items-center gap-2 p-2">
+						<div
+							class="flex w-full items-center gap-1 rounded-lg border border-zinc-200 px-2 py-1 outline-zinc-400 transition-colors focus-within:bg-transparent focus-within:outline hover:bg-zinc-100 dark:border-zinc-700 dark:outline-zinc-600 dark:hover:bg-zinc-700"
+						>
+							<Search size={20} />
+							<input
+								bind:value={search}
+								type="text"
+								placeholder="Search a companion"
+								class="w-full border-none bg-none p-1 text-sm placeholder:text-zinc-400 focus:outline-none dark:placeholder:text-zinc-500"
+							/>
+						</div>
+						<button
+							onclick={() => handleCompanionCreation()}
+							aria-label="Create a new companion"
+							class="flex items-center justify-center gap-1 rounded-lg bg-zinc-100 p-2 text-sm transition-colors hover:bg-zinc-200 dark:bg-zinc-700 dark:hover:bg-zinc-600"
+							><Plus size={16} /> New</button
+						>
+					</header>
+					{#each filteredCompanions as companion (companion.id)}
 						{@render menuItem(companion.id, companion.name)}
 					{/each}
 				</div>
 
 				<div
-					class="col-span-6 flex h-full flex-col divide-y divide-zinc-200 bg-white dark:bg-zinc-900"
+					class="col-span-6 flex h-full flex-col divide-y divide-zinc-200 bg-white dark:divide-zinc-700 dark:bg-zinc-900"
 				>
-					<div class="p-4">
-						<h3 class="block text-sm opacity-50">Titre</h3>
-						<input
-							type="text"
-							class="rounded-lg border border-zinc-200 p-1"
-							value={currentCompanion?.name}
-							oninput={(e) => {
-								const name = (e.target as HTMLInputElement).value;
-								if (currentCompanion) {
-									updateCompanion(currentCompanion?.id, (companion) => {
-										if (companion) {
-											companion.name = name;
-										}
-										return companion;
-									});
-								}
-							}}
-						/>
-					</div>
-					<div class="p-4">
-						<span class="text-sm opacity-50"> System Prompt </span>
-						{#key currentCompanion}
-							{#if currentCompanion}
-								<Editor id={currentCompanion.id} bind:content={currentCompanion.system} />
-							{/if}
-						{/key}
-					</div>
+					{#key currentCompanion}
+						{#if currentCompanion}
+							<Editor
+								id={currentCompanion.id}
+								{currentCompanion}
+								bind:content={currentCompanion.system}
+								ondelete={handleCompanionDeletion}
+							/>
+						{/if}
+					{/key}
 				</div>
 			</div>
 		</div>

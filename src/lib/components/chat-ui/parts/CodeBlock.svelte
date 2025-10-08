@@ -36,7 +36,7 @@
 
 <div
 	class={`
-		not-prose  overflow-hidden rounded-2xl border
+		not-prose my-6 overflow-hidden rounded-xl border
 		border-zinc-200 bg-zinc-100 text-sm shadow
 		dark:border-zinc-600 dark:bg-zinc-700
 		${className}

@@ -32,6 +32,17 @@ export function createCompanion(partial: Companion) {
 	return item.id;
 }
 
+export function deleteCompanion(chatId: string) {
+	companions.update((list) => list.filter((c) => c.id !== chatId));
+	// return the first companion id, or undefined if none
+	let first: string | undefined;
+	companions.update((list) => {
+		first = list[0]?.id;
+		return list; // no mutation
+	});
+	return first;
+}
+
 export function updateCompanion(id: string, mutate: (companion: Companion) => Companion): void {
 	companions.update((list) => {
 		const idx = list.findIndex((c) => c.id === id);

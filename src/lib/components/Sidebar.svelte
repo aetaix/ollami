@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { chats, deleteChat } from '$lib/stores/chatsStorage';
-	import { PanelRight, MessageSquare, Plus, Trash, Search } from '@lucide/svelte';
+	import { PanelRight, MessageSquare, Plus, Trash, Search, Layers, Smile } from '@lucide/svelte';
 	import ToggleMode from './sidebar-ui/ToggleMode.svelte';
 	import Settings from './Settings.svelte';
 	import { fly } from 'svelte/transition';
@@ -82,7 +82,7 @@
 			>
 				<div class="flex items-center justify-between gap-2">
 					<div
-						class="flex items-center gap-1 rounded-lg px-2 py-1 outline-zinc-400 transition-colors focus-within:bg-transparent focus-within:outline hover:bg-zinc-100 dark:outline-zinc-600 dark:hover:bg-zinc-700"
+						class="flex items-center gap-1 rounded-lg border border-zinc-200 px-2 py-1 outline-zinc-400 transition-colors focus-within:bg-transparent focus-within:outline hover:bg-zinc-100 dark:border-zinc-700 dark:outline-zinc-600 dark:hover:bg-zinc-700"
 					>
 						<Search size={20} />
 						<input
@@ -139,16 +139,22 @@
 				id="models"
 				href="/models"
 				aria-current={pathname === '/models' ? 'page' : undefined}
-				class="relative rounded-lg px-3 py-2
+				class="relative flex items-center gap-2 rounded-lg px-3 py-2
 			{pathname === '/models' ? '' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}
-			">Models</a
+			"
+			>
+				<Layers size={16} class="opacity-50" />
+				Models</a
 			><a
 				id="companions"
 				href="/companions"
 				aria-current={pathname === '/companions' ? 'page' : undefined}
-				class="relative rounded-lg px-3 py-2
+				class="relative flex items-center gap-2 rounded-lg px-3 py-2
 			{pathname === '/companions' ? '' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}
-			">Companions</a
+			"
+			>
+				<Smile size={16} class="opacity-50" />
+				Companions</a
 			>
 		</div>
 

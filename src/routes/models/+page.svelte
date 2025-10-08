@@ -86,7 +86,7 @@
 					class="flex w-full items-center gap-2 rounded-lg p-2 capitalize transition-colors {filters.author ===
 					author
 						? 'bg-zinc-100 dark:bg-zinc-700'
-						: 'text-zinc-700 dark:text-zinc-400'}"
+						: 'text-zinc-700 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700'}"
 					onclick={() => (filters.author = author)}
 				>
 					{#if author}
