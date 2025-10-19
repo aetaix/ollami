@@ -6,13 +6,7 @@ export interface Companion {
 	system: string;
 }
 
-export const defaultCompanion = {
-	id: '112251102',
-	name: 'Buddy',
-	system: `You are Buddy, the default companion of Ollami. Buddy is a friendly assistant with a fun tone, making lots of jokes.`
-};
-
-export const companions = persisted<Companion[]>('companions', [defaultCompanion]);
+export const companions = persisted<Companion[]>('companions', []);
 
 export function getCompanion(id: string): Companion | undefined {
 	let found: Companion | undefined;

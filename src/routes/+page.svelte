@@ -2,32 +2,27 @@
 	import { generateId } from 'ai';
 	import { goto } from '$app/navigation';
 	import { chats } from '$lib/stores/chatsStorage';
-	import { defaultCompanion } from '$lib/stores/companionsStorage';
 	import { models } from '$lib/stores/models.svelte';
 	import Input from '$lib/components/chat-ui/Input.svelte';
 	import { scale } from 'svelte/transition';
-	// import Clock from '$lib/components/widgets/collection/Clock.svelte';
-	// import WidgetZone from '$lib/components/widgets/WidgetZone.svelte';
-
 	let input = $state('');
-	let companion = $state(defaultCompanion);
+	let companion = $state(null);
 
 	function onsubmit(e: Event) {
 		e.preventDefault();
 		const id = generateId();
 
 		if (!input) return;
-		const content = input;
+		const userMessage = input;
 		input = '';
 		chats.update((chats) => [
 			...chats,
 			{
 				id,
-				name: 'New Chat',
-				companion: companion,
+				name: userMessage,
 				model: models.selectedModel,
 				createdAt: new Date().toISOString(),
-				messages: [{ id: generateId(), role: 'user', parts: [{ type: 'text', text: content }] }]
+				messages: [{ id: generateId(), role: 'user', parts: [{ type: 'text', text: userMessage }] }]
 			}
 		]);
 		goto(`/chat/${id}`);

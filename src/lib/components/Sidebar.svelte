@@ -54,21 +54,21 @@
 	<nav
 		bind:this={navEl}
 		aria-label="Sidebar"
-		class="border-glass relative flex h-full flex-col justify-between rounded-2xl bg-gradient-to-tl from-zinc-100 to-transparent p-2 pt-0 shadow backdrop-blur-2xl transition-colors dark:from-zinc-800/50"
+		class="relative flex h-full flex-col justify-between rounded-2xl border border-zinc-200 bg-gradient-to-tl from-zinc-100 to-transparent p-2 pt-0 shadow-[0_5px_20px_#00000017] backdrop-blur-2xl transition-colors dark:border-zinc-800 dark:from-zinc-800/50"
 	>
 		<div class="flex flex-col gap-2">
 			<div
 				style:height={height + 'px'}
 				style:transform={`translateY(${posY}px)`}
-				class="border-glass pointer-events-none absolute right-2 left-2 origin-top rounded-xl bg-gradient-to-tr from-zinc-100/50 to-white shadow transition-all ease-in-out dark:from-zinc-800/50 dark:to-transparent"
+				class=" pointer-events-none absolute right-2 left-2 origin-bottom rounded-xl bg-white shadow-[0_5px_20px_#00000017] transition-all ease-in-out dark:bg-zinc-800"
 			></div>
 			<div class="relative flex items-center justify-between pt-2 pl-2">
 				<Ollami size={64} aria-label="Ollami" />
 				<button
 					onclick={ontogglesidebar}
-					class="rounded-lg p-2 transition-colors hover:bg-zinc-100 hover:shadow-none dark:hover:bg-zinc-800"
+					class="rounded-lg p-2 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
 				>
-					<PanelRight size={20} />
+					<PanelRight size={17} />
 				</button>
 			</div>
 			<div

@@ -13,7 +13,7 @@
 			<Reasoning text={part.text} />
 		{/if}
 		{#if part.type === 'text'}
-			<div class="prose prose-base max-w-none dark:prose-invert">
+			<div class="prose prose-base max-w-none prose-zinc dark:prose-invert">
 				<SvelteMarkdown source={part.text} renderers={{ code: CodeBlock }} />
 			</div>
 		{/if}

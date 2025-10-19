@@ -4,7 +4,6 @@
 	import { chats, saveMessage, renameChat } from '$lib/stores/chatsStorage';
 	import { models } from '$lib/stores/models.svelte';
 	import Chat from '$lib/components/Chat.svelte';
-	import { companions } from '$lib/stores/companionsStorage';
 
 	let currentChat = $derived($chats.find((chat) => chat.id === page.params.id));
 	let initialized = false;
@@ -57,7 +56,7 @@
 						{
 							body: {
 								model: currentChat?.model,
-								companion: currentChat?.companion
+								companion: currentChat?.companion || null
 							}
 						}
 					);

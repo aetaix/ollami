@@ -44,14 +44,14 @@
 	<div
 		class="relative transition-all duration-300 ease-in-out {isSidebarOpen
 			? 'w-[calc(100%-320px)]'
-			: 'w-full pl-16'}"
+			: 'w-full pl-14'}"
 	>
 		{#if !isSidebarOpen}
 			<button
 				onclick={toggleSidebar}
-				class="absolute top-4 left-4 z-10 rounded-lg border border-zinc-200 bg-zinc-100 p-2 shadow transition-colors hover:bg-neutral-50 hover:shadow-none dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+				class="absolute top-4 left-4 z-10 rounded-lg bg-zinc-100 p-2 transition-colors hover:bg-neutral-200 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 			>
-				<PanelLeft size={20} />
+				<PanelLeft size={17} />
 			</button>
 		{/if}
 		{@render children?.()}
