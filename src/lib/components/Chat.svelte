@@ -6,7 +6,7 @@
 	import { ChevronDown } from '@lucide/svelte';
 	import { tick } from 'svelte';
 
-	let { messages, input = $bindable(''), model, status, onsubmit } = $props();
+	let { messages, input = $bindable(''), model = $bindable(), status, onsubmit } = $props();
 
 	let messagesContainer: HTMLDivElement;
 	let arrowDownVisible = $state(false);
@@ -85,6 +85,6 @@
 				<ChevronDown size={24} />
 			</button>
 		{/if}
-		<Input bind:input {onsubmit} {model} />
+		<Input bind:input {onsubmit} bind:model />
 	</div>
 </main>

@@ -9,6 +9,10 @@
 	let input = $state('');
 	let companion = $state(null);
 
+	$effect(() => {
+		$inspect(companion);
+	});
+
 	function onsubmit(e: Event) {
 		e.preventDefault();
 		const id = generateId();
@@ -21,6 +25,7 @@
 			{
 				id,
 				name: userMessage,
+				companion: companion ?? undefined,
 				model: models.selectedModel,
 				createdAt: new Date().toISOString(),
 				messages: [{ id: generateId(), role: 'user', parts: [{ type: 'text', text: userMessage }] }]
