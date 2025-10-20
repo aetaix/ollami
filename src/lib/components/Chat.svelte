@@ -55,22 +55,6 @@
 </script>
 
 <main class="relative flex h-screen w-full flex-col">
-	{#if model}
-		<div
-			class="absolute top-4 flex items-center gap-2 rounded-lg bg-zinc-100 p-2 text-sm dark:bg-zinc-800"
-		>
-			<img src={`/provider-icons/${model.icon}`} alt={model.name} class="size-5 object-contain" />
-			<p>{model.name}</p>
-			{#if model.parameters}
-				<span class="rounded bg-indigo-500/10 p-1 py-0 text-sm text-indigo-500"
-					>{model.parameters}</span
-				>
-			{:else if model.provider === 'ollama'}
-				<span class="rounded bg-indigo-500/10 p-1 py-0 text-sm text-indigo-500">Latest</span>
-			{/if}
-		</div>
-	{/if}
-
 	<div
 		bind:this={messagesContainer}
 		class="overflow-y-auto mask-b-from-90% mask-b-to-95%"

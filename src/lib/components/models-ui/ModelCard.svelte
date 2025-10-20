@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Cloud, Laptop, Trash, Check } from '@lucide/svelte';
 	import Download from './Download.svelte';
-	let { model } = $props();
+	let { model, onselect } = $props();
 
 	async function deleteModel(model: App.Model) {
 		const res = await fetch('/api/models/ollama/delete', {
@@ -34,10 +34,13 @@
 					>
 				{/if}
 			</div>
-			{#if model.provider !== 'ollama'}
-				<Cloud class="size-4 text-zinc-400" />
-			{:else}
-				<Laptop class="size-4 text-zinc-400" />
+			{#if model.installed}
+				<button
+					onclick={() => deleteModel(model)}
+					class="flex size-8 shrink items-center justify-center rounded bg-zinc-100 text-zinc-700 opacity-0 transition-all group-hover:scale-100 group-hover:opacity-100 hover:bg-red-50 hover:text-red-500 dark:bg-zinc-700 dark:text-zinc-200"
+				>
+					<Trash class="size-4 " />
+				</button>
 			{/if}
 		</header>
 		<p class="text-sm text-zinc-600 dark:text-zinc-300">{model.description}</p>
@@ -56,22 +59,26 @@
 		{#if model.provider === 'ollama'}
 			{#if model.installed}
 				<div class="flex items-center group-hover:gap-2">
-					<span
-						class="flex items-center gap-2 rounded bg-emerald-50 px-2 py-1 text-sm text-emerald-500 dark:bg-emerald-500/10"
-					>
-						<Check size={20} />
-						Installed</span
-					>
 					<button
-						onclick={() => deleteModel(model)}
-						class="flex h-8 w-0 shrink items-center justify-center rounded bg-zinc-100 text-zinc-700 transition-all group-hover:w-8 group-hover:scale-100 hover:bg-red-50 hover:text-red-500 dark:bg-zinc-700 dark:text-zinc-200"
+						class="flex items-center gap-2 rounded-md bg-black px-2 py-1 text-sm text-white shadow hover:bg-zinc-800 dark:bg-white dark:text-black hover:dark:bg-zinc-200"
+						onclick={() => onselect && onselect(model)}
 					>
-						<Trash class="size-4 " />
-					</button>
+						<Laptop class="size-4 " /> Use</button
+					>
 				</div>
 			{:else}
 				<Download {model} />
 			{/if}
+		{/if}
+
+		{#if model.provider !== 'ollama'}
+			<button
+				class="flex items-center gap-2 rounded-md bg-black px-2 py-1 text-sm text-white shadow hover:bg-zinc-800 dark:bg-white dark:text-black hover:dark:bg-zinc-200"
+				onclick={() => onselect && onselect(model)}
+			>
+				<Cloud class="size-4 " />
+				Use</button
+			>
 		{/if}
 	</footer>
 </article>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import ModelCard from '$lib/components/models-ui/ModelCard.svelte';
 	import { models } from '$lib/stores/models.svelte';
 	import { Search, Layers } from '@lucide/svelte';
@@ -36,6 +37,12 @@
 			return authorMatch;
 		});
 	});
+
+	const handleModelSelect = (model: App.Model) => {
+		// Handle model selection (e.g., run the model)
+		models.selectedModel = model;
+		goto('/');
+	};
 </script>
 
 <div class="h-screen overflow-hidden p-4 pl-0">
@@ -112,7 +119,7 @@
 				<div class="grid h-fit grid-cols-2 gap-4">
 					{#if filteredModels.length > 0}
 						{#each filteredModels as model (model)}
-							<ModelCard {model} />
+							<ModelCard {model} onselect={handleModelSelect} />
 						{/each}
 					{:else}
 						<div class="col-span-8 p-4 text-center text-zinc-500">

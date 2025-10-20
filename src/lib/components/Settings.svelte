@@ -1,14 +1,28 @@
+<!-- Settings defs
+ 
+-General:
+	- Default prompt
+	- Favorite model
+	- Default companion
+	- default chat shortener model (we recommend light model )
+- Apparence
+	- theme
+	- background
+- About
+-->
+
 <script lang="ts">
 	import { Dialog, Tabs } from 'bits-ui';
 	import Apparence from './settings-ui/Apparence.svelte';
 	import { X } from '@lucide/svelte';
 	import { fade, fly } from 'svelte/transition';
+	import General from './settings-ui/General.svelte';
 
 	const settings = [
 		{
 			label: 'General',
 			value: 'general',
-			content: null
+			content: General
 		},
 		{
 			label: 'Apparence',
@@ -30,9 +44,9 @@
 		<Dialog.Content>
 			<div
 				transition:fly|global={{ y: 20, duration: 200 }}
-				class="fixed top-[50%] left-[50%] z-50 w-full max-w-3xl translate-x-[-50%] translate-y-[-50%] rounded-xl border border-zinc-200 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800"
+				class="fixed top-[50%] left-[50%] z-50 h-[400px] w-full max-w-3xl translate-x-[-50%] translate-y-[-50%] rounded-xl border-4 border-zinc-100 bg-white shadow dark:border-zinc-700 dark:bg-zinc-800"
 			>
-				<Tabs.Root class="grid grid-cols-6">
+				<Tabs.Root class="grid h-full grid-cols-6">
 					<Tabs.List class="col-span-2 flex flex-col border-r border-zinc-200 p-4">
 						<h3 class="mb-4 text-lg">Settings</h3>
 						{#each settings as setting (setting.label)}
@@ -45,12 +59,10 @@
 						{/each}
 					</Tabs.List>
 					{#each settings as setting (setting.label)}
-						<Tabs.Content class="col-span-4" value={setting.label}>
-							<div class="p-4">
-								{#if setting.content}
-									<setting.content></setting.content>
-								{/if}
-							</div>
+						<Tabs.Content class="col-span-4 h-full overflow-y-auto" value={setting.label}>
+							{#if setting.content}
+								<setting.content></setting.content>
+							{/if}
 						</Tabs.Content>
 					{/each}
 				</Tabs.Root>

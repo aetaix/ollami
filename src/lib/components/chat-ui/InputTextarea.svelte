@@ -22,7 +22,7 @@
 				extensions: [
 					StarterKit,
 					Placeholder.configure({
-						placeholder: 'Type your message here...',
+						placeholder: 'Ask something ...',
 						emptyEditorClass: 'is-empty', // Add a class when editor is empty
 						emptyNodeClass: 'is-empty-node' // Add a class to empty nodes
 					})
@@ -31,7 +31,7 @@
 				autofocus: true,
 				editorProps: {
 					attributes: {
-						class: 'focus:outline-none max-h-44 overflow-y-auto p-1'
+						class: 'focus:outline-none max-h-44 min-h-16 overflow-y-auto p-1'
 					},
 					handleKeyDown: (view, event) => {
 						if (event.key === 'Enter' && !event.shiftKey) {
