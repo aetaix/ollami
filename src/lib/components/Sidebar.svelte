@@ -102,7 +102,7 @@
 
 				<ul class="flex max-h-[414px] flex-col items-stretch gap-2 overflow-y-auto">
 					{#if orderedChats.length === 0}
-						<li class="text-center text-sm opacity-50">No chats available</li>
+						<li class="text-center text-sm opacity-50 py-2">No chats available</li>
 					{/if}
 
 					{#each orderedChats as chat (chat.id)}

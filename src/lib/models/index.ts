@@ -20,6 +20,36 @@ const models: App.Model[] = [
 		icon: 'mistral.svg'
 	},
 	{
+		name: "Ministral 3",
+		description:"The Ministral 3 family is designed for edge deployment, capable of running on a wide range of hardware.",
+		api: 'ministral-3',
+		provider: 'ollama',
+		author: 'mistral',
+		parameters: '3b',
+		icon: 'mistral.svg',
+		size: 3
+	},
+		{
+		name: "Ministral 3",
+		description:"The Ministral 3 family is designed for edge deployment, capable of running on a wide range of hardware.",
+		api: 'ministral-3',
+		provider: 'ollama',
+		author: 'mistral',
+		parameters: '8b',
+		icon: 'mistral.svg',
+		size: 6
+	},
+		{
+		name: "Ministral 3",
+		description:"The Ministral 3 family is designed for edge deployment, capable of running on a wide range of hardware.",
+		api: 'ministral-3',
+		provider: 'ollama',
+		author: 'mistral',
+		parameters: '14b',
+		icon: 'mistral.svg',
+		size: 9.1
+	},
+	{
 		name: 'Mistral Small 3.2',
 		description: 'SOTA. Multimodal. Multilingual. Apache 2.0.',
 		api: 'mistral-small-latest',
