@@ -46,7 +46,7 @@
 			append(
 				{ role: 'user', content: $input },
 				{
-					options: { body: { model: chatModel, collectionName } }
+					options: { body: { model: chatModel.image, collectionName } }
 				}
 			);
 		}
@@ -101,7 +101,7 @@
 			append(
 				{ role: 'user', content: currentChat.messages[1].content },
 				{
-					options: { body: { model: chatModel, collectionName } }
+					options: { body: { model: chatModel.image, collectionName } }
 				}
 			);
 		}
@@ -166,7 +166,7 @@
 		append(
 			{ role: 'user', content: query.content },
 			{
-				options: { body: { model: chatModel } }
+				options: { body: { model: chatModel.image } }
 			}
 		);
 	}
